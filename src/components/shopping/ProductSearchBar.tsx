@@ -61,7 +61,7 @@ export const ProductSearchBar = ({
 
   return (
     <div className="relative flex-1 group">
-      <div className="search-bar relative h-14 shadow-search">
+      <div className="relative h-14 rounded-lg shadow-search bg-white border border-border">
         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400">
           <Search className="w-5 h-5" />
         </div>
@@ -74,7 +74,7 @@ export const ProductSearchBar = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Cosa vuoi acquistare? (Enter per aggiungere)"
-          className={`h-14 pl-12 pr-24 py-4 bg-white border-input dark:border-neutral-700 transition-all duration-300 rounded-lg w-full text-base focus-visible-ring
+          className={`h-14 pl-12 pr-24 py-4 bg-white border-input dark:border-neutral-700 transition-all duration-300 rounded-lg w-full text-base
             ${isFocused ? 'border-primary ring-1 ring-primary/30 shadow-md' : 'hover:border-neutral-300'}`}
           aria-label="Cerca prodotto"
         />

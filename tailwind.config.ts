@@ -111,9 +111,11 @@ export default {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "0.5rem",
+        md: "0.375rem",
+        sm: "0.25rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
       },
       keyframes: {
         "accordion-down": {
@@ -163,6 +165,29 @@ export default {
         'card': '0px 4px 8px rgba(0, 0, 0, 0.05)',
         'button': '0px 2px 4px rgba(0, 0, 0, 0.08)',
         'search': '0px 2px 6px rgba(0, 0, 0, 0.06)',
+      },
+      fontFamily: {
+        sans: [
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Segoe UI',
+          'Roboto',
+          'Oxygen',
+          'Ubuntu', 
+          'Cantarell',
+          'sans-serif',
+        ],
+      },
+      fontSize: {
+        'xs': '0.75rem',     // 12px
+        'sm': '0.875rem',    // 14px
+        'base': '1rem',      // 16px
+        'lg': '1.125rem',    // 18px
+        'xl': '1.25rem',     // 20px
+        '2xl': '1.5rem',     // 24px
+        '3xl': '1.875rem',   // 30px
+        '4xl': '2.25rem',    // 36px
       },
     },
   },

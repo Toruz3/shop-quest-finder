@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "./hooks/use-theme";
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -17,7 +18,14 @@ import AccountPage from "./pages/AccountPage";
 import { Footer } from "./components/Footer";
 import "./App.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000, // 1 minute
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -46,17 +54,19 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
-          <BrowserRouter>
-            <div className="app-container">
-              <AppRoutes />
-            </div>
-          </BrowserRouter>
-        </TooltipProvider>
-      </AuthProvider>
+      <ThemeProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
+            <BrowserRouter>
+              <div className="app-container">
+                <AppRoutes />
+              </div>
+            </BrowserRouter>
+          </TooltipProvider>
+        </AuthProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };
