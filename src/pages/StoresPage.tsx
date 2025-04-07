@@ -10,6 +10,7 @@ import { Product, ProductSuggestion } from "@/types/shopping";
 import { Input } from "@/components/ui/input";
 import { ProductSuggestions } from "@/components/shopping/ProductSuggestions";
 import { productDatabase } from "@/data/productDatabase";
+import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
 const StoresPage = () => {
@@ -22,11 +23,23 @@ const StoresPage = () => {
   const [suggestions, setSuggestions] = useState<ProductSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  // Usa i prodotti dal location state o inizializza con dati di esempio
   useEffect(() => {
     if (location.state?.products) {
       setProducts(location.state.products);
     } else {
-      navigate("/");
+      // Invece di reindirizzare, imposta alcuni prodotti di esempio
+      const sampleProducts = [
+        { id: Date.now(), name: 'Pane', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
+        { id: Date.now() + 1, name: 'Latte', quantity: 2, imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
+        { id: Date.now() + 2, name: 'Pasta', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1556060997-e26d9299868f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
+      ];
+      setProducts(sampleProducts);
+      toast({
+        title: "Prodotti di esempio aggiunti",
+        description: "Sono stati aggiunti alcuni prodotti di esempio per una migliore esperienza",
+        duration: 3000,
+      });
     }
   }, [location, navigate]);
 
