@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -22,7 +21,6 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Se l'utente è già autenticato, redirect alla home
   if (user) {
     navigate("/");
     return null;
@@ -78,7 +76,6 @@ const Auth = () => {
   if (showResetForm) {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
-        {/* Decorative elements */}
         <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
         
@@ -136,7 +133,6 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      {/* Decorative elements */}
       <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
@@ -239,7 +235,7 @@ const Auth = () => {
           
           <Button
             type="submit"
-            className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white font-medium py-2 h-10 mt-2"
+            className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white font-medium h-10 text-sm mt-2"
             disabled={isLoading}
           >
             {isLoading ? (
