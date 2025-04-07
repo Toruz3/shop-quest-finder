@@ -8,7 +8,7 @@ import { ProductSuggestions } from "./shopping/ProductSuggestions";
 import { ProductList } from "./shopping/ProductList";
 import { CategoryChips } from "./shopping/CategoryChips";
 import { EmptyState } from "./shopping/EmptyState";
-import { FabMenu } from "./components/ui/fab-menu";
+import { FabMenu } from "@/components/ui/fab-menu";
 import { toast } from "@/hooks/use-toast";
 import { Product, ProductSuggestion } from "@/types/shopping";
 import { productDatabase } from "@/data/productDatabase";
