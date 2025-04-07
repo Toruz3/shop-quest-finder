@@ -28,7 +28,7 @@ const StoresPage = () => {
     if (location.state?.products) {
       setProducts(location.state.products);
     } else {
-      // Invece di reindirizzare, imposta alcuni prodotti di esempio
+      // Inizializza con prodotti di esempio
       const sampleProducts = [
         { id: Date.now(), name: 'Pane', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
         { id: Date.now() + 1, name: 'Latte', quantity: 2, imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
@@ -41,7 +41,7 @@ const StoresPage = () => {
         duration: 3000,
       });
     }
-  }, [location, navigate]);
+  }, [location]);
 
   useEffect(() => {
     if (newProductName.length >= 2) {
