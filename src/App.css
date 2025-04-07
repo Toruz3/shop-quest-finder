@@ -1,0 +1,181 @@
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+/* Main content with padding for fixed footer */
+.main-content {
+  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0.5rem));
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Center container for desktop */
+@media (min-width: 769px) {
+  .main-content > div,
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .scrollable-content {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 100%;
+  }
+  
+  /* Adjust height for smaller devices */
+  .h-screen-minus-footer {
+    height: calc(100vh - 80px);
+  }
+}
+
+/* Improved scrollbar for product lists */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(55, 178, 77, 0.6) rgba(245, 247, 250, 0.7);
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Responsiveness */
+.app-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .app-container {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-container {
+    padding: 0 3rem;
+  }
+}
+
+/* Center content on larger screens */
+@media (min-width: 768px) {
+  .center-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .center-card {
+    max-width: 480px;
+  }
+}
+
+/* Improvement for toast positioning */
+.bottom-toast {
+  margin-bottom: 5rem !important;
+}
+
+/* Fixed fab button position */
+.fab-button {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Search results container with proper scrolling */
+.search-results-container {
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  z-index: 50;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, h5, h6 {
+  color: #1E293B;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+h2 {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+p {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/* Touch target sizes for better accessibility */
+button, a, input[type="button"], input[type="submit"] {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Tablet and desktop adjustments */
+@media (min-width: 768px) {
+  .desktop-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .fab-button {
+    bottom: 100px;
+  }
+  
+  .search-results-container {
+    max-height: 240px;
+  }
+}
+
+/* Bottom toast positioning */
+:root {
+  --toaster-top: auto;
+  --toaster-bottom: 100px;
+}
+
+[data-sonner-toaster] {
+  bottom: 80px !important;
+  top: auto !important;
+}
