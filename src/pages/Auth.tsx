@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { Label } from "@/components/ui/label";
+
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState("");
@@ -26,10 +27,12 @@ const Auth = () => {
   const {
     toast
   } = useToast();
+
   if (user) {
     navigate("/");
     return null;
   }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -51,6 +54,7 @@ const Auth = () => {
       });
     }
   };
+
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -69,6 +73,7 @@ const Auth = () => {
       });
     }
   };
+
   if (showResetForm) {
     return <div className="min-h-screen flex items-center justify-center px-4">
         <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
@@ -107,6 +112,7 @@ const Auth = () => {
         </div>
       </div>;
   }
+
   return <div className="min-h-screen flex items-center justify-center px-4">
       <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -157,7 +163,12 @@ const Auth = () => {
           
           {isLogin && <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="mx-0 text-xs" />
+                <Checkbox 
+                  id="rememberMe" 
+                  checked={rememberMe} 
+                  onCheckedChange={checked => setRememberMe(checked === true)} 
+                  className="size-4 mx-0" 
+                />
                 <Label htmlFor="rememberMe" className="text-sm cursor-pointer">
                   Ricordami
                 </Label>
@@ -180,4 +191,5 @@ const Auth = () => {
       </div>
     </div>;
 };
+
 export default Auth;
