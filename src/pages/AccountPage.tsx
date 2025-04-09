@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -6,32 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from "@/contexts/AuthContext";
-import { 
-  User, LogOut, Settings, Bell, Moon, Lock, Smartphone, 
-  CreditCard, HelpCircle, Heart, ShoppingBag, History, MapPin, Share2,
-  Check, X, Save, Trash2
-} from "lucide-react";
+import { User, LogOut, Settings, Bell, Moon, Lock, Smartphone, CreditCard, HelpCircle, Heart, ShoppingBag, History, MapPin, Share2, Check, X, Save, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
-  const { user, logout } = useAuth();
+  const {
+    user,
+    logout
+  } = useAuth();
   const navigate = useNavigate();
-  
   const [darkMode, setDarkMode] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [showProfileDialog, setShowProfileDialog] = useState(false);
@@ -42,54 +31,48 @@ const AccountPage = () => {
   // Gestione del profilo
   const [profileName, setProfileName] = useState(user?.name || "");
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
-  
   useEffect(() => {
     if (user) {
       setProfileName(user.name);
       setProfileEmail(user.email);
     }
   }, [user]);
-  
   const handleLogout = () => {
     logout();
     navigate("/auth");
     toast({
       title: "Logout effettuato",
       description: "Sei stato disconnesso con successo",
-      duration: 3000,
+      duration: 3000
     });
   };
-
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     toast({
       title: darkMode ? "Tema chiaro attivato" : "Tema scuro attivato",
       description: "Le impostazioni di visualizzazione sono state aggiornate",
-      duration: 2000,
+      duration: 2000
     });
   };
-
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
       title: notificationsEnabled ? "Notifiche disattivate" : "Notifiche attivate",
       description: "Le impostazioni di notifica sono state aggiornate",
-      duration: 2000,
+      duration: 2000
     });
   };
-
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
-
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
         variant: "destructive",
         title: "Nome richiesto",
-        description: "Il nome non può essere vuoto",
+        description: "Il nome non può essere vuoto"
       });
       return;
     }
@@ -97,57 +80,48 @@ const AccountPage = () => {
     // Simula aggiornamento profilo
     setProfileName(newName);
     setProfileEmail(newEmail);
-    
     toast({
       title: "Profilo aggiornato",
-      description: "Le modifiche al profilo sono state salvate",
+      description: "Le modifiche al profilo sono state salvate"
     });
-    
     setShowProfileDialog(false);
   };
-  
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
         variant: "destructive",
         title: "Campi obbligatori",
-        description: "Compila tutti i campi per continuare",
+        description: "Compila tutti i campi per continuare"
       });
       return;
     }
-    
     if (newPassword !== confirmPassword) {
       toast({
         variant: "destructive",
         title: "Le password non corrispondono",
-        description: "La nuova password e la conferma devono essere identiche",
+        description: "La nuova password e la conferma devono essere identiche"
       });
       return;
     }
-    
+
     // Simula cambio password
     toast({
       title: "Password aggiornata",
-      description: "La tua password è stata modificata con successo",
+      description: "La tua password è stata modificata con successo"
     });
-    
     setShowPasswordDialog(false);
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
   };
-  
   if (!user) {
     navigate("/auth");
     return null;
   }
-  
-  return (
-    <div className="min-h-screen relative overflow-hidden pb-20">
+  return <div className="min-h-screen relative overflow-hidden pb-20">
       {/* Decorative elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -176,22 +150,13 @@ const AccountPage = () => {
           
           <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="mb-4">
             <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-primary-50">
-              <TabsTrigger 
-                value="profile" 
-                className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
-              >
+              <TabsTrigger value="profile" className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
                 Profilo
               </TabsTrigger>
-              <TabsTrigger 
-                value="preferences" 
-                className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
-              >
+              <TabsTrigger value="preferences" className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
                 Preferenze
               </TabsTrigger>
-              <TabsTrigger 
-                value="activity" 
-                className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
-              >
+              <TabsTrigger value="activity" className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
                 Attività
               </TabsTrigger>
             </TabsList>
@@ -208,7 +173,7 @@ const AccountPage = () => {
                 <div className="divide-y divide-neutral-100">
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Modifica profilo</h4>
+                      <h4 className="text-sm font-medium text-left">Modifica profilo</h4>
                       <p className="text-xs text-neutral-500">Nome, email, foto profilo</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8" onClick={handleEditProfile}>
@@ -218,7 +183,7 @@ const AccountPage = () => {
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Sicurezza</h4>
+                      <h4 className="text-sm font-medium text-left">Sicurezza</h4>
                       <p className="text-xs text-neutral-500">Password, autenticazione</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8" onClick={() => setShowPasswordDialog(true)}>
@@ -229,7 +194,7 @@ const AccountPage = () => {
                   <div className="p-3 flex items-center justify-between">
                     <div>
                       <h4 className="text-sm font-medium">Dispositivi collegati</h4>
-                      <p className="text-xs text-neutral-500">Gestisci accessi</p>
+                      <p className="text-xs text-neutral-500 text-left">Gestisci accessi</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Smartphone size={16} />
@@ -238,8 +203,8 @@ const AccountPage = () => {
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Metodi di pagamento</h4>
-                      <p className="text-xs text-neutral-500">Carte e fatturazione</p>
+                      <h4 className="text-sm font-medium text-left">Metodi di pagamento</h4>
+                      <p className="text-xs text-neutral-500 text-left">Carte e fatturazione</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <CreditCard size={16} />
@@ -269,7 +234,7 @@ const AccountPage = () => {
                   <div className="p-3 flex items-center justify-between">
                     <div>
                       <h4 className="text-sm font-medium">Centro assistenza</h4>
-                      <p className="text-xs text-neutral-500">Domande frequenti</p>
+                      <p className="text-xs text-neutral-500 text-left">Domande frequenti</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Settings size={16} />
@@ -278,8 +243,8 @@ const AccountPage = () => {
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Contattaci</h4>
-                      <p className="text-xs text-neutral-500">Email, telefono</p>
+                      <h4 className="text-sm font-medium text-left">Contattaci</h4>
+                      <p className="text-xs text-neutral-500 text-left">Email, telefono</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Settings size={16} />
@@ -288,8 +253,8 @@ const AccountPage = () => {
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Privacy e Termini</h4>
-                      <p className="text-xs text-neutral-500">Informative legali</p>
+                      <h4 className="text-sm font-medium text-left">Privacy e Termini</h4>
+                      <p className="text-xs text-neutral-500 text-left">Informative legali</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Settings size={16} />
@@ -506,23 +471,12 @@ const AccountPage = () => {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="name">Nome</Label>
-              <Input
-                id="name"
-                value={newName}
-                onChange={(e) => setNewName(e.target.value)}
-                placeholder="Il tuo nome"
-              />
+              <Input id="name" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Il tuo nome" />
             </div>
             
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="la-tua-email@esempio.com"
-              />
+              <Input id="email" type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="la-tua-email@esempio.com" />
             </div>
           </div>
           
@@ -552,32 +506,17 @@ const AccountPage = () => {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="current-password">Password attuale</Label>
-              <Input
-                id="current-password"
-                type="password"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-              />
+              <Input id="current-password" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} />
             </div>
             
             <div className="space-y-2">
               <Label htmlFor="new-password">Nuova password</Label>
-              <Input
-                id="new-password"
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
+              <Input id="new-password" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} />
             </div>
             
             <div className="space-y-2">
               <Label htmlFor="confirm-password">Conferma password</Label>
-              <Input
-                id="confirm-password"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
+              <Input id="confirm-password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
             </div>
           </div>
           
@@ -595,8 +534,6 @@ const AccountPage = () => {
       </Dialog>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AccountPage;
