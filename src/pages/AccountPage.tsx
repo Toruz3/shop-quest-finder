@@ -134,8 +134,8 @@ const AccountPage = () => {
                 {profileName.charAt(0).toUpperCase()}
               </div>
               <div className="flex-1">
-                <h2 className="text-lg font-semibold">{profileName}</h2>
-                <p className="text-sm text-neutral-500">{profileEmail}</p>
+                <h2 className="text-lg font-semibold text-left">{profileName}</h2>
+                <p className="text-sm text-neutral-500 text-left">{profileEmail}</p>
                 <div className="flex mt-1">
                   <Badge className="bg-primary-100 text-primary-700 border-primary-200 mr-2">
                     Utente Standard
