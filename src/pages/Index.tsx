@@ -1,6 +1,6 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ShoppingList } from "@/components/ShoppingList";
 import { useAuth } from "@/contexts/AuthContext";
 import { Product } from "@/types/shopping";
@@ -9,10 +9,17 @@ import { motion } from "framer-motion";
 const Index = () => {
   const [isCalculating, setIsCalculating] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Se l'utente non è autenticato, redirect alla pagina di login
+  useEffect(() => {
+    // Se l'utente è autenticato e arriva su questa pagina senza flag, lo ridirezioniamo alla welcome solo al primo ingresso
+    if (user && location.state?.fromWelcome !== true) {
+      navigate("/welcome");
+    }
+  }, [user, navigate, location.state]);
+
   if (!user) {
     navigate("/auth");
     return null;
@@ -21,10 +28,8 @@ const Index = () => {
   const handleFindStores = (newProducts: Product[]) => {
     setProducts(newProducts);
     setIsCalculating(true);
-    // Simulate calculation time
     setTimeout(() => {
       setIsCalculating(false);
-      // Navigate to stores page with products
       navigate("/stores", { state: { products: newProducts } });
     }, 2000);
   };
@@ -41,7 +46,6 @@ const Index = () => {
         <section className="w-full">
           <ShoppingList onFindStores={handleFindStores} isCalculating={isCalculating} />
         </section>
-
         {isCalculating && (
           <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-xl shadow-xl text-center animate-fade-in max-w-xs w-full">
@@ -51,7 +55,6 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-bold text-primary mb-2">Ricerca in corso</h3>
               <p className="text-base font-medium mb-2 text-neutral-700">Troviamo il miglior supermercato...</p>
-              
               <div className="mt-4 w-full h-2 bg-secondary rounded-full overflow-hidden">
                 <div className="h-full bg-primary shimmer rounded-full" style={{width: '70%'}}></div>
               </div>

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,7 +14,8 @@ import MapPage from "./pages/MapPage";
 import PriceHistoryPage from "./pages/PriceHistoryPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import AccountPage from "./pages/AccountPage";
-import { Footer } from "./components/Footer";
+import Welcome from "./pages/Welcome";
+import Footer from "./components/Footer";
 import "./App.css";
 
 const queryClient = new QueryClient({
@@ -35,6 +35,7 @@ const AppRoutes = () => {
     <>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route path="/welcome" element={<Welcome />} />
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/stores" element={<StoresPage />} />
