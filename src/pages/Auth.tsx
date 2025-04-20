@@ -157,7 +157,7 @@ const Auth = () => {
           
           {isLogin && <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="size-2 mx-0" />
+                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="size-1 mx-0 font-normal" />
                 <Label htmlFor="rememberMe" className="text-sm cursor-pointer">
                   Ricordami
                 </Label>
