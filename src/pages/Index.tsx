@@ -14,16 +14,12 @@ const Index = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Se l'utente è autenticato e arriva su questa pagina senza flag, lo ridirezioniamo alla welcome solo al primo ingresso
-    if (user && location.state?.fromWelcome !== true) {
-      navigate("/welcome");
+    // Se non loggato, redirect a /auth
+    if (!user) {
+      navigate("/auth");
+      return;
     }
-  }, [user, navigate, location.state]);
-
-  if (!user) {
-    navigate("/auth");
-    return null;
-  }
+  }, [user, navigate]);
 
   const handleFindStores = (newProducts: Product[]) => {
     setProducts(newProducts);

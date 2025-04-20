@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ShoppingCart, Sparkles } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -8,6 +9,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { Label } from "@/components/ui/label";
 const Auth = () => {
+  const location = useLocation();
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,10 +28,21 @@ const Auth = () => {
   const {
     toast
   } = useToast();
+  
+  useEffect(() => {
+    // Se dalla welcome ho mandato "Registrati", apri tab corretta
+    if (location.state && location.state.tab === "register") {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, [location.state]);
+
   if (user) {
-    navigate("/");
+    navigate("/app");
     return null;
   }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -42,7 +55,7 @@ const Auth = () => {
         title: isLogin ? "Accesso effettuato" : "Registrazione completata",
         description: "Benvenuto su Shop Quest Finder!"
       });
-      navigate("/");
+      navigate("/app");
     } catch (error) {
       toast({
         variant: "destructive",

@@ -28,30 +28,74 @@ const queryClient = new QueryClient({
   },
 });
 
+const authenticatedRoutes = [
+  "/app",
+  "/stores",
+  "/map",
+  "/price-history",
+  "/favorites",
+  "/account"
+];
+
 const AppRoutes = () => {
   const location = useLocation();
   const isAuthPage = location.pathname === "/auth";
-  
+  const isAuthenticatedPage = authenticatedRoutes.some(path => location.pathname.startsWith(path));
+
   return (
     <>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<Welcome />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/stores" element={<StoresPage />} />
-          <Route path="/map" element={<MapPage />} />
-          <Route path="/price-history" element={<PriceHistoryPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
-          <Route path="/account" element={<AccountPage />} />
+          <Route path="/app" element={
+            <ProtectedRoute>
+              <Index />
+            </ProtectedRoute>
+          } />
+          <Route path="/stores" element={
+            <ProtectedRoute>
+              <StoresPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/map" element={
+            <ProtectedRoute>
+              <MapPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/price-history" element={
+            <ProtectedRoute>
+              <PriceHistoryPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/favorites" element={
+            <ProtectedRoute>
+              <FavoritesPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/account" element={
+            <ProtectedRoute>
+              <AccountPage />
+            </ProtectedRoute>
+          } />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
-      
-      {!isAuthPage && <Footer />}
+      {/* Mostra la footer solo nelle pagine autenticate */}
+      {isAuthenticatedPage && !isAuthPage && <Footer />}
     </>
   );
 };
+
+// Componente per proteggere le route
+import { useAuth } from "./contexts/AuthContext";
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { user, isLoading } = useAuth();
+  const location = useLocation();
+  if (isLoading) return null; // loading
+  if (!user) return <Navigate to="/auth" state={{ from: location }} replace />;
+  return <>{children}</>;
+}
 
 const App = () => {
   return (

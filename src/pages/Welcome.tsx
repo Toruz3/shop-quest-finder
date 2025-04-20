@@ -1,23 +1,11 @@
 
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Sparkles } from "lucide-react";
 
 const Welcome = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
-
-  const handleStart = () => {
-    navigate("/");
-  };
-
-  // Se non autenticato, redirect login
-  if (!user) {
-    navigate("/auth");
-    return null;
-  }
 
   return (
     <motion.div
@@ -55,13 +43,24 @@ const Welcome = () => {
         >
           Benvenuto! Trova il miglior supermercato per la tua spesa, gestisci la lista prodotti e risparmia tempo e denaro.
         </motion.p>
-        <Button
-          className="px-10 py-4 btn-primary rounded-lg font-bold text-lg shadow-lg ripple"
-          size="lg"
-          onClick={handleStart}
-        >
-          Inizia ora
-        </Button>
+
+        <div className="flex flex-col sm:flex-row gap-3 w-full justify-center">
+          <Button
+            className="px-10 py-4 btn-primary rounded-lg font-bold text-lg shadow-lg ripple w-full sm:w-auto"
+            size="lg"
+            onClick={() => navigate("/auth")}
+          >
+            Accedi
+          </Button>
+          <Button
+            className="px-10 py-4 rounded-lg font-bold text-lg shadow-lg bg-accent text-white hover:opacity-90 w-full sm:w-auto"
+            size="lg"
+            variant="secondary"
+            onClick={() => navigate("/auth", { state: { tab: "register" } })}
+          >
+            Registrati
+          </Button>
+        </div>
       </div>
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Un leggero overlay di sfondo a gradiente verde chiaro coerente con la palette */}
