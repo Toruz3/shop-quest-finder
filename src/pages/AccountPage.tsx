@@ -14,10 +14,12 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const {
     user,
+    profile,
     logout
   } = useAuth();
   const navigate = useNavigate();
@@ -29,14 +31,18 @@ const AccountPage = () => {
   const [newEmail, setNewEmail] = useState("");
 
   // Gestione del profilo
-  const [profileName, setProfileName] = useState(user?.name || "");
+  const [profileName, setProfileName] = useState(profile?.name || "");
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
+  
   useEffect(() => {
+    if (profile) {
+      setProfileName(profile.name);
+    }
     if (user) {
-      setProfileName(user.name);
       setProfileEmail(user.email);
     }
-  }, [user]);
+  }, [user, profile]);
+  
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -46,6 +52,7 @@ const AccountPage = () => {
       duration: 3000
     });
   };
+  
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     toast({
@@ -54,6 +61,7 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+  
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -62,11 +70,13 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+  
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
+  
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -86,9 +96,11 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
+  
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -117,10 +129,12 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
+  
   if (!user) {
     navigate("/auth");
     return null;
   }
+  
   return <div className="min-h-screen relative overflow-hidden pb-20">
       {/* Decorative elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
@@ -458,7 +472,6 @@ const AccountPage = () => {
         </div>
       </div>
 
-      {/* Dialog per la modifica del profilo */}
       <Dialog open={showProfileDialog} onOpenChange={setShowProfileDialog}>
         <DialogContent>
           <DialogHeader>
@@ -493,7 +506,6 @@ const AccountPage = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Dialog per il cambio password */}
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
         <DialogContent>
           <DialogHeader>
@@ -536,4 +548,5 @@ const AccountPage = () => {
       <Footer />
     </div>;
 };
+
 export default AccountPage;

@@ -31,7 +31,7 @@ export const useShoppingLists = () => {
         .from("shopping_lists")
         .insert([{ name, user_id: user.id }]);
       if (error) throw error;
-      queryClient.invalidateQueries(["shopping_lists", user.id]);
+      queryClient.invalidateQueries({ queryKey: ["shopping_lists", user.id] });
       return data;
     },
   });
@@ -40,7 +40,7 @@ export const useShoppingLists = () => {
     mutationFn: async (id: string) => {
       const { error } = await supabase.from("shopping_lists").delete().eq("id", id);
       if (error) throw error;
-      queryClient.invalidateQueries(["shopping_lists", user?.id]);
+      queryClient.invalidateQueries({ queryKey: ["shopping_lists", user?.id] });
     },
   });
 
@@ -50,6 +50,6 @@ export const useShoppingLists = () => {
     error,
     createList: createList.mutateAsync,
     deleteList: deleteList.mutateAsync,
-    refresh: () => queryClient.invalidateQueries(["shopping_lists", user?.id]),
+    refresh: () => queryClient.invalidateQueries({ queryKey: ["shopping_lists", user?.id] }),
   };
 };
