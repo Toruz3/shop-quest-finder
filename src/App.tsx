@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,7 +16,7 @@ import PriceHistoryPage from "./pages/PriceHistoryPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import AccountPage from "./pages/AccountPage";
 import Welcome from "./pages/Welcome";
-import Footer from "./components/Footer";
+import { Footer } from "./components/Footer";
 import "./App.css";
 
 const queryClient = new QueryClient({
