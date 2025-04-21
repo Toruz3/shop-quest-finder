@@ -20,7 +20,7 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
   
   const navItems = [
     { 
-      path: "/", 
+      path: "/app", 
       icon: <ShoppingCart className="w-7 h-7" />, 
       label: "Spesa",
       badge: productsCount > 0 ? productsCount : null
