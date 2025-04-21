@@ -79,7 +79,8 @@ const StoresPage = () => {
   };
 
   const goBackToHome = () => {
-    navigate("/", { state: { products } });
+    // Modificato per tornare sempre alla pagina principale dell'app invece che al welcome
+    navigate("/app", { state: { products } });
   };
 
   const handleAddProduct = (e: React.FormEvent) => {
