@@ -12,10 +12,12 @@ import { ProductSuggestions } from "@/components/shopping/ProductSuggestions";
 import { productDatabase } from "@/data/productDatabase";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const StoresPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isMobile = useIsMobile();
   const [products, setProducts] = useState<Product[]>([]);
   const [showEditMode, setShowEditMode] = useState(false);
   const [newProductName, setNewProductName] = useState("");
@@ -111,7 +113,7 @@ const StoresPage = () => {
 
   return (
     <motion.div 
-      className="min-h-screen relative overflow-hidden main-content"
+      className="min-h-screen relative overflow-x-hidden main-content pb-24"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -121,9 +123,9 @@ const StoresPage = () => {
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10"></div>
       
-      <div className="container px-3 py-6 relative z-10 h-[calc(100vh-80px)] flex flex-col">
-        <div className="flex-grow flex flex-col md:flex-row gap-4 md:gap-10 max-w-4xl mx-auto">
-          <div className="w-full md:w-1/3">
+      <div className="container px-3 py-4 relative z-10 h-full flex flex-col">
+        <div className={`flex-grow flex flex-col ${!isMobile ? 'md:flex-row' : ''} gap-4 md:gap-6 max-w-4xl mx-auto w-full`}>
+          <div className={`w-full ${!isMobile ? 'md:w-1/3' : ''}`}>
             <div className="flex items-center justify-between mb-4">
               <Button 
                 variant="ghost" 
@@ -142,7 +144,7 @@ const StoresPage = () => {
               <div className="w-8"></div>
             </div>
 
-            <Card className="p-4 w-full mx-auto glass-effect rounded-xl shadow-lg animate-fade-in h-[calc(100vh-180px)] flex flex-col">
+            <Card className="p-4 w-full mx-auto glass-effect rounded-xl shadow-lg animate-fade-in h-[calc(100vh-180px)] max-h-[500px] flex flex-col">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-base font-bold text-gray-800">Riepilogo prodotti</h3>
                 <Button
@@ -244,7 +246,7 @@ const StoresPage = () => {
             </Card>
           </div>
           
-          <div className="w-full md:w-2/3 mt-4 md:mt-16">
+          <div className={`w-full ${!isMobile ? 'md:w-2/3' : ''} ${!isMobile ? 'md:mt-16' : 'mt-4'}`}>
             <StoreComparison />
           </div>
         </div>

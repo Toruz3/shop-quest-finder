@@ -1,3 +1,4 @@
+
 #root {
   max-width: 100%;
   margin: 0 auto;
@@ -24,8 +25,8 @@
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   
   .scrollable-content {
@@ -48,11 +49,20 @@
     min-height: calc(100vh - 80px);
     padding-bottom: 112px;
     gap: 0.5rem;
+    width: 100vw;
   }
   
   /* Adjust height for smaller devices */
   .h-screen-minus-footer {
     height: calc(100vh - 80px);
+  }
+  
+  /* Full width containers on mobile */
+  .full-width-mobile {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
@@ -64,6 +74,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
+  padding-bottom: 20px;
 }
 
 /* Smooth scrolling */
@@ -82,13 +93,13 @@ html {
 
 @media (min-width: 640px) {
   .app-container {
-    padding: 0 2rem;
+    padding: 0 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .app-container {
-    padding: 0 3rem;
+    padding: 0 2rem;
   }
 }
 
@@ -153,8 +164,8 @@ p {
 
 /* Touch target sizes for better accessibility */
 button, a, input[type="button"], input[type="submit"] {
-  min-height: 48px;
-  min-width: 48px;
+  min-height: 40px;
+  min-width: 40px;
 }
 
 /* Tablet and desktop adjustments */
@@ -169,11 +180,21 @@ button, a, input[type="button"], input[type="submit"] {
 /* Mobile optimizations */
 @media (max-width: 640px) {
   .fab-button {
-    bottom: 100px;
+    bottom: 80px;
+    right: 16px;
   }
   
   .search-results-container {
     max-height: 240px;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  
+  .stores-container {
+    padding-bottom: 120px;
   }
 }
 
@@ -186,4 +207,27 @@ button, a, input[type="button"], input[type="submit"] {
 [data-sonner-toaster] {
   bottom: 80px !important;
   top: auto !important;
+}
+
+/* Improved button styles for mobile */
+@media (max-width: 640px) {
+  button.touch-target {
+    min-height: 48px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .btn-mobile-friendly {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Fix for mobile viewport issues */
+@media (max-width: 768px) {
+  .fixed-height-mobile {
+    max-height: 400px;
+  }
 }

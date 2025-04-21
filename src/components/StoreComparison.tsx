@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Store {
   id: number;
@@ -84,6 +85,7 @@ export const StoreComparison = () => {
   const [stores, setStores] = useState<Store[]>(() => {
     return [...initialStores].sort((a, b) => a.totalPrice - b.totalPrice);
   });
+  const isMobile = useIsMobile();
 
   const handleSortChange = (value: SortOption) => {
     setSortBy(value);
@@ -140,7 +142,7 @@ export const StoreComparison = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-4 px-1 flex flex-col h-full">
+    <div className={`w-full ${isMobile ? 'max-w-full' : 'max-w-md'} mx-auto space-y-4 px-1 flex flex-col h-full pb-20`}>
       <div className="glass-effect p-3 rounded-xl shadow-md sticky top-0 z-10 bg-white/95 backdrop-blur-md">
         <div className="flex items-center gap-2 mb-3">
           <div className="p-1.5 bg-primary/10 rounded-full">
@@ -173,7 +175,7 @@ export const StoreComparison = () => {
         </RadioGroup>
       </div>
 
-      <div className="flex-grow overflow-y-auto custom-scrollbar pb-20">
+      <div className="flex-grow overflow-y-auto custom-scrollbar pb-4">
         <div className="bg-accent/10 p-3 rounded-xl mb-4">
           <h3 className="text-base font-bold text-gray-800 mb-2">Migliore opzione:</h3>
           <p className="text-sm text-gray-600 mb-2">
