@@ -38,8 +38,8 @@ const Index = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="w-full max-w-md mx-auto px-4 py-6 relative z-10 flex flex-col items-center justify-center flex-grow">
-        <section className="w-full">
+      <div className="w-full max-w-md mx-auto px-2 md:px-4 py-4 md:py-6 relative z-10 flex flex-col items-center justify-center flex-grow">
+        <section className="w-full flex-1 mb-4 sm:mb-0">
           <ShoppingList onFindStores={handleFindStores} isCalculating={isCalculating} />
         </section>
         {isCalculating && (
