@@ -135,7 +135,7 @@ export const StoreComparison = () => {
           </div>
           <div className="flex-1">
             <div className={`flex items-center gap-1.5 p-2 rounded-xl border-2 transition-all duration-200 cursor-pointer ${sortBy === 'distance' ? 'border-primary/50 bg-primary/5' : 'border-gray-200 hover:border-primary/30 hover:bg-primary/5'}`}>
-              <RadioGroupItem value="distance" id="distance" className="text-primary w-3.5 h-3.5" />
+              <RadioGroupItem value="distance" id="distance" className="text-primary w-1.5 h-1.5" />
               <Label htmlFor="distance" className="cursor-pointer font-medium flex items-center gap-1.5 text-sm">
                 <MapPin className="w-3.5 h-3.5" /> Distanza
               </Label>
