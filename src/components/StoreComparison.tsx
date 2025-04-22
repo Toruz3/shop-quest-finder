@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MapPin, Navigation, SortAsc, Tag, Star, Building, ArrowRight, Clock, Wallet, ShoppingCart } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -7,7 +6,6 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 interface Store {
   id: number;
   name: string;
@@ -19,77 +17,66 @@ interface Store {
   closingTime: string;
   address: string;
 }
-
-const initialStores: Store[] = [
-  {
-    id: 1,
-    name: "Conad",
-    distance: "0.8 km",
-    distanceInKm: 0.8,
-    totalPrice: 45.99,
-    savings: 5.50,
-    isOpen: true,
-    closingTime: "21:00",
-    address: "Via Roma, 42"
-  },
-  {
-    id: 2,
-    name: "Esselunga",
-    distance: "1.2 km",
-    distanceInKm: 1.2,
-    totalPrice: 42.99,
-    savings: 8.50,
-    isOpen: true,
-    closingTime: "22:00",
-    address: "Corso Italia, 76"
-  },
-  {
-    id: 3,
-    name: "Carrefour",
-    distance: "1.5 km",
-    distanceInKm: 1.5,
-    totalPrice: 48.99,
-    savings: 2.50,
-    isOpen: true,
-    closingTime: "20:30",
-    address: "Via Garibaldi, 103"
-  },
-  {
-    id: 4,
-    name: "Lidl",
-    distance: "2.1 km",
-    distanceInKm: 2.1,
-    totalPrice: 40.99,
-    savings: 10.50,
-    isOpen: true,
-    closingTime: "21:30",
-    address: "Via Dante, 15"
-  },
-  {
-    id: 5,
-    name: "Eurospin",
-    distance: "2.8 km",
-    distanceInKm: 2.8,
-    totalPrice: 38.99,
-    savings: 12.50,
-    isOpen: true,
-    closingTime: "20:00",
-    address: "Via Mazzini, 8"
-  },
-];
-
+const initialStores: Store[] = [{
+  id: 1,
+  name: "Conad",
+  distance: "0.8 km",
+  distanceInKm: 0.8,
+  totalPrice: 45.99,
+  savings: 5.50,
+  isOpen: true,
+  closingTime: "21:00",
+  address: "Via Roma, 42"
+}, {
+  id: 2,
+  name: "Esselunga",
+  distance: "1.2 km",
+  distanceInKm: 1.2,
+  totalPrice: 42.99,
+  savings: 8.50,
+  isOpen: true,
+  closingTime: "22:00",
+  address: "Corso Italia, 76"
+}, {
+  id: 3,
+  name: "Carrefour",
+  distance: "1.5 km",
+  distanceInKm: 1.5,
+  totalPrice: 48.99,
+  savings: 2.50,
+  isOpen: true,
+  closingTime: "20:30",
+  address: "Via Garibaldi, 103"
+}, {
+  id: 4,
+  name: "Lidl",
+  distance: "2.1 km",
+  distanceInKm: 2.1,
+  totalPrice: 40.99,
+  savings: 10.50,
+  isOpen: true,
+  closingTime: "21:30",
+  address: "Via Dante, 15"
+}, {
+  id: 5,
+  name: "Eurospin",
+  distance: "2.8 km",
+  distanceInKm: 2.8,
+  totalPrice: 38.99,
+  savings: 12.50,
+  isOpen: true,
+  closingTime: "20:00",
+  address: "Via Mazzini, 8"
+}];
 type SortOption = "price" | "distance";
-
 export const StoreComparison = () => {
   const [sortBy, setSortBy] = useState<SortOption>("price");
   const [stores, setStores] = useState<Store[]>(() => {
     return [...initialStores].sort((a, b) => a.totalPrice - b.totalPrice);
   });
   const isMobile = useIsMobile();
-
   const handleSortChange = (value: SortOption) => {
     setSortBy(value);
-    
     const sortedStores = [...initialStores].sort((a, b) => {
       if (value === "price") {
         return a.totalPrice - b.totalPrice;
@@ -97,52 +84,38 @@ export const StoreComparison = () => {
         return a.distanceInKm - b.distanceInKm;
       }
     });
-    
     setStores(sortedStores);
   };
-
   const getBestOption = (store: Store): React.ReactNode => {
     const isLowestPrice = store.totalPrice === Math.min(...stores.map(s => s.totalPrice));
     const isClosest = store.distanceInKm === Math.min(...stores.map(s => s.distanceInKm));
-    
     if (isLowestPrice && isClosest) {
-      return (
-        <div className="absolute -right-1 -top-1 z-10">
+      return <div className="absolute -right-1 -top-1 z-10">
           <div className="bg-gradient-to-r from-primary to-accent px-2 py-0.5 rounded-full shadow-md flex items-center justify-center">
             <Star className="w-3 h-3 text-white mr-0.5" /> 
             <span className="text-white text-[10px] font-medium">Miglior opzione</span>
           </div>
-        </div>
-      );
+        </div>;
     }
-    
     if (isLowestPrice) {
-      return (
-        <div className="absolute -right-1 -top-1 z-10">
+      return <div className="absolute -right-1 -top-1 z-10">
           <div className="bg-primary px-2 py-0.5 rounded-full shadow-md flex items-center justify-center">
             <Tag className="w-2.5 h-2.5 text-white mr-0.5" /> 
             <span className="text-white text-[10px] font-medium">Prezzo più basso</span>
           </div>
-        </div>
-      );
+        </div>;
     }
-    
     if (isClosest) {
-      return (
-        <div className="absolute -right-1 -top-1 z-10">
+      return <div className="absolute -right-1 -top-1 z-10">
           <div className="bg-accent px-2 py-0.5 rounded-full shadow-md flex items-center justify-center">
             <MapPin className="w-2.5 h-2.5 text-white mr-0.5" /> 
             <span className="text-white text-[10px] font-medium">Più vicino</span>
           </div>
-        </div>
-      );
+        </div>;
     }
-    
     return null;
   };
-
-  return (
-    <div className={`w-full ${isMobile ? 'max-w-full' : 'max-w-md'} mx-auto space-y-4 px-1 flex flex-col h-full pb-20`}>
+  return <div className={`w-full ${isMobile ? 'max-w-full' : 'max-w-md'} mx-auto space-y-4 px-1 flex flex-col h-full pb-20`}>
       <div className="glass-effect p-3 rounded-xl shadow-md sticky top-0 z-10 bg-white/95 backdrop-blur-md">
         <div className="flex items-center gap-2 mb-3">
           <div className="p-1.5 bg-primary/10 rounded-full">
@@ -151,14 +124,10 @@ export const StoreComparison = () => {
           <h3 className="text-base font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Ordina supermercati</h3>
         </div>
         
-        <RadioGroup 
-          value={sortBy} 
-          onValueChange={(value) => handleSortChange(value as SortOption)}
-          className="flex gap-2"
-        >
+        <RadioGroup value={sortBy} onValueChange={value => handleSortChange(value as SortOption)} className="flex gap-2">
           <div className="flex-1">
             <div className={`flex items-center gap-1.5 p-2 rounded-xl border-2 transition-all duration-200 cursor-pointer ${sortBy === 'price' ? 'border-primary/50 bg-primary/5' : 'border-gray-200 hover:border-primary/30 hover:bg-primary/5'}`}>
-              <RadioGroupItem value="price" id="price" className="text-primary w-3.5 h-3.5" />
+              <RadioGroupItem value="price" id="price" className="text-primary w-1.5 h-1.5" />
               <Label htmlFor="price" className="cursor-pointer font-medium flex items-center gap-1.5 text-sm">
                 <Tag className="w-3.5 h-3.5" /> Prezzo
               </Label>
@@ -205,11 +174,7 @@ export const StoreComparison = () => {
         <h3 className="text-base font-bold text-gray-800 mt-4 mb-2">Tutte le opzioni:</h3>
 
         <div className="space-y-4">
-          {stores.map((store, index) => (
-            <Card
-              key={store.id}
-              className="p-3 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 hover:border-primary/20 glass-effect rounded-xl relative overflow-hidden group"
-            >
+          {stores.map((store, index) => <Card key={store.id} className="p-3 hover:shadow-lg transition-all duration-300 cursor-pointer border border-gray-200 hover:border-primary/20 glass-effect rounded-xl relative overflow-hidden group">
               {getBestOption(store)}
               
               <div className="absolute -left-10 -bottom-10 w-20 h-20 bg-primary/5 rounded-full blur-xl"></div>
@@ -254,10 +219,8 @@ export const StoreComparison = () => {
                   <ArrowRight className="w-3.5 h-3.5 ml-1 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                 </Button>
               </div>
-            </Card>
-          ))}
+            </Card>)}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
