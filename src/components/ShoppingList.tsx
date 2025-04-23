@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ShoppingCart, Sparkles, ShoppingBag, Barcode, Upload, Share2, Calendar, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,10 +26,9 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
   useEffect(() => {
     if (searchTerm.length >= 1) {
       const term = searchTerm.trim().toLowerCase();
-      // Mostra solo prodotti che iniziano per il termine inserito (su nome o categoria)
+      // Mostra solo prodotti il cui nome inizia con il termine inserito (non più categorie)
       const filtered = productDatabase.filter(product =>
-        product.name.toLowerCase().startsWith(term) ||
-        product.category.toLowerCase().startsWith(term)
+        product.name.toLowerCase().startsWith(term)
       );
       setSuggestions(filtered);
       setShowSuggestions(true);
@@ -299,4 +297,3 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
     </Card>
   );
 };
-

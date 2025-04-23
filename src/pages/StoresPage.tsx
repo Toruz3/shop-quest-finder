@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { StoreComparison } from "@/components/StoreComparison";
@@ -45,9 +46,9 @@ const StoresPage = () => {
   useEffect(() => {
     if (newProductName.length >= 1) {
       const term = newProductName.trim().toLowerCase();
+      // Modifica qui: ricerca solo per nome prodotto e non per categoria
       const filtered = productDatabase.filter(product =>
-        product.name.toLowerCase().startsWith(term) ||
-        product.category.toLowerCase().startsWith(term)
+        product.name.toLowerCase().startsWith(term)
       );
       setSuggestions(filtered);
       setShowSuggestions(true);
