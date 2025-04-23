@@ -14,7 +14,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const {
@@ -33,7 +32,6 @@ const AccountPage = () => {
   // Gestione del profilo
   const [profileName, setProfileName] = useState(profile?.name || "");
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
-  
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -42,7 +40,6 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
-  
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -52,7 +49,6 @@ const AccountPage = () => {
       duration: 3000
     });
   };
-  
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     toast({
@@ -61,7 +57,6 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-  
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -70,13 +65,11 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-  
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
-  
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -96,11 +89,9 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
-  
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -129,12 +120,10 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
-  
   if (!user) {
     navigate("/auth");
     return null;
   }
-  
   return <div className="min-h-screen relative overflow-hidden pb-20">
       {/* Decorative elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
@@ -296,7 +285,7 @@ const AccountPage = () => {
                 <div className="divide-y divide-neutral-100">
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Tema scuro</h4>
+                      <h4 className="text-sm font-medium text-left">Tema scuro</h4>
                       <p className="text-xs text-neutral-500">Cambia l'aspetto dell'app</p>
                     </div>
                     <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
@@ -304,7 +293,7 @@ const AccountPage = () => {
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Notifiche</h4>
+                      <h4 className="text-sm font-medium text-left">Notifiche</h4>
                       <p className="text-xs text-neutral-500">Gestisci avvisi e promemoria</p>
                     </div>
                     <Switch checked={notificationsEnabled} onCheckedChange={toggleNotifications} />
@@ -333,8 +322,8 @@ const AccountPage = () => {
                 <div className="divide-y divide-neutral-100">
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Supermercati preferiti</h4>
-                      <p className="text-xs text-neutral-500">Gestisci le tue preferenze</p>
+                      <h4 className="text-sm font-medium text-left">Supermercati preferiti</h4>
+                      <p className="text-xs text-neutral-500 text-left">Gestisci le tue preferenze</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Heart size={16} />
@@ -344,7 +333,7 @@ const AccountPage = () => {
                   <div className="p-3 flex items-center justify-between">
                     <div>
                       <h4 className="text-sm font-medium">Raggio di ricerca</h4>
-                      <p className="text-xs text-neutral-500">5km</p>
+                      <p className="text-xs text-neutral-500 text-left">5km</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <MapPin size={16} />
@@ -353,7 +342,7 @@ const AccountPage = () => {
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium">Categorie nascoste</h4>
+                      <h4 className="text-sm font-medium text-left">Categorie nascoste</h4>
                       <p className="text-xs text-neutral-500">Nascondi categorie non utilizzate</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
@@ -364,7 +353,7 @@ const AccountPage = () => {
                   <div className="p-3 flex items-center justify-between">
                     <div>
                       <h4 className="text-sm font-medium">Dieta e preferenze alimentari</h4>
-                      <p className="text-xs text-neutral-500">Filtri per prodotti</p>
+                      <p className="text-xs text-neutral-500 text-left">Filtri per prodotti</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Settings size={16} />
@@ -548,5 +537,4 @@ const AccountPage = () => {
       <Footer />
     </div>;
 };
-
 export default AccountPage;
