@@ -381,10 +381,10 @@ const AccountPage = () => {
                 <div className="divide-y divide-neutral-100">
                   <div className="p-3">
                     <div className="flex justify-between mb-1">
-                      <h4 className="text-sm font-medium">Spesa completata</h4>
+                      <h4 className="text-sm font-medium text-left">Spesa completata</h4>
                       <span className="text-xs text-neutral-500">2 giorni fa</span>
                     </div>
-                    <p className="text-xs text-neutral-600">Esselunga • 12 prodotti • €42,75</p>
+                    <p className="text-xs text-neutral-600 text-left">Esselunga • 12 prodotti • €42,75</p>
                   </div>
                   
                   <div className="p-3">
@@ -392,7 +392,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium">Lista salvata</h4>
                       <span className="text-xs text-neutral-500">5 giorni fa</span>
                     </div>
-                    <p className="text-xs text-neutral-600">Lista "Cena speciale" • 8 prodotti</p>
+                    <p className="text-xs text-neutral-600 text-left">Lista "Cena speciale" • 8 prodotti</p>
                   </div>
                   
                   <div className="p-3">
@@ -400,7 +400,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium">Prodotto aggiunto ai preferiti</h4>
                       <span className="text-xs text-neutral-500">1 settimana fa</span>
                     </div>
-                    <p className="text-xs text-neutral-600">Parmigiano Reggiano • €4,99</p>
+                    <p className="text-xs text-neutral-600 text-left">Parmigiano Reggiano • €4,99</p>
                   </div>
                 </div>
                 
