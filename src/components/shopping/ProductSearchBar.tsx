@@ -2,7 +2,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Search, Mic, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ProductSearchBarProps {
@@ -61,7 +60,7 @@ export const ProductSearchBar = ({
 
   return (
     <div className="relative flex-1 group">
-      <div className="relative h-14 rounded-lg shadow-search bg-white border border-border">
+      <div className="relative h-14 rounded-lg shadow-sm bg-white border border-neutral-200 hover:border-neutral-300 transition-all">
         <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400">
           <Search className="w-5 h-5" />
         </div>
@@ -74,8 +73,8 @@ export const ProductSearchBar = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Cosa vuoi acquistare? (Enter per aggiungere)"
-          className={`h-14 pl-12 pr-24 py-4 bg-white border-input dark:border-neutral-700 transition-all duration-300 rounded-lg w-full text-base
-            ${isFocused ? 'border-primary ring-1 ring-primary/30 shadow-md' : 'hover:border-neutral-300'}`}
+          className={`h-14 pl-12 pr-24 py-4 bg-white shadow-none border-none transition-all duration-300 rounded-lg w-full text-base
+            ${isFocused ? 'ring-1 ring-primary/30' : ''}`}
           aria-label="Cerca prodotto"
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
@@ -109,7 +108,7 @@ export const ProductSearchBar = ({
           <button 
             onClick={onAddProduct}
             disabled={!searchTerm.trim()}
-            className="p-2 rounded-full text-primary-600 hover:text-primary-700 hover:bg-primary-50 transition-colors disabled:opacity-50 disabled:hover:bg-transparent touch-target ripple"
+            className="p-2 rounded-full text-primary hover:text-primary/80 hover:bg-primary-50 transition-colors disabled:opacity-50 disabled:hover:bg-transparent touch-target"
             aria-label="Aggiungi prodotto"
           >
             <Search className="w-5 h-5" />
@@ -129,8 +128,8 @@ export const ProductSearchBar = ({
             <div className="flex justify-center mb-3">
               <div className="relative">
                 <div className="w-4 h-4 bg-primary rounded-full absolute"></div>
-                <div className="w-8 h-8 bg-primary-300/50 rounded-full animate-ping absolute -top-2 -left-2"></div>
-                <div className="w-16 h-16 bg-primary-100/30 rounded-full animate-ping absolute -top-6 -left-6"></div>
+                <div className="w-8 h-8 bg-primary/30 rounded-full animate-ping absolute -top-2 -left-2"></div>
+                <div className="w-16 h-16 bg-primary/10 rounded-full animate-ping absolute -top-6 -left-6"></div>
               </div>
             </div>
             <p className="text-base font-medium text-neutral-800">Sto ascoltando...</p>
