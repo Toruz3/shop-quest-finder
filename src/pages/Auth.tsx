@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { Label } from "@/components/ui/label";
+
 const Auth = () => {
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(true);
@@ -27,8 +28,8 @@ const Auth = () => {
   const {
     toast
   } = useToast();
+
   useEffect(() => {
-    // If coming from welcome page with "register" tab, open correct tab
     if (location.state && location.state.tab === "register") {
       setIsLogin(false);
     } else {
@@ -36,12 +37,12 @@ const Auth = () => {
     }
   }, [location.state]);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (user) {
       navigate("/app");
     }
   }, [user, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -68,6 +69,7 @@ const Auth = () => {
       console.error("Auth error:", error);
     }
   };
+
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -87,6 +89,7 @@ const Auth = () => {
       console.error("Reset password error:", error);
     }
   };
+
   if (showResetForm) {
     return <div className="min-h-screen flex items-center justify-center px-4">
         <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
@@ -125,6 +128,7 @@ const Auth = () => {
         </div>
       </div>;
   }
+
   return <div className="min-h-screen flex items-center justify-center px-4">
       <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -175,12 +179,24 @@ const Auth = () => {
           
           {isLogin && <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="size-2 mx-0 font-normal" />
-                <Label htmlFor="rememberMe" className="text-sm cursor-pointer">
+                <Checkbox 
+                  id="rememberMe" 
+                  checked={rememberMe} 
+                  onCheckedChange={checked => setRememberMe(checked === true)} 
+                  className="size-3 mx-0" 
+                />
+                <Label 
+                  htmlFor="rememberMe" 
+                  className="text-xs cursor-pointer ml-1" 
+                >
                   Remember me
                 </Label>
               </div>
-              <button type="button" className="text-primary hover:underline text-sm" onClick={() => setShowResetForm(true)}>
+              <button 
+                type="button" 
+                className="text-primary hover:underline text-xs" 
+                onClick={() => setShowResetForm(true)}
+              >
                 Forgot password?
               </button>
             </div>}
@@ -198,4 +214,5 @@ const Auth = () => {
       </div>
     </div>;
 };
+
 export default Auth;
