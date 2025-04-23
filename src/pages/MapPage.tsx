@@ -66,7 +66,7 @@ const MapPage = () => {
   
   return (
     <motion.div 
-      className="min-h-screen relative overflow-hidden main-content"
+      className="min-h-screen relative overflow-hidden main-content px-0 sm:px-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -75,14 +75,14 @@ const MapPage = () => {
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
-      <div className="container px-3 py-4 relative z-10">
-        <div className="max-w-md mx-auto">
-          <h1 className="text-xl font-bold mb-4 flex items-center gap-2">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="max-w-md mx-auto w-full">
+          <h1 className="text-xl font-bold mb-4 flex items-center gap-2 justify-center sm:justify-start">
             <MapPin className="text-primary" />
             <span>Supermercati vicini</span>
           </h1>
           
-          <div className="relative mb-4">
+          <div className="relative mb-4 w-full">
             <Input
               placeholder="Cerca supermercato per nome"
               value={searchTerm}
@@ -92,7 +92,7 @@ const MapPage = () => {
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
           </div>
           
-          <Tabs defaultValue="nearby" className="mb-4" onValueChange={setSelectedTab}>
+          <Tabs defaultValue="nearby" className="mb-4 w-full" onValueChange={setSelectedTab}>
             <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-primary-50">
               <TabsTrigger 
                 value="nearby" 
@@ -115,7 +115,7 @@ const MapPage = () => {
             </TabsList>
           </Tabs>
           
-          <div className="mb-4">
+          <div className="mb-4 w-full">
             <Button 
               variant="outline" 
               size="sm" 
@@ -135,19 +135,19 @@ const MapPage = () => {
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="mt-2 p-3 bg-white rounded-lg border border-neutral-200"
+                className="mt-2 p-3 bg-white rounded-lg border border-neutral-200 w-full"
               >
                 <div className="grid grid-cols-2 gap-2 mb-2">
-                  <Button size="sm" variant="outline" className="justify-start text-xs">
+                  <Button size="sm" variant="outline" className="justify-start text-xs w-full">
                     Distanza <ChevronDown size={14} className="ml-1" />
                   </Button>
-                  <Button size="sm" variant="outline" className="justify-start text-xs">
+                  <Button size="sm" variant="outline" className="justify-start text-xs w-full">
                     Fascia di prezzo <ChevronDown size={14} className="ml-1" />
                   </Button>
-                  <Button size="sm" variant="outline" className="justify-start text-xs">
+                  <Button size="sm" variant="outline" className="justify-start text-xs w-full">
                     Valutazione <ChevronDown size={14} className="ml-1" />
                   </Button>
-                  <Button size="sm" variant="outline" className="justify-start text-xs">
+                  <Button size="sm" variant="outline" className="justify-start text-xs w-full">
                     Servizi <ChevronDown size={14} className="ml-1" />
                   </Button>
                 </div>
@@ -163,7 +163,7 @@ const MapPage = () => {
             )}
           </div>
           
-          <div className="relative mb-4 rounded-xl overflow-hidden h-48 bg-neutral-100">
+          <div className="relative mb-4 rounded-xl overflow-hidden h-48 bg-neutral-100 w-full">
             {!isMapLoaded ? (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
@@ -193,7 +193,7 @@ const MapPage = () => {
             )}
           </div>
           
-          <div className="space-y-3 mb-20">
+          <div className="space-y-3 mb-20 w-full">
             {stores
               .filter(store => 
                 (selectedTab === "offers" ? store.hasOffers : true) &&
@@ -208,7 +208,7 @@ const MapPage = () => {
                 return 0;
               })
               .map(store => (
-                <Card key={store.id} className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md">
+                <Card key={store.id} className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md w-full">
                   <div className="flex justify-between items-start">
                     <div>
                       <h3 className="font-medium text-neutral-800">
