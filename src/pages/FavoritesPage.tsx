@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("lists");
@@ -17,6 +18,7 @@ const FavoritesPage = () => {
   const [editingList, setEditingList] = useState<any>(null);
   const [listName, setListName] = useState("");
   const navigate = useNavigate();
+
   const [favoriteLists, setFavoriteLists] = useState([{
     id: 1,
     name: "Spesa settimanale",
@@ -62,18 +64,22 @@ const FavoritesPage = () => {
     price: 3.75,
     store: "Carrefour"
   }]);
+
   const filteredLists = favoriteLists.filter(list => list.name.toLowerCase().includes(searchTerm.toLowerCase()));
   const filteredProducts = favoriteProducts.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
   const handleAddList = () => {
     setEditingList(null);
     setListName("");
     setShowDialog(true);
   };
+
   const handleEditList = (list: any) => {
     setEditingList(list);
     setListName(list.name);
     setShowDialog(true);
   };
+
   const handleSaveList = () => {
     if (!listName.trim()) {
       toast({
@@ -108,6 +114,7 @@ const FavoritesPage = () => {
     }
     setShowDialog(false);
   };
+
   const handleDeleteProduct = (id: number) => {
     setFavoriteProducts(prevProducts => prevProducts.filter(product => product.id !== id));
     toast({
@@ -115,6 +122,7 @@ const FavoritesPage = () => {
       description: "Il prodotto è stato rimosso dai preferiti"
     });
   };
+
   const handleUseList = (list: any) => {
     toast({
       title: "Lista utilizzata",
@@ -124,12 +132,14 @@ const FavoritesPage = () => {
       navigate("/");
     }, 1500);
   };
+
   const handleAddToCart = (product: any) => {
     toast({
       title: "Prodotto aggiunto",
       description: `${product.name} aggiunto al carrello`
     });
   };
+
   return <div className="min-h-screen relative overflow-hidden pb-20">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -201,23 +211,38 @@ const FavoritesPage = () => {
                           </div>
                         </div>
                         
-                        <div className="border-t border-neutral-100 bg-neutral-50 p-2 flex justify-between">
-                          <div className="flex gap-1 overflow-x-auto scrollbar-none">
-                            <Button variant="ghost" size="sm" className="h-8 px-2 text-xs whitespace-nowrap">
-                              <Copy size={14} className="mr-1" />
+                        <div className="border-t border-neutral-100 bg-neutral-50 px-2 py-3 flex flex-col gap-2 sm:flex-row sm:justify-between">
+                          <div className="
+                            flex flex-col gap-2 w-full
+                            sm:flex-row sm:gap-1 sm:overflow-x-auto sm:whitespace-nowrap
+                          ">
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="w-full sm:w-auto h-10 sm:h-8 px-3 text-xs sm:text-xs whitespace-nowrap flex items-center justify-center"
+                            >
+                              <Copy size={16} className="mr-1" />
                               Duplica
                             </Button>
-                            <Button variant="ghost" size="sm" className="h-8 px-2 text-xs whitespace-nowrap">
-                              <Calendar size={14} className="mr-1" />
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="w-full sm:w-auto h-10 sm:h-8 px-3 text-xs sm:text-xs whitespace-nowrap flex items-center justify-center"
+                            >
+                              <Calendar size={16} className="mr-1" />
                               Pianifica
                             </Button>
-                            <Button variant="ghost" size="sm" className="h-8 px-2 text-xs whitespace-nowrap">
-                              <Share2 size={14} className="mr-1" />
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="w-full sm:w-auto h-10 sm:h-8 px-3 text-xs sm:text-xs whitespace-nowrap flex items-center justify-center"
+                            >
+                              <Share2 size={16} className="mr-1" />
                               Condividi
                             </Button>
                           </div>
-                          <Button variant="default" size="sm" className="h-8 px-3 text-xs ml-2" onClick={() => handleUseList(list)}>
-                            <ShoppingCart size={14} className="mr-1" />
+                          <Button variant="default" size="sm" className="w-full sm:w-auto h-10 sm:h-8 px-3 text-xs sm:text-xs mt-2 sm:mt-0 ml-0 sm:ml-2" onClick={() => handleUseList(list)}>
+                            <ShoppingCart size={16} className="mr-1" />
                             Usa
                           </Button>
                         </div>
@@ -322,4 +347,5 @@ const FavoritesPage = () => {
       <Footer productsCount={0} />
     </div>;
 };
+
 export default FavoritesPage;
