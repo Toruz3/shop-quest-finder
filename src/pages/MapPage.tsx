@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -73,131 +72,130 @@ const MapPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Background decorative elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
-      <div className="flex-1 flex flex-col w-full h-[100%] overflow-hidden">
-        <div className="container mx-auto px-4 py-4 relative z-10 flex flex-col h-full">
-          <div className="w-full max-w-md mx-auto flex flex-col h-full">
+      <div className="w-full h-full overflow-y-auto pb-24">
+        <div className="container mx-auto px-4 py-4 relative">
+          <div className="w-full max-w-md mx-auto">
             <h1 className="text-xl font-bold mb-4 flex items-center gap-2 justify-center text-center">
               <MapPin className="text-primary" />
               <span>Supermercati vicini</span>
             </h1>
             
-            <div className="relative mb-4 w-full">
-              <Input
-                placeholder="Cerca supermercato per nome"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pr-10 py-5 bg-white border-primary-100 focus:border-primary-300 focus:ring focus:ring-primary-200 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full"
-              />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-            </div>
-            
-            <Tabs defaultValue="nearby" className="mb-4 w-full" onValueChange={setSelectedTab}>
-              <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-primary-50">
-                <TabsTrigger 
-                  value="nearby" 
-                  className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
-                >
-                  Più vicini
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="cheapest" 
-                  className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
-                >
-                  Più economici
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="offers" 
-                  className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
-                >
-                  Offerte
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-            
-            <div className="mb-4 w-full">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="w-full justify-between bg-white"
-                onClick={() => setShowFilters(!showFilters)}
-              >
-                <span className="flex items-center gap-2">
-                  <Filter size={16} />
-                  Filtri
-                </span>
-                <ChevronDown size={16} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
-              </Button>
+            <div className="space-y-4">
+              <div className="relative">
+                <Input
+                  placeholder="Cerca supermercato per nome"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pr-10 py-5 bg-white border-primary-100 focus:border-primary-300 focus:ring focus:ring-primary-200 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full"
+                />
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+              </div>
               
-              {showFilters && (
-                <motion.div 
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-2 p-3 bg-white rounded-lg border border-neutral-200 w-full"
+              <Tabs defaultValue="nearby" className="w-full" onValueChange={setSelectedTab}>
+                <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-primary-50">
+                  <TabsTrigger 
+                    value="nearby" 
+                    className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
+                  >
+                    Più vicini
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="cheapest" 
+                    className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
+                  >
+                    Più economici
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="offers" 
+                    className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all"
+                  >
+                    Offerte
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              
+              <div>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full justify-between bg-white"
+                  onClick={() => setShowFilters(!showFilters)}
                 >
-                  <div className="grid grid-cols-2 gap-2 mb-2">
-                    <Button size="sm" variant="outline" className="justify-start text-xs w-full">
-                      Distanza <ChevronDown size={14} className="ml-1" />
+                  <span className="flex items-center gap-2">
+                    <Filter size={16} />
+                    Filtri
+                  </span>
+                  <ChevronDown size={16} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                </Button>
+                
+                {showFilters && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-2 p-3 bg-white rounded-lg border border-neutral-200"
+                  >
+                    <div className="grid grid-cols-2 gap-2 mb-2">
+                      <Button size="sm" variant="outline" className="justify-start text-xs w-full">
+                        Distanza <ChevronDown size={14} className="ml-1" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="justify-start text-xs w-full">
+                        Fascia di prezzo <ChevronDown size={14} className="ml-1" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="justify-start text-xs w-full">
+                        Valutazione <ChevronDown size={14} className="ml-1" />
+                      </Button>
+                      <Button size="sm" variant="outline" className="justify-start text-xs w-full">
+                        Servizi <ChevronDown size={14} className="ml-1" />
+                      </Button>
+                    </div>
+                    <div className="flex gap-2 flex-wrap">
+                      <Badge variant="outline" className="bg-primary-50 text-primary border-primary-200">
+                        Consegna a domicilio ✓
+                      </Badge>
+                      <Badge variant="outline" className="bg-primary-50 text-primary border-primary-200">
+                        Aperto ora ✓
+                      </Badge>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+              
+              <div className="relative rounded-xl overflow-hidden h-48 bg-neutral-100">
+                {!isMapLoaded ? (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                ) : (
+                  <div className="relative h-full w-full">
+                    <img 
+                      src="https://images.unsplash.com/photo-1545065053-73e294de55ed?auto=format&fit=crop&w=600&h=200&q=80" 
+                      alt="Map" 
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
+                    <Button 
+                      size="sm" 
+                      className="absolute bottom-2 right-2 bg-white text-primary hover:bg-white/90"
+                    >
+                      <Locate size={16} className="mr-1" />
+                      Posizione attuale
                     </Button>
-                    <Button size="sm" variant="outline" className="justify-start text-xs w-full">
-                      Fascia di prezzo <ChevronDown size={14} className="ml-1" />
-                    </Button>
-                    <Button size="sm" variant="outline" className="justify-start text-xs w-full">
-                      Valutazione <ChevronDown size={14} className="ml-1" />
-                    </Button>
-                    <Button size="sm" variant="outline" className="justify-start text-xs w-full">
-                      Servizi <ChevronDown size={14} className="ml-1" />
+                    <Button 
+                      size="icon" 
+                      className="absolute top-2 right-2 h-8 w-8 bg-white text-neutral-700 hover:bg-white/90"
+                    >
+                      <PlusCircle size={16} />
                     </Button>
                   </div>
-                  <div className="flex gap-2 flex-wrap">
-                    <Badge variant="outline" className="bg-primary-50 text-primary border-primary-200">
-                      Consegna a domicilio ✓
-                    </Badge>
-                    <Badge variant="outline" className="bg-primary-50 text-primary border-primary-200">
-                      Aperto ora ✓
-                    </Badge>
-                  </div>
-                </motion.div>
-              )}
-            </div>
-            
-            <div className="relative mb-4 rounded-xl overflow-hidden h-48 bg-neutral-100 w-full">
-              {!isMapLoaded ? (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              ) : (
-                <div className="relative h-full w-full">
-                  <img 
-                    src="https://images.unsplash.com/photo-1545065053-73e294de55ed?auto=format&fit=crop&w=600&h=200&q=80" 
-                    alt="Map" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
-                  <Button 
-                    size="sm" 
-                    className="absolute bottom-2 right-2 bg-white text-primary hover:bg-white/90"
-                  >
-                    <Locate size={16} className="mr-1" />
-                    Posizione attuale
-                  </Button>
-                  <Button 
-                    size="icon" 
-                    className="absolute top-2 right-2 h-8 w-8 bg-white text-neutral-700 hover:bg-white/90"
-                  >
-                    <PlusCircle size={16} />
-                  </Button>
-                </div>
-              )}
-            </div>
-            
-            <div className="flex-1 overflow-y-auto w-full pb-0">
-              <div className="space-y-3 w-full">
+                )}
+              </div>
+              
+              <div className="space-y-3">
                 {stores
                   .filter(store => 
                     (selectedTab === "offers" ? store.hasOffers : true) &&
@@ -212,7 +210,7 @@ const MapPage = () => {
                     return 0;
                   })
                   .map(store => (
-                    <Card key={store.id} className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md w-full">
+                    <Card key={store.id} className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md">
                       <div className="flex justify-between items-start">
                         <div>
                           <h3 className="font-medium text-neutral-800">
