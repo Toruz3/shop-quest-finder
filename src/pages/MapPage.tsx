@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Search, ChevronDown, Filter, Navigation, PlusCircle, Locate } from "lucide-react";
 import { motion } from "framer-motion";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 const MapPage = () => {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
@@ -67,19 +67,20 @@ const MapPage = () => {
   
   return (
     <motion.div 
-      className="min-h-screen relative overflow-hidden main-content"
+      className="min-h-screen w-full overflow-hidden flex flex-col items-center main-content"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
+      {/* Background decorative elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
-      <ScrollArea className="h-[calc(100vh-4rem)] w-full">
+      <div className="h-[calc(100vh-4rem)] w-full overflow-y-auto custom-scrollbar">
         <div className="container mx-auto px-4 py-4 relative z-10">
           <div className="w-full max-w-md mx-auto">
-            <h1 className="text-xl font-bold mb-4 flex items-center gap-2 justify-center">
+            <h1 className="text-xl font-bold mb-4 flex items-center gap-2 justify-center text-center">
               <MapPin className="text-primary" />
               <span>Supermercati vicini</span>
             </h1>
@@ -258,7 +259,7 @@ const MapPage = () => {
             </div>
           </div>
         </div>
-      </ScrollArea>
+      </div>
     </motion.div>
   );
 };

@@ -8,6 +8,13 @@
 /* ==========================================================================
    CSS VARIABLES (LIGHT THEME)
    ========================================================================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   CSS VARIABLES (LIGHT THEME)
+   ========================================================================== */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -233,6 +240,11 @@
   .main-content {
     padding-bottom: 116px !important;
     padding-top: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
