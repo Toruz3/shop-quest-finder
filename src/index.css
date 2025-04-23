@@ -1,3 +1,4 @@
+
 /* ==========================================================================
    TAILWIND BASE & LAYER SETUP
    ========================================================================== */
@@ -90,18 +91,25 @@
     @apply scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-secondary/40 hover:scrollbar-thumb-primary/60;
     scrollbar-width: thin;
   }
-  .custom-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  
+  /* Global scrollbar hiding for all scrollable elements */
+  .custom-scrollbar, 
+  [class*="overflow-y-auto"],
+  [class*="overflow-x-auto"],
+  [class*="overflow-scroll"] {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
   }
   
-  .custom-scrollbar::-webkit-scrollbar {
-    display: none;
+  .custom-scrollbar::-webkit-scrollbar, 
+  [class*="overflow-y-auto"]::-webkit-scrollbar,
+  [class*="overflow-x-auto"]::-webkit-scrollbar,
+  [class*="overflow-scroll"]::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
-  .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-  .custom-scrollbar::-webkit-scrollbar-track { @apply bg-secondary rounded-full; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-primary/60 rounded-full transition-colors; }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover { @apply bg-primary/80; }
+  
   .touch-target { @apply min-h-[48px] min-w-[48px]; }
   .mobile-full { @apply w-full md:w-auto; }
   .mobile-padding { @apply px-4 py-3 md:px-4 md:py-3; }
@@ -117,8 +125,8 @@
   }
   .content-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative; }
   .page-container { @apply min-h-[calc(100vh-80px)] w-full max-w-7xl mx-auto; }
-  .scrollable-content { @apply overflow-y-auto overscroll-contain custom-scrollbar; height: calc(100vh - 180px); max-height: 600px;}
-  .search-results-container { @apply max-h-[280px] overflow-y-auto overscroll-contain custom-scrollbar; }
+  .scrollable-content { @apply overflow-y-auto overscroll-contain; height: calc(100vh - 180px); max-height: 600px;}
+  .search-results-container { @apply max-h-[280px] overflow-y-auto overscroll-contain; }
 }
 
 /* ==========================================================================
@@ -243,8 +251,10 @@
     width: 100% !important;
     max-width: 100% !important;
     display: flex;
+    flex-direction: column !important;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start !important;
+    height: 100vh !important;
   }
 }
 

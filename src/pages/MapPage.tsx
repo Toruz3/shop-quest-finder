@@ -67,7 +67,7 @@ const MapPage = () => {
   
   return (
     <motion.div 
-      className="min-h-screen w-full overflow-hidden flex flex-col items-center main-content"
+      className="min-h-screen w-full flex flex-col overflow-hidden main-content"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -77,9 +77,9 @@ const MapPage = () => {
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
-      <div className="h-[calc(100vh-4rem)] w-full overflow-y-auto custom-scrollbar">
-        <div className="container mx-auto px-4 py-4 relative z-10">
-          <div className="w-full max-w-md mx-auto">
+      <div className="flex-1 flex flex-col w-full h-[100%] overflow-hidden">
+        <div className="container mx-auto px-4 py-4 relative z-10 flex flex-col h-full">
+          <div className="w-full max-w-md mx-auto flex flex-col h-full">
             <h1 className="text-xl font-bold mb-4 flex items-center gap-2 justify-center text-center">
               <MapPin className="text-primary" />
               <span>Supermercati vicini</span>
@@ -196,66 +196,68 @@ const MapPage = () => {
               )}
             </div>
             
-            <div className="space-y-3 mb-20 w-full">
-              {stores
-                .filter(store => 
-                  (selectedTab === "offers" ? store.hasOffers : true) &&
-                  (searchTerm ? store.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
-                )
-                .sort((a, b) => {
-                  if (selectedTab === "nearby") {
-                    return parseFloat(a.distance) - parseFloat(b.distance);
-                  } else if (selectedTab === "cheapest") {
-                    return a.priceLevel.length - b.priceLevel.length;
-                  }
-                  return 0;
-                })
-                .map(store => (
-                  <Card key={store.id} className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md w-full">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <h3 className="font-medium text-neutral-800">
-                          {store.name}
-                        </h3>
-                        <p className="text-xs text-neutral-500 mt-1 flex items-center gap-1">
-                          <MapPin size={12} />
-                          {store.address} • {store.distance}
-                        </p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Badge variant="outline" className="text-xs py-0">
-                            {store.priceLevel}
-                          </Badge>
-                          <span className="text-xs text-neutral-600">
-                            ★ {store.rating}
-                          </span>
+            <div className="flex-1 overflow-y-auto w-full pb-0">
+              <div className="space-y-3 w-full">
+                {stores
+                  .filter(store => 
+                    (selectedTab === "offers" ? store.hasOffers : true) &&
+                    (searchTerm ? store.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
+                  )
+                  .sort((a, b) => {
+                    if (selectedTab === "nearby") {
+                      return parseFloat(a.distance) - parseFloat(b.distance);
+                    } else if (selectedTab === "cheapest") {
+                      return a.priceLevel.length - b.priceLevel.length;
+                    }
+                    return 0;
+                  })
+                  .map(store => (
+                    <Card key={store.id} className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md w-full">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h3 className="font-medium text-neutral-800">
+                            {store.name}
+                          </h3>
+                          <p className="text-xs text-neutral-500 mt-1 flex items-center gap-1">
+                            <MapPin size={12} />
+                            {store.address} • {store.distance}
+                          </p>
+                          <div className="flex items-center gap-2 mt-2">
+                            <Badge variant="outline" className="text-xs py-0">
+                              {store.priceLevel}
+                            </Badge>
+                            <span className="text-xs text-neutral-600">
+                              ★ {store.rating}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-end">
+                          <Button size="sm" variant="default" className="h-8 text-xs px-2 mb-1">
+                            <Navigation size={12} className="mr-1" />
+                            Naviga
+                          </Button>
+                          <Button size="sm" variant="outline" className="h-8 text-xs px-2">
+                            Dettagli
+                          </Button>
                         </div>
                       </div>
-                      <div className="flex flex-col items-end">
-                        <Button size="sm" variant="default" className="h-8 text-xs px-2 mb-1">
-                          <Navigation size={12} className="mr-1" />
-                          Naviga
-                        </Button>
-                        <Button size="sm" variant="outline" className="h-8 text-xs px-2">
-                          Dettagli
-                        </Button>
-                      </div>
-                    </div>
-                    
-                    {store.hasOffers && (
-                      <div className="mt-2 pt-2 border-t border-dashed border-neutral-200">
-                        <p className="text-xs text-accent-600 font-medium">Offerte speciali:</p>
-                        <ul className="mt-1 space-y-1">
-                          {store.specialOffers.map((offer, idx) => (
-                            <li key={idx} className="text-xs text-neutral-700 flex items-start gap-1">
-                              <span className="text-primary text-xs">•</span>
-                              {offer}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </Card>
-                ))}
+                      
+                      {store.hasOffers && (
+                        <div className="mt-2 pt-2 border-t border-dashed border-neutral-200">
+                          <p className="text-xs text-accent-600 font-medium">Offerte speciali:</p>
+                          <ul className="mt-1 space-y-1">
+                            {store.specialOffers.map((offer, idx) => (
+                              <li key={idx} className="text-xs text-neutral-700 flex items-start gap-1">
+                                <span className="text-primary text-xs">•</span>
+                                {offer}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </Card>
+                  ))}
+              </div>
             </div>
           </div>
         </div>
