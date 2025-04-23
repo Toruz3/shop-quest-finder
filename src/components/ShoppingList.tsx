@@ -25,10 +25,12 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   useEffect(() => {
-    if (searchTerm.length >= 2) {
+    if (searchTerm.length >= 1) {
+      const term = searchTerm.trim().toLowerCase();
+      // Mostra solo prodotti che iniziano per il termine inserito (su nome o categoria)
       const filtered = productDatabase.filter(product =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchTerm.toLowerCase())
+        product.name.toLowerCase().startsWith(term) ||
+        product.category.toLowerCase().startsWith(term)
       );
       setSuggestions(filtered);
       setShowSuggestions(true);
@@ -297,3 +299,4 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
     </Card>
   );
 };
+

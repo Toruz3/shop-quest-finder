@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { StoreComparison } from "@/components/StoreComparison";
@@ -25,12 +24,10 @@ const StoresPage = () => {
   const [suggestions, setSuggestions] = useState<ProductSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
-  // Usa i prodotti dal location state o inizializza con dati di esempio
   useEffect(() => {
     if (location.state?.products) {
       setProducts(location.state.products);
     } else {
-      // Inizializza con prodotti di esempio
       const sampleProducts = [
         { id: Date.now(), name: 'Pane', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
         { id: Date.now() + 1, name: 'Latte', quantity: 2, imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
@@ -46,10 +43,11 @@ const StoresPage = () => {
   }, [location]);
 
   useEffect(() => {
-    if (newProductName.length >= 2) {
+    if (newProductName.length >= 1) {
+      const term = newProductName.trim().toLowerCase();
       const filtered = productDatabase.filter(product =>
-        product.name.toLowerCase().includes(newProductName.toLowerCase()) ||
-        product.category.toLowerCase().includes(newProductName.toLowerCase())
+        product.name.toLowerCase().startsWith(term) ||
+        product.category.toLowerCase().startsWith(term)
       );
       setSuggestions(filtered);
       setShowSuggestions(true);
@@ -79,7 +77,6 @@ const StoresPage = () => {
   };
 
   const goBackToHome = () => {
-    // Modificato per tornare sempre alla pagina principale dell'app invece che al welcome
     navigate("/app", { state: { products } });
   };
 
