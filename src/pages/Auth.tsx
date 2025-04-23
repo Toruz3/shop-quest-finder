@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ShoppingCart, Sparkles } from "lucide-react";
@@ -8,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { Label } from "@/components/ui/label";
-
 const Auth = () => {
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(true);
@@ -26,8 +24,9 @@ const Auth = () => {
     user
   } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  
+  const {
+    toast
+  } = useToast();
   useEffect(() => {
     // If coming from welcome page with "register" tab, open correct tab
     if (location.state && location.state.tab === "register") {
@@ -43,7 +42,6 @@ const Auth = () => {
       navigate("/app");
     }
   }, [user, navigate]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -70,7 +68,6 @@ const Auth = () => {
       console.error("Auth error:", error);
     }
   };
-
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -90,7 +87,6 @@ const Auth = () => {
       console.error("Reset password error:", error);
     }
   };
-
   if (showResetForm) {
     return <div className="min-h-screen flex items-center justify-center px-4">
         <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
@@ -129,7 +125,6 @@ const Auth = () => {
         </div>
       </div>;
   }
-
   return <div className="min-h-screen flex items-center justify-center px-4">
       <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -180,7 +175,7 @@ const Auth = () => {
           
           {isLogin && <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-2">
-                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="size-4 mx-0 font-normal" />
+                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="size-2 mx-0 font-normal" />
                 <Label htmlFor="rememberMe" className="text-sm cursor-pointer">
                   Remember me
                 </Label>
@@ -203,5 +198,4 @@ const Auth = () => {
       </div>
     </div>;
 };
-
 export default Auth;
