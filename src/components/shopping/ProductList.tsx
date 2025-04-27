@@ -15,7 +15,7 @@ export const ProductList = ({
   onRemoveProduct,
 }: ProductListProps) => {
   return (
-    <div className="space-y-3 overflow-y-auto custom-scrollbar pr-1 w-full" 
+    <div className="space-y-4 overflow-y-auto custom-scrollbar pr-1 w-full" 
          style={{ maxHeight: products.length ? `${Math.min(400, products.length * 110)}px` : "auto" }}>
       <AnimatePresence>
         {products.map((product) => (

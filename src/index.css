@@ -9,13 +9,6 @@
 /* ==========================================================================
    CSS VARIABLES (LIGHT THEME)
    ========================================================================== */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* ==========================================================================
-   CSS VARIABLES (LIGHT THEME)
-   ========================================================================== */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -136,11 +129,11 @@
   .card-hover { @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1; }
   .btn-primary { @apply bg-primary text-white font-medium shadow-md hover:shadow-lg hover:bg-primary/90 hover:shadow-primary/20 transition-all duration-300; min-height: 48px; border-radius: 8px; padding: 0 16px;}
   .btn-secondary { @apply bg-secondary text-foreground font-medium border border-border hover:bg-secondary/80 transition-all duration-300; min-height: 48px; border-radius: 8px; padding: 0 16px;}
-  .card { @apply bg-card rounded-xl border border-border shadow-sm; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05); border-radius: 12px;}
+  .card { @apply bg-card rounded-xl border border-border shadow-card; border-radius: 12px;}
   .mobile-card { @apply p-4 rounded-xl shadow-sm hover:shadow-md transition-all;}
   .mobile-button { @apply h-12 rounded-lg active:scale-95 transition-transform; min-height: 48px;}
   .mobile-input { @apply h-14 text-base px-4 rounded-lg;}
-  .search-bar { @apply h-14 px-4 rounded-lg shadow-sm flex items-center bg-white border border-border;}
+  .search-bar { @apply h-14 px-4 rounded-lg shadow-search flex items-center bg-white border border-border;}
   .fab-button { @apply fixed rounded-full shadow-lg active:scale-95 transition-transform z-30 bottom-24 right-5;}
   .bottom-sheet { @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-xl z-40 transform transition-transform duration-300;}
   .bottom-sheet-open { @apply translate-y-0;}
@@ -239,7 +232,7 @@
     left: 0;
     right: 0;
     padding-bottom: calc(env(safe-area-inset-bottom, 0.75rem) + 0.5rem);
-    height: 72px;
+    height: 64px;
     min-height: 64px;
     z-index: 60;
     background: #fff;
