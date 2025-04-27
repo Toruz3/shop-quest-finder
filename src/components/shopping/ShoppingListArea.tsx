@@ -17,7 +17,10 @@ export const ShoppingListArea = ({
   onAddSampleProducts
 }: ShoppingListAreaProps) => {
   return (
-    <div className="mt-4 w-full flex-grow overflow-y-auto custom-scrollbar" style={{ minHeight: products.length ? "0" : "220px" }}>
+    <div 
+      className="mt-4 w-full flex-grow overflow-y-auto hide-scrollbar smooth-scroll touch-scroll" 
+      style={{ minHeight: products.length ? "0" : "220px" }}
+    >
       {products.length === 0 ? (
         <EmptyState onAddSampleProducts={onAddSampleProducts} />
       ) : (
