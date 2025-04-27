@@ -13,14 +13,26 @@ export const useProductSearch = (searchTerm: string) => {
     queryFn: async () => {
       if (searchTerm.length < 2) return [];
       
-      const { data: products } = await supabase
+      const { data: products, error } = await supabase
         .from('products')
-        .select('id, name, category, description, imageUrl')
+        .select('id, name, category, image_url')
         .order('similarity(name, $1)', { ascending: false })
         .textSearch('name', `${searchTerm}:*`)
         .limit(5);
 
-      return products || [];
+      if (error) {
+        console.error("Error searching products:", error);
+        return [];
+      }
+      
+      // Map database columns to our expected format
+      return products.map(product => ({
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        imageUrl: product.image_url || '',
+        description: product.category // Use category as description since description doesn't exist
+      })) as ProductSuggestion[];
     },
     enabled: searchTerm.length >= 2
   });
