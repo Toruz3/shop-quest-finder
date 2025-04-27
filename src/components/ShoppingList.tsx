@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
-import { ShoppingCart, Sparkles, ShoppingBag, Barcode, Upload, Share2, Calendar, Bell } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ProductSearchBar } from "./shopping/ProductSearchBar";
-import { ProductSuggestions } from "./shopping/ProductSuggestions";
-import { ProductList } from "./shopping/ProductList";
-import { CategoryChips } from "./shopping/CategoryChips";
-import { EmptyState } from "./shopping/EmptyState";
 import { FabMenu } from "@/components/ui/fab-menu";
 import { toast } from "@/hooks/use-toast";
 import { Product, ProductSuggestion } from "@/types/shopping";
 import { productDatabase } from "@/data/productDatabase";
+import { ShoppingHeader } from "./shopping/ShoppingHeader";
+import { SearchSection } from "./shopping/SearchSection";
+import { ShoppingListArea } from "./shopping/ShoppingListArea";
+import { ShoppingActionButton } from "./shopping/ShoppingActionButton";
+import { ShoppingBag, Barcode, Upload, Share2, Calendar, Bell } from "lucide-react";
 
 interface ShoppingListProps {
   onFindStores: (products: Product[]) => void;
@@ -230,68 +228,30 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
 
   return (
     <Card className="p-6 w-full max-w-md mx-auto shadow-card rounded-xl border border-neutral-200 overflow-hidden flex flex-col h-[calc(100vh-100px)] md:min-h-[600px] md:max-h-[800px]">
-      <div className="flex items-center justify-center gap-2 mb-6">
-        <div className="flex items-center justify-center">
-          <ShoppingCart className="w-6 h-6 text-primary mr-2" />
-          <h2 className="text-xl font-bold text-primary">
-            Shop Quest
-          </h2>
-          <Sparkles className="w-5 h-5 text-notification ml-2" />
-        </div>
-      </div>
+      <ShoppingHeader />
       
-      <div className="text-sm text-neutral-600 text-center mb-6">
-        Trova il miglior supermercato per la tua spesa
-      </div>
+      <SearchSection 
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        onAddProduct={() => addProduct(searchTerm)}
+        onSelectCategory={handleSelectCategory}
+        showSuggestions={showSuggestions}
+        suggestions={suggestions}
+        onSelectSuggestion={addProduct}
+      />
 
-      <div className="relative space-y-2 w-full">
-        <ProductSearchBar
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          onAddProduct={() => addProduct(searchTerm)}
-        />
-        
-        <CategoryChips onSelectCategory={handleSelectCategory} />
+      <ShoppingListArea 
+        products={products}
+        onUpdateQuantity={updateQuantity}
+        onRemoveProduct={removeProduct}
+        onAddSampleProducts={handleAddSampleProducts}
+      />
 
-        {showSuggestions && suggestions.length > 0 && (
-          <ProductSuggestions
-            suggestions={suggestions}
-            onSelectSuggestion={addProduct}
-          />
-        )}
-      </div>
-
-      <div className="mt-4 w-full flex-grow overflow-y-auto custom-scrollbar" style={{ minHeight: products.length ? "0" : "200px" }}>
-        {products.length === 0 ? (
-          <EmptyState onAddSampleProducts={handleAddSampleProducts} />
-        ) : (
-          <ProductList
-            products={products}
-            onUpdateQuantity={updateQuantity}
-            onRemoveProduct={removeProduct}
-          />
-        )}
-      </div>
-
-      {products.length > 0 && (
-        <Button 
-          className="w-full mt-6 py-6 h-14 btn-primary rounded-lg shadow-lg ripple"
-          onClick={handleFindStores}
-          disabled={isCalculating}
-        >
-          {isCalculating ? (
-            <span className="flex items-center gap-2">
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-              Ricerca in corso...
-            </span>
-          ) : (
-            <span className="flex items-center gap-2 font-semibold text-base">
-              <span>Trova supermercato</span>
-              <ShoppingCart className="w-5 h-5" />
-            </span>
-          )}
-        </Button>
-      )}
+      <ShoppingActionButton 
+        onFindStores={handleFindStores}
+        isCalculating={isCalculating}
+        showButton={products.length > 0}
+      />
       
       <FabMenu actions={fabActions} />
     </Card>
