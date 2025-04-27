@@ -14,6 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const {
@@ -29,9 +30,9 @@ const AccountPage = () => {
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
 
-  // Gestione del profilo
   const [profileName, setProfileName] = useState(profile?.name || "");
   const [profileEmail, setProfileEmail] = useState(user?.email || "");
+
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -40,6 +41,7 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
+
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -49,6 +51,7 @@ const AccountPage = () => {
       duration: 3000
     });
   };
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     toast({
@@ -57,6 +60,7 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -65,11 +69,13 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
+
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -80,7 +86,6 @@ const AccountPage = () => {
       return;
     }
 
-    // Simula aggiornamento profilo
     setProfileName(newName);
     setProfileEmail(newEmail);
     toast({
@@ -89,9 +94,11 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
+
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -110,7 +117,6 @@ const AccountPage = () => {
       return;
     }
 
-    // Simula cambio password
     toast({
       title: "Password aggiornata",
       description: "La tua password è stata modificata con successo"
@@ -120,12 +126,13 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
+
   if (!user) {
     navigate("/auth");
     return null;
   }
+
   return <div className="min-h-screen relative overflow-hidden pb-20">
-      {/* Decorative elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
@@ -164,7 +171,10 @@ const AccountPage = () => {
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent value="profile" className="mt-4 space-y-4">
+            <TabsContent 
+              value="profile" 
+              className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
+            >
               <Card className="border border-neutral-200 overflow-hidden">
                 <div className="p-3 bg-neutral-50 border-b border-neutral-200">
                   <h3 className="font-medium flex items-center gap-2">
@@ -273,7 +283,10 @@ const AccountPage = () => {
               </Alert>
             </TabsContent>
             
-            <TabsContent value="preferences" className="mt-4 space-y-4">
+            <TabsContent 
+              value="preferences" 
+              className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
+            >
               <Card className="border border-neutral-200 overflow-hidden">
                 <div className="p-3 bg-neutral-50 border-b border-neutral-200">
                   <h3 className="font-medium flex items-center gap-2">
@@ -369,7 +382,10 @@ const AccountPage = () => {
               </Alert>
             </TabsContent>
             
-            <TabsContent value="activity" className="mt-4 space-y-4">
+            <TabsContent 
+              value="activity" 
+              className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
+            >
               <Card className="border border-neutral-200 overflow-hidden">
                 <div className="p-3 bg-neutral-50 border-b border-neutral-200">
                   <h3 className="font-medium flex items-center gap-2">
@@ -537,4 +553,5 @@ const AccountPage = () => {
       <Footer />
     </div>;
 };
+
 export default AccountPage;
