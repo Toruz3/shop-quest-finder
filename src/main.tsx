@@ -10,7 +10,11 @@ if (!rootElement) {
   throw new Error("Root element not found");
 }
 
-ReactDOM.createRoot(rootElement).render(
+// Create root with explicit typing
+const root = ReactDOM.createRoot(rootElement);
+
+// Render the app
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>

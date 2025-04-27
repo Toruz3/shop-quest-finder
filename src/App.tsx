@@ -19,6 +19,7 @@ import Welcome from "./pages/Welcome";
 import { Footer } from "./components/Footer";
 import "./App.css";
 
+// Initialize query client outside component to prevent re-initialization
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -37,6 +38,7 @@ const authenticatedRoutes = [
   "/account"
 ];
 
+// Separate route component for better organization
 const AppRoutes = () => {
   const location = useLocation();
   const isAuthPage = location.pathname === "/auth";
@@ -81,13 +83,12 @@ const AppRoutes = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
-      {/* Mostra la footer solo nelle pagine autenticate */}
       {isAuthenticatedPage && !isAuthPage && <Footer />}
     </>
   );
 };
 
-// Componente per proteggere le route
+// Protected route component
 import { useAuth } from "./contexts/AuthContext";
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -97,22 +98,23 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
+// Main App component
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
-            <BrowserRouter>
+      <BrowserRouter>
+        <ThemeProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
               <div className="app-container">
                 <AppRoutes />
               </div>
-            </BrowserRouter>
-          </TooltipProvider>
-        </AuthProvider>
-      </ThemeProvider>
+            </TooltipProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 };
