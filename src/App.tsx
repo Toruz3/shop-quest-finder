@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./hooks/use-theme";
 import { AnimatePresence } from "framer-motion";
@@ -37,6 +37,16 @@ const authenticatedRoutes = [
   "/favorites",
   "/account"
 ];
+
+// Protected route component
+import { useAuth } from "./contexts/AuthContext";
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { user, isLoading } = useAuth();
+  const location = useLocation();
+  if (isLoading) return null; // loading
+  if (!user) return <Navigate to="/auth" state={{ from: location }} replace />;
+  return <>{children}</>;
+}
 
 // Separate route component for better organization
 const AppRoutes = () => {
@@ -88,21 +98,11 @@ const AppRoutes = () => {
   );
 };
 
-// Protected route component
-import { useAuth } from "./contexts/AuthContext";
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isLoading } = useAuth();
-  const location = useLocation();
-  if (isLoading) return null; // loading
-  if (!user) return <Navigate to="/auth" state={{ from: location }} replace />;
-  return <>{children}</>;
-}
-
 // Main App component
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
+      <Router>
         <ThemeProvider>
           <AuthProvider>
             <TooltipProvider>
@@ -114,7 +114,7 @@ const App = () => {
             </TooltipProvider>
           </AuthProvider>
         </ThemeProvider>
-      </BrowserRouter>
+      </Router>
     </QueryClientProvider>
   );
 };

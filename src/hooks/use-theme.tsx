@@ -1,5 +1,5 @@
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import * as React from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -9,14 +9,14 @@ interface ThemeContextType {
   setTheme: (theme: Theme) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   // Use a simple string as the initial state to avoid client/server mismatch
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = React.useState<Theme>('light');
   
   // Effect for initializing theme from localStorage and system preferences
-  useEffect(() => {
+  React.useEffect(() => {
     try {
       const savedTheme = localStorage.getItem('theme') as Theme | null;
       
@@ -36,7 +36,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Effect for applying theme to document and saving to localStorage
-  useEffect(() => {
+  React.useEffect(() => {
     try {
       if (typeof document !== 'undefined') {
         if (theme === 'dark') {
@@ -54,15 +54,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = React.useCallback(() => {
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+  }, []);
 
-  const contextValue = {
+  const contextValue = React.useMemo(() => ({
     theme,
     toggleTheme,
     setTheme,
-  };
+  }), [theme, toggleTheme]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
@@ -72,7 +72,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 }
 
 export function useTheme() {
-  const context = useContext(ThemeContext);
+  const context = React.useContext(ThemeContext);
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
