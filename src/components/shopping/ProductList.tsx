@@ -15,8 +15,17 @@ export const ProductList = ({
   onRemoveProduct,
 }: ProductListProps) => {
   return (
-    <div className="space-y-4 overflow-y-auto custom-scrollbar pr-1 w-full" 
-         style={{ maxHeight: products.length ? `${Math.min(400, products.length * 110)}px` : "auto" }}>
+    <div 
+      className="space-y-4 hide-scrollbar smooth-scroll touch-scroll focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" 
+      style={{ 
+        maxHeight: products.length ? `${Math.min(400, products.length * 110)}px` : "auto",
+        willChange: 'transform',
+        contain: 'paint layout',
+      }}
+      tabIndex={0}
+      role="list"
+      aria-label="Lista prodotti"
+    >
       <AnimatePresence>
         {products.map((product) => (
           <ProductCard

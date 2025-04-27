@@ -124,21 +124,22 @@
   .hide-scrollbar {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    overflow-y: scroll;
+    overflow-y: auto;
     overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   }
 
   .hide-scrollbar::-webkit-scrollbar {
     display: none;  /* Chrome, Safari and Opera */
   }
 
-  /* Abilita scorrimento scorrevole su dispositivi mobili */
+  /* Smooth scroll behavior */
   .smooth-scroll {
-    -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
-  /* Ensure scrolling works on touch devices */
+  /* Touch-optimized scrolling */
   .touch-scroll {
     overflow-y: auto;
     overscroll-behavior: contain;
