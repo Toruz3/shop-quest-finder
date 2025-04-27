@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Search, Mic, X } from "lucide-react";
 import { Input } from "@/components/ui/input";

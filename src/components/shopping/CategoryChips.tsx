@@ -14,11 +14,10 @@ export const CategoryChips = ({ onSelectCategory }: CategoryChipsProps) => {
   
   useEffect(() => {
     const loadCategories = async () => {
-      // Using select distinct with PostgreSQL
       const { data, error } = await supabase
         .from('products')
         .select('category')
-        .order('category');
+        .distinct();
       
       if (error) {
         toast({
@@ -29,14 +28,11 @@ export const CategoryChips = ({ onSelectCategory }: CategoryChipsProps) => {
         return;
       }
       
-      // Filter out duplicates in JavaScript
-      const uniqueCategories = Array.from(new Set(data.map(item => item.category)));
-      
       // Map categories to icons
-      const categoriesWithIcons = uniqueCategories.map((category, index) => ({
+      const categoriesWithIcons = (data || []).map((item, index) => ({
         id: index + 1,
-        name: category,
-        icon: getCategoryIcon(category)
+        name: item.category,
+        icon: getCategoryIcon(item.category)
       }));
       
       setCategories(categoriesWithIcons);
