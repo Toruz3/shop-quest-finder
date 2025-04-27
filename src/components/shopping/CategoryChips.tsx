@@ -1,6 +1,8 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 interface CategoryChipsProps {
   onSelectCategory: (category: string) => void;
@@ -8,17 +10,50 @@ interface CategoryChipsProps {
 
 export const CategoryChips = ({ onSelectCategory }: CategoryChipsProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [categories, setCategories] = useState<{ id: number; name: string; icon: string }[]>([]);
   
-  const categories = [
-    { id: 1, name: 'Frutta', icon: '🍎' },
-    { id: 2, name: 'Verdura', icon: '🥦' },
-    { id: 3, name: 'Carne', icon: '🥩' },
-    { id: 4, name: 'Pesce', icon: '🐟' },
-    { id: 5, name: 'Latticini', icon: '🧀' },
-    { id: 6, name: 'Casa', icon: '🧹' },
-    { id: 7, name: 'Bevande', icon: '🥤' },
-    { id: 8, name: 'Surgelati', icon: '🧊' }
-  ];
+  useEffect(() => {
+    const loadCategories = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('category')
+        .distinct();
+      
+      if (error) {
+        toast({
+          title: "Errore",
+          description: "Impossibile caricare le categorie",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      // Map categories to icons
+      const categoriesWithIcons = (data || []).map((item, index) => ({
+        id: index + 1,
+        name: item.category,
+        icon: getCategoryIcon(item.category)
+      }));
+      
+      setCategories(categoriesWithIcons);
+    };
+    
+    loadCategories();
+  }, []);
+  
+  const getCategoryIcon = (category: string): string => {
+    const icons: Record<string, string> = {
+      'Frutta': '🍎',
+      'Verdura': '🥦',
+      'Carne': '🥩',
+      'Pesce': '🐟',
+      'Latticini': '🧀',
+      'Casa': '🧹',
+      'Bevande': '🥤',
+      'Surgelati': '🧊'
+    };
+    return icons[category] || '📦';
+  };
   
   const handleSelect = (category: string) => {
     setSelectedCategory(category === selectedCategory ? null : category);

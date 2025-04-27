@@ -242,12 +242,68 @@ export type Database = {
         }
         Relationships: []
       }
+      user_search_history: {
+        Row: {
+          created_at: string | null
+          id: string
+          search_term: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          search_term: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          search_term?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      add_search_term: {
+        Args: { p_user_id: string; p_search_term: string }
+        Returns: undefined
+      }
+      gtrgm_compress: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      gtrgm_decompress: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      gtrgm_in: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      gtrgm_options: {
+        Args: { "": unknown }
+        Returns: undefined
+      }
+      gtrgm_out: {
+        Args: { "": unknown }
+        Returns: unknown
+      }
+      set_limit: {
+        Args: { "": number }
+        Returns: number
+      }
+      show_limit: {
+        Args: Record<PropertyKey, never>
+        Returns: number
+      }
+      show_trgm: {
+        Args: { "": string }
+        Returns: string[]
+      }
     }
     Enums: {
       [_ in never]: never

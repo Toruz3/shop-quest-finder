@@ -1,8 +1,8 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { Search, Mic, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
+import { useProductSearch } from "@/hooks/useProductSearch";
 
 interface ProductSearchBarProps {
   searchTerm: string;
@@ -18,10 +18,9 @@ export const ProductSearchBar = ({
   const [isListening, setIsListening] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { suggestions, isLoading, addToHistory } = useProductSearch(searchTerm);
   
-  // Focus input on component mount for mobile
   useEffect(() => {
-    // Delay focus to ensure proper keyboard behavior on mobile
     const timer = setTimeout(() => {
       if (inputRef.current && window.innerWidth < 768) {
         inputRef.current.focus();
@@ -31,18 +30,23 @@ export const ProductSearchBar = ({
     return () => clearTimeout(timer);
   }, []);
   
+  const handleSearch = async () => {
+    if (searchTerm.trim()) {
+      await addToHistory(searchTerm.trim());
+      onAddProduct();
+    }
+  };
+  
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && searchTerm.trim()) {
-      onAddProduct();
+      handleSearch();
       e.preventDefault();
     }
   };
   
   const handleMicClick = () => {
-    // Voice recognition simulation
     if (!isListening) {
       setIsListening(true);
-      // In a real app, voice recognition API would be integrated here
       setTimeout(() => {
         setIsListening(false);
         onSearchChange(searchTerm + (searchTerm ? ' ' : '') + 'pomodori');
@@ -115,6 +119,46 @@ export const ProductSearchBar = ({
           </button>
         </div>
       </div>
+      
+      {searchTerm && suggestions.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="absolute z-50 w-full bg-white rounded-xl shadow-lg border border-neutral-200 mt-1"
+        >
+          <div className="py-1">
+            {suggestions.map((suggestion) => (
+              <motion.button
+                key={suggestion.id}
+                className="w-full px-4 py-2 text-left hover:bg-neutral-50 flex items-center gap-2"
+                onClick={() => {
+                  onSearchChange(suggestion.name);
+                  handleSearch();
+                }}
+              >
+                {suggestion.imageUrl && (
+                  <img
+                    src={suggestion.imageUrl}
+                    alt={suggestion.name}
+                    className="w-8 h-8 object-cover rounded"
+                  />
+                )}
+                <div>
+                  <div className="font-medium">{suggestion.name}</div>
+                  <div className="text-sm text-neutral-500">{suggestion.category}</div>
+                </div>
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+      )}
+      
+      {isLoading && searchTerm && (
+        <div className="absolute z-50 w-full bg-white rounded-xl shadow-lg border border-neutral-200 mt-1 p-4 text-center">
+          <div className="animate-spin w-5 h-5 border-2 border-primary border-t-transparent rounded-full mx-auto"></div>
+        </div>
+      )}
       
       <AnimatePresence>
         {isListening && (
