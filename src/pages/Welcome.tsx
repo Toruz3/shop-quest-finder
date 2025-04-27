@@ -1,8 +1,7 @@
-
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { LogIn, UserPlus } from "lucide-react";
+import { LogIn, UserPlus, ShoppingCart } from "lucide-react";
 
 const Welcome = () => {
   const navigate = useNavigate();
