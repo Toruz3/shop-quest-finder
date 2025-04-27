@@ -98,11 +98,11 @@ const AppRoutes = () => {
   );
 };
 
-// Main App component
+// Main App component - Important to ensure correct provider nesting order
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
+    <Router>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AuthProvider>
             <TooltipProvider>
@@ -114,8 +114,8 @@ const App = () => {
             </TooltipProvider>
           </AuthProvider>
         </ThemeProvider>
-      </Router>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </Router>
   );
 };
 
