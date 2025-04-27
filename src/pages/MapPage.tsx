@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapHeader } from "@/components/map/MapHeader";
@@ -80,15 +79,11 @@ const MapPage = () => {
           <div className="w-full max-w-md mx-auto">
             <MapHeader />
             
-            <div className="space-y-4">
+            <div className="flex flex-col h-[calc(100vh-180px)]">
               <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-              
               <FilterTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-              
               <FilterButton />
-              
               <MapView isMapLoaded={isMapLoaded} />
-              
               <StoresList
                 stores={stores}
                 searchTerm={searchTerm}
