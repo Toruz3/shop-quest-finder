@@ -34,7 +34,7 @@ export const StoresList = ({ stores, searchTerm, selectedTab }: StoresListProps)
     });
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 hide-scrollbar smooth-scroll custom-scrollbar overflow-y-auto max-h-[70vh]">
       {filteredStores.map(store => (
         <StoreItem key={store.id} store={store} />
       ))}

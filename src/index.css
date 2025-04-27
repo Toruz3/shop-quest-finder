@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    TAILWIND BASE & LAYER SETUP
    ========================================================================== */
@@ -120,6 +119,34 @@
   .page-container { @apply min-h-[calc(100vh-80px)] w-full max-w-7xl mx-auto; }
   .scrollable-content { @apply overflow-y-auto overscroll-contain; height: calc(100vh - 180px); max-height: 600px;}
   .search-results-container { @apply max-h-[280px] overflow-y-auto overscroll-contain; }
+
+  /* Nascondi scrollbar mantenendo lo scorrimento */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+
+  /* Abilita scorrimento scorrevole su dispositivi mobili */
+  .smooth-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Scrollbar personalizzato e discreto */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 2px;
+  }
 }
 
 /* ==========================================================================
