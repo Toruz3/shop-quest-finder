@@ -1,0 +1,48 @@
+
+/* Pull to refresh animation */
+.ptr-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: #37B24D;
+  z-index: 10;
+  text-align: center;
+  height: 50px;
+  transition: all .25s ease;
+}
+
+.ptr-refresh {
+  background-color: #F5F7FA;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 50%;
+  margin-left: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .25s ease;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ptr-loading .ptr-refresh {
+  transform: rotate(180deg);
+}
+
+.ptr-refresh-icon {
+  fill: #37B24D;
+  width: 24px;
+  height: 24px;
+  transition: all .25s ease;
+}
+
+.ptr-loading .ptr-refresh-icon {
+  animation: ptr-loading 1s linear infinite;
+}
+
+@keyframes ptr-loading {
+  from { transform: rotate(0);}
+  to { transform: rotate(360deg);}
+}

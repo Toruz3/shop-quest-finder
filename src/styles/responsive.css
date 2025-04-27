@@ -1,0 +1,42 @@
+
+/* Mobile-specific styles */
+@media (max-width: 640px) {
+  .container { padding-left: 1rem; padding-right: 1rem;}
+  h1 { font-size: 1.25rem;}
+  h2 { font-size: 1.125rem;}
+  .card { border-radius: 0.75rem;}
+
+  /* Footer adjustments on mobile */
+  .footer-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0.75rem) + 0.5rem);
+    height: 64px;
+    min-height: 64px;
+    z-index: 60;
+    background: #fff;
+    @apply border-t border-border shadow-lg;
+  }
+  
+  .main-content {
+    padding-bottom: 116px !important;
+    padding-top: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+    justify-content: flex-start !important;
+    height: 100vh !important;
+  }
+}
+
+/* Extra small device support */
+@media (max-width: 360px) {
+  html { font-size: 14px;}
+  .xs-hidden { display: none;}
+  .xs-compact { padding: 0.375rem !important;}
+  .container { padding-left: 0.75rem; padding-right: 0.75rem;}
+}

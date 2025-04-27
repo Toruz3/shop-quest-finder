@@ -1,0 +1,76 @@
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  
+  .scrollbar-styled {
+    @apply scrollbar-thin scrollbar-thumb-primary/40 scrollbar-track-secondary/40 hover:scrollbar-thumb-primary/60;
+    scrollbar-width: thin;
+  }
+  
+  .custom-scrollbar, 
+  [class*="overflow-y-auto"],
+  [class*="overflow-x-auto"],
+  [class*="overflow-scroll"] {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar, 
+  [class*="overflow-y-auto"]::-webkit-scrollbar,
+  [class*="overflow-x-auto"]::-webkit-scrollbar,
+  [class*="overflow-scroll"]::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+  
+  .touch-target { @apply min-h-[48px] min-w-[48px]; }
+  .mobile-full { @apply w-full md:w-auto; }
+  .mobile-padding { @apply px-4 py-3 md:px-4 md:py-3; }
+  .active-scale { @apply transition-transform active:scale-95; }
+  .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem); }
+  .full-width-mobile { @apply -mx-3 md:mx-0 w-screen md:w-auto; width: calc(100% + 1.5rem);}
+  
+  .content-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative; }
+  .page-container { @apply min-h-[calc(100vh-80px)] w-full max-w-7xl mx-auto; }
+  .scrollable-content { @apply overflow-y-auto overscroll-contain; height: calc(100vh - 180px); max-height: 600px;}
+  .search-results-container { @apply max-h-[280px] overflow-y-auto overscroll-contain; }
+
+  /* Scrollbar utilities */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .touch-scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 2px;
+  }
+}

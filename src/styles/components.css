@@ -1,0 +1,21 @@
+
+@layer components {
+  .card-hover { @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1; }
+  .btn-primary { @apply bg-primary text-white font-medium shadow-md hover:shadow-lg hover:bg-primary/90 hover:shadow-primary/20 transition-all duration-300; min-height: 48px; border-radius: 8px; padding: 0 16px;}
+  .btn-secondary { @apply bg-secondary text-foreground font-medium border border-border hover:bg-secondary/80 transition-all duration-300; min-height: 48px; border-radius: 8px; padding: 0 16px;}
+  .card { @apply bg-card rounded-xl border border-border shadow-card; border-radius: 12px;}
+  .mobile-card { @apply p-4 rounded-xl shadow-sm hover:shadow-md transition-all;}
+  .mobile-button { @apply h-12 rounded-lg active:scale-95 transition-transform; min-height: 48px;}
+  .mobile-input { @apply h-14 text-base px-4 rounded-lg;}
+  .search-bar { @apply h-14 px-4 rounded-lg shadow-search flex items-center bg-white border border-border;}
+  .fab-button { @apply fixed rounded-full shadow-lg active:scale-95 transition-transform z-30 bottom-24 right-5;}
+  .bottom-sheet { @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-xl shadow-xl z-40 transform transition-transform duration-300;}
+  .bottom-sheet-open { @apply translate-y-0;}
+  .bottom-sheet-closed { @apply translate-y-full;}
+  .toast-bottom { @apply bottom-20 top-auto !important;}
+
+  /* Category chip styles */
+  .category-chip { @apply flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-200; height: 40px;}
+  .category-chip-active { @apply bg-primary/15 text-primary font-medium;}
+  .category-chip-inactive { @apply bg-secondary text-foreground hover:bg-secondary/80;}
+}

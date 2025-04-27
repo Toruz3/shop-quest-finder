@@ -1,0 +1,40 @@
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus states */
+.focus-visible-ring { 
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-opacity-50 focus-visible:ring-offset-2;
+}
+
+/* Interactive elements */
+.interactive-element { @apply transition-all duration-200;}
+.interactive-element:hover { @apply -translate-y-0.5;}
+.interactive-element:active { @apply translate-y-0;}
+
+/* Button states */
+button, a.btn { @apply transition-all duration-200;}
+button:focus-visible, a.btn:focus-visible { @apply outline-none ring-2 ring-primary ring-offset-2;}
+button:hover, a.btn:hover { @apply brightness-105;}
+button:active, a.btn:active { @apply brightness-95;}
+
+/* Toast positioning */
+:root {
+  --toaster-top: auto;
+  --toaster-bottom: 100px;
+}
+
+[data-sonner-toaster] {
+  bottom: 80px !important;
+  top: auto !important;
+}
