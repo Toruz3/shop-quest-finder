@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -11,23 +12,25 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
+  // Check for initial theme in a safe way without causing hydration issues
+  const [theme, setTheme] = useState<Theme>('light');
+  
+  // Load theme preference on mount (client-side only)
+  useEffect(() => {
     // Check if a theme is saved in localStorage
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     
     // If it exists, use it, otherwise check system preferences
     if (savedTheme) {
-      return savedTheme;
+      setTheme(savedTheme);
+    } else if (
+      window.matchMedia && 
+      window.matchMedia('(prefers-color-scheme: dark)').matches
+    ) {
+      setTheme('dark');
     }
-    
-    // Check if the system prefers dark mode
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    
-    // Default to light
-    return 'light';
-  });
+    // No need for default case as we already set 'light' as the initial value
+  }, []);
 
   useEffect(() => {
     // Save the theme to localStorage
