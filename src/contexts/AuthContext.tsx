@@ -31,7 +31,7 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = React.useState<User | null>(null);
   const [session, setSession] = React.useState<Session | null>(null);
   const [profile, setProfile] = React.useState<Profile | null>(null);
@@ -161,19 +161,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const value = {
+    user,
+    session,
+    profile,
+    isLoading,
+    login,
+    signup,
+    logout,
+    resetPassword,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        session,
-        profile,
-        isLoading,
-        login,
-        signup,
-        logout,
-        resetPassword,
-      }}
-    >
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
