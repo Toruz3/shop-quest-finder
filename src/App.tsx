@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -19,8 +18,8 @@ import AccountPage from "./pages/AccountPage";
 import Welcome from "./pages/Welcome";
 import { Footer } from "./components/Footer";
 import "./App.css";
+import ShoppingPage from "./pages/ShoppingPage";
 
-// Initialize query client outside component to prevent re-initialization
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -39,7 +38,6 @@ const authenticatedRoutes = [
   "/account"
 ];
 
-// Protected route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
   const location = useLocation();
@@ -49,7 +47,6 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }
 
-// Separate route component for better organization
 const AppRoutes = () => {
   const location = useLocation();
   const isAuthPage = location.pathname === "/auth";
@@ -63,7 +60,7 @@ const AppRoutes = () => {
           <Route path="/auth" element={<Auth />} />
           <Route path="/app" element={
             <ProtectedRoute>
-              <Index />
+              <ShoppingPage />
             </ProtectedRoute>
           } />
           <Route path="/stores" element={
@@ -99,7 +96,6 @@ const AppRoutes = () => {
   );
 };
 
-// Main App component - Important to ensure correct provider nesting order
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
