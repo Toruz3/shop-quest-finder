@@ -6,7 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "./hooks/use-theme";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/AuthContext"; // Correctly import useAuth
 import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
@@ -41,7 +42,7 @@ const authenticatedRoutes = [
 
 // Protected route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const auth = useAuth();
+  const auth = useAuth(); // Use the imported hook
   const { user, isLoading } = auth;
   const location = useLocation();
   if (isLoading) return null; // loading
