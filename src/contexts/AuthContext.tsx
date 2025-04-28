@@ -1,5 +1,5 @@
 
-import * as React from "react";
+import React from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -60,6 +60,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Initial setup: listener + session and profile retrieval
   React.useEffect(() => {
+    console.log("Setting up auth state listener");
+    
     // First set up auth state listener
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
@@ -79,6 +81,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Then check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("Initial session check:", session ? "Session found" : "No session");
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
