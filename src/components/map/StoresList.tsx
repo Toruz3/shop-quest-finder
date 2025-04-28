@@ -35,10 +35,12 @@ export const StoresList = ({ stores, searchTerm, selectedTab }: StoresListProps)
 
   return (
     <div className="flex-1 overflow-y-auto hide-scrollbar smooth-scroll">
-      <div className="space-y-3 pb-2">
+      <div className="space-y-3">
         {filteredStores.map(store => (
           <StoreItem key={store.id} store={store} />
         ))}
+        {/* This invisible spacer ensures content doesn't get cut off at the bottom */}
+        <div className="h-2" aria-hidden="true"></div>
       </div>
     </div>
   );
