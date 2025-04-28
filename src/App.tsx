@@ -40,7 +40,6 @@ const authenticatedRoutes = [
 ];
 
 // Protected route component
-import { useAuth } from "./contexts/AuthContext";
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
   const location = useLocation();
@@ -102,23 +101,21 @@ const AppRoutes = () => {
 // Main App component - Important to ensure correct provider nesting order
 const App = () => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <Router>
-          <ThemeProvider>
-            <AuthProvider>
-              <TooltipProvider>
-                <Toaster />
-                <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
-                <div className="app-container">
-                  <AppRoutes />
-                </div>
-              </TooltipProvider>
-            </AuthProvider>
-          </ThemeProvider>
-        </Router>
-      </QueryClientProvider>
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <ThemeProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
+              <div className="app-container">
+                <AppRoutes />
+              </div>
+            </TooltipProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </Router>
+    </QueryClientProvider>
   );
 };
 
