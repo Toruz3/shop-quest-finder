@@ -12,6 +12,8 @@ const ShoppingPage = () => {
     searchTerm,
     setSearchTerm,
     isCalculating,
+    suggestions,
+    isLoadingSuggestions,
     handleAddProduct,
     handleUpdateQuantity,
     handleRemoveProduct,
@@ -37,7 +39,7 @@ const ShoppingPage = () => {
               onAddProduct={() => handleAddProduct(searchTerm)}
               onSelectCategory={() => {}}
               showSuggestions={searchTerm.length >= 2}
-              suggestions={[]}
+              suggestions={suggestions}
               onSelectSuggestion={(name) => {
                 setSearchTerm(name);
                 handleAddProduct(name);

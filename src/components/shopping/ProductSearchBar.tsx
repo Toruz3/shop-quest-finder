@@ -33,6 +33,7 @@ export const ProductSearchBar = ({
   
   const handleSearch = async () => {
     if (searchTerm.trim()) {
+      console.log("Adding to history:", searchTerm.trim());
       await addToHistory(searchTerm.trim());
       onAddProduct();
     }
@@ -73,7 +74,10 @@ export const ProductSearchBar = ({
           ref={inputRef}
           type="text"
           value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={(e) => {
+            console.log("Search input changed:", e.target.value);
+            onSearchChange(e.target.value);
+          }}
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}

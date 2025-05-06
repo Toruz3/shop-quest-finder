@@ -22,6 +22,8 @@ export const SearchSection = ({
   suggestions,
   onSelectSuggestion
 }: SearchSectionProps) => {
+  console.log("SearchSection render - suggestions:", suggestions?.length, "showSuggestions:", showSuggestions);
+  
   return (
     <div className="relative space-y-2 w-full">
       <ProductSearchBar
@@ -30,7 +32,7 @@ export const SearchSection = ({
         onAddProduct={onAddProduct}
       />
       
-      {showSuggestions && suggestions.length > 0 && (
+      {showSuggestions && suggestions && suggestions.length > 0 && (
         <ProductSuggestions
           suggestions={suggestions}
           onSelectSuggestion={onSelectSuggestion}
