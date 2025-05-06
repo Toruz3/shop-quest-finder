@@ -34,9 +34,9 @@ const ShoppingPage = () => {
   console.log("ShoppingPage render - suggestions:", suggestions?.length, "showing:", searchTerm.length >= 2);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <main className="flex-1 overflow-y-auto px-4 py-4">
-        <div className="flex flex-col h-full max-w-md mx-auto w-full">
+    <div className="flex flex-col min-h-screen bg-background overflow-y-auto">
+      <main className="flex-1 px-4 py-4 overflow-y-auto">
+        <div className="flex flex-col max-w-md mx-auto w-full">
           <ShoppingHeader />
           
           <div className="mt-4 mb-6">

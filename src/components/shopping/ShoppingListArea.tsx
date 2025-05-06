@@ -18,10 +18,9 @@ export const ShoppingListArea = ({
 }: ShoppingListAreaProps) => {
   return (
     <div 
-      className="mt-4 w-full flex-grow hide-scrollbar smooth-scroll touch-scroll"
+      className="mt-4 w-full"
       style={{ 
         minHeight: products.length ? "0" : "220px",
-        contain: 'paint layout',
       }}
       role="region"
       aria-label="Area lista della spesa"

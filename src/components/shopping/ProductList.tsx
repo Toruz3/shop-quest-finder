@@ -16,12 +16,7 @@ export const ProductList = ({
 }: ProductListProps) => {
   return (
     <div 
-      className="space-y-4 hide-scrollbar smooth-scroll touch-scroll focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" 
-      style={{ 
-        maxHeight: products.length ? `${Math.min(400, products.length * 110)}px` : "auto",
-        willChange: 'transform',
-        contain: 'paint layout',
-      }}
+      className="space-y-4" 
       tabIndex={0}
       role="list"
       aria-label="Lista prodotti"
