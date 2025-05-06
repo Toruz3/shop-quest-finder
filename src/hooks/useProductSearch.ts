@@ -16,12 +16,12 @@ export const useProductSearch = (searchTerm: string) => {
       console.log('Fetching suggestions for:', searchTerm);
       
       try {
-        // Use a simple textSearch approach instead of similarity which was causing errors
+        // Use ilike instead of textSearch which was causing errors
         const { data: products, error } = await supabase
           .from('products')
           .select('id, name, category, image_url')
-          .textSearch('name', `${searchTerm}:*`)
-          .limit(10); // Increased from 5 to 10 for more suggestions
+          .ilike('name', `%${searchTerm}%`)
+          .limit(10);
 
         if (error) {
           console.error("Error searching products:", error);

@@ -15,19 +15,34 @@ export const useShoppingState = () => {
   const { suggestions, isLoading } = useProductSearch(searchTerm);
 
   const handleUpdateQuantity = (id: number, increment: boolean) => {
-    setProducts(products.map((product) =>
-      product.id === id
-        ? {
-            ...product,
-            quantity: increment
-              ? product.quantity + 1
-              : Math.max(1, product.quantity - 1),
+    console.log('Updating quantity for product ID:', id, 'increment:', increment);
+    
+    setProducts(prevProducts => {
+      const updatedProducts = prevProducts.map((product) => {
+        if (product.id === id) {
+          if (!increment && product.quantity === 1) {
+            // Mark for removal if decrementing and quantity is 1
+            console.log('Product will be removed as quantity would become 0');
+            return null;
           }
-        : product
-    ));
+          
+          const newQuantity = increment ? product.quantity + 1 : product.quantity - 1;
+          console.log('New quantity will be:', newQuantity);
+          
+          return {
+            ...product,
+            quantity: newQuantity,
+          };
+        }
+        return product;
+      }).filter(Boolean) as Product[]; // Remove null items (products marked for removal)
+      
+      return updatedProducts;
+    });
   };
 
   const handleRemoveProduct = (id: number) => {
+    console.log('Removing product with ID:', id);
     const productToRemove = products.find(p => p.id === id);
     setProducts(products.filter((product) => product.id !== id));
     
