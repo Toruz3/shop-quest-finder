@@ -36,9 +36,12 @@ const ShoppingPage = () => {
               onSearchChange={setSearchTerm}
               onAddProduct={() => handleAddProduct(searchTerm)}
               onSelectCategory={() => {}}
-              showSuggestions={false}
+              showSuggestions={searchTerm.length >= 2}
               suggestions={[]}
-              onSelectSuggestion={() => {}}
+              onSelectSuggestion={(name) => {
+                setSearchTerm(name);
+                handleAddProduct(name);
+              }}
             />
           </div>
 

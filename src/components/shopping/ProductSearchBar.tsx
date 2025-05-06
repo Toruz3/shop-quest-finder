@@ -77,7 +77,7 @@ export const ProductSearchBar = ({
           onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Cosa vuoi acquistare? (Enter per aggiungere)"
+          placeholder="Cosa vuoi acquistare?"
           className={`h-14 pl-12 pr-24 py-4 bg-white shadow-none border-none transition-all duration-300 rounded-lg w-full text-base
             ${isFocused ? 'ring-1 ring-primary/30' : ''}`}
           aria-label="Cerca prodotto"
@@ -121,46 +121,7 @@ export const ProductSearchBar = ({
         </div>
       </div>
       
-      {searchTerm && suggestions.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="absolute z-50 w-full bg-white rounded-xl shadow-lg border border-neutral-200 mt-1"
-        >
-          <div className="py-1">
-            {suggestions.map((suggestion) => (
-              <motion.button
-                key={suggestion.id}
-                className="w-full px-4 py-2 text-left hover:bg-neutral-50 flex items-center gap-2"
-                onClick={() => {
-                  onSearchChange(suggestion.name);
-                  handleSearch();
-                }}
-              >
-                {suggestion.imageUrl && (
-                  <img
-                    src={suggestion.imageUrl}
-                    alt={suggestion.name}
-                    className="w-8 h-8 object-cover rounded"
-                  />
-                )}
-                <div>
-                  <div className="font-medium">{suggestion.name}</div>
-                  <div className="text-sm text-neutral-500">{suggestion.category}</div>
-                </div>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-      )}
-      
-      {isLoading && searchTerm && (
-        <div className="absolute z-50 w-full bg-white rounded-xl shadow-lg border border-neutral-200 mt-1 p-4 text-center">
-          <div className="animate-spin w-5 h-5 border-2 border-primary border-t-transparent rounded-full mx-auto"></div>
-        </div>
-      )}
-      
+      {/* The suggestion dropdown is now handled by the parent component */}
       <AnimatePresence>
         {isListening && (
           <motion.div 

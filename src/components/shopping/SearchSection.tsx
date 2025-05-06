@@ -1,6 +1,5 @@
 
 import { ProductSearchBar } from "./ProductSearchBar";
-import { CategoryChips } from "./CategoryChips";
 import { ProductSuggestions } from "./ProductSuggestions";
 import { ProductSuggestion } from "@/types/shopping";
 
@@ -31,8 +30,6 @@ export const SearchSection = ({
         onAddProduct={onAddProduct}
       />
       
-      <CategoryChips onSelectCategory={onSelectCategory} />
-
       {showSuggestions && suggestions.length > 0 && (
         <ProductSuggestions
           suggestions={suggestions}

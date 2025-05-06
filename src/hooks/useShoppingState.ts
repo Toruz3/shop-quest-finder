@@ -1,14 +1,18 @@
 
-import { useState } from "react";
-import { Product } from "@/types/shopping";
+import { useState, useEffect } from "react";
+import { Product, ProductSuggestion } from "@/types/shopping";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
+import { useProductSearch } from "@/hooks/useProductSearch";
 
 export const useShoppingState = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isCalculating, setIsCalculating] = useState(false);
+  
+  // Use the product search hook to get suggestions
+  const { suggestions, isLoading } = useProductSearch(searchTerm);
 
   const handleUpdateQuantity = (id: number, increment: boolean) => {
     setProducts(products.map((product) =>
@@ -39,9 +43,19 @@ export const useShoppingState = () => {
 
   const handleAddProduct = (name: string) => {
     if (name.trim()) {
+      // Check if the product name matches any suggestion to get the image
+      const matchingSuggestion = suggestions.find(
+        s => s.name.toLowerCase() === name.toLowerCase()
+      );
+      
       setProducts([
         ...products,
-        { id: Date.now(), name: name.trim(), quantity: 1 }
+        { 
+          id: Date.now(), 
+          name: name.trim(), 
+          quantity: 1,
+          imageUrl: matchingSuggestion?.imageUrl 
+        }
       ]);
       setSearchTerm("");
       toast({
@@ -81,6 +95,8 @@ export const useShoppingState = () => {
     searchTerm,
     setSearchTerm,
     isCalculating,
+    suggestions,
+    isLoadingSuggestions: isLoading,
     handleAddProduct,
     handleUpdateQuantity,
     handleRemoveProduct,
