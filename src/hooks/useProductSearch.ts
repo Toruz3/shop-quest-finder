@@ -21,7 +21,7 @@ export const useProductSearch = (searchTerm: string) => {
           .from('products')
           .select('id, name, category, image_url')
           .textSearch('name', `${searchTerm}:*`)
-          .limit(5);
+          .limit(10); // Increased from 5 to 10 for more suggestions
 
         if (error) {
           console.error("Error searching products:", error);

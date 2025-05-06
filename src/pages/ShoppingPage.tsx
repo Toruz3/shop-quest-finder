@@ -23,8 +23,15 @@ const ShoppingPage = () => {
   
   const handleFabClick = () => {
     const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
-    if (searchInput) searchInput.focus();
+    if (searchInput) {
+      console.log("Focusing search input");
+      searchInput.focus();
+    } else {
+      console.log("Could not find search input");
+    }
   };
+
+  console.log("ShoppingPage render - suggestions:", suggestions?.length, "showing:", searchTerm.length >= 2);
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
