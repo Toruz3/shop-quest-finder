@@ -4,7 +4,9 @@ export interface Product {
   name: string;
   quantity: number;
   imageUrl?: string;
-  originalIsPromotional?: boolean; // Added this property to track promotional status
+  price?: number;
+  supermarket?: string;
+  originalIsPromotional?: boolean;
 }
 
 export interface ProductSuggestion {
@@ -13,5 +15,5 @@ export interface ProductSuggestion {
   category: string;
   imageUrl: string;
   description: string;
-  isPromotional?: boolean; // Added for tracking promotional status in suggestions
+  isPromotional?: boolean;
 }

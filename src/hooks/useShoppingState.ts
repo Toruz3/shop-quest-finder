@@ -75,6 +75,8 @@ export const useShoppingState = () => {
           name: name.trim(), 
           quantity: 1,
           imageUrl: matchingSuggestion?.imageUrl,
+          price: matchingSuggestion?.price || undefined,
+          supermarket: matchingSuggestion?.supermarket || undefined,
           // Store the original promotion status that will never change
           originalIsPromotional: matchingSuggestion?.isPromotional || false
         }
@@ -95,6 +97,8 @@ export const useShoppingState = () => {
         name: 'Pane', 
         quantity: 1, 
         imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+        price: 1.50,
+        supermarket: 'Supermercato locale',
         originalIsPromotional: false 
       },
       { 
@@ -102,6 +106,8 @@ export const useShoppingState = () => {
         name: 'Latte', 
         quantity: 2, 
         imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+        price: 1.20,
+        supermarket: 'Coop',
         originalIsPromotional: true 
       },
       { 
@@ -109,6 +115,8 @@ export const useShoppingState = () => {
         name: 'Pasta', 
         quantity: 1, 
         imageUrl: 'https://images.unsplash.com/photo-1556060997-e26d9299868f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+        price: 0.90,
+        supermarket: 'Carrefour',
         originalIsPromotional: false 
       },
     ];

@@ -38,7 +38,10 @@ export const useProductSearch = (searchTerm: string) => {
           category: product.category,
           imageUrl: product.image_url || '',
           description: product.category, // Use category as description since description doesn't exist
-          isPromotional: false // Default to false since the column doesn't exist
+          // Add price and supermarket for demo purposes (in production, these would come from the database)
+          price: Math.floor(Math.random() * 10) + 1 + Math.random(), // Random price between 1-11€
+          supermarket: ['Coop', 'Conad', 'Carrefour', 'Esselunga'][Math.floor(Math.random() * 4)],
+          isPromotional: Math.random() > 0.8 // 20% chance of being promotional for testing
         })) as ProductSuggestion[];
       } catch (error) {
         console.error("Error in product search:", error);
