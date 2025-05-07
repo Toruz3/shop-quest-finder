@@ -58,7 +58,7 @@ export const useShoppingState = () => {
 
   const handleAddProduct = (name: string) => {
     if (name.trim()) {
-      // Check if the product name matches any suggestion to get the image and promotion status
+      // Check if the product name matches any suggestion to get the image
       const matchingSuggestion = suggestions.find(
         s => s.name.toLowerCase() === name.toLowerCase()
       );

@@ -1,3 +1,4 @@
+
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -18,7 +19,7 @@ export const useProductSearch = (searchTerm: string) => {
         // Use ilike for broader matching
         const { data: products, error } = await supabase
           .from('products')
-          .select('id, name, category, image_url, is_promotional')
+          .select('id, name, category, image_url')
           .ilike('name', `%${searchTerm}%`)
           .limit(15); // Increased limit for more results
 
@@ -28,16 +29,16 @@ export const useProductSearch = (searchTerm: string) => {
         }
         
         console.log('Raw suggestions count from Supabase:', products?.length);
-        console.log('Search results with promotion status:', products);
         
-        // Map database columns to our expected format, including isPromotional
+        // Map database columns to our expected format
+        // Note: Since there's no is_promotional in the database, we'll set it to false by default
         return products.map(product => ({
           id: product.id,
           name: product.name,
           category: product.category,
           imageUrl: product.image_url || '',
           description: product.category, // Use category as description since description doesn't exist
-          isPromotional: product.is_promotional || false // Get promotion status from database
+          isPromotional: false // Default to false since the column doesn't exist
         })) as ProductSuggestion[];
       } catch (error) {
         console.error("Error in product search:", error);
