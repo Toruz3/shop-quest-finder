@@ -103,6 +103,25 @@ export const useShoppingState = () => {
     });
   };
 
+  const handleNewList = () => {
+    if (products.length > 0) {
+      setProducts([]);
+      toast({
+        title: "Lista svuotata",
+        description: "La tua lista della spesa è stata azzerata",
+        duration: 3000,
+        className: "toast-bottom"
+      });
+    } else {
+      toast({
+        title: "Lista già vuota",
+        description: "La tua lista della spesa è già vuota",
+        duration: 3000,
+        className: "toast-bottom"
+      });
+    }
+  };
+
   const handleFindStores = () => {
     setIsCalculating(true);
     setTimeout(() => {
@@ -128,5 +147,6 @@ export const useShoppingState = () => {
     handleRemoveProduct,
     handleAddSampleProducts,
     handleFindStores,
+    handleNewList,
   };
 };

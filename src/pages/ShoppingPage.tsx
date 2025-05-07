@@ -19,6 +19,7 @@ const ShoppingPage = () => {
     handleRemoveProduct,
     handleAddSampleProducts,
     handleFindStores,
+    handleNewList,
   } = useShoppingState();
   
   const handleFabClick = () => {
@@ -72,7 +73,10 @@ const ShoppingPage = () => {
         </div>
       </main>
 
-      <ShoppingFab onClick={handleFabClick} />
+      <ShoppingFab 
+        onClick={handleFabClick} 
+        onNewList={handleNewList}
+      />
     </div>
   );
 };

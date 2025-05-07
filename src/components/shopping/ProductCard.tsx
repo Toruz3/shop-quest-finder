@@ -38,6 +38,9 @@ export const ProductCard = ({
     }, 300);
   };
 
+  console.log('Rendering ProductCard:', product);
+  console.log('Checking offer badge for item:', product.id, 'onSale:', priceData.onSale);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -48,19 +51,19 @@ export const ProductCard = ({
     >
       <div className="card p-4 animate-fade-in hover:shadow-md transition-all duration-200 group">
         <div className="flex items-center justify-between">
-          <div className="flex items-start gap-3">
-            <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center text-neutral-400 overflow-hidden">
+          <div className="flex items-start gap-3 flex-grow min-w-0">
+            <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center text-neutral-400 overflow-hidden flex-shrink-0">
               {product.imageUrl ? (
                 <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
               ) : (
                 <ShoppingBagIcon className="w-6 h-6" />
               )}
             </div>
-            <div className="flex-1">
-              <div className="flex items-center">
-                <h3 className="font-medium text-neutral-800 text-base mr-2">{product.name}</h3>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center flex-wrap gap-1">
+                <h3 className="font-medium text-neutral-800 text-base truncate">{product.name}</h3>
                 {priceData.onSale && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-notification/10 text-notification-600">
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-notification/10 text-notification-600 flex-shrink-0">
                     <Tag className="w-3 h-3 mr-1" />
                     Offerta
                   </span>
@@ -74,7 +77,7 @@ export const ProductCard = ({
             </div>
           </div>
           
-          <div className="flex items-center gap-2 ml-2">
+          <div className="flex items-center gap-2 ml-2 flex-shrink-0">
             <Button
               variant="outline"
               size="icon"
