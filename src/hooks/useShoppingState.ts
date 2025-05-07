@@ -18,7 +18,7 @@ export const useShoppingState = () => {
     console.log('Updating quantity for product ID:', id, 'increment:', increment);
     
     setProducts(prevProducts => {
-      const updatedProducts = prevProducts.map((product) => {
+      return prevProducts.map((product) => {
         if (product.id === id) {
           if (!increment && product.quantity === 1) {
             // Mark for removal if decrementing and quantity is 1
@@ -29,17 +29,15 @@ export const useShoppingState = () => {
           const newQuantity = increment ? product.quantity + 1 : product.quantity - 1;
           console.log('New quantity will be:', newQuantity);
           
-          // Important: Do NOT set any offer-related property based on quantity
+          // IMPORTANT: Return the product with ONLY the quantity updated
+          // No other properties should be modified here
           return {
             ...product,
             quantity: newQuantity,
-            // No offer-related property should be set here
           };
         }
         return product;
       }).filter(Boolean) as Product[]; // Remove null items (products marked for removal)
-      
-      return updatedProducts;
     });
   };
 
@@ -60,7 +58,7 @@ export const useShoppingState = () => {
 
   const handleAddProduct = (name: string) => {
     if (name.trim()) {
-      // Check if the product name matches any suggestion to get the image
+      // Check if the product name matches any suggestion to get the image and promotion status
       const matchingSuggestion = suggestions.find(
         s => s.name.toLowerCase() === name.toLowerCase()
       );
@@ -68,6 +66,8 @@ export const useShoppingState = () => {
       // Log the suggestion data to verify it contains the correct information
       console.log('Adding product with matching suggestion:', matchingSuggestion);
       
+      // Create a new product with originalIsPromotional set from the suggestion
+      // This property will never be modified after initial creation
       setProducts([
         ...products,
         { 
@@ -75,7 +75,8 @@ export const useShoppingState = () => {
           name: name.trim(), 
           quantity: 1,
           imageUrl: matchingSuggestion?.imageUrl,
-          // No offer-related property should be set here based on quantity
+          // Store the original promotion status that will never change
+          originalIsPromotional: matchingSuggestion?.isPromotional || false
         }
       ]);
       setSearchTerm("");
@@ -89,9 +90,27 @@ export const useShoppingState = () => {
 
   const handleAddSampleProducts = () => {
     const sampleProducts = [
-      { id: Date.now(), name: 'Pane', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
-      { id: Date.now() + 1, name: 'Latte', quantity: 2, imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
-      { id: Date.now() + 2, name: 'Pasta', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1556060997-e26d9299868f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
+      { 
+        id: Date.now(), 
+        name: 'Pane', 
+        quantity: 1, 
+        imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+        originalIsPromotional: false 
+      },
+      { 
+        id: Date.now() + 1, 
+        name: 'Latte', 
+        quantity: 2, 
+        imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+        originalIsPromotional: true 
+      },
+      { 
+        id: Date.now() + 2, 
+        name: 'Pasta', 
+        quantity: 1, 
+        imageUrl: 'https://images.unsplash.com/photo-1556060997-e26d9299868f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80',
+        originalIsPromotional: false 
+      },
     ];
     
     setProducts(sampleProducts);
