@@ -29,9 +29,11 @@ export const useShoppingState = () => {
           const newQuantity = increment ? product.quantity + 1 : product.quantity - 1;
           console.log('New quantity will be:', newQuantity);
           
+          // Important: Do NOT set any offer-related property based on quantity
           return {
             ...product,
             quantity: newQuantity,
+            // No offer-related property should be set here
           };
         }
         return product;
@@ -63,13 +65,17 @@ export const useShoppingState = () => {
         s => s.name.toLowerCase() === name.toLowerCase()
       );
       
+      // Log the suggestion data to verify it contains the correct information
+      console.log('Adding product with matching suggestion:', matchingSuggestion);
+      
       setProducts([
         ...products,
         { 
           id: Date.now(), 
           name: name.trim(), 
           quantity: 1,
-          imageUrl: matchingSuggestion?.imageUrl 
+          imageUrl: matchingSuggestion?.imageUrl,
+          // No offer-related property should be set here based on quantity
         }
       ]);
       setSearchTerm("");
@@ -104,6 +110,11 @@ export const useShoppingState = () => {
       navigate("/stores", { state: { products } });
     }, 2000);
   };
+
+  // Debug logging of products state to check for unexpected changes
+  useEffect(() => {
+    console.log('Products state updated:', products);
+  }, [products]);
 
   return {
     products,
