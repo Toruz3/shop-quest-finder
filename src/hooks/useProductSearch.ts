@@ -1,4 +1,3 @@
-
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
@@ -31,7 +30,7 @@ export const useProductSearch = (searchTerm: string) => {
         console.log('Raw suggestions count from Supabase:', products?.length);
         
         // Map database columns to our expected format
-        // Note: Since there's no is_promotional in the database, we'll set it to false by default
+        // Now we're properly returning price and supermarket properties
         return products.map(product => ({
           id: product.id,
           name: product.name,

@@ -16,4 +16,7 @@ export interface ProductSuggestion {
   imageUrl: string;
   description: string;
   isPromotional?: boolean;
+  // Add the missing properties
+  price?: number;
+  supermarket?: string;
 }
