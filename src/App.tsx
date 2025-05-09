@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -19,14 +20,36 @@ import { Footer } from "./components/Footer";
 import "./App.css";
 import ShoppingPage from "./pages/ShoppingPage";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60 * 1000, // 1 minute
-      refetchOnWindowFocus: false,
+// Create a new QueryClient instance inside the component to ensure it's properly scoped
+const App = () => {
+  // Create a new QueryClient instance
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000, // 1 minute
+        refetchOnWindowFocus: false,
+      },
     },
-  },
-});
+  });
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <ThemeProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
+              <div className="app-container">
+                <AppRoutes />
+              </div>
+            </TooltipProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </Router>
+    </QueryClientProvider>
+  );
+};
 
 const authenticatedRoutes = [
   "/app",
@@ -92,26 +115,6 @@ const AppRoutes = () => {
       </AnimatePresence>
       {isAuthenticatedPage && !isAuthPage && <Footer />}
     </>
-  );
-};
-
-const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <ThemeProvider>
-          <AuthProvider>
-            <TooltipProvider>
-              <Toaster />
-              <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
-              <div className="app-container">
-                <AppRoutes />
-              </div>
-            </TooltipProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </Router>
-    </QueryClientProvider>
   );
 };
 
