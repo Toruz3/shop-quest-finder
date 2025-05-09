@@ -166,7 +166,7 @@ export const ShoppingFab = ({
         </AnimatePresence>
         
         {/* Main FAB button - fixed position */}
-        <Button onClick={handleFabClick} aria-label={showFabOptions ? "Chiudi opzioni" : "Apri opzioni"} className="fixed bottom-20 right-5 z-20 w-15 h-14 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg flex items-center justify-center transition-colors">
+        <Button onClick={handleFabClick} aria-label={showFabOptions ? "Chiudi opzioni" : "Apri opzioni"} className="fixed bottom-13 right-6 z-20 w-15 h-14 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg flex items-center justify-center transition-colors">
           <motion.div animate={{
           rotate: showFabOptions ? 45 : 0
         }} transition={{
