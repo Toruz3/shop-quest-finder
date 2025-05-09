@@ -154,24 +154,31 @@ export const ProductCard = ({
                   {isLoading ? (
                     <div className="py-2 text-center text-xs text-gray-500">Caricamento...</div>
                   ) : priceComparison && priceComparison.length > 0 ? (
-                    <ul className="space-y-2">
+                    <div className="space-y-2">
                       {priceComparison.map((item, idx) => (
-                        <li key={idx} className="flex justify-between items-center">
+                        <div key={idx} className="w-full">
                           {idx > 0 && <Separator className="my-1.5" />}
                           <div className="flex justify-between items-center w-full pt-1">
-                            <span>{item.supermarketName}</span>
-                            <div className="flex items-center">
-                              <span className="font-medium">€{item.price.toFixed(2)}</span>
+                            <span className="text-xs text-gray-600 truncate max-w-[55%]">
+                              {item.supermarketName}
+                            </span>
+                            <div className="flex items-center gap-x-1.5 flex-shrink-0">
+                              <span className="text-xs font-medium">
+                                €{item.price.toFixed(2)}
+                              </span>
                               {item.isBestOffer && (
-                                <Badge variant="outline" className="ml-1.5 bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1">
+                                <Badge 
+                                  variant="outline" 
+                                  className="bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1 whitespace-nowrap"
+                                >
                                   Miglior prezzo
                                 </Badge>
                               )}
                             </div>
                           </div>
-                        </li>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   ) : (
                     <div className="py-2 text-center text-xs text-gray-500">Nessun dato disponibile per il confronto</div>
                   )}
