@@ -6,15 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Product } from "@/types/shopping";
+import { Separator } from "@/components/ui/separator";
+import { Product, PriceComparison } from "@/types/shopping";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-
-interface PriceComparisonItem {
-  supermarketName: string;
-  price: number;
-  isBestOffer: boolean;
-}
 
 interface ProductCardProps {
   product: Product;
@@ -42,31 +36,20 @@ export const ProductCard = ({
         { supermarketName: 'Esselunga', price: (product.price || 0) * 0.9, isBestOffer: true },
         { supermarketName: 'Carrefour', price: (product.price || 0) * 1.05, isBestOffer: false },
         { supermarketName: 'Coop', price: (product.price || 0) * 0.95, isBestOffer: false }
-      ] as PriceComparisonItem[];
+      ] as PriceComparison[];
     },
     enabled: isComparisonOpen, // Only fetch when comparison section is opened
   });
   
   return (
     <motion.div
-      initial={{
-        opacity: 0,
-        y: 10
-      }}
-      animate={{
-        opacity: 1,
-        y: 0
-      }}
-      exit={{
-        opacity: 0,
-        y: -10
-      }}
-      transition={{
-        duration: 0.2
-      }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.2 }}
     >
       <Card className="p-4 bg-white shadow-md border border-gray-100 rounded-2xl overflow-hidden">
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-3">
           {/* Image column */}
           <div className="flex-shrink-0">
             {product.imageUrl ? (
@@ -86,7 +69,7 @@ export const ProductCard = ({
 
           {/* Product info column */}
           <div className="flex-grow min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center flex-wrap gap-2 mb-1">
               <h3 className="font-semibold text-gray-900 truncate">
                 {product.name}
               </h3>
@@ -107,14 +90,53 @@ export const ProductCard = ({
               </p>
             )}
 
-            {/* Price comparison collapsible */}
+            {/* Quantity controls in a row */}
+            <div className="flex items-center justify-between mt-3 mb-2">
+              <div className="flex items-center gap-1">
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-8 w-8 rounded-full" 
+                  onClick={() => onUpdateQuantity(product.id, false)} 
+                  aria-label="Diminuisci quantità"
+                >
+                  <Minus className="h-3 w-3" />
+                </Button>
+
+                <span className="w-6 text-center text-sm font-medium">
+                  {product.quantity}
+                </span>
+
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="h-8 w-8 rounded-full" 
+                  onClick={() => onUpdateQuantity(product.id, true)} 
+                  aria-label="Aumenta quantità"
+                >
+                  <Plus className="h-3 w-3" />
+                </Button>
+              </div>
+
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="h-8 w-8 text-gray-400 hover:text-red-500 rounded-full" 
+                onClick={() => onRemoveProduct(product.id)} 
+                aria-label="Rimuovi prodotto"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            </div>
+
+            {/* Price comparison collapsible - moved below all other elements in a dedicated row */}
             <Collapsible
               open={isComparisonOpen}
               onOpenChange={setIsComparisonOpen}
-              className="mt-2"
+              className="mt-1 w-full"
             >
               <CollapsibleTrigger asChild>
-                <Button variant="ghost" size="sm" className="p-0 h-8 text-blue-500 hover:text-blue-700">
+                <Button variant="ghost" size="sm" className="p-0 h-8 text-blue-500 hover:text-blue-700 w-full justify-start">
                   <BarChart3 className="h-3.5 w-3.5 mr-1" />
                   Confronta prezzi
                   {isComparisonOpen ? (
@@ -125,24 +147,27 @@ export const ProductCard = ({
                 </Button>
               </CollapsibleTrigger>
               
-              <CollapsibleContent className="pt-2">
-                <div className="bg-gray-50 p-2 rounded-lg text-sm">
-                  <h4 className="text-xs font-medium text-gray-700 mb-1">Prezzi in altri supermercati</h4>
+              <CollapsibleContent className="pt-3">
+                <div className="bg-gray-50 p-3 rounded-lg text-sm">
+                  <h4 className="text-xs font-medium text-gray-700 mb-2">Prezzi in altri supermercati</h4>
                   
                   {isLoading ? (
                     <div className="py-2 text-center text-xs text-gray-500">Caricamento...</div>
                   ) : priceComparison && priceComparison.length > 0 ? (
-                    <ul className="space-y-1.5">
+                    <ul className="space-y-2">
                       {priceComparison.map((item, idx) => (
                         <li key={idx} className="flex justify-between items-center">
-                          <span>{item.supermarketName}</span>
-                          <div className="flex items-center">
-                            <span className="font-medium">€{item.price.toFixed(2)}</span>
-                            {item.isBestOffer && (
-                              <Badge variant="outline" className="ml-1.5 bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1">
-                                Miglior prezzo
-                              </Badge>
-                            )}
+                          {idx > 0 && <Separator className="my-1.5" />}
+                          <div className="flex justify-between items-center w-full pt-1">
+                            <span>{item.supermarketName}</span>
+                            <div className="flex items-center">
+                              <span className="font-medium">€{item.price.toFixed(2)}</span>
+                              {item.isBestOffer && (
+                                <Badge variant="outline" className="ml-1.5 bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1">
+                                  Miglior prezzo
+                                </Badge>
+                              )}
+                            </div>
                           </div>
                         </li>
                       ))}
@@ -153,45 +178,6 @@ export const ProductCard = ({
                 </div>
               </CollapsibleContent>
             </Collapsible>
-          </div>
-
-          {/* Quantity controls column */}
-          <div className="flex flex-col items-end space-y-2">
-            <div className="flex items-center gap-1">
-              <Button 
-                variant="outline" 
-                size="icon" 
-                className="h-8 w-8 rounded-full" 
-                onClick={() => onUpdateQuantity(product.id, false)} 
-                aria-label="Diminuisci quantità"
-              >
-                <Minus className="h-3 w-3" />
-              </Button>
-
-              <span className="w-6 text-center text-sm font-medium">
-                {product.quantity}
-              </span>
-
-              <Button 
-                variant="outline" 
-                size="icon" 
-                className="h-8 w-8 rounded-full" 
-                onClick={() => onUpdateQuantity(product.id, true)} 
-                aria-label="Aumenta quantità"
-              >
-                <Plus className="h-3 w-3" />
-              </Button>
-            </div>
-
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="h-8 w-8 text-gray-400 hover:text-red-500 rounded-full" 
-              onClick={() => onRemoveProduct(product.id)} 
-              aria-label="Rimuovi prodotto"
-            >
-              <Trash2 className="h-4 w-4" />
-            </Button>
           </div>
         </div>
       </Card>
