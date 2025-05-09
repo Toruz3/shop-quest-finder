@@ -1,81 +1,200 @@
+
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2, ChevronDown, ChevronUp, BarChart3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Product } from "@/types/shopping";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+
+interface PriceComparisonItem {
+  supermarketName: string;
+  price: number;
+  isBestOffer: boolean;
+}
+
 interface ProductCardProps {
   product: Product;
   onUpdateQuantity: (id: number, increment: boolean) => void;
   onRemoveProduct: (id: number) => void;
 }
+
 export const ProductCard = ({
   product,
   onUpdateQuantity,
   onRemoveProduct
 }: ProductCardProps) => {
-  console.log('Rendering ProductCard:', product.id, 'originalIsPromotional:', product.originalIsPromotional);
-  return <motion.div initial={{
-    opacity: 0,
-    y: 10
-  }} animate={{
-    opacity: 1,
-    y: 0
-  }} exit={{
-    opacity: 0,
-    y: -10
-  }} transition={{
-    duration: 0.2
-  }} className="p-4 bg-white shadow-sm border border-gray-100 rounded-lg flex items-center gap-3">
-      {/* Image column */}
-      <div className="flex-shrink-0">
-        {product.imageUrl ? <img src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover rounded-md" /> : <div className="w-16 h-16 rounded-md bg-gray-100 flex items-center justify-center">
-            <span className="text-xl font-semibold text-gray-400">
-              {product.name.charAt(0).toUpperCase()}
-            </span>
-          </div>}
-      </div>
+  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  
+  // Price comparison data fetch using React Query
+  const { data: priceComparison, isLoading } = useQuery({
+    queryKey: ['product-price-comparison', product.id],
+    queryFn: async () => {
+      // This is a simulated API call - in a real app, you would fetch from Supabase
+      // Simulating a delay to show loading state
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      // Sample comparison data
+      return [
+        { supermarketName: 'Esselunga', price: (product.price || 0) * 0.9, isBestOffer: true },
+        { supermarketName: 'Carrefour', price: (product.price || 0) * 1.05, isBestOffer: false },
+        { supermarketName: 'Coop', price: (product.price || 0) * 0.95, isBestOffer: false }
+      ] as PriceComparisonItem[];
+    },
+    enabled: isComparisonOpen, // Only fetch when comparison section is opened
+  });
+  
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 10
+      }}
+      animate={{
+        opacity: 1,
+        y: 0
+      }}
+      exit={{
+        opacity: 0,
+        y: -10
+      }}
+      transition={{
+        duration: 0.2
+      }}
+    >
+      <Card className="p-4 bg-white shadow-md border border-gray-100 rounded-2xl overflow-hidden">
+        <div className="flex items-center gap-3">
+          {/* Image column */}
+          <div className="flex-shrink-0">
+            {product.imageUrl ? (
+              <img 
+                src={product.imageUrl} 
+                alt={product.name} 
+                className="w-16 h-16 object-cover rounded-lg shadow-sm" 
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center">
+                <span className="text-xl font-semibold text-gray-400">
+                  {product.name.charAt(0).toUpperCase()}
+                </span>
+              </div>
+            )}
+          </div>
 
-      {/* Product info column */}
-      <div className="flex-grow min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <h3 className="font-medium text-gray-900 truncate">
-            {product.name}
-          </h3>
-          
-          {/* Badge for promotional items */}
-          {product.originalIsPromotional && <Badge variant="default" className="bg-red-500 text-white text-xs">
-              Offerta
-            </Badge>}
+          {/* Product info column */}
+          <div className="flex-grow min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="font-semibold text-gray-900 truncate">
+                {product.name}
+              </h3>
+              
+              {/* Badge for promotional items */}
+              {product.originalIsPromotional && (
+                <Badge variant="default" className="bg-red-500 text-white text-xs">
+                  Offerta
+                </Badge>
+              )}
+            </div>
+
+            {/* Price and supermarket info */}
+            {(product.price || product.supermarket) && (
+              <p className="text-sm text-gray-500 text-left">
+                {product.price ? `€${product.price.toFixed(2)}` : ''} 
+                {product.supermarket ? ` • ${product.supermarket}` : ''}
+              </p>
+            )}
+
+            {/* Price comparison collapsible */}
+            <Collapsible
+              open={isComparisonOpen}
+              onOpenChange={setIsComparisonOpen}
+              className="mt-2"
+            >
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm" className="p-0 h-8 text-blue-500 hover:text-blue-700">
+                  <BarChart3 className="h-3.5 w-3.5 mr-1" />
+                  Confronta prezzi
+                  {isComparisonOpen ? (
+                    <ChevronUp className="h-3.5 w-3.5 ml-1" />
+                  ) : (
+                    <ChevronDown className="h-3.5 w-3.5 ml-1" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+              
+              <CollapsibleContent className="pt-2">
+                <div className="bg-gray-50 p-2 rounded-lg text-sm">
+                  <h4 className="text-xs font-medium text-gray-700 mb-1">Prezzi in altri supermercati</h4>
+                  
+                  {isLoading ? (
+                    <div className="py-2 text-center text-xs text-gray-500">Caricamento...</div>
+                  ) : priceComparison && priceComparison.length > 0 ? (
+                    <ul className="space-y-1.5">
+                      {priceComparison.map((item, idx) => (
+                        <li key={idx} className="flex justify-between items-center">
+                          <span>{item.supermarketName}</span>
+                          <div className="flex items-center">
+                            <span className="font-medium">€{item.price.toFixed(2)}</span>
+                            {item.isBestOffer && (
+                              <Badge variant="outline" className="ml-1.5 bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1">
+                                Miglior prezzo
+                              </Badge>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className="py-2 text-center text-xs text-gray-500">Nessun dato disponibile per il confronto</div>
+                  )}
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
+          </div>
+
+          {/* Quantity controls column */}
+          <div className="flex flex-col items-end space-y-2">
+            <div className="flex items-center gap-1">
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="h-8 w-8 rounded-full" 
+                onClick={() => onUpdateQuantity(product.id, false)} 
+                aria-label="Diminuisci quantità"
+              >
+                <Minus className="h-3 w-3" />
+              </Button>
+
+              <span className="w-6 text-center text-sm font-medium">
+                {product.quantity}
+              </span>
+
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="h-8 w-8 rounded-full" 
+                onClick={() => onUpdateQuantity(product.id, true)} 
+                aria-label="Aumenta quantità"
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
+            </div>
+
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="h-8 w-8 text-gray-400 hover:text-red-500 rounded-full" 
+              onClick={() => onRemoveProduct(product.id)} 
+              aria-label="Rimuovi prodotto"
+            >
+              <Trash2 className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-
-        {/* Price would go here */}
-        <p className="text-sm text-gray-500 text-left">
-          {/* We'll add price if available */}
-          {product.price ? `€${product.price.toFixed(2)}` : ''} 
-          {/* Optional supermarket */}
-          {product.supermarket ? ` • ${product.supermarket}` : ''}
-        </p>
-      </div>
-
-      {/* Quantity controls column */}
-      <div className="flex flex-col sm:flex-row items-center gap-2 flex-shrink-0">
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" onClick={() => onUpdateQuantity(product.id, false)} aria-label="Diminuisci quantità">
-            <Minus className="h-3 w-3" />
-          </Button>
-
-          <span className="w-5 text-center text-sm font-medium">
-            {product.quantity}
-          </span>
-
-          <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" onClick={() => onUpdateQuantity(product.id, true)} aria-label="Aumenta quantità">
-            <Plus className="h-3 w-3" />
-          </Button>
-        </div>
-
-        <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-red-500 rounded-full" onClick={() => onRemoveProduct(product.id)} aria-label="Rimuovi prodotto">
-          <Trash2 className="h-4 w-4" />
-        </Button>
-      </div>
-    </motion.div>;
+      </Card>
+    </motion.div>
+  );
 };
