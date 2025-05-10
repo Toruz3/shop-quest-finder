@@ -70,42 +70,44 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* FAB options - positioned ABOVE the main FAB with increased spacing */}
+      {/* FAB options - positioned ABOVE the main FAB with proper spacing */}
       <AnimatePresence>
         {showFabOptions && (
-          <div className="fixed bottom-24 right-5 z-50 flex flex-col-reverse items-end gap-3">
-            {/* Aggiunta Rapida - increased gap to prevent overlap */}
+          <div className="fixed bottom-[calc(6rem+4rem)] right-5 z-50 flex flex-col-reverse items-end gap-4 pointer-events-none">
+            {/* Each button has pointer-events-auto to allow clicks through the pointer-events-none container */}
+            
+            {/* Salva Lista - top position */}
             <motion.div 
-              className="flex items-center justify-end gap-2" 
+              className="flex items-center justify-end gap-2 pointer-events-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 25 }}
+              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
             >
               <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow">
-                Aggiunta Rapida
+                Salva Lista
               </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button 
                       className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95" 
-                      onClick={handleQuickAdd} 
-                      aria-label="Aggiunta rapida"
+                      onClick={handleSaveList} 
+                      aria-label="Salva lista"
                     >
-                      <Zap className="w-5 h-5" />
+                      <Save className="w-5 h-5" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Aggiunta rapida
+                    Salva lista
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </motion.div>
             
-            {/* Nuova Lista - increased vertical spacing */}
+            {/* Nuova Lista - middle position */}
             <motion.div 
-              className="flex items-center justify-end gap-2 mt-2" 
+              className="flex items-center justify-end gap-2 pointer-events-auto mb-4" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
@@ -132,30 +134,30 @@ export const ShoppingFab = ({
               </TooltipProvider>
             </motion.div>
             
-            {/* Salva Lista - further increased vertical spacing */}
+            {/* Aggiunta Rapida - closest to main FAB */}
             <motion.div 
-              className="flex items-center justify-end gap-2 mt-2" 
+              className="flex items-center justify-end gap-2 pointer-events-auto mb-4" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
+              transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 25 }}
             >
               <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow">
-                Salva Lista
+                Aggiunta Rapida
               </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button 
                       className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95" 
-                      onClick={handleSaveList} 
-                      aria-label="Salva lista"
+                      onClick={handleQuickAdd} 
+                      aria-label="Aggiunta rapida"
                     >
-                      <Save className="w-5 h-5" />
+                      <Zap className="w-5 h-5" />
                     </button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Salva lista
+                    Aggiunta rapida
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -164,7 +166,7 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* Main FAB button - fixed position with correct positioning */}
+      {/* Main FAB button - fixed position at bottom right */}
       <button 
         onClick={handleFabClick} 
         aria-label={showFabOptions ? "Chiudi opzioni" : "Apri opzioni"} 
