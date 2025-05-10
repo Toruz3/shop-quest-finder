@@ -70,11 +70,11 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* FAB options - positioned ABOVE the main FAB */}
+      {/* FAB options - positioned ABOVE the main FAB with increased spacing */}
       <AnimatePresence>
         {showFabOptions && (
-          <div className="fixed bottom-24 right-5 z-50 flex flex-col-reverse items-end gap-4">
-            {/* Aggiunta Rapida */}
+          <div className="fixed bottom-24 right-5 z-50 flex flex-col-reverse items-end gap-3">
+            {/* Aggiunta Rapida - increased gap to prevent overlap */}
             <motion.div 
               className="flex items-center justify-end gap-2" 
               initial={{ opacity: 0, y: 20 }}
@@ -103,9 +103,9 @@ export const ShoppingFab = ({
               </TooltipProvider>
             </motion.div>
             
-            {/* Nuova Lista */}
+            {/* Nuova Lista - increased vertical spacing */}
             <motion.div 
-              className="flex items-center justify-end gap-2" 
+              className="flex items-center justify-end gap-2 mt-2" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
@@ -132,9 +132,9 @@ export const ShoppingFab = ({
               </TooltipProvider>
             </motion.div>
             
-            {/* Salva Lista */}
+            {/* Salva Lista - further increased vertical spacing */}
             <motion.div 
-              className="flex items-center justify-end gap-2" 
+              className="flex items-center justify-end gap-2 mt-2" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
