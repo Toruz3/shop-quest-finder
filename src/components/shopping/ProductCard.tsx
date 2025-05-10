@@ -124,7 +124,7 @@ export const ProductCard = ({
               </Button>
             </div>
 
-            {/* Price comparison collapsible - with improved layout for mobile */}
+            {/* Price comparison collapsible */}
             <Collapsible
               open={isComparisonOpen}
               onOpenChange={setIsComparisonOpen}
@@ -142,8 +142,8 @@ export const ProductCard = ({
                 </Button>
               </CollapsibleTrigger>
               
-              <CollapsibleContent className="pt-3">
-                <div className="bg-gray-50 p-3 rounded-lg text-sm">
+              <CollapsibleContent className="pt-3 w-full">
+                <div className="bg-gray-50 p-3 rounded-lg text-sm w-full -ml-0">
                   <h4 className="text-xs font-medium text-gray-700 mb-2">Prezzi in altri supermercati</h4>
                   
                   {isLoading ? (
