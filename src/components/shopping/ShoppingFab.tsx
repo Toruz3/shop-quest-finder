@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Plus, X, FilePlus2, Save, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -166,14 +167,15 @@ export const ShoppingFab = ({
         </AnimatePresence>
         
         {/* Main FAB button - fixed position */}
-        <Button onClick={handleFabClick} aria-label={showFabOptions ? "Chiudi opzioni" : "Apri opzioni"} className="fixed bottom-20 right-5 z-50 w-15 h-15 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg flex items-center justify-center transition-colors">
-          <motion.div animate={{
-          rotate: showFabOptions ? 45 : 0
-        }} transition={{
-          type: 'spring',
-          stiffness: 260,
-          damping: 20
-        }}>
+        <Button 
+          onClick={handleFabClick} 
+          aria-label={showFabOptions ? "Chiudi opzioni" : "Apri opzioni"} 
+          className="fixed bottom-28 right-5 z-50 w-15 h-15 rounded-full bg-primary hover:bg-primary/90 text-white shadow-lg flex items-center justify-center transition-colors"
+        >
+          <motion.div 
+            animate={{ rotate: showFabOptions ? 45 : 0 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+          >
             {showFabOptions ? <X className="h-6 w-6" /> : <Plus className="h-6 w-6" />}
           </motion.div>
         </Button>

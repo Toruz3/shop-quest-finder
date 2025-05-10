@@ -84,6 +84,7 @@ export const ProductSearchBar = ({
           placeholder="Cosa vuoi acquistare?"
           className={`h-14 pl-12 pr-24 py-4 bg-white shadow-none border-none transition-all duration-300 rounded-lg w-full text-base
             ${isFocused ? 'ring-1 ring-primary/30' : ''}`}
+          style={{ borderColor: 'transparent' }} // Ensuring all borders are transparent
           aria-label="Cerca prodotto"
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">

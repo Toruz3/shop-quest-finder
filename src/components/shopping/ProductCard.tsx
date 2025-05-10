@@ -74,12 +74,7 @@ export const ProductCard = ({
                 {product.name}
               </h3>
               
-              {/* Badge for promotional items */}
-              {product.originalIsPromotional && (
-                <Badge variant="default" className="bg-red-500 text-white text-xs">
-                  Offerta
-                </Badge>
-              )}
+              {/* "Offerta" badge removed as requested */}
             </div>
 
             {/* Price and supermarket info */}
@@ -129,7 +124,7 @@ export const ProductCard = ({
               </Button>
             </div>
 
-            {/* Price comparison collapsible - moved below all other elements in a dedicated row */}
+            {/* Price comparison collapsible - with improved layout for mobile */}
             <Collapsible
               open={isComparisonOpen}
               onOpenChange={setIsComparisonOpen}
