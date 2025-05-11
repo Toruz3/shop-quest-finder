@@ -8,6 +8,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { Separator } from "@/components/ui/separator";
 import { Product, PriceComparison } from "@/types/shopping";
 import { useQuery } from "@tanstack/react-query";
+
 interface ProductCardProps {
   product: Product;
   onUpdateQuantity: (id: number, increment: boolean) => void;
@@ -118,7 +119,8 @@ export const ProductCard = ({
               
               <CollapsibleContent className="w-full pt-3 pl-0">
                 <div className="bg-gray-50 rounded-lg text-sm w-full p-0">
-                  {isLoading ? <div className="py-2 text-center text-xs text-gray-500 pr-3 pb-3 pt-3">Caricamento...</div> : priceComparison && priceComparison.length > 0 ? <div className="space-y-2  pb-3 pt-3 pl-0">
+                  {isLoading ? <div className="py-2 text-center text-xs text-gray-500 pb-3 pt-3">Caricamento...</div> : priceComparison && priceComparison.length > 0 ? 
+                    <div className="space-y-2 pb-3 pt-3 pl-0">
                       {priceComparison.map((item, idx) => <div key={idx} className="w-full">
                           {idx > 0 && <Separator className="my-1.5" />}
                           <div className="flex justify-between items-center w-full pt-1 px-0">
@@ -135,7 +137,7 @@ export const ProductCard = ({
                             </div>
                           </div>
                         </div>)}
-                    </div> : <div className="py-2 text-center text-xs text-gray-500 pr-3 pb-3 pt-3">Nessun dato disponibile per il confronto</div>}
+                    </div> : <div className="py-2 text-center text-xs text-gray-500 pb-3 pt-3">Nessun dato disponibile per il confronto</div>}
                 </div>
               </CollapsibleContent>
             </Collapsible>
