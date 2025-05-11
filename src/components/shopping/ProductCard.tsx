@@ -140,14 +140,14 @@ export const ProductCard = ({
                 </Button>
               </CollapsibleTrigger>
               
-              <CollapsibleContent className="w-full pt-3">
-                <div className="bg-gray-50 rounded-lg text-sm w-full ml-0 pl-0">
-                  <h4 className="text-xs font-medium text-gray-700 mb-2 px-3 pt-3">Prezzi in altri supermercati</h4>
+              <CollapsibleContent className="w-full pt-3 pl-0">
+                <div className="bg-gray-50 rounded-lg text-sm w-full pl-0 ml-0">
+                  <h4 className="text-xs font-medium text-gray-700 mb-2 pt-3 pr-3 pb-0 px-3">Prezzi in altri supermercati</h4>
                   
                   {isLoading ? (
-                    <div className="py-2 text-center text-xs text-gray-500 px-3">Caricamento...</div>
+                    <div className="py-2 text-center text-xs text-gray-500 pr-3 pb-3 px-3">Caricamento...</div>
                   ) : priceComparison && priceComparison.length > 0 ? (
-                    <div className="space-y-2 px-3 pb-3">
+                    <div className="space-y-2 pr-3 pb-3 px-3">
                       {priceComparison.map((item, idx) => (
                         <div key={idx} className="w-full">
                           {idx > 0 && <Separator className="my-1.5" />}
@@ -173,7 +173,7 @@ export const ProductCard = ({
                       ))}
                     </div>
                   ) : (
-                    <div className="py-2 text-center text-xs text-gray-500 px-3 pb-3">Nessun dato disponibile per il confronto</div>
+                    <div className="py-2 text-center text-xs text-gray-500 pr-3 pb-3 px-3">Nessun dato disponibile per il confronto</div>
                   )}
                 </div>
               </CollapsibleContent>

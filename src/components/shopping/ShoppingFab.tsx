@@ -70,11 +70,11 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* FAB options - positioned ABOVE the main FAB with proper spacing */}
+      {/* FAB options - posizionati sopra il FAB principale con spaziatura ridotta */}
       <AnimatePresence>
         {showFabOptions && (
-          <div className="fixed bottom-[calc(6rem+4rem)] right-5 z-50 flex flex-col-reverse items-end gap-4 pointer-events-none">
-            {/* Each button has pointer-events-auto to allow clicks through the pointer-events-none container */}
+          <div className="fixed bottom-[calc(6rem+4rem)] right-5 z-50 flex flex-col-reverse items-end gap-2 pointer-events-none">
+            {/* Ogni pulsante ha pointer-events-auto per consentire i click attraverso il container pointer-events-none */}
             
             {/* Salva Lista - top position */}
             <motion.div 
@@ -84,14 +84,14 @@ export const ShoppingFab = ({
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
             >
-              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow">
+              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow whitespace-nowrap">
                 Salva Lista
               </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button 
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95" 
+                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95 flex-shrink-0" 
                       onClick={handleSaveList} 
                       aria-label="Salva lista"
                     >
@@ -107,20 +107,20 @@ export const ShoppingFab = ({
             
             {/* Nuova Lista - middle position */}
             <motion.div 
-              className="flex items-center justify-end gap-2 pointer-events-auto mb-4" 
+              className="flex items-center justify-end gap-2 pointer-events-auto" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.2, type: 'spring', stiffness: 300, damping: 25 }}
             >
-              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow">
+              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow whitespace-nowrap">
                 Nuova Lista
               </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button 
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95" 
+                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95 flex-shrink-0" 
                       onClick={handleNewList} 
                       aria-label="Nuova lista"
                     >
@@ -136,20 +136,20 @@ export const ShoppingFab = ({
             
             {/* Aggiunta Rapida - closest to main FAB */}
             <motion.div 
-              className="flex items-center justify-end gap-2 pointer-events-auto mb-4" 
+              className="flex items-center justify-end gap-2 pointer-events-auto" 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 25 }}
             >
-              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow">
+              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow whitespace-nowrap">
                 Aggiunta Rapida
               </div>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <button 
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95" 
+                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95 flex-shrink-0" 
                       onClick={handleQuickAdd} 
                       aria-label="Aggiunta rapida"
                     >
