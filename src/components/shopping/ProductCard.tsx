@@ -141,7 +141,7 @@ export const ProductCard = ({
               </CollapsibleTrigger>
               
               <CollapsibleContent className="w-full pt-3 pl-0">
-                <div className="bg-gray-50 rounded-lg text-sm w-full pl-0">
+                <div className="bg-gray-50 rounded-lg text-sm w-full p-0">
                   {isLoading ? (
                     <div className="py-2 text-center text-xs text-gray-500 pr-3 pb-3 pt-3">Caricamento...</div>
                   ) : priceComparison && priceComparison.length > 0 ? (
