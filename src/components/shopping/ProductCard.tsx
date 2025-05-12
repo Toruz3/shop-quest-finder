@@ -51,29 +51,33 @@ export const ProductCard = ({
     },
     enabled: isComparisonOpen // Only fetch when comparison section is opened
   });
-  return <motion.div initial={{
-    opacity: 0,
-    y: 10
-  }} animate={{
-    opacity: 1,
-    y: 0
-  }} exit={{
-    opacity: 0,
-    y: -10
-  }} transition={{
-    duration: 0.2
-  }}>
-      <Card className="border border-gray-100 rounded-2xl overflow-hidden shadow-md">
+  
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.2 }}
+    >
+      <Card>
         {/* Main product content with padding */}
         <div className="p-4 bg-white">
           <div className="flex items-start gap-3">
             {/* Image column */}
             <div className="flex-shrink-0">
-              {product.imageUrl ? <img src={product.imageUrl} alt={product.name} className="w-16 h-16 object-cover rounded-lg shadow-sm" /> : <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center">
+              {product.imageUrl ? (
+                <img 
+                  src={product.imageUrl} 
+                  alt={product.name} 
+                  className="w-16 h-16 object-cover rounded-lg shadow-sm" 
+                />
+              ) : (
+                <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center">
                   <span className="text-xl font-semibold text-gray-400">
                     {product.name.charAt(0).toUpperCase()}
                   </span>
-                </div>}
+                </div>
+              )}
             </div>
 
             {/* Product info column */}
@@ -85,15 +89,23 @@ export const ProductCard = ({
               </div>
 
               {/* Price and supermarket info */}
-              {(product.price || product.supermarket) && <p className="text-sm text-gray-500 text-left">
+              {(product.price || product.supermarket) && (
+                <p className="text-sm text-gray-500 text-left">
                   {product.price ? `€${product.price.toFixed(2)}` : ''} 
                   {product.supermarket ? ` • ${product.supermarket}` : ''}
-                </p>}
+                </p>
+              )}
 
               {/* Quantity controls in a row */}
               <div className="flex items-center justify-between mt-3 mb-2">
                 <div className="flex items-center gap-1">
-                  <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" onClick={() => onUpdateQuantity(product.id, false)} aria-label="Diminuisci quantità">
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    className="h-8 w-8 rounded-full" 
+                    onClick={() => onUpdateQuantity(product.id, false)} 
+                    aria-label="Diminuisci quantità"
+                  >
                     <Minus className="h-3 w-3" />
                   </Button>
 
@@ -101,12 +113,24 @@ export const ProductCard = ({
                     {product.quantity}
                   </span>
 
-                  <Button variant="outline" size="icon" className="h-8 w-8 rounded-full" onClick={() => onUpdateQuantity(product.id, true)} aria-label="Aumenta quantità">
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    className="h-8 w-8 rounded-full" 
+                    onClick={() => onUpdateQuantity(product.id, true)} 
+                    aria-label="Aumenta quantità"
+                  >
                     <Plus className="h-3 w-3" />
                   </Button>
                 </div>
 
-                <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-red-500 rounded-full" onClick={() => onRemoveProduct(product.id)} aria-label="Rimuovi prodotto">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="h-8 w-8 text-gray-400 hover:text-red-500 rounded-full" 
+                  onClick={() => onRemoveProduct(product.id)} 
+                  aria-label="Rimuovi prodotto"
+                >
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
@@ -115,53 +139,57 @@ export const ProductCard = ({
               <div className="mt-1 w-full">
                 <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen} className="w-full">
                   <CollapsibleTrigger asChild>
-                    <Button variant="ghost" size="sm" className="p-0 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-start">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="p-0 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-start"
+                    >
                       <BarChart3 className="h-3.5 w-3.5 mr-1" />
                       Confronta prezzi
                       <ChevronUp className={`ml-auto h-3.5 w-3.5 transition-transform ${isComparisonOpen ? '' : 'rotate-180'}`} />
                     </Button>
                   </CollapsibleTrigger>
+                  
+                  <CollapsibleContent className="w-full">
+                    <div className="bg-gray-50 w-full">
+                      {isLoading ? (
+                        <div className="py-3 px-4 text-center text-xs text-gray-500">Caricamento...</div>
+                      ) : priceComparison && priceComparison.length > 0 ? (
+                        <div className="py-3 space-y-2">
+                          {priceComparison.map((item, idx) => (
+                            <div key={idx} className="w-full">
+                              {idx > 0 && <Separator className="my-1.5" />}
+                              <div className="flex justify-between items-center w-full px-4 pt-1">
+                                <span className="text-xs text-gray-600 truncate max-w-[55%]">
+                                  {item.supermarketName}
+                                </span>
+                                <div className="flex items-center gap-x-1.5 flex-shrink-0">
+                                  <span className="text-xs font-medium">
+                                    €{item.price.toFixed(2)}
+                                  </span>
+                                  {item.isBestOffer && (
+                                    <Badge variant="outline" className="bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1 whitespace-nowrap">
+                                      Miglior prezzo
+                                    </Badge>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="py-3 px-4 text-center text-xs text-gray-500">
+                          Nessun dato disponibile per il confronto
+                        </div>
+                      )}
+                    </div>
+                  </CollapsibleContent>
                 </Collapsible>
               </div>
             </div>
           </div>
         </div>
-        
-        {/* Price comparison content - Full width section */}
-        <CollapsibleContent className="w-full">
-          <div className="bg-gray-50 w-full">
-            {isLoading ? (
-              <div className="py-3 px-4 text-center text-xs text-gray-500">Caricamento...</div>
-            ) : priceComparison && priceComparison.length > 0 ? (
-              <div className="py-3 space-y-2">
-                {priceComparison.map((item, idx) => (
-                  <div key={idx} className="w-full">
-                    {idx > 0 && <Separator className="my-1.5" />}
-                    <div className="flex justify-between items-center w-full px-4 pt-1">
-                      <span className="text-xs text-gray-600 truncate max-w-[55%]">
-                        {item.supermarketName}
-                      </span>
-                      <div className="flex items-center gap-x-1.5 flex-shrink-0">
-                        <span className="text-xs font-medium">
-                          €{item.price.toFixed(2)}
-                        </span>
-                        {item.isBestOffer && (
-                          <Badge variant="outline" className="bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1 whitespace-nowrap">
-                            Miglior prezzo
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="py-3 px-4 text-center text-xs text-gray-500">
-                Nessun dato disponibile per il confronto
-              </div>
-            )}
-          </div>
-        </CollapsibleContent>
       </Card>
-    </motion.div>;
+    </motion.div>
+  );
 };
