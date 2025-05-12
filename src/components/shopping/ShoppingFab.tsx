@@ -70,12 +70,10 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* FAB options - posizionati sopra il FAB principale con miglior allineamento */}
+      {/* FAB options - Positioning improved to align with the main FAB */}
       <AnimatePresence>
         {showFabOptions && (
-          <div className="fixed bottom-[calc(6rem+4rem)] right-2 z-50 flex flex-col-reverse items-end gap-1 pointer-events-none">
-            {/* Ogni pulsante ha pointer-events-auto per consentire i click attraverso il container pointer-events-none */}
-            
+          <div className="fixed bottom-36 right-5 z-40 flex flex-col items-end gap-2 pointer-events-none">
             {/* Salva Lista - top position */}
             <motion.div 
               className="flex items-center justify-end gap-2 pointer-events-auto"
