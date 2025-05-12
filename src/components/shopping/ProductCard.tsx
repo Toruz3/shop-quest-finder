@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus, Trash2, ChevronDown, ChevronUp, BarChart3 } from "lucide-react";
@@ -14,6 +15,7 @@ interface ProductCardProps {
   onUpdateQuantity: (id: number, increment: boolean) => void;
   onRemoveProduct: (id: number) => void;
 }
+
 export const ProductCard = ({
   product,
   onUpdateQuantity,
@@ -107,13 +109,13 @@ export const ProductCard = ({
               </Button>
             </div>
 
-            {/* Price comparison collapsible */}
+            {/* Price comparison collapsible - Modified container div to remove any padding/margin */}
             <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen} className="mt-1 w-full">
               <CollapsibleTrigger asChild>
-                <Button variant="ghost" size="sm" className="p-0 h-8 text-blue-500 hover:text-blue-700 w-full justify-start">
+                <Button variant="ghost" size="sm" className="p-0 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-start">
                   <BarChart3 className="h-3.5 w-3.5 mr-1" />
                   Confronta prezzi
-                  {isComparisonOpen ? <ChevronUp className="h-3.5 w-3.5 ml-1" /> : <ChevronDown className="h-3.5 w-3.5 ml-1" />}
+                  <ChevronUp className={`ml-auto h-3.5 w-3.5 transition-transform ${isComparisonOpen ? '' : 'rotate-180'}`} />
                 </Button>
               </CollapsibleTrigger>
               
