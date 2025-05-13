@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Plus, X, FilePlus2, Save, Zap } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 
 interface ShoppingFabProps {
   onClick: () => void;
@@ -70,97 +70,78 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* FAB options - Positioning improved to align with the main FAB */}
+      {/* FAB options - Adjusted positioning for better alignment */}
       <AnimatePresence>
         {showFabOptions && (
-          <div className="fixed bottom-36 right-5 z-40 flex flex-col items-end gap-2 pointer-events-none">
-            {/* Salva Lista - top position */}
+          <motion.div 
+            className="fixed bottom-[9.5rem] right-5 z-40 flex flex-col items-end gap-3 pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {/* Aggiunta Rapida - top position (furthest from FAB) */}
             <motion.div 
-              className="flex items-center justify-end gap-2 pointer-events-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
-            >
-              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow whitespace-nowrap">
-                Salva Lista
-              </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button 
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95 flex-shrink-0" 
-                      onClick={handleSaveList} 
-                      aria-label="Salva lista"
-                    >
-                      <Save className="w-5 h-5" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Salva lista
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </motion.div>
-            
-            {/* Nuova Lista - middle position */}
-            <motion.div 
-              className="flex items-center justify-end gap-2 pointer-events-auto" 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 300, damping: 25 }}
-            >
-              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow whitespace-nowrap">
-                Nuova Lista
-              </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button 
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95 flex-shrink-0" 
-                      onClick={handleNewList} 
-                      aria-label="Nuova lista"
-                    >
-                      <FilePlus2 className="w-5 h-5" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Nuova lista
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </motion.div>
-            
-            {/* Aggiunta Rapida - closest to main FAB */}
-            <motion.div 
-              className="flex items-center justify-end gap-2 pointer-events-auto" 
+              className="flex items-center justify-end space-x-3 rtl:space-x-reverse pointer-events-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 25 }}
             >
-              <div className="text-sm bg-white/90 backdrop-blur-sm text-card-foreground px-3 py-1.5 rounded-lg shadow whitespace-nowrap">
+              <span className="bg-card text-card-foreground py-1.5 px-3 rounded-md shadow-sm text-sm font-medium">
                 Aggiunta Rapida
-              </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <button 
-                      className="bg-blue-500 hover:bg-blue-600 text-white rounded-full w-12 h-12 flex items-center justify-center p-0 shadow-lg transition-transform duration-150 ease-in-out hover:scale-105 active:scale-95 flex-shrink-0" 
-                      onClick={handleQuickAdd} 
-                      aria-label="Aggiunta rapida"
-                    >
-                      <Zap className="w-5 h-5" />
-                    </button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    Aggiunta rapida
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              </span>
+              <Button 
+                size="icon" 
+                className="bg-blue-500 hover:bg-blue-600 text-white rounded-full h-10 w-10 flex-shrink-0" 
+                onClick={handleQuickAdd}
+                aria-label="Aggiunta rapida"
+              >
+                <Zap className="h-5 w-5" />
+              </Button>
             </motion.div>
-          </div>
+            
+            {/* Nuova Lista - middle position */}
+            <motion.div 
+              className="flex items-center justify-end space-x-3 rtl:space-x-reverse pointer-events-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ delay: 0.2, type: 'spring', stiffness: 300, damping: 25 }}
+            >
+              <span className="bg-card text-card-foreground py-1.5 px-3 rounded-md shadow-sm text-sm font-medium">
+                Nuova Lista
+              </span>
+              <Button 
+                size="icon" 
+                className="bg-blue-500 hover:bg-blue-600 text-white rounded-full h-10 w-10 flex-shrink-0" 
+                onClick={handleNewList}
+                aria-label="Nuova lista"
+              >
+                <FilePlus2 className="h-5 w-5" />
+              </Button>
+            </motion.div>
+            
+            {/* Salva Lista - bottom position (closest to FAB) */}
+            <motion.div 
+              className="flex items-center justify-end space-x-3 rtl:space-x-reverse pointer-events-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
+            >
+              <span className="bg-card text-card-foreground py-1.5 px-3 rounded-md shadow-sm text-sm font-medium">
+                Salva Lista
+              </span>
+              <Button 
+                size="icon" 
+                className="bg-blue-500 hover:bg-blue-600 text-white rounded-full h-10 w-10 flex-shrink-0" 
+                onClick={handleSaveList}
+                aria-label="Salva lista"
+              >
+                <Save className="h-5 w-5" />
+              </Button>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
       

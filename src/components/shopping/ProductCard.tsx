@@ -59,7 +59,7 @@ export const ProductCard = ({
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
     >
-      <Card>
+      <Card className="overflow-hidden">
         {/* Main product content with padding */}
         <div className="p-4 bg-white">
           <div className="flex items-start gap-3">
@@ -134,59 +134,59 @@ export const ProductCard = ({
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>
-
-              {/* Price comparison trigger button */}
-              <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen} className="w-full">
-                <CollapsibleTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="p-0 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-start"
-                  >
-                    <BarChart3 className="h-3.5 w-3.5 mr-1" />
-                    Confronta prezzi
-                    <ChevronUp className={`ml-auto h-3.5 w-3.5 transition-transform ${isComparisonOpen ? '' : 'rotate-180'}`} />
-                  </Button>
-                </CollapsibleTrigger>
-                
-                <CollapsibleContent className="w-full">
-                  <div className="bg-gray-50 w-full">
-                    {isLoading ? (
-                      <div className="py-3 px-4 text-center text-xs text-gray-500">Caricamento...</div>
-                    ) : priceComparison && priceComparison.length > 0 ? (
-                      <div className="py-3 space-y-2">
-                        {priceComparison.map((item, idx) => (
-                          <div key={idx} className="w-full">
-                            {idx > 0 && <Separator className="my-1.5" />}
-                            <div className="flex justify-between items-center w-full px-4 pt-1">
-                              <span className="text-xs text-gray-600 truncate max-w-[55%]">
-                                {item.supermarketName}
-                              </span>
-                              <div className="flex items-center gap-x-1.5 flex-shrink-0">
-                                <span className="text-xs font-medium">
-                                  €{item.price.toFixed(2)}
-                                </span>
-                                {item.isBestOffer && (
-                                  <Badge variant="outline" className="bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1 whitespace-nowrap">
-                                    Miglior prezzo
-                                  </Badge>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="py-3 px-4 text-center text-xs text-gray-500">
-                        Nessun dato disponibile per il confronto
-                      </div>
-                    )}
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
             </div>
           </div>
         </div>
+
+        {/* Price comparison section - positioned as direct child of Card */}
+        <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen} className="w-full border-t border-gray-100">
+          <CollapsibleTrigger asChild>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="px-4 py-2 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-start"
+            >
+              <BarChart3 className="h-3.5 w-3.5 mr-1" />
+              Confronta prezzi
+              <ChevronUp className={`ml-auto h-3.5 w-3.5 transition-transform ${isComparisonOpen ? '' : 'rotate-180'}`} />
+            </Button>
+          </CollapsibleTrigger>
+          
+          <CollapsibleContent className="w-full">
+            <div className="bg-gray-50 w-full">
+              {isLoading ? (
+                <div className="py-3 px-4 text-center text-xs text-gray-500">Caricamento...</div>
+              ) : priceComparison && priceComparison.length > 0 ? (
+                <div className="py-3 space-y-2">
+                  {priceComparison.map((item, idx) => (
+                    <div key={idx} className="w-full">
+                      {idx > 0 && <Separator className="my-1.5" />}
+                      <div className="flex justify-between items-center w-full px-4 pt-1">
+                        <span className="text-xs text-gray-600 truncate max-w-[55%]">
+                          {item.supermarketName}
+                        </span>
+                        <div className="flex items-center gap-x-1.5 flex-shrink-0">
+                          <span className="text-xs font-medium">
+                            €{item.price.toFixed(2)}
+                          </span>
+                          {item.isBestOffer && (
+                            <Badge variant="outline" className="bg-green-50 text-green-600 text-[10px] border-green-200 py-0 px-1 whitespace-nowrap">
+                              Miglior prezzo
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-3 px-4 text-center text-xs text-gray-500">
+                  Nessun dato disponibile per il confronto
+                </div>
+              )}
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
       </Card>
     </motion.div>
   );
