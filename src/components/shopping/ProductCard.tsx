@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus, Trash2, BarChart3 } from "lucide-react";
@@ -144,7 +143,7 @@ export const ProductCard = ({
             <Button 
               variant="ghost" 
               size="sm" 
-              className="px-4 py-2 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-start"
+              className="px-4 py-2 h-8 text-blue-500 hover:text-blue-700 w-full flex items-center justify-center"
             >
               <BarChart3 className="h-3.5 w-3.5 mr-1" />
               Confronta prezzi
