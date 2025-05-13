@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Minus, Plus, Trash2, ChevronDown, ChevronUp, BarChart3 } from "lucide-react";
+import { Minus, Plus, Trash2, BarChart3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -148,7 +148,6 @@ export const ProductCard = ({
             >
               <BarChart3 className="h-3.5 w-3.5 mr-1" />
               Confronta prezzi
-              <ChevronUp className={`ml-auto h-3.5 w-3.5 transition-transform ${isComparisonOpen ? '' : 'rotate-180'}`} />
             </Button>
           </CollapsibleTrigger>
           

@@ -70,33 +70,36 @@ export const ShoppingFab = ({
         )}
       </AnimatePresence>
       
-      {/* FAB options - Adjusted positioning for better alignment */}
+      {/* FAB options with centered alignment 
+           Calculation: bottom-[5.5rem] based on:
+           FAB: bottom-24 (6rem) + (h-14 (3.5rem) / 2) - (h-10 (2.5rem) / 2) = 6rem + 1.75rem - 1.25rem = 6.5rem
+      */}
       <AnimatePresence>
         {showFabOptions && (
           <motion.div 
-            className="fixed bottom-[9.5rem] right-5 z-40 flex flex-col items-end gap-3 pointer-events-none"
+            className="fixed bottom-[6.5rem] right-5 z-40 flex flex-col items-end gap-3 pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Aggiunta Rapida - top position (furthest from FAB) */}
+            {/* Salva Lista - bottom position (closest to FAB) */}
             <motion.div 
               className="flex items-center justify-end space-x-3 rtl:space-x-reverse pointer-events-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 25 }}
+              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
             >
               <span className="bg-card text-card-foreground py-1.5 px-3 rounded-md shadow-sm text-sm font-medium">
-                Aggiunta Rapida
+                Salva Lista
               </span>
               <Button 
                 size="icon" 
                 className="bg-blue-500 hover:bg-blue-600 text-white rounded-full h-10 w-10 flex-shrink-0" 
-                onClick={handleQuickAdd}
-                aria-label="Aggiunta rapida"
+                onClick={handleSaveList}
+                aria-label="Salva lista"
               >
-                <Zap className="h-5 w-5" />
+                <Save className="h-5 w-5" />
               </Button>
             </motion.div>
             
@@ -121,24 +124,24 @@ export const ShoppingFab = ({
               </Button>
             </motion.div>
             
-            {/* Salva Lista - bottom position (closest to FAB) */}
+            {/* Aggiunta Rapida - top position (furthest from FAB) */}
             <motion.div 
               className="flex items-center justify-end space-x-3 rtl:space-x-reverse pointer-events-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
+              transition={{ delay: 0.1, type: 'spring', stiffness: 300, damping: 25 }}
             >
               <span className="bg-card text-card-foreground py-1.5 px-3 rounded-md shadow-sm text-sm font-medium">
-                Salva Lista
+                Aggiunta Rapida
               </span>
               <Button 
                 size="icon" 
                 className="bg-blue-500 hover:bg-blue-600 text-white rounded-full h-10 w-10 flex-shrink-0" 
-                onClick={handleSaveList}
-                aria-label="Salva lista"
+                onClick={handleQuickAdd}
+                aria-label="Aggiunta rapida"
               >
-                <Save className="h-5 w-5" />
+                <Zap className="h-5 w-5" />
               </Button>
             </motion.div>
           </motion.div>
