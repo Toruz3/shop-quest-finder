@@ -71,13 +71,13 @@ export const ShoppingFab = ({
       </AnimatePresence>
       
       {/* FAB options with adjusted positioning 
-           Calculation: bottom-[9.25rem] based on:
-           FAB: bottom-24 (6rem) + h-14 (3.5rem) + space (0.75rem) = 10.25rem
+           Calculation: bottom-[9.75rem] based on:
+           FAB: bottom-24 (6rem) + h-14 (3.5rem) + space (1.25rem) = 10.75rem
       */}
       <AnimatePresence>
         {showFabOptions && (
           <motion.div 
-            className="fixed bottom-[9.25rem] right-6 z-40 flex flex-col items-end gap-3 pointer-events-none"
+            className="fixed bottom-[9.75rem] right-6 z-40 flex flex-col items-end gap-3 pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
