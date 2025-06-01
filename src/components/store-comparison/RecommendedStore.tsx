@@ -32,57 +32,24 @@ export const RecommendedStore = ({ store }: RecommendedStoreProps) => {
             </p>
           </div>
           
-          {/* Layout stabilizzato con grid system */}
-          <div className="grid grid-cols-3 gap-4 py-4 px-4 bg-white/60 rounded-xl backdrop-blur-sm mb-6">
-            {/* Colonna Totale Spesa - Larghezza Fissa */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <Euro className="h-4 w-4 text-green-600 flex-shrink-0" />
-                <motion.span 
-                  key={store.totalPrice}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="font-bold text-xl text-green-700 min-w-[4rem] text-center"
-                >
-                  €{store.totalPrice.toFixed(2)}
-                </motion.span>
-              </div>
-              <span className="text-xs text-gray-500 font-medium block">Totale spesa</span>
+          {/* Nuovo layout migliorato per le metriche */}
+          <div className="flex justify-between items-center mt-6 mb-6">
+            <div className="flex flex-col items-center">
+              <span className="text-2xl font-semibold text-green-600">€{store.totalPrice.toFixed(2)}</span>
+              <span className="text-sm text-gray-500 mt-1">Totale spesa</span>
             </div>
-
-            {/* Colonna Distanza - Larghezza Fissa */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <MapPin className="h-4 w-4 text-blue-600 flex-shrink-0" />
-                <motion.span 
-                  key={store.distance}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="font-bold text-xl text-blue-700 min-w-[3rem] text-center"
-                >
-                  {store.distance}
-                </motion.span>
+            
+            <div className="flex flex-col items-center">
+              <div className="flex items-baseline">
+                <span className="text-2xl font-semibold text-blue-500">{store.distanceInKm}</span>
+                <span className="text-sm text-blue-500 ml-1">km</span>
               </div>
-              <span className="text-xs text-gray-500 font-medium block">Distanza</span>
+              <span className="text-sm text-gray-500 mt-1">Distanza</span>
             </div>
-
-            {/* Colonna Risparmi - Larghezza Fissa */}
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 mb-1">
-                <PiggyBank className="h-4 w-4 text-orange-600 flex-shrink-0" />
-                <motion.span 
-                  key={store.savings}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.2 }}
-                  className="font-bold text-xl text-orange-600 min-w-[3rem] text-center"
-                >
-                  €{store.savings.toFixed(2)}
-                </motion.span>
-              </div>
-              <span className="text-xs text-gray-500 font-medium block">Risparmi</span>
+            
+            <div className="flex flex-col items-center">
+              <span className="text-2xl font-semibold text-orange-500">€{store.savings.toFixed(2)}</span>
+              <span className="text-sm text-gray-500 mt-1">Risparmi</span>
             </div>
           </div>
           
