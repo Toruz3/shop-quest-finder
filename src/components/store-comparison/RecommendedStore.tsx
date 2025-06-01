@@ -1,8 +1,8 @@
 
-import { Navigation, MapPin } from "lucide-react";
+import { Navigation, MapPin, Crown, Euro, PiggyBank } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion";
 
 interface Store {
   id: number;
@@ -26,38 +26,73 @@ export const RecommendedStore = ({ store }: RecommendedStoreProps) => {
         <CardContent className="p-6">
           <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
-              <h3 className="font-bold text-xl text-green-800 mb-1">{store.name}</h3>
+              <h3 className="font-bold text-2xl text-green-800 mb-1">{store.name}</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
                 In base al prezzo totale e alla distanza,<br />
                 ti consigliamo di fare la spesa qui
               </p>
             </div>
-            <Badge className="bg-green-600 hover:bg-green-600 text-white text-xs font-medium px-3 py-1 rounded-full">
-              TOP CHOICE
-            </Badge>
+            
+            {/* Badge discreto nell'angolo */}
+            <div className="ml-4 flex-shrink-0">
+              <div className="flex items-center gap-1 text-green-600">
+                <Crown className="h-3 w-3" />
+                <span className="text-xs font-medium">Consigliato</span>
+              </div>
+            </div>
           </div>
           
-          <div className="flex items-center justify-between mb-6 py-4 px-4 bg-white/60 rounded-xl backdrop-blur-sm">
+          {/* Layout stabilizzato con grid system */}
+          <div className="grid grid-cols-3 gap-4 py-4 px-4 bg-white/60 rounded-xl backdrop-blur-sm mb-6">
+            {/* Colonna Totale Spesa - Larghezza Fissa */}
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <span className="text-2xl font-bold text-green-700">€{store.totalPrice.toFixed(2)}</span>
+                <Euro className="h-4 w-4 text-green-600 flex-shrink-0" />
+                <motion.span 
+                  key={store.totalPrice}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="font-bold text-xl text-green-700 min-w-[4rem] text-center"
+                >
+                  €{store.totalPrice.toFixed(2)}
+                </motion.span>
               </div>
-              <span className="text-xs text-gray-500 font-medium">Totale spesa</span>
+              <span className="text-xs text-gray-500 font-medium block">Totale spesa</span>
             </div>
-            <div className="w-px h-12 bg-gray-200"></div>
+
+            {/* Colonna Distanza - Larghezza Fissa */}
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <MapPin className="h-4 w-4 text-blue-600" />
-                <span className="text-xl font-bold text-blue-700">{store.distance}</span>
+                <MapPin className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                <motion.span 
+                  key={store.distance}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="font-bold text-xl text-blue-700 min-w-[3rem] text-center"
+                >
+                  {store.distance}
+                </motion.span>
               </div>
-              <span className="text-xs text-gray-500 font-medium">Distanza</span>
+              <span className="text-xs text-gray-500 font-medium block">Distanza</span>
             </div>
-            <div className="w-px h-12 bg-gray-200"></div>
+
+            {/* Colonna Risparmi - Larghezza Fissa */}
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 mb-1">
-                <span className="text-xl font-bold text-orange-600">€{store.savings.toFixed(2)}</span>
+                <PiggyBank className="h-4 w-4 text-orange-600 flex-shrink-0" />
+                <motion.span 
+                  key={store.savings}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  className="font-bold text-xl text-orange-600 min-w-[3rem] text-center"
+                >
+                  €{store.savings.toFixed(2)}
+                </motion.span>
               </div>
-              <span className="text-xs text-gray-500 font-medium">Risparmi</span>
+              <span className="text-xs text-gray-500 font-medium block">Risparmi</span>
             </div>
           </div>
           
