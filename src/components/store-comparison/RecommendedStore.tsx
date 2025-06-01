@@ -1,5 +1,5 @@
 
-import { Navigation, MapPin, Crown, Euro, PiggyBank } from "lucide-react";
+import { Navigation, MapPin, Euro, PiggyBank } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -24,22 +24,12 @@ export const RecommendedStore = ({ store }: RecommendedStoreProps) => {
       <h2 className="font-semibold mb-4 text-gray-600">Migliore opzione:</h2>
       <Card className="border-2 border-green-200 bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg rounded-2xl overflow-hidden">
         <CardContent className="p-6">
-          <div className="flex items-start justify-between mb-4">
-            <div className="flex-1">
-              <h3 className="font-bold text-2xl text-green-800 mb-1">{store.name}</h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                In base al prezzo totale e alla distanza,<br />
-                ti consigliamo di fare la spesa qui
-              </p>
-            </div>
-            
-            {/* Badge discreto nell'angolo */}
-            <div className="ml-4 flex-shrink-0">
-              <div className="flex items-center gap-1 text-green-600">
-                <Crown className="h-3 w-3" />
-                <span className="text-xs font-medium">Consigliato</span>
-              </div>
-            </div>
+          <div className="mb-6">
+            <h3 className="font-bold text-2xl text-green-800 mb-2">{store.name}</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              In base al prezzo totale e alla distanza,<br />
+              ti consigliamo di fare la spesa qui
+            </p>
           </div>
           
           {/* Layout stabilizzato con grid system */}
