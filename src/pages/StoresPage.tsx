@@ -1,28 +1,95 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { StoreComparison } from "@/components/StoreComparison";
-import { ProductList } from "@/components/shopping/ProductList";
-import { ShoppingCart, ChevronLeft, Plus, RefreshCw } from "lucide-react";
+import { ChevronLeft, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Product, ProductSuggestion } from "@/types/shopping";
-import { Input } from "@/components/ui/input";
-import { ProductSuggestions } from "@/components/shopping/ProductSuggestions";
-import { productDatabase } from "@/data/productDatabase";
+import { Product } from "@/types/shopping";
 import { toast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { ProductSummary } from "@/components/store-comparison/ProductSummary";
+import { SupermarketFilters } from "@/components/store-comparison/SupermarketFilters";
+import { RecommendedStore } from "@/components/store-comparison/RecommendedStore";
+import { SupermarketCard } from "@/components/store-comparison/SupermarketCard";
+
+interface Store {
+  id: number;
+  name: string;
+  distance: string;
+  distanceInKm: number;
+  totalPrice: number;
+  savings: number;
+  isOpen: boolean;
+  closingTime: string;
+  address: string;
+}
+
+const initialStores: Store[] = [
+  {
+    id: 1,
+    name: "Eurospin",
+    distance: "2.8 km",
+    distanceInKm: 2.8,
+    totalPrice: 38.99,
+    savings: 12.50,
+    isOpen: true,
+    closingTime: "20:00",
+    address: "Via Mazzini, 8"
+  },
+  {
+    id: 2,
+    name: "Lidl",
+    distance: "2.1 km",
+    distanceInKm: 2.1,
+    totalPrice: 40.99,
+    savings: 10.50,
+    isOpen: true,
+    closingTime: "21:30",
+    address: "Via Dante, 15"
+  },
+  {
+    id: 3,
+    name: "Esselunga",
+    distance: "1.2 km",
+    distanceInKm: 1.2,
+    totalPrice: 42.99,
+    savings: 8.50,
+    isOpen: true,
+    closingTime: "22:00",
+    address: "Corso Italia, 76"
+  },
+  {
+    id: 4,
+    name: "Conad",
+    distance: "0.8 km",
+    distanceInKm: 0.8,
+    totalPrice: 45.99,
+    savings: 5.50,
+    isOpen: true,
+    closingTime: "21:00",
+    address: "Via Roma, 42"
+  },
+  {
+    id: 5,
+    name: "Carrefour",
+    distance: "1.5 km",
+    distanceInKm: 1.5,
+    totalPrice: 48.99,
+    savings: 2.50,
+    isOpen: true,
+    closingTime: "20:30",
+    address: "Via Garibaldi, 103"
+  }
+];
+
+type SortOption = "price" | "distance";
 
 const StoresPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isMobile = useIsMobile();
   const [products, setProducts] = useState<Product[]>([]);
-  const [showEditMode, setShowEditMode] = useState(false);
-  const [newProductName, setNewProductName] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
-  const [suggestions, setSuggestions] = useState<ProductSuggestion[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [sortBy, setSortBy] = useState<SortOption>("price");
+  const [stores, setStores] = useState<Store[]>(() => {
+    return [...initialStores].sort((a, b) => a.totalPrice - b.totalPrice);
+  });
 
   useEffect(() => {
     if (location.state?.products) {
@@ -60,227 +127,94 @@ const StoresPage = () => {
     }
   }, [location]);
 
-  useEffect(() => {
-    if (newProductName.length >= 1) {
-      const term = newProductName.trim().toLowerCase();
-      const filtered = productDatabase.filter(product =>
-        product.name.toLowerCase().startsWith(term)
-      );
-      setSuggestions(filtered);
-      setShowSuggestions(true);
-    } else {
-      setSuggestions([]);
-      setShowSuggestions(false);
-    }
-  }, [newProductName]);
-
-  const updateQuantity = (id: number, increment: boolean) => {
-    setProducts(
-      products.map((product) =>
-        product.id === id
-          ? {
-              ...product,
-              quantity: increment
-                ? product.quantity + 1
-                : Math.max(1, product.quantity - 1),
-            }
-          : product
-      )
-    );
+  const handleSortChange = (value: SortOption) => {
+    setSortBy(value);
+    const sortedStores = [...initialStores].sort((a, b) => {
+      if (value === "price") {
+        return a.totalPrice - b.totalPrice;
+      } else {
+        return a.distanceInKm - b.distanceInKm;
+      }
+    });
+    setStores(sortedStores);
   };
 
-  const removeProduct = (id: number) => {
-    setProducts(products.filter((product) => product.id !== id));
+  const handleEditProducts = () => {
+    navigate("/app", { state: { products } });
   };
 
   const goBackToHome = () => {
     navigate("/app", { state: { products } });
   };
 
-  const handleAddProduct = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newProductName.trim()) {
-      const matchingSuggestion = suggestions.find(
-        s => s.name.toLowerCase() === newProductName.toLowerCase()
-      );
-      
-      setProducts([
-        ...products,
-        { 
-          id: Date.now(), 
-          name: newProductName.trim(), 
-          quantity: 1,
-          originalIsPromotional: matchingSuggestion?.isPromotional || false
-        }
-      ]);
-      setNewProductName("");
-      setShowSuggestions(false);
-    }
-  };
-
-  const handleSelectSuggestion = (name: string) => {
-    const matchingSuggestion = suggestions.find(
-      s => s.name.toLowerCase() === name.toLowerCase()
-    );
+  const getStoreWithMetadata = (store: Store, index: number) => {
+    const isLowestPrice = store.totalPrice === Math.min(...stores.map(s => s.totalPrice));
+    const isClosest = store.distanceInKm === Math.min(...stores.map(s => s.distanceInKm));
     
-    setProducts([
-      ...products,
-      { 
-        id: Date.now(), 
-        name: name.trim(), 
-        quantity: 1,
-        originalIsPromotional: matchingSuggestion?.isPromotional || false
-      }
-    ]);
-    setNewProductName("");
-    setShowSuggestions(false);
+    return {
+      ...store,
+      isBestPrice: isLowestPrice,
+      isClosest: isClosest && !isLowestPrice
+    };
   };
 
-  const handleSearchAgain = () => {
-    setIsSearching(true);
-    setTimeout(() => {
-      setIsSearching(false);
-      navigate("/stores", { state: { products: [...products] }, replace: true });
-    }, 1000);
-  };
+  const recommendedStore = stores[0];
+  const otherStores = stores.slice(1);
 
   return (
     <motion.div 
-      className="min-h-screen relative overflow-x-hidden main-content pb-24"
+      className="min-h-screen bg-gray-50/30 overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-      
-      <div className="container px-3 py-4 relative z-10 h-full flex flex-col">
-        <div className={`flex-grow flex flex-col ${!isMobile ? 'md:flex-row' : ''} gap-4 md:gap-6 max-w-4xl mx-auto w-full`}>
-          <div className={`w-full ${!isMobile ? 'md:w-1/3' : ''}`}>
-            <div className="flex items-center justify-between mb-4">
-              <Button 
-                variant="ghost" 
-                onClick={goBackToHome}
-                className="flex items-center text-gray-700 hover:text-primary"
-                aria-label="Torna indietro"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </Button>
-              <div className="flex items-center gap-1">
-                <ShoppingCart className="w-5 h-5 text-primary" />
-                <h2 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Shop Quest
-                </h2>
-              </div>
-              <div className="w-8"></div>
+      {/* Mobile Header */}
+      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div className="flex items-center justify-between p-4">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="p-2 hover:bg-gray-100 rounded-xl"
+            onClick={goBackToHome}
+          >
+            <ChevronLeft className="h-5 w-5 text-gray-600" />
+          </Button>
+          <div className="flex items-center gap-2">
+            <div className="p-1.5 bg-green-100 rounded-full">
+              <ShoppingCart className="h-4 w-4 text-green-600" />
             </div>
-
-            <Card className="p-4 w-full mx-auto glass-effect rounded-xl shadow-lg animate-fade-in h-[calc(100vh-180px)] max-h-[500px] flex flex-col">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-base font-bold text-gray-800">Riepilogo prodotti</h3>
-                <Button
-                  variant="ghost"
-                  onClick={() => setShowEditMode(!showEditMode)}
-                  className="text-xs text-primary hover:text-primary/80 p-1 h-auto"
-                >
-                  {showEditMode ? "Nascondi modifica" : "Modifica prodotti"}
-                </Button>
-              </div>
-              
-              <div className="flex-grow overflow-y-auto custom-scrollbar">
-                {showEditMode ? (
-                  <div className="space-y-4">
-                    <ProductList
-                      products={products}
-                      onUpdateQuantity={updateQuantity}
-                      onRemoveProduct={removeProduct}
-                    />
-                    
-                    <form onSubmit={handleAddProduct} className="mt-4 pt-3 border-t border-gray-100 relative">
-                      <h4 className="text-sm font-medium text-gray-700 mb-2">Aggiungi un prodotto</h4>
-                      <div className="flex gap-2">
-                        <Input
-                          type="text"
-                          value={newProductName}
-                          onChange={(e) => setNewProductName(e.target.value)}
-                          placeholder="Nome prodotto"
-                          className="flex-1 bg-white/80 border-gray-200 focus:border-primary/30 h-9 text-sm"
-                        />
-                        <Button 
-                          type="submit" 
-                          size="sm" 
-                          className="bg-primary h-9"
-                          disabled={!newProductName.trim()}
-                        >
-                          <Plus className="w-4 h-4 mr-1" />
-                          <span>Aggiungi</span>
-                        </Button>
-                      </div>
-                      
-                      {showSuggestions && suggestions.length > 0 && (
-                        <div className="relative mt-1">
-                          <div className="absolute top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md rounded-xl shadow-lg border border-primary/10 max-h-64 overflow-y-auto">
-                            <ProductSuggestions
-                              suggestions={suggestions}
-                              onSelectSuggestion={handleSelectSuggestion}
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </form>
-                  </div>
-                ) : (
-                  <div className="space-y-2">
-                    {products.map((product) => (
-                      <div
-                        key={product.id}
-                        className="flex items-center justify-between p-2 bg-white/60 backdrop-blur-sm rounded-xl border border-primary/5"
-                      >
-                        <div className="flex items-center gap-2">
-                          {product.imageUrl && (
-                            <div className="w-8 h-8 rounded-md overflow-hidden bg-gray-100 flex-shrink-0">
-                              <img 
-                                src={product.imageUrl} 
-                                alt={product.name} 
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          )}
-                          <span className="font-medium text-gray-800 text-sm">{product.name}</span>
-                        </div>
-                        <span className="text-sm text-gray-700 bg-gray-100 px-2 py-0.5 rounded-full">x{product.quantity}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              
-              {showEditMode && (
-                <Button 
-                  onClick={handleSearchAgain} 
-                  className="w-full mt-4 bg-accent hover:bg-accent/90"
-                  disabled={isSearching}
-                >
-                  {isSearching ? (
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Ricerca in corso...
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      <RefreshCw className="w-4 h-4" />
-                      <span>Aggiorna lista</span>
-                    </span>
-                  )}
-                </Button>
-              )}
-            </Card>
+            <h1 className="font-semibold text-lg text-gray-800 tracking-tight">Shop Quest</h1>
           </div>
-          
-          <div className={`w-full ${!isMobile ? 'md:w-2/3' : ''} ${!isMobile ? 'md:mt-16' : 'mt-4'}`}>
-            <StoreComparison />
+          <div className="w-9" />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="pb-8">
+        {/* Product Summary */}
+        <ProductSummary products={products} onEditProducts={handleEditProducts} />
+        
+        {/* Filters */}
+        <SupermarketFilters sortBy={sortBy} onSortChange={handleSortChange} />
+        
+        {/* Recommended Store */}
+        <RecommendedStore store={recommendedStore} />
+        
+        {/* Other Options */}
+        <div className="px-4 mt-8 pb-8">
+          <h2 className="font-semibold mb-4 text-gray-800">Tutte le opzioni:</h2>
+          <div className="space-y-4">
+            {otherStores.map((store, index) => (
+              <motion.div
+                key={store.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <SupermarketCard store={getStoreWithMetadata(store, index + 1)} />
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,0 +1,71 @@
+
+import { useState } from "react";
+import { ChevronDown, Package, Edit3 } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Product } from "@/types/shopping";
+
+interface ProductSummaryProps {
+  products: Product[];
+  onEditProducts: () => void;
+}
+
+export const ProductSummary = ({ products, onEditProducts }: ProductSummaryProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="mx-4 mt-4">
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger asChild>
+          <Button variant="outline" className="w-full justify-between p-4 h-auto rounded-2xl border-gray-200 hover:bg-gray-50">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-green-100 rounded-full">
+                <Package className="h-4 w-4 text-green-600" />
+              </div>
+              <div className="text-left">
+                <span className="font-semibold text-gray-800">Riepilogo prodotti</span>
+                <p className="text-sm text-gray-500">{products.length} prodotti selezionati</p>
+              </div>
+            </div>
+            <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <Card className="mt-3 border-gray-100 rounded-2xl overflow-hidden">
+            <div className="p-4 space-y-3 bg-gray-50/50">
+              {products.map((product) => (
+                <div key={product.id} className="flex items-center justify-between py-2">
+                  <div className="flex items-center gap-3">
+                    {product.imageUrl && (
+                      <div className="w-10 h-10 rounded-xl overflow-hidden bg-white shadow-sm">
+                        <img 
+                          src={product.imageUrl} 
+                          alt={product.name} 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <span className="font-medium text-gray-800">{product.name}</span>
+                  </div>
+                  <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full shadow-sm">
+                    x{product.quantity}
+                  </span>
+                </div>
+              ))}
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="w-full text-green-600 hover:text-green-700 hover:bg-green-50 mt-4 rounded-xl"
+                onClick={onEditProducts}
+              >
+                <Edit3 className="h-4 w-4 mr-2" />
+                Modifica prodotti
+              </Button>
+            </div>
+          </Card>
+        </CollapsibleContent>
+      </Collapsible>
+    </div>
+  );
+};
