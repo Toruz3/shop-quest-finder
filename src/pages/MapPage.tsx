@@ -83,8 +83,8 @@ const MapPage = () => {
             {/* Header area */}
             <MapHeader />
             
-            {/* Main content area - flex-1 makes it expand to fill available space */}
-            <div className="flex-1 flex flex-col overflow-hidden">
+            {/* Main content area with standardized spacing */}
+            <div className="flex-1 flex flex-col overflow-hidden space-y-3">
               <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
               <FilterTabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
               <FilterButton />
