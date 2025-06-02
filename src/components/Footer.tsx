@@ -55,7 +55,7 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
 
   return (
     <motion.div 
-      className={`fixed bottom-0 left-0 right-0 bg-white border-t border-neutral-200 shadow-lg z-50 transition-all duration-300 safe-bottom footer-fixed ${isCalculating ? 'opacity-30 pointer-events-none' : ''}`}
+      className={`fixed bottom-0 left-0 right-0 bg-background border-t border-border shadow-lg z-50 transition-all duration-300 safe-bottom footer-fixed ${isCalculating ? 'opacity-30 pointer-events-none' : ''}`}
       initial={{ y: 0 }}
       animate={{ y: 0 }}
       layoutId="footer"
@@ -71,14 +71,14 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
               className={`flex flex-col items-center justify-center gap-1 text-xs py-1 ${
                 isActive(item.path) 
                   ? 'text-primary font-medium' 
-                  : 'text-neutral-600 hover:text-primary'
+                  : 'text-muted-foreground hover:text-primary'
               } transition-colors relative active-scale touch-target ripple`}
             >
               <motion.div 
                 className={`p-1.5 rounded-full ${
                   isActive(item.path) 
-                    ? 'bg-primary-100 text-primary' 
-                    : 'hover:bg-primary-50'
+                    ? 'bg-primary/10 text-primary' 
+                    : 'hover:bg-muted'
                 } transition-colors relative`}
                 layoutId={`icon-bg-${item.path}`}
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -86,7 +86,7 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
                 {item.icon}
                 {item.badge && (
                   <Badge 
-                    className="absolute -top-1 -right-1 h-5 min-w-5 p-0 flex items-center justify-center text-xs bg-notification text-white font-medium"
+                    className="absolute -top-1 -right-1 h-5 min-w-5 p-0 flex items-center justify-center text-xs bg-destructive text-destructive-foreground font-medium"
                   >
                     {item.badge}
                   </Badge>
