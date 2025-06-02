@@ -1,45 +1,53 @@
 
 import * as React from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'system';
 
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
+  isDarkMode: boolean;
 }
 
 const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Use a simple string as the initial state to avoid client/server mismatch
-  const [theme, setTheme] = React.useState<Theme>('light');
+  const [theme, setTheme] = React.useState<Theme>('system');
+  const [isDarkMode, setIsDarkMode] = React.useState(false);
   
   // Effect for initializing theme from localStorage and system preferences
   React.useEffect(() => {
     try {
       const savedTheme = localStorage.getItem('theme') as Theme | null;
       
-      if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
+      if (savedTheme && ['light', 'dark', 'system'].includes(savedTheme)) {
         setTheme(savedTheme);
-      } else if (
-        typeof window !== 'undefined' &&
-        window.matchMedia && 
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      ) {
-        setTheme('dark');
       }
     } catch (error) {
-      // Fallback to light theme if there's any error
-      console.error('Error accessing localStorage or matchMedia:', error);
+      console.error('Error accessing localStorage:', error);
     }
   }, []);
 
-  // Effect for applying theme to document and saving to localStorage
+  // Effect for applying theme to document and calculating isDarkMode
   React.useEffect(() => {
     try {
+      let shouldBeDark = false;
+      
+      if (theme === 'dark') {
+        shouldBeDark = true;
+      } else if (theme === 'light') {
+        shouldBeDark = false;
+      } else if (theme === 'system') {
+        shouldBeDark = typeof window !== 'undefined' &&
+          window.matchMedia && 
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      
+      setIsDarkMode(shouldBeDark);
+      
       if (typeof document !== 'undefined') {
-        if (theme === 'dark') {
+        if (shouldBeDark) {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
@@ -62,7 +70,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     theme,
     toggleTheme,
     setTheme,
-  }), [theme, toggleTheme]);
+    isDarkMode,
+  }), [theme, toggleTheme, isDarkMode]);
 
   return (
     <ThemeContext.Provider value={contextValue}>
