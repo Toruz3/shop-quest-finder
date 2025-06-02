@@ -32,24 +32,36 @@ export const RecommendedStore = ({ store }: RecommendedStoreProps) => {
             </p>
           </div>
           
-          {/* Nuovo layout migliorato per le metriche */}
-          <div className="flex justify-between items-center mt-6 mb-6">
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-semibold text-green-600">€{store.totalPrice.toFixed(2)}</span>
-              <span className="text-sm text-gray-500 mt-1">Totale spesa</span>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="flex items-baseline">
-                <span className="text-2xl font-semibold text-blue-500">{store.distanceInKm}</span>
-                <span className="text-sm text-blue-500 ml-1">km</span>
+          {/* Layout fisso con grid per prevenire movimento testi */}
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="flex flex-col items-center min-w-0">
+              <div className="h-8 flex items-center justify-center mb-2">
+                <span className="text-2xl font-semibold text-green-600">€{store.totalPrice.toFixed(2)}</span>
               </div>
-              <span className="text-sm text-gray-500 mt-1">Distanza</span>
+              <div className="h-4 flex items-center justify-center">
+                <span className="text-sm text-gray-500 text-center">Totale spesa</span>
+              </div>
             </div>
             
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-semibold text-orange-500">€{store.savings.toFixed(2)}</span>
-              <span className="text-sm text-gray-500 mt-1">Risparmi</span>
+            <div className="flex flex-col items-center min-w-0">
+              <div className="h-8 flex items-center justify-center mb-2">
+                <div className="flex items-baseline">
+                  <span className="text-2xl font-semibold text-blue-500">{store.distanceInKm}</span>
+                  <span className="text-sm text-blue-500 ml-1">km</span>
+                </div>
+              </div>
+              <div className="h-4 flex items-center justify-center">
+                <span className="text-sm text-gray-500 text-center">Distanza</span>
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center min-w-0">
+              <div className="h-8 flex items-center justify-center mb-2">
+                <span className="text-2xl font-semibold text-orange-500">€{store.savings.toFixed(2)}</span>
+              </div>
+              <div className="h-4 flex items-center justify-center">
+                <span className="text-sm text-gray-500 text-center">Risparmi</span>
+              </div>
             </div>
           </div>
           
