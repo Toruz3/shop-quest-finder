@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Footer } from "@/components/Footer";
-import { ModernToggle } from "@/components/ModernToggle";
+import { ModernToggle } from "@/components/ui/modern-toggle";
 
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -197,7 +197,7 @@ const AccountPage = () => {
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-card-foreground">Dispositivi collegati</h4>
+                      <h4 className="text-sm font-medium text-left text-card-foreground">Dispositivi collegati</h4>
                       <p className="text-xs text-muted-foreground text-left">Gestisci accessi</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
