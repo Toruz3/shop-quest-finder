@@ -15,6 +15,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Footer } from "@/components/Footer";
 
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -274,8 +275,8 @@ const AccountPage = () => {
                 </div>
               </Card>
               
-              <Alert className="bg-primary-50 border-primary-200">
-                <AlertDescription className="text-sm text-primary-800">
+              <Alert className="bg-primary/5 border-primary/20">
+                <AlertDescription className="text-sm text-foreground">
                   Il tuo account è configurato correttamente. Puoi gestire le impostazioni del tuo profilo in qualsiasi momento.
                 </AlertDescription>
               </Alert>
@@ -451,7 +452,7 @@ const AccountPage = () => {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between p-2 bg-muted rounded-md">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                           <Smartphone size={14} className="text-primary" />
                         </div>
                         <div>
@@ -464,8 +465,8 @@ const AccountPage = () => {
                     
                     <div className="flex items-center justify-between p-2 bg-muted rounded-md">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center">
-                          <Smartphone size={14} className="text-neutral-600" />
+                        <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                          <Smartphone size={14} className="text-muted-foreground" />
                         </div>
                         <div>
                           <p className="text-xs font-medium">MacBook Air</p>
@@ -477,7 +478,7 @@ const AccountPage = () => {
                   
                   <Separator className="my-3" />
                   
-                  <Button variant="outline" size="sm" className="w-full dark:text-gray-300 dark:hover:text-white">
+                  <Button variant="outline" size="sm" className="w-full">
                     Gestisci sincronizzazione
                   </Button>
                 </div>
