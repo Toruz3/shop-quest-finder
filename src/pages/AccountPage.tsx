@@ -303,7 +303,7 @@ const AccountPage = () => {
                     <Switch
                       checked={isDarkMode}
                       onCheckedChange={handleThemeToggle}
-                      className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                      className="h-4 w-7 data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-gray-300 shadow-inner"
                     />
                   </div>
                   
@@ -315,7 +315,7 @@ const AccountPage = () => {
                     <Switch
                       checked={notificationsEnabled}
                       onCheckedChange={toggleNotifications}
-                      className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                      className="h-4 w-7 data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-gray-300 shadow-inner"
                     />
                   </div>
                   
