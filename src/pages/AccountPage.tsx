@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CompactToggle } from "@/components/ui/compact-toggle";
+import { HorizontalToggle } from "@/components/ui/horizontal-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/hooks/use-theme";
 import { User, LogOut, Settings, Lock, Smartphone, CreditCard, HelpCircle, Heart, ShoppingBag, History, MapPin, Share2, Check, X, Save, Copy, Calendar, MoreHorizontal, Bell, BellOff, Moon, Sun } from "lucide-react";
@@ -300,7 +300,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-card-foreground text-left">Tema scuro</h4>
                       <p className="text-xs text-muted-foreground text-left">Cambia l'aspetto dell'app</p>
                     </div>
-                    <CompactToggle
+                    <HorizontalToggle
                       checked={isDarkMode}
                       onCheckedChange={handleThemeToggle}
                     />
@@ -311,7 +311,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-card-foreground text-left">Notifiche</h4>
                       <p className="text-xs text-muted-foreground text-left">Gestisci avvisi e promemoria</p>
                     </div>
-                    <CompactToggle
+                    <HorizontalToggle
                       checked={notificationsEnabled}
                       onCheckedChange={toggleNotifications}
                     />
@@ -389,7 +389,7 @@ const AccountPage = () => {
             </TabsContent>
             
             <TabsContent value="activity" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
-              {/* Activity content - keep existing code */}
+              {/* Activity content - keep existing code (activity sections, device sync, etc.) */}
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -481,7 +481,7 @@ const AccountPage = () => {
         </div>
       </div>
 
-      {/* Dialogs - keep existing code */}
+      {/* Dialogs - keep existing code (profile and password dialogs) */}
       <Dialog open={showProfileDialog} onOpenChange={setShowProfileDialog}>
         <DialogContent>
           <DialogHeader>
