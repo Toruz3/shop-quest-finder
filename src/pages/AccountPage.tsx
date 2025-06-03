@@ -16,21 +16,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Footer } from "@/components/Footer";
-
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
-  const { user, profile, logout } = useAuth();
+  const {
+    user,
+    profile,
+    logout
+  } = useAuth();
   const navigate = useNavigate();
-  const { isDarkMode, toggleTheme, theme } = useTheme();
+  const {
+    isDarkMode,
+    toggleTheme,
+    theme
+  } = useTheme();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [showProfileDialog, setShowProfileDialog] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
-
   const [profileName, setProfileName] = useState(profile?.name || "Mario Rossi");
   const [profileEmail, setProfileEmail] = useState(user?.email || "mario.rossi@email.com");
-
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -39,7 +44,6 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
-
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -49,7 +53,6 @@ const AccountPage = () => {
       duration: 3000
     });
   };
-
   const handleThemeToggle = () => {
     toggleTheme();
     toast({
@@ -58,7 +61,6 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -67,13 +69,11 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
-
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -83,7 +83,6 @@ const AccountPage = () => {
       });
       return;
     }
-
     setProfileName(newName);
     setProfileEmail(newEmail);
     toast({
@@ -92,11 +91,9 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
-
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -114,7 +111,6 @@ const AccountPage = () => {
       });
       return;
     }
-
     toast({
       title: "Password aggiornata",
       description: "La tua password è stata modificata con successo"
@@ -124,14 +120,11 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
-
   if (!user) {
     navigate("/auth");
     return null;
   }
-
-  return (
-    <div className="min-h-screen relative overflow-hidden pb-20 bg-background transition-colors duration-300">
+  return <div className="min-h-screen relative overflow-hidden pb-20 bg-background transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
@@ -170,10 +163,7 @@ const AccountPage = () => {
               </TabsTrigger>
             </TabsList>
             
-            <TabsContent 
-              value="profile" 
-              className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
-            >
+            <TabsContent value="profile" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="p-3 bg-muted border-b border-border">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -282,10 +272,7 @@ const AccountPage = () => {
               </Alert>
             </TabsContent>
             
-            <TabsContent 
-              value="preferences" 
-              className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
-            >
+            <TabsContent value="preferences" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="p-3 bg-muted border-b border-border">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -297,36 +284,28 @@ const AccountPage = () => {
                 <div className="divide-y divide-border">
                   <div className="p-3 flex items-center justify-between">
                     <div className="flex-1">
-                      <h4 className="text-sm font-medium text-card-foreground">Tema scuro</h4>
-                      <p className="text-xs text-muted-foreground">Cambia l'aspetto dell'app</p>
+                      <h4 className="text-sm font-medium text-card-foreground text-left">Tema scuro</h4>
+                      <p className="text-xs text-muted-foreground text-left">Cambia l'aspetto dell'app</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Switch
-                        checked={isDarkMode}
-                        onCheckedChange={handleThemeToggle}
-                        aria-label="Attiva modalità scura"
-                      />
+                      <Switch checked={isDarkMode} onCheckedChange={handleThemeToggle} aria-label="Attiva modalità scura" />
                     </div>
                   </div>
                   
                   <div className="p-3 flex items-center justify-between">
                     <div className="flex-1">
-                      <h4 className="text-sm font-medium text-card-foreground">Notifiche</h4>
-                      <p className="text-xs text-muted-foreground">Gestisci avvisi e promemoria</p>
+                      <h4 className="text-sm font-medium text-card-foreground text-left">Notifiche</h4>
+                      <p className="text-xs text-muted-foreground text-left">Gestisci avvisi e promemoria</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Switch
-                        checked={notificationsEnabled}
-                        onCheckedChange={toggleNotifications}
-                        aria-label="Attiva notifiche"
-                      />
+                      <Switch checked={notificationsEnabled} onCheckedChange={toggleNotifications} aria-label="Attiva notifiche" />
                     </div>
                   </div>
                   
                   <div className="p-3 flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-medium text-card-foreground">Lingua</h4>
-                      <p className="text-xs text-muted-foreground">Italiano</p>
+                      <h4 className="text-sm font-medium text-card-foreground text-left">Lingua</h4>
+                      <p className="text-xs text-muted-foreground text-left">Italiano</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8">
                       <Settings size={16} />
@@ -393,10 +372,7 @@ const AccountPage = () => {
               </Alert>
             </TabsContent>
             
-            <TabsContent 
-              value="activity" 
-              className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]"
-            >
+            <TabsContent value="activity" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="p-3 bg-muted border-b border-border">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -562,8 +538,6 @@ const AccountPage = () => {
       </Dialog>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AccountPage;
