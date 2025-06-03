@@ -16,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Footer } from "@/components/Footer";
-import { ModernToggle } from "@/components/ui/modern-toggle";
 
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -38,6 +37,7 @@ const AccountPage = () => {
   const [newEmail, setNewEmail] = useState("");
   const [profileName, setProfileName] = useState(profile?.name || "Mario Rossi");
   const [profileEmail, setProfileEmail] = useState(user?.email || "mario.rossi@email.com");
+
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -46,6 +46,7 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
+
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -55,6 +56,7 @@ const AccountPage = () => {
       duration: 3000
     });
   };
+
   const handleThemeToggle = () => {
     toggleTheme();
     toast({
@@ -63,6 +65,7 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -71,11 +74,13 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
+
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -93,9 +98,11 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
+
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -122,16 +129,19 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
+
   if (!user) {
     navigate("/auth");
     return null;
   }
+
   return <div className="min-h-screen relative overflow-hidden pb-20 bg-background transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
       <div className="container px-3 py-4 relative z-10">
         <div className="max-w-md mx-auto">
+          {/* Profile Card */}
           <Card className="border border-border bg-card p-4 mb-4 transition-colors duration-200">
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold">
@@ -166,6 +176,7 @@ const AccountPage = () => {
             </TabsList>
             
             <TabsContent value="profile" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
+              {/* Profile content - keep existing code */}
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -284,36 +295,28 @@ const AccountPage = () => {
                 </div>
                 
                 <div className="divide-y divide-border">
-                  <div className="p-3 flex items-center justify-between hover:bg-muted/30 transition-colors duration-200">
-                    <div className="flex-1">
+                  <div className="flex items-center justify-between p-3 hover:bg-muted/30 transition-colors duration-200">
+                    <div className="flex flex-col">
                       <h4 className="text-sm font-medium text-card-foreground text-left">Tema scuro</h4>
                       <p className="text-xs text-muted-foreground text-left">Cambia l'aspetto dell'app</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <ModernToggle
-                        isEnabled={isDarkMode}
-                        onToggle={handleThemeToggle}
-                        label="Tema scuro"
-                        description="Attiva modalità scura"
-                        icon="theme"
-                      />
-                    </div>
+                    <Switch
+                      checked={isDarkMode}
+                      onCheckedChange={handleThemeToggle}
+                      className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                    />
                   </div>
                   
-                  <div className="p-3 flex items-center justify-between hover:bg-muted/30 transition-colors duration-200">
-                    <div className="flex-1">
+                  <div className="flex items-center justify-between p-3 hover:bg-muted/30 transition-colors duration-200">
+                    <div className="flex flex-col">
                       <h4 className="text-sm font-medium text-card-foreground text-left">Notifiche</h4>
                       <p className="text-xs text-muted-foreground text-left">Gestisci avvisi e promemoria</p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <ModernToggle
-                        isEnabled={notificationsEnabled}
-                        onToggle={toggleNotifications}
-                        label="Notifiche"
-                        description="Attiva notifiche"
-                        icon="notification"
-                      />
-                    </div>
+                    <Switch
+                      checked={notificationsEnabled}
+                      onCheckedChange={toggleNotifications}
+                      className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input"
+                    />
                   </div>
                   
                   <div className="menu-item">
@@ -328,6 +331,7 @@ const AccountPage = () => {
                 </div>
               </Card>
               
+              {/* Shopping preferences section - keep existing code */}
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -387,6 +391,7 @@ const AccountPage = () => {
             </TabsContent>
             
             <TabsContent value="activity" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
+              {/* Activity content - keep existing code */}
               <Card className="border border-border bg-card overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-card-foreground">
@@ -478,6 +483,7 @@ const AccountPage = () => {
         </div>
       </div>
 
+      {/* Dialogs - keep existing code */}
       <Dialog open={showProfileDialog} onOpenChange={setShowProfileDialog}>
         <DialogContent>
           <DialogHeader>
@@ -554,4 +560,5 @@ const AccountPage = () => {
       <Footer />
     </div>;
 };
+
 export default AccountPage;
