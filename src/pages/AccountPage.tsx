@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
+import { CompactToggle } from "@/components/ui/compact-toggle";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/hooks/use-theme";
 import { User, LogOut, Settings, Lock, Smartphone, CreditCard, HelpCircle, Heart, ShoppingBag, History, MapPin, Share2, Check, X, Save, Copy, Calendar, MoreHorizontal, Bell, BellOff, Moon, Sun } from "lucide-react";
@@ -300,10 +300,9 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-card-foreground text-left">Tema scuro</h4>
                       <p className="text-xs text-muted-foreground text-left">Cambia l'aspetto dell'app</p>
                     </div>
-                    <Switch
+                    <CompactToggle
                       checked={isDarkMode}
                       onCheckedChange={handleThemeToggle}
-                      className="h-4 w-7 data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-gray-300 shadow-inner"
                     />
                   </div>
                   
@@ -312,10 +311,9 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-card-foreground text-left">Notifiche</h4>
                       <p className="text-xs text-muted-foreground text-left">Gestisci avvisi e promemoria</p>
                     </div>
-                    <Switch
+                    <CompactToggle
                       checked={notificationsEnabled}
                       onCheckedChange={toggleNotifications}
-                      className="h-4 w-7 data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-gray-300 shadow-inner"
                     />
                   </div>
                   
