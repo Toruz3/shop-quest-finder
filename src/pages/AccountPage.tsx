@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Footer } from "@/components/Footer";
-
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const {
@@ -38,7 +36,6 @@ const AccountPage = () => {
   const [newEmail, setNewEmail] = useState("");
   const [profileName, setProfileName] = useState(profile?.name || "Mario Rossi");
   const [profileEmail, setProfileEmail] = useState(user?.email || "mario.rossi@email.com");
-
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -47,7 +44,6 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
-
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -57,7 +53,6 @@ const AccountPage = () => {
       duration: 3000
     });
   };
-
   const handleThemeToggle = () => {
     toggleTheme();
     toast({
@@ -66,7 +61,6 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -75,13 +69,11 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
-
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -99,11 +91,9 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
-
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -130,14 +120,11 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
-
   if (!user) {
     navigate("/auth");
     return null;
   }
-
-  return (
-    <div className="min-h-screen relative overflow-hidden pb-20 bg-background dark:bg-gray-900 transition-colors duration-300">
+  return <div className="min-h-screen relative overflow-hidden pb-20 bg-background dark:bg-gray-900 transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 dark:bg-accent/10 rounded-full blur-3xl"></div>
       
@@ -301,10 +288,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-card-foreground dark:text-gray-100 text-left">Tema scuro</h4>
                       <p className="text-xs text-muted-foreground dark:text-gray-300 text-left">Cambia l'aspetto dell'app</p>
                     </div>
-                    <HorizontalToggle
-                      checked={isDarkMode}
-                      onCheckedChange={handleThemeToggle}
-                    />
+                    <HorizontalToggle checked={isDarkMode} onCheckedChange={handleThemeToggle} />
                   </div>
                   
                   <div className="flex items-center justify-between p-3 hover:bg-muted/30 dark:hover:bg-gray-700/50 transition-colors duration-200">
@@ -312,10 +296,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-card-foreground dark:text-gray-100 text-left">Notifiche</h4>
                       <p className="text-xs text-muted-foreground dark:text-gray-300 text-left">Gestisci avvisi e promemoria</p>
                     </div>
-                    <HorizontalToggle
-                      checked={notificationsEnabled}
-                      onCheckedChange={toggleNotifications}
-                    />
+                    <HorizontalToggle checked={notificationsEnabled} onCheckedChange={toggleNotifications} />
                   </div>
                   
                   <div className="menu-item p-3 flex items-center justify-between hover:bg-muted/30 dark:hover:bg-gray-700/50 transition-colors duration-200">
@@ -361,7 +342,7 @@ const AccountPage = () => {
                   
                   <div className="menu-item p-3 flex items-center justify-between hover:bg-muted/30 dark:hover:bg-gray-700/50 transition-colors duration-200">
                     <div>
-                      <h4 className="text-sm font-medium text-left text-blue-600 dark:text-blue-400">Categorie nascoste</h4>
+                      <h4 className="text-sm font-medium text-left text-slate-50">Categorie nascoste</h4>
                       <p className="text-xs text-muted-foreground dark:text-gray-300">Nascondi categorie non utilizzate</p>
                     </div>
                     <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50 dark:hover:bg-gray-600">
@@ -555,8 +536,6 @@ const AccountPage = () => {
       </Dialog>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default AccountPage;
