@@ -33,9 +33,9 @@ const ShoppingPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
-      <main className="flex-1 px-4 py-4 overflow-y-auto pb-24 md:pb-28 relative">
-        <div className="flex flex-col max-w-md mx-auto w-full">
+    <div className="flex flex-col min-h-screen w-full bg-slate-800">
+      <main className="flex-1 px-2 py-4 overflow-y-auto pb-24 md:pb-28 relative">
+        <div className="flex flex-col w-full">
           <ShoppingHeader />
           
           <div className="mt-4 mb-6">

@@ -163,28 +163,28 @@ const StoresPage = () => {
 
   return (
     <motion.div 
-      className="min-h-screen bg-gray-50/30 overflow-x-hidden"
+      className="min-h-screen bg-slate-800 overflow-x-hidden w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
       {/* Mobile Header */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <div className="sticky top-0 z-50 bg-slate-700/80 backdrop-blur-md border-b border-slate-600">
         <div className="flex items-center justify-between p-4">
           <Button 
             variant="ghost" 
             size="sm" 
-            className="p-2 hover:bg-gray-100 rounded-xl"
+            className="p-2 hover:bg-slate-600 rounded-xl text-slate-100"
             onClick={goBackToHome}
           >
-            <ChevronLeft className="h-5 w-5 text-gray-600" />
+            <ChevronLeft className="h-5 w-5 text-slate-300" />
           </Button>
           <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-green-100 rounded-full">
-              <ShoppingCart className="h-4 w-4 text-green-600" />
+            <div className="p-1.5 bg-green-400/20 rounded-full">
+              <ShoppingCart className="h-4 w-4 text-green-400" />
             </div>
-            <h1 className="font-semibold text-lg text-gray-800 tracking-tight">Shop Quest</h1>
+            <h1 className="font-semibold text-lg text-slate-100 tracking-tight">Shop Quest</h1>
           </div>
           <div className="w-9" />
         </div>
@@ -202,8 +202,8 @@ const StoresPage = () => {
         <RecommendedStore store={recommendedStore} />
         
         {/* Other Options */}
-        <div className="px-4 mt-8 pb-8">
-          <h2 className="font-semibold mb-4 text-gray-800">Tutte le opzioni:</h2>
+        <div className="px-2 mt-8 pb-8">
+          <h2 className="font-semibold mb-4 text-slate-100">Tutte le opzioni:</h2>
           <div className="space-y-4">
             {otherStores.map((store, index) => (
               <motion.div

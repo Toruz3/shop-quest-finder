@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { Label } from "@/components/ui/label";
+
 const Auth = () => {
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(true);
@@ -27,6 +28,7 @@ const Auth = () => {
   const {
     toast
   } = useToast();
+
   useEffect(() => {
     if (location.state && location.state.tab === "register") {
       setIsLogin(false);
@@ -34,11 +36,13 @@ const Auth = () => {
       setIsLogin(true);
     }
   }, [location.state]);
+
   useEffect(() => {
     if (user) {
       navigate("/app");
     }
   }, [user, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -65,6 +69,7 @@ const Auth = () => {
       console.error("Auth error:", error);
     }
   };
+
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -84,37 +89,38 @@ const Auth = () => {
       console.error("Reset password error:", error);
     }
   };
+
   if (showResetForm) {
-    return <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
+    return <div className="min-h-screen flex items-center justify-center px-4 bg-slate-800 w-full">
+        <div className="absolute top-40 right-[5%] w-64 h-64 bg-green-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-slate-600/20 rounded-full blur-3xl"></div>
         
-        <div className="w-full max-w-sm glass-effect p-6 rounded-xl shadow-lg">
+        <div className="w-full max-w-sm bg-slate-700/80 backdrop-blur-md p-6 rounded-xl shadow-lg border border-slate-600">
           <div className="text-center mb-4">
             <div className="flex items-center justify-center gap-2 mb-3">
-              <ShoppingCart className="w-5 h-5 text-primary" />
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Shop Quest</h1>
-              <Sparkles className="w-5 h-5 text-accent" />
+              <ShoppingCart className="w-5 h-5 text-green-400" />
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-green-300 bg-clip-text text-transparent">Shop Quest</h1>
+              <Sparkles className="w-5 h-5 text-green-300" />
             </div>
-            <p className="text-gray-600 text-sm">Reset your password</p>
+            <p className="text-slate-300 text-sm">Reset your password</p>
           </div>
           
           <form onSubmit={handleResetPassword} className="space-y-3">
             <div className="space-y-1">
-              <label htmlFor="resetEmail" className="text-sm font-medium">
+              <label htmlFor="resetEmail" className="text-sm font-medium text-slate-200">
                 Email
               </label>
-              <Input id="resetEmail" type="email" value={resetEmail} onChange={e => setResetEmail(e.target.value)} required className="border-gray-300 focus:border-primary/30 focus:ring focus:ring-primary/20 h-9" />
-              <p className="text-xs text-gray-500 mt-1">
+              <Input id="resetEmail" type="email" value={resetEmail} onChange={e => setResetEmail(e.target.value)} required className="bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-400 focus:border-green-400 focus:ring-green-400/20 h-9" />
+              <p className="text-xs text-slate-400 mt-1">
                 Enter your email and we'll send you instructions to reset your password.
               </p>
             </div>
             
             <div className="flex gap-2 pt-2">
-              <Button type="button" variant="outline" className="flex-1" onClick={() => setShowResetForm(false)} disabled={isLoading}>
+              <Button type="button" variant="outline" className="flex-1 bg-slate-600 hover:bg-slate-500 text-slate-200 border-slate-500" onClick={() => setShowResetForm(false)} disabled={isLoading}>
                 Cancel
               </Button>
-              <Button type="submit" className="flex-1 bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white font-medium py-2 h-10" disabled={isLoading}>
+              <Button type="submit" className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 h-10" disabled={isLoading}>
                 {isLoading ? "Sending..." : "Send email"}
               </Button>
             </div>
@@ -122,50 +128,51 @@ const Auth = () => {
         </div>
       </div>;
   }
-  return <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
+
+  return <div className="min-h-screen flex items-center justify-center px-4 bg-slate-800 w-full">
+      <div className="absolute top-40 right-[5%] w-64 h-64 bg-green-400/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-slate-600/20 rounded-full blur-3xl"></div>
       
-      <div className="w-full max-w-sm glass-effect p-6 rounded-xl shadow-lg">
+      <div className="w-full max-w-sm bg-slate-700/80 backdrop-blur-md p-6 rounded-xl shadow-lg border border-slate-600">
         <div className="text-center mb-4">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <ShoppingCart className="w-5 h-5 text-primary" />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Shop Quest</h1>
-            <Sparkles className="w-5 h-5 text-accent" />
+            <ShoppingCart className="w-5 h-5 text-green-400" />
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-green-300 bg-clip-text text-transparent">Shop Quest</h1>
+            <Sparkles className="w-5 h-5 text-green-300" />
           </div>
-          <p className="text-gray-600 text-sm">Access to manage your shopping list</p>
+          <p className="text-slate-300 text-sm">Access to manage your shopping list</p>
         </div>
         
-        <div className="tabs flex border-b mb-4">
-          <div className={`w-1/2 text-center py-2 cursor-pointer ${isLogin ? 'font-medium text-primary' : 'text-gray-600'}`} onClick={() => setIsLogin(true)}>
+        <div className="tabs flex border-b border-slate-600 mb-4">
+          <div className={`w-1/2 text-center py-2 cursor-pointer ${isLogin ? 'font-medium text-green-400' : 'text-slate-400'}`} onClick={() => setIsLogin(true)}>
             Login
           </div>
-          <div className={`w-1/2 text-center py-2 cursor-pointer ${!isLogin ? 'font-medium text-primary' : 'text-gray-600'}`} onClick={() => setIsLogin(false)}>
+          <div className={`w-1/2 text-center py-2 cursor-pointer ${!isLogin ? 'font-medium text-green-400' : 'text-slate-400'}`} onClick={() => setIsLogin(false)}>
             Register
           </div>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-3">
           {!isLogin && <div className="space-y-1">
-              <label htmlFor="name" className="text-sm font-medium">
+              <label htmlFor="name" className="text-sm font-medium text-slate-200">
                 Name
               </label>
-              <Input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required={!isLogin} className="border-gray-300 focus:border-primary/30 focus:ring focus:ring-primary/20 h-9" />
+              <Input id="name" type="text" value={name} onChange={e => setName(e.target.value)} required={!isLogin} className="bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-400 focus:border-green-400 focus:ring-green-400/20 h-9" />
             </div>}
           
           <div className="space-y-1">
-            <label htmlFor="email" className="text-sm font-medium">
+            <label htmlFor="email" className="text-sm font-medium text-slate-200">
               Email
             </label>
-            <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required className="border-gray-300 focus:border-primary/30 focus:ring focus:ring-primary/20 h-9" />
+            <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required className="bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-400 focus:border-green-400 focus:ring-green-400/20 h-9" />
           </div>
           
           <div className="space-y-1">
-            <label htmlFor="password" className="text-sm font-medium">
+            <label htmlFor="password" className="text-sm font-medium text-slate-200">
               Password
             </label>
-            <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} required className="border-gray-300 focus:border-primary/30 focus:ring focus:ring-primary/20 h-9" />
-            {isLogin && <p className="text-xs text-gray-500 mt-1">
+            <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} required className="bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-400 focus:border-green-400 focus:ring-green-400/20 h-9" />
+            {isLogin && <p className="text-xs text-slate-400 mt-1">
                 Demo: use any email with password: "password"
               </p>}
           </div>
@@ -173,16 +180,16 @@ const Auth = () => {
           {isLogin && <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-2">
                 <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="size-1 mx-0" />
-                <Label htmlFor="rememberMe" className="text-xs cursor-pointer ml-1">
+                <Label htmlFor="rememberMe" className="text-xs cursor-pointer ml-1 text-slate-300">
                   Remember me
                 </Label>
               </div>
-              <button type="button" className="text-primary hover:underline text-xs" onClick={() => setShowResetForm(true)}>
+              <button type="button" className="text-green-400 hover:underline text-xs" onClick={() => setShowResetForm(true)}>
                 Forgot password?
               </button>
             </div>}
           
-          <Button type="submit" className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 text-white font-medium h-10 text-sm mt-2" disabled={isLoading}>
+          <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-medium h-10 text-sm mt-2" disabled={isLoading}>
             {isLoading ? <span className="flex items-center justify-center">
                 <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -195,4 +202,5 @@ const Auth = () => {
       </div>
     </div>;
 };
+
 export default Auth;
