@@ -14,9 +14,9 @@ export const SearchBar = ({ searchTerm, setSearchTerm }: SearchBarProps) => {
         placeholder="Cerca supermercato per nome" 
         value={searchTerm} 
         onChange={e => setSearchTerm(e.target.value)} 
-        className="pr-10 py-6 h-14 bg-white border-primary-100 focus:border-primary-300 focus:ring focus:ring-primary-200 transition-all duration-300 rounded-xl shadow-search w-full text-base" 
+        className="pr-10 py-6 h-14 bg-input border-border focus:border-ring focus:ring focus:ring-ring/20 transition-all duration-300 rounded-xl shadow-sm w-full text-base text-foreground placeholder:text-muted-foreground" 
       />
-      <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 w-5 h-5" />
+      <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5" />
     </div>
   );
 };

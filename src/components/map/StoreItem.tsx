@@ -25,42 +25,42 @@ interface StoreItemProps {
 
 export const StoreItem = ({ store }: StoreItemProps) => {
   return (
-    <Card className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md">
+    <Card className="p-3 bg-card border-border hover:bg-muted/50 transition-all shadow-sm hover:shadow-md">
       <div className="flex justify-between items-start">
         <div>
-          <h3 className="font-medium text-neutral-800 text-left">
+          <h3 className="font-medium text-card-foreground text-left">
             {store.name}
           </h3>
-          <p className="text-xs text-neutral-500 mt-1 flex items-center gap-1">
+          <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
             <MapPin size={12} />
             {store.address} • {store.distance}
           </p>
           <div className="flex items-center gap-2 mt-2">
-            <Badge variant="outline" className="text-xs py-0">
+            <Badge variant="outline" className="text-xs py-0 border-border">
               {store.priceLevel}
             </Badge>
-            <span className="text-xs text-neutral-600">
+            <span className="text-xs text-muted-foreground">
               ★ {store.rating}
             </span>
           </div>
         </div>
         <div className="flex flex-col items-end">
-          <Button size="sm" variant="default" className="h-8 text-xs px-2 mb-1">
+          <Button size="sm" variant="default" className="h-8 text-xs px-2 mb-1 bg-primary hover:bg-primary/90 text-primary-foreground">
             <Navigation size={12} className="mr-1" />
             Naviga
           </Button>
-          <Button size="sm" variant="outline" className="h-8 text-xs px-2">
+          <Button size="sm" variant="outline" className="h-8 text-xs px-2 border-border hover:bg-accent">
             Dettagli
           </Button>
         </div>
       </div>
       
       {store.hasOffers && (
-        <div className="mt-2 pt-2 border-t border-dashed border-neutral-200">
-          <p className="text-xs text-accent-600 font-medium">Offerte speciali:</p>
+        <div className="mt-2 pt-2 border-t border-dashed border-border">
+          <p className="text-xs text-primary font-medium">Offerte speciali:</p>
           <ul className="mt-1 space-y-1">
             {store.specialOffers.map((offer, idx) => (
-              <li key={idx} className="text-xs text-neutral-700 flex items-start gap-1">
+              <li key={idx} className="text-xs text-muted-foreground flex items-start gap-1">
                 <span className="text-primary text-xs">•</span>
                 {offer}
               </li>

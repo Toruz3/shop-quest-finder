@@ -5,6 +5,7 @@
 
 @layer base {
   :root {
+    /* Light Mode (Default) */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -28,26 +29,26 @@
   }
 
   .dark {
-    /* Unified slate theme with optimal readability */
-    --background: 30 41 59;          /* slate-800 - Main background */
-    --foreground: 241 245 249;       /* slate-100 - Primary text */
-    --card: 51 65 85;                /* slate-700 - Card background */
-    --card-foreground: 241 245 249;  /* slate-100 - Card text */
-    --popover: 51 65 85;             /* slate-700 - Elevated background */
-    --popover-foreground: 241 245 249; /* slate-100 - Popover text */
-    --primary: 74 222 128;           /* green-400 - Brand green for dark mode */
-    --primary-foreground: 30 41 59;  /* slate-800 - Dark text on green */
-    --secondary: 71 85 105;          /* slate-600 - Secondary background */
-    --secondary-foreground: 203 213 225; /* slate-300 - Secondary text */
-    --muted: 71 85 105;              /* slate-600 - Muted background */
-    --muted-foreground: 148 163 184; /* slate-400 - Muted text */
-    --accent: 71 85 105;             /* slate-600 - Accent background */
-    --accent-foreground: 241 245 249; /* slate-100 - Accent text */
+    /* Dark Mode */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 47.4% 11.2%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 47.4% 11.2%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 74 222 128;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 71 85 105;             /* slate-600 - Softer borders */
-    --input: 51 65 85;               /* slate-700 - Input background */
-    --ring: 74 222 128;              /* green-400 - Focus ring */
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 74 222 128;
   }
 
   * {
@@ -69,7 +70,7 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground antialiased transition-colors duration-200;
     font-feature-settings: "rlig" 1, "calt" 1;
     position: relative;
     width: 100%;
