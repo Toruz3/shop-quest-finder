@@ -1,5 +1,5 @@
+
 import { useState } from "react";
-import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -39,6 +39,7 @@ const FavoritesPage = () => {
     lastUsed: "3 giorni fa",
     items: ["Caffè", "Latte", "Cereali", "Frutta", "Yogurt"]
   }]);
+  
   const [favoriteProducts, setFavoriteProducts] = useState([{
     id: 1,
     name: "Latte Parzialmente Scremato",
@@ -191,38 +192,50 @@ const FavoritesPage = () => {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen relative overflow-hidden pb-20">
-        <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
+      <div className="min-h-screen bg-slate-800 text-slate-100 relative overflow-hidden pb-20">
+        {/* Decorative elements with updated colors */}
+        <div className="absolute top-20 right-[5%] w-64 h-64 bg-green-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-slate-600/20 rounded-full blur-3xl"></div>
         
         <div className="container px-3 py-4 relative z-10">
           <div className="max-w-md mx-auto">
-            <h1 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Star className="text-primary" size={20} />
+            <h1 className="text-xl font-bold mb-4 flex items-center gap-2 text-slate-100">
+              <Star className="text-green-400" size={20} />
               <span>I miei preferiti</span>
             </h1>
             
             <div className="relative mb-4">
-              <Input placeholder={activeTab === "lists" ? "Cerca lista" : "Cerca prodotto"} value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pr-10 py-5 bg-white border-primary-100 focus:border-primary-300 focus:ring focus:ring-primary-200 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full" />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+              <Input 
+                placeholder={activeTab === "lists" ? "Cerca lista" : "Cerca prodotto"} 
+                value={searchTerm} 
+                onChange={e => setSearchTerm(e.target.value)} 
+                className="pr-10 py-5 bg-slate-700 border-slate-600 text-slate-100 placeholder:text-slate-400 focus:border-green-400 focus:ring-green-400/20 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full" 
+              />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400" />
             </div>
             
             <Tabs defaultValue="lists" value={activeTab} onValueChange={setActiveTab} className="mb-4">
-              <TabsList className="w-full grid grid-cols-2 h-12 rounded-lg p-1 bg-primary-50">
-                <TabsTrigger value="lists" className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
+              <TabsList className="w-full grid grid-cols-2 h-12 rounded-lg p-1 bg-slate-700">
+                <TabsTrigger 
+                  value="lists" 
+                  className="rounded-md data-[state=active]:bg-slate-600 data-[state=active]:text-slate-100 data-[state=active]:shadow-sm text-slate-300 transition-all"
+                >
                   Liste salvate
                 </TabsTrigger>
-                <TabsTrigger value="products" className="rounded-md data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
+                <TabsTrigger 
+                  value="products" 
+                  className="rounded-md data-[state=active]:bg-slate-600 data-[state=active]:text-slate-100 data-[state=active]:shadow-sm text-slate-300 transition-all"
+                >
                   Prodotti preferiti
                 </TabsTrigger>
               </TabsList>
               
               <TabsContent value="lists" className="mt-4">
                 <div className="flex justify-between items-center mb-3">
-                  <h2 className="text-sm font-medium text-neutral-700">
+                  <h2 className="text-sm font-medium text-slate-300">
                     {filteredLists.length} liste salvate
                   </h2>
-                  <Button variant="outline" size="sm" className="h-8 text-xs bg-white" onClick={handleAddList}>
+                  <Button variant="outline" size="sm" className="h-8 text-xs bg-slate-700 hover:bg-slate-600 text-slate-100 border-slate-600" onClick={handleAddList}>
                     <Plus size={14} className="mr-1" />
                     Nuova lista
                   </Button>
@@ -240,35 +253,35 @@ const FavoritesPage = () => {
                       }} transition={{
                         duration: 0.3
                       }}>
-                        <Card className="overflow-hidden border border-neutral-200 hover:border-primary-200 transition-all duration-300 shadow-sm hover:shadow-md">
+                        <Card className="overflow-hidden border border-slate-600 bg-slate-700 hover:border-green-400/50 hover:bg-slate-600 transition-all duration-300 shadow-sm hover:shadow-md">
                           <div className="p-3">
                             <div className="flex justify-between items-start">
                               <div>
-                                <h3 className="font-medium text-neutral-800 text-left">{list.name}</h3>
-                                <p className="text-xs text-neutral-500 mt-1 text-left">
+                                <h3 className="font-medium text-slate-100 text-left">{list.name}</h3>
+                                <p className="text-xs text-slate-300 mt-1 text-left">
                                   {list.itemCount} prodotti • Usata {list.lastUsed}
                                 </p>
                               </div>
-                              <Button size="icon" variant="ghost" className="h-8 w-8" onClick={() => handleEditList(list)}>
+                              <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-slate-100 hover:bg-slate-600" onClick={() => handleEditList(list)}>
                                 <Pencil size={14} />
                               </Button>
                             </div>
                             
                             <div className="flex flex-wrap gap-1 mt-2">
                               {list.items.slice(0, 5).map((item, idx) => (
-                                <Badge key={idx} variant="outline" className="bg-primary-50 text-primary-700 border-primary-200 text-xs">
+                                <Badge key={idx} variant="outline" className="bg-slate-600 text-slate-200 border-slate-500 text-xs hover:bg-slate-500">
                                   {item}
                                 </Badge>
                               ))}
                               {list.items.length > 5 && (
-                                <Badge variant="outline" className="bg-neutral-100 text-neutral-600 border-neutral-200 text-xs">
+                                <Badge variant="outline" className="bg-slate-600 text-slate-200 border-slate-500 text-xs">
                                   +{list.items.length - 5}
                                 </Badge>
                               )}
                             </div>
                           </div>
                           
-                          <div className="border-t border-neutral-100 bg-neutral-50 px-3 py-3 flex justify-between items-center">
+                          <div className="border-t border-slate-600 bg-slate-700/50 px-3 py-3 flex justify-between items-center">
                             {/* Compact action buttons with tooltips */}
                             <div className="flex items-center gap-1">
                               <Tooltip>
@@ -276,13 +289,13 @@ const FavoritesPage = () => {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-8 w-8 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors"
+                                    className="h-8 w-8 rounded-lg bg-slate-600 hover:bg-slate-500 text-slate-300 hover:text-slate-100 transition-colors"
                                     onClick={() => handleDuplicate(list.id)}
                                   >
-                                    <Copy size={14} className="text-gray-600" />
+                                    <Copy size={14} />
                                   </Button>
                                 </TooltipTrigger>
-                                <TooltipContent>
+                                <TooltipContent className="bg-slate-700 border-slate-600 text-slate-100">
                                   <p>Duplica lista</p>
                                 </TooltipContent>
                               </Tooltip>
@@ -292,13 +305,13 @@ const FavoritesPage = () => {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-8 w-8 rounded-lg bg-blue-100 hover:bg-blue-200 transition-colors"
+                                    className="h-8 w-8 rounded-lg bg-slate-600 hover:bg-slate-500 text-slate-300 hover:text-slate-100 transition-colors"
                                     onClick={() => handleSchedule(list.id)}
                                   >
-                                    <Calendar size={14} className="text-blue-600" />
+                                    <Calendar size={14} />
                                   </Button>
                                 </TooltipTrigger>
-                                <TooltipContent>
+                                <TooltipContent className="bg-slate-700 border-slate-600 text-slate-100">
                                   <p>Pianifica spesa</p>
                                 </TooltipContent>
                               </Tooltip>
@@ -308,19 +321,19 @@ const FavoritesPage = () => {
                                   <Button
                                     variant="ghost"
                                     size="icon"
-                                    className="h-8 w-8 rounded-lg bg-green-100 hover:bg-green-200 transition-colors"
+                                    className="h-8 w-8 rounded-lg bg-slate-600 hover:bg-slate-500 text-slate-300 hover:text-slate-100 transition-colors"
                                     onClick={() => handleShare(list.id, list.name)}
                                   >
-                                    <Share2 size={14} className="text-green-600" />
+                                    <Share2 size={14} />
                                   </Button>
                                 </TooltipTrigger>
-                                <TooltipContent>
+                                <TooltipContent className="bg-slate-700 border-slate-600 text-slate-100">
                                   <p>Condividi lista</p>
                                 </TooltipContent>
                               </Tooltip>
                             </div>
 
-                            <Button variant="default" size="sm" className="h-8 px-3 text-xs" onClick={() => handleUseList(list)}>
+                            <Button variant="default" size="sm" className="h-8 px-3 text-xs bg-green-600 hover:bg-green-700 text-white" onClick={() => handleUseList(list)}>
                               <ShoppingCart size={14} className="mr-1" />
                               Usa
                             </Button>
@@ -330,12 +343,12 @@ const FavoritesPage = () => {
                     ))}
                   </div>
                 ) : (
-                  <Card className="p-6 text-center border-dashed border-2">
+                  <Card className="p-6 text-center border-dashed border-2 border-slate-600 bg-slate-700">
                     <div className="flex flex-col items-center">
-                      <AlertCircle className="text-neutral-400 mb-2" size={32} />
-                      <h3 className="text-base font-medium">Nessuna lista trovata</h3>
-                      <p className="text-sm text-neutral-500 mt-1">Crea una nuova lista o modifica i filtri di ricerca</p>
-                      <Button onClick={handleAddList} className="mt-4">
+                      <AlertCircle className="text-slate-400 mb-2" size={32} />
+                      <h3 className="text-base font-medium text-slate-100">Nessuna lista trovata</h3>
+                      <p className="text-sm text-slate-300 mt-1">Crea una nuova lista o modifica i filtri di ricerca</p>
+                      <Button onClick={handleAddList} className="mt-4 bg-green-600 hover:bg-green-700 text-white">
                         <Plus size={16} className="mr-1" />
                         Crea lista
                       </Button>
@@ -346,10 +359,10 @@ const FavoritesPage = () => {
               
               <TabsContent value="products" className="mt-4">
                 <div className="flex justify-between items-center mb-3">
-                  <h2 className="text-sm font-medium text-neutral-700">
+                  <h2 className="text-sm font-medium text-slate-300">
                     {filteredProducts.length} prodotti preferiti
                   </h2>
-                  <Button variant="outline" size="sm" className="h-8 text-xs bg-white">
+                  <Button variant="outline" size="sm" className="h-8 text-xs bg-slate-700 hover:bg-slate-600 text-slate-100 border-slate-600">
                     <Plus size={14} className="mr-1" />
                     Aggiungi prodotto
                   </Button>
@@ -367,23 +380,23 @@ const FavoritesPage = () => {
                       }} transition={{
                         duration: 0.3
                       }}>
-                        <Card className="p-3 border border-neutral-200 hover:border-primary-200 transition-all shadow-sm hover:shadow-md">
+                        <Card className="p-3 border border-slate-600 bg-slate-700 hover:border-green-400/50 hover:bg-slate-600 transition-all shadow-sm hover:shadow-md">
                           <div className="flex justify-between items-center">
                             <div>
-                              <h3 className="font-medium text-neutral-800">{product.name}</h3>
+                              <h3 className="font-medium text-slate-100">{product.name}</h3>
                               <div className="flex items-center gap-2 mt-1">
-                                <span className="text-sm">€{product.price.toFixed(2)}</span>
-                                <span className="text-xs text-neutral-500">
+                                <span className="text-sm text-slate-100">€{product.price.toFixed(2)}</span>
+                                <span className="text-xs text-slate-300">
                                   {product.store}
                                 </span>
                               </div>
                             </div>
                             
                             <div className="flex items-center gap-1">
-                              <Button size="icon" variant="ghost" className="h-8 w-8 text-neutral-600 hover:text-red-500" onClick={() => handleDeleteProduct(product.id)}>
+                              <Button size="icon" variant="ghost" className="h-8 w-8 text-slate-400 hover:text-red-400 hover:bg-slate-600" onClick={() => handleDeleteProduct(product.id)}>
                                 <Trash2 size={16} />
                               </Button>
-                              <Button size="sm" variant="outline" className="h-8 bg-white" onClick={() => handleAddToCart(product)}>
+                              <Button size="sm" variant="outline" className="h-8 bg-slate-600 hover:bg-slate-500 text-slate-100 border-slate-500" onClick={() => handleAddToCart(product)}>
                                 <ShoppingCart size={14} className="mr-1" />
                                 Aggiungi
                               </Button>
@@ -394,11 +407,11 @@ const FavoritesPage = () => {
                     ))}
                   </div>
                 ) : (
-                  <Card className="p-6 text-center border-dashed border-2">
+                  <Card className="p-6 text-center border-dashed border-2 border-slate-600 bg-slate-700">
                     <div className="flex flex-col items-center">
-                      <AlertCircle className="text-neutral-400 mb-2" size={32} />
-                      <h3 className="text-base font-medium">Nessun prodotto trovato</h3>
-                      <p className="text-sm text-neutral-500 mt-1">Aggiungi prodotti ai preferiti o modifica i filtri di ricerca</p>
+                      <AlertCircle className="text-slate-400 mb-2" size={32} />
+                      <h3 className="text-base font-medium text-slate-100">Nessun prodotto trovato</h3>
+                      <p className="text-sm text-slate-300 mt-1">Aggiungi prodotti ai preferiti o modifica i filtri di ricerca</p>
                     </div>
                   </Card>
                 )}
@@ -408,32 +421,36 @@ const FavoritesPage = () => {
         </div>
 
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[425px] bg-slate-700 border-slate-600">
             <DialogHeader>
-              <DialogTitle>{editingList ? "Modifica lista" : "Crea nuova lista"}</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-slate-100">{editingList ? "Modifica lista" : "Crea nuova lista"}</DialogTitle>
+              <DialogDescription className="text-slate-300">
                 {editingList ? "Modifica il nome della tua lista preferita" : "Crea una nuova lista dei tuoi prodotti preferiti"}
               </DialogDescription>
             </DialogHeader>
             
             <div className="py-4">
-              <Input value={listName} onChange={e => setListName(e.target.value)} placeholder="Nome lista" className="w-full" autoFocus />
+              <Input 
+                value={listName} 
+                onChange={e => setListName(e.target.value)} 
+                placeholder="Nome lista" 
+                className="w-full bg-slate-600 border-slate-500 text-slate-100 placeholder:text-slate-400 focus:border-green-400" 
+                autoFocus 
+              />
             </div>
             
             <DialogFooter className="flex justify-between sm:justify-between gap-2">
-              <Button variant="outline" onClick={() => setShowDialog(false)}>
+              <Button variant="outline" onClick={() => setShowDialog(false)} className="bg-slate-600 hover:bg-slate-500 text-slate-100 border-slate-500">
                 <X size={16} className="mr-1" />
                 Annulla
               </Button>
-              <Button onClick={handleSaveList}>
+              <Button onClick={handleSaveList} className="bg-green-600 hover:bg-green-700 text-white">
                 <Save size={16} className="mr-1" />
                 {editingList ? "Aggiorna" : "Crea"}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
-
-        <Footer productsCount={0} />
       </div>
     </TooltipProvider>
   );

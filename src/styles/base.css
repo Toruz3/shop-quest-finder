@@ -28,26 +28,26 @@
   }
 
   .dark {
-    /* Soft dark theme with reduced contrast */
-    --background: 220 16% 10%;          /* #1a1b23 - Main background */
-    --foreground: 220 13% 91%;          /* #e4e6ea - Primary text */
-    --card: 220 13% 16%;                /* #252730 - Card background */
-    --card-foreground: 220 13% 91%;     /* #e4e6ea - Card text */
-    --popover: 220 13% 18%;             /* #2d303b - Elevated background */
-    --popover-foreground: 220 13% 91%;  /* #e4e6ea - Popover text */
-    --primary: 142 71% 45%;             /* #22c55e - Keep brand green */
-    --primary-foreground: 220 16% 10%;  /* Dark text on green */
-    --secondary: 220 13% 18%;           /* #2d303b - Secondary background */
-    --secondary-foreground: 220 13% 91%; /* #e4e6ea - Secondary text */
-    --muted: 220 13% 18%;               /* #2d303b - Muted background */
-    --muted-foreground: 220 9% 68%;     /* #9ca3af - Muted text */
-    --accent: 220 13% 18%;              /* #2d303b - Accent background */
-    --accent-foreground: 220 13% 91%;   /* #e4e6ea - Accent text */
+    /* Unified slate theme with optimal readability */
+    --background: 30 41 59;          /* slate-800 - Main background */
+    --foreground: 241 245 249;       /* slate-100 - Primary text */
+    --card: 51 65 85;                /* slate-700 - Card background */
+    --card-foreground: 241 245 249;  /* slate-100 - Card text */
+    --popover: 51 65 85;             /* slate-700 - Elevated background */
+    --popover-foreground: 241 245 249; /* slate-100 - Popover text */
+    --primary: 74 222 128;           /* green-400 - Brand green for dark mode */
+    --primary-foreground: 30 41 59;  /* slate-800 - Dark text on green */
+    --secondary: 71 85 105;          /* slate-600 - Secondary background */
+    --secondary-foreground: 203 213 225; /* slate-300 - Secondary text */
+    --muted: 71 85 105;              /* slate-600 - Muted background */
+    --muted-foreground: 148 163 184; /* slate-400 - Muted text */
+    --accent: 71 85 105;             /* slate-600 - Accent background */
+    --accent-foreground: 241 245 249; /* slate-100 - Accent text */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 220 13% 25%;              /* #374151 - Softer borders */
-    --input: 220 13% 18%;               /* #2d303b - Input background */
-    --ring: 142 71% 45%;                /* Green focus ring */
+    --border: 71 85 105;             /* slate-600 - Softer borders */
+    --input: 51 65 85;               /* slate-700 - Input background */
+    --ring: 74 222 128;              /* green-400 - Focus ring */
   }
 
   * {
