@@ -66,8 +66,8 @@ export const ProductSearchBar = ({
 
   return (
     <div className="relative flex-1 group">
-      <div className="relative h-14 rounded-lg shadow-sm bg-white border border-neutral-200 hover:border-neutral-300 transition-all">
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400">
+      <div className="relative h-14 rounded-lg shadow-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all">
+        <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500">
           <Search className="w-5 h-5" />
         </div>
         <Input
@@ -82,7 +82,7 @@ export const ProductSearchBar = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder="Cosa vuoi acquistare?"
-          className="h-14 pl-12 pr-24 py-4 bg-white shadow-none border border-input rounded-lg w-full text-base"
+          className="h-14 pl-12 pr-24 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 shadow-none border-0 rounded-lg w-full text-base focus:ring-2 focus:ring-primary/20"
           aria-label="Cerca prodotto"
         />
         <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
@@ -90,7 +90,7 @@ export const ProductSearchBar = ({
             {searchTerm && (
               <motion.button 
                 onClick={clearSearch} 
-                className="p-2 rounded-full text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 transition-colors touch-target"
+                className="p-2 rounded-full text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors touch-target"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -106,17 +106,17 @@ export const ProductSearchBar = ({
             className={`p-2 rounded-full transition-all duration-300 touch-target ${
               isListening 
                 ? 'bg-primary text-white animate-pulse' 
-                : 'text-neutral-400 hover:text-primary hover:bg-primary-50'
+                : 'text-gray-400 dark:text-gray-500 hover:text-primary hover:bg-primary-50 dark:hover:bg-gray-700'
             }`}
             aria-label={isListening ? "Interrompi riconoscimento vocale" : "Attiva riconoscimento vocale"}
           >
             <Mic className="w-5 h-5" />
           </button>
-          <div className="text-neutral-300">|</div>
+          <div className="text-gray-300 dark:text-gray-600">|</div>
           <button 
             onClick={onAddProduct}
             disabled={!searchTerm.trim()}
-            className="p-2 rounded-full text-primary hover:text-primary/80 hover:bg-primary-50 transition-colors disabled:opacity-50 disabled:hover:bg-transparent touch-target"
+            className="p-2 rounded-full text-primary hover:text-primary/80 hover:bg-primary-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:hover:bg-transparent touch-target"
             aria-label="Aggiungi prodotto"
           >
             <Search className="w-5 h-5" />
@@ -124,11 +124,10 @@ export const ProductSearchBar = ({
         </div>
       </div>
       
-      {/* The suggestion dropdown is now handled by the parent component */}
       <AnimatePresence>
         {isListening && (
           <motion.div 
-            className="absolute left-0 right-0 top-full mt-2 p-4 bg-white rounded-lg shadow-md border border-neutral-100 text-center z-10"
+            className="absolute left-0 right-0 top-full mt-2 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-100 dark:border-gray-700 text-center z-10"
             initial={{ opacity: 0, y: -10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, y: -10, height: 0 }}
@@ -141,8 +140,8 @@ export const ProductSearchBar = ({
                 <div className="w-16 h-16 bg-primary/10 rounded-full animate-ping absolute -top-6 -left-6"></div>
               </div>
             </div>
-            <p className="text-base font-medium text-neutral-800">Sto ascoltando...</p>
-            <p className="text-sm text-neutral-500 mt-1">Pronuncia il nome del prodotto</p>
+            <p className="text-base font-medium text-gray-800 dark:text-gray-200">Sto ascoltando...</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Pronuncia il nome del prodotto</p>
           </motion.div>
         )}
       </AnimatePresence>
