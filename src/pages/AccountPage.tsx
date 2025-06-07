@@ -136,14 +136,14 @@ const AccountPage = () => {
     return null;
   }
 
-  return <div className="min-h-screen relative overflow-hidden pb-32 bg-white dark:bg-gray-900 transition-colors duration-300">
+  return <div className="min-h-screen relative overflow-hidden pb-40 md:pb-24 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
       <div className="container px-3 py-4 relative z-10">
         <div className="max-w-md mx-auto">
           {/* Profile Card */}
-          <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 p-4 mb-4 transition-colors duration-200">
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 mb-4 transition-colors duration-200">
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl font-bold">
                 {profileName.charAt(0).toUpperCase()}
@@ -178,7 +178,7 @@ const AccountPage = () => {
             
             <TabsContent value="profile" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
               {/* Profile content */}
-              <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 overflow-hidden">
+              <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <User size={16} className="text-primary" />
@@ -238,7 +238,7 @@ const AccountPage = () => {
                 </div>
               </Card>
               
-              <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 overflow-hidden">
+              <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <HelpCircle size={16} className="text-primary" />
@@ -279,27 +279,27 @@ const AccountPage = () => {
                 </div>
               </Card>
               
-              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-6">
-                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
+              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
+                <AlertDescription className="text-sm text-green-800 dark:text-green-200 leading-relaxed text-center">
                   Il tuo account è configurato correttamente. Puoi gestire le impostazioni del tuo profilo in qualsiasi momento.
                 </AlertDescription>
               </Alert>
             </TabsContent>
             
             <TabsContent value="preferences" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
-              <Card className="border border-border bg-card overflow-hidden">
+              <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-card-foreground">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <Settings size={16} className="text-primary" />
                     Preferenze App
                   </h3>
                 </div>
                 
-                <div className="divide-y divide-border">
-                  <div className="flex items-center justify-between p-3 hover:bg-muted/30 transition-colors duration-200">
+                <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <div className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div className="flex flex-col">
-                      <h4 className="text-sm font-medium text-card-foreground text-left">Tema scuro</h4>
-                      <p className="text-xs text-muted-foreground text-left">Cambia l'aspetto dell'app</p>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Tema scuro</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Cambia l'aspetto dell'app</p>
                     </div>
                     <Switch
                       checked={isDarkMode}
@@ -308,10 +308,10 @@ const AccountPage = () => {
                     />
                   </div>
                   
-                  <div className="flex items-center justify-between p-3 hover:bg-muted/30 transition-colors duration-200">
+                  <div className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div className="flex flex-col">
-                      <h4 className="text-sm font-medium text-card-foreground text-left">Notifiche</h4>
-                      <p className="text-xs text-muted-foreground text-left">Gestisci avvisi e promemoria</p>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Notifiche</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Gestisci avvisi e promemoria</p>
                     </div>
                     <Switch
                       checked={notificationsEnabled}
@@ -322,151 +322,151 @@ const AccountPage = () => {
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-card-foreground text-left">Lingua</h4>
-                      <p className="text-xs text-muted-foreground text-left">Italiano</p>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Lingua</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Italiano</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <Settings size={16} />
                     </Button>
                   </div>
                 </div>
               </Card>
               
-              {/* Shopping preferences section - keep existing code */}
-              <Card className="border border-border bg-card overflow-hidden">
+              {/* Shopping preferences section */}
+              <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-card-foreground">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <ShoppingBag size={16} className="text-primary" />
                     Preferenze Spesa
                   </h3>
                 </div>
                 
-                <div className="divide-y divide-border">
+                <div className="divide-y divide-gray-200 dark:divide-gray-700">
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-left text-card-foreground">Supermercati preferiti</h4>
-                      <p className="text-xs text-muted-foreground text-left">Gestisci le tue preferenze</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Supermercati preferiti</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Gestisci le tue preferenze</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <Heart size={16} />
                     </Button>
                   </div>
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium">Raggio di ricerca</h4>
-                      <p className="text-xs text-muted-foreground text-left">5km</p>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">Raggio di ricerca</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">5km</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <MapPin size={16} />
                     </Button>
                   </div>
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-left">Categorie nascoste</h4>
-                      <p className="text-xs text-muted-foreground">Nascondi categorie non utilizzate</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Categorie nascoste</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Nascondi categorie non utilizzate</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <Settings size={16} />
                     </Button>
                   </div>
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium">Dieta e preferenze alimentari</h4>
-                      <p className="text-xs text-muted-foreground text-left">Filtri per prodotti</p>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">Dieta e preferenze alimentari</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Filtri per prodotti</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <Settings size={16} />
                     </Button>
                   </div>
                 </div>
               </Card>
               
-              <Alert>
-                <AlertDescription className="text-sm">
+              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
+                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
                   Personalizza l'app in base alle tue preferenze. Le modifiche verranno salvate automaticamente.
                 </AlertDescription>
               </Alert>
             </TabsContent>
             
             <TabsContent value="activity" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
-              {/* Activity content - keep existing code */}
-              <Card className="border border-border bg-card overflow-hidden">
+              {/* Activity content */}
+              <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-card-foreground">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <History size={16} className="text-primary" />
                     Attività Recente
                   </h3>
                 </div>
                 
-                <div className="divide-y divide-border">
-                  <div className="p-3 hover:bg-muted/30 transition-colors duration-200">
+                <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <div className="p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div className="flex justify-between mb-1">
-                      <h4 className="text-sm font-medium text-left text-card-foreground">Spesa completata</h4>
-                      <span className="text-xs text-muted-foreground">2 giorni fa</span>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Spesa completata</h4>
+                      <span className="text-xs text-gray-600 dark:text-gray-300">2 giorni fa</span>
                     </div>
-                    <p className="text-xs text-muted-foreground text-left">Esselunga • 12 prodotti • €42,75</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Esselunga • 12 prodotti • €42,75</p>
                   </div>
                   
-                  <div className="p-3 hover:bg-muted/30 transition-colors duration-200">
+                  <div className="p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div className="flex justify-between mb-1">
-                      <h4 className="text-sm font-medium">Lista salvata</h4>
-                      <span className="text-xs text-muted-foreground">5 giorni fa</span>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">Lista salvata</h4>
+                      <span className="text-xs text-gray-600 dark:text-gray-300">5 giorni fa</span>
                     </div>
-                    <p className="text-xs text-muted-foreground text-left">Lista "Cena speciale" • 8 prodotti</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Lista "Cena speciale" • 8 prodotti</p>
                   </div>
                   
-                  <div className="p-3 hover:bg-muted/30 transition-colors duration-200">
+                  <div className="p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div className="flex justify-between mb-1">
-                      <h4 className="text-sm font-medium">Prodotto aggiunto ai preferiti</h4>
-                      <span className="text-xs text-muted-foreground">1 settimana fa</span>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">Prodotto aggiunto ai preferiti</h4>
+                      <span className="text-xs text-gray-600 dark:text-gray-300">1 settimana fa</span>
                     </div>
-                    <p className="text-xs text-muted-foreground text-left">Parmigiano Reggiano • €4,99</p>
+                    <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Parmigiano Reggiano • €4,99</p>
                   </div>
                 </div>
                 
-                <div className="p-3 border-t border-border bg-muted/20">
-                  <Button variant="ghost" size="sm" className="w-full text-muted-foreground hover:bg-muted/50">
+                <div className="p-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+                  <Button variant="ghost" size="sm" className="w-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">
                     Vedi tutte le attività
                   </Button>
                 </div>
               </Card>
               
-              <Card className="border border-border bg-card overflow-hidden">
+              <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-card-foreground">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <Share2 size={16} className="text-primary" />
                     Sincronizzazione
                   </h3>
                 </div>
                 
                 <div className="p-3">
-                  <h4 className="text-sm font-medium mb-2">Dispositivi sincronizzati</h4>
+                  <h4 className="text-sm font-medium mb-2 text-gray-900 dark:text-gray-100">Dispositivi sincronizzati</h4>
                   
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between p-2 bg-muted/30 rounded-md">
+                    <div className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded-md">
                       <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                           <Smartphone size={14} className="text-primary" />
                         </div>
                         <div>
-                          <p className="text-xs font-medium">iPhone 12</p>
-                          <p className="text-xs text-muted-foreground">iOS 16 • Ultimo accesso: oggi</p>
+                          <p className="text-xs font-medium text-gray-900 dark:text-gray-100">iPhone 12</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">iOS 16 • Ultimo accesso: oggi</p>
                         </div>
                       </div>
                       <Badge>Attuale</Badge>
                     </div>
                     
-                    <div className="flex items-center justify-between p-2 bg-muted/30 rounded-md">
+                    <div className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded-md">
                       <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center">
-                          <Smartphone size={14} className="text-muted-foreground" />
+                        <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-600 flex items-center justify-center">
+                          <Smartphone size={14} className="text-gray-600 dark:text-gray-300" />
                         </div>
                         <div>
-                          <p className="text-xs font-medium">MacBook Air</p>
-                          <p className="text-xs text-muted-foreground">Chrome • Ultimo accesso: ieri</p>
+                          <p className="text-xs font-medium text-gray-900 dark:text-gray-100">MacBook Air</p>
+                          <p className="text-xs text-gray-600 dark:text-gray-300">Chrome • Ultimo accesso: ieri</p>
                         </div>
                       </div>
                     </div>
@@ -479,6 +479,12 @@ const AccountPage = () => {
                   </Button>
                 </div>
               </Card>
+              
+              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-8">
+                <AlertDescription className="text-sm text-green-800 dark:text-green-200 leading-relaxed text-center">
+                  Il tuo account è configurato correttamente. Puoi gestire le impostazioni del tuo profilo in qualsiasi momento.
+                </AlertDescription>
+              </Alert>
             </TabsContent>
           </Tabs>
         </div>
