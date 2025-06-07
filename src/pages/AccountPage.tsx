@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -135,26 +136,26 @@ const AccountPage = () => {
     return null;
   }
 
-  return <div className="min-h-screen relative overflow-hidden pb-20 bg-background transition-colors duration-300">
+  return <div className="min-h-screen relative overflow-hidden pb-32 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
       <div className="container px-3 py-4 relative z-10">
         <div className="max-w-md mx-auto">
           {/* Profile Card */}
-          <Card className="border border-border bg-card p-4 mb-4 transition-colors duration-200">
+          <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 p-4 mb-4 transition-colors duration-200">
             <div className="flex items-center space-x-4">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold">
+              <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl font-bold">
                 {profileName.charAt(0).toUpperCase()}
               </div>
               <div className="flex-1">
-                <h2 className="text-lg font-semibold text-left text-card-foreground">{profileName}</h2>
-                <p className="text-sm text-muted-foreground text-left">{profileEmail}</p>
+                <h2 className="text-lg font-semibold text-left text-gray-900 dark:text-gray-100">{profileName}</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-left">{profileEmail}</p>
                 <div className="flex mt-1">
-                  <Badge className="bg-primary/15 text-primary border-primary/20 mr-2">
+                  <Badge className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800 mr-2">
                     Utente Standard
                   </Badge>
-                  <Badge variant="outline" className="text-muted-foreground border-border bg-muted/30">
+                  <Badge variant="outline" className="text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800">
                     Dal 2023
                   </Badge>
                 </div>
@@ -163,65 +164,65 @@ const AccountPage = () => {
           </Card>
           
           <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="mb-4">
-            <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-muted/50">
-              <TabsTrigger value="profile" className="rounded-md data-[state=active]:bg-card data-[state=active]:text-card-foreground data-[state=active]:shadow-sm transition-all duration-200">
+            <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800">
+              <TabsTrigger value="profile" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
                 Profilo
               </TabsTrigger>
-              <TabsTrigger value="preferences" className="rounded-md data-[state=active]:bg-card data-[state=active]:text-card-foreground data-[state=active]:shadow-sm transition-all duration-200">
+              <TabsTrigger value="preferences" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
                 Preferenze
               </TabsTrigger>
-              <TabsTrigger value="activity" className="rounded-md data-[state=active]:bg-card data-[state=active]:text-card-foreground data-[state=active]:shadow-sm transition-all duration-200">
+              <TabsTrigger value="activity" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
                 Attività
               </TabsTrigger>
             </TabsList>
             
             <TabsContent value="profile" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
-              {/* Profile content - keep existing code */}
-              <Card className="border border-border bg-card overflow-hidden">
+              {/* Profile content */}
+              <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-card-foreground">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <User size={16} className="text-primary" />
                     Gestione Account
                   </h3>
                 </div>
                 
-                <div className="divide-y divide-border">
+                <div className="divide-y divide-gray-200 dark:divide-gray-700">
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-left text-card-foreground">Modifica profilo</h4>
-                      <p className="text-xs text-muted-foreground">Nome, email, foto profilo</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Modifica profilo</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Nome, email, foto profilo</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50" onClick={handleEditProfile}>
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300" onClick={handleEditProfile}>
                       <Settings size={16} />
                     </Button>
                   </div>
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-left text-card-foreground">Sicurezza</h4>
-                      <p className="text-xs text-muted-foreground">Password, autenticazione</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Sicurezza</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300">Password, autenticazione</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50" onClick={() => setShowPasswordDialog(true)}>
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300" onClick={() => setShowPasswordDialog(true)}>
                       <Lock size={16} />
                     </Button>
                   </div>
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-left text-card-foreground">Dispositivi collegati</h4>
-                      <p className="text-xs text-muted-foreground text-left">Gestisci accessi</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Dispositivi collegati</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Gestisci accessi</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">
                       <Smartphone size={16} />
                     </Button>
                   </div>
                   
                   <div className="menu-item">
                     <div>
-                      <h4 className="text-sm font-medium text-left text-card-foreground">Metodi di pagamento</h4>
-                      <p className="text-xs text-muted-foreground text-left">Carte e fatturazione</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Metodi di pagamento</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Carte e fatturazione</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300">
                       <CreditCard size={16} />
                     </Button>
                   </div>
@@ -237,49 +238,49 @@ const AccountPage = () => {
                 </div>
               </Card>
               
-              <Card className="border border-border bg-card overflow-hidden">
+              <Card className="border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-card-foreground">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
                     <HelpCircle size={16} className="text-primary" />
                     Supporto
                   </h3>
                 </div>
                 
-                <div className="divide-y divide-border">
-                  <div className="menu-item">
+                <div className="divide-y divide-gray-200 dark:divide-gray-700">
+                  <div className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div>
-                      <h4 className="text-sm font-medium">Centro assistenza</h4>
-                      <p className="text-xs text-muted-foreground text-left">Domande frequenti</p>
+                      <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">Centro assistenza</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Domande frequenti</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-400">
                       <Settings size={16} />
                     </Button>
                   </div>
                   
-                  <div className="menu-item">
+                  <div className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div>
-                      <h4 className="text-sm font-medium text-left">Contattaci</h4>
-                      <p className="text-xs text-muted-foreground text-left">Email, telefono</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Contattaci</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Email, telefono</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-400">
                       <Settings size={16} />
                     </Button>
                   </div>
                   
-                  <div className="menu-item">
+                  <div className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
                     <div>
-                      <h4 className="text-sm font-medium text-left">Privacy e Termini</h4>
-                      <p className="text-xs text-muted-foreground text-left">Informative legali</p>
+                      <h4 className="text-sm font-medium text-left text-gray-900 dark:text-gray-100">Privacy e Termini</h4>
+                      <p className="text-xs text-gray-600 dark:text-gray-300 text-left">Informative legali</p>
                     </div>
-                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-muted/50">
+                    <Button size="sm" variant="ghost" className="h-8 w-8 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-600 dark:text-gray-400">
                       <Settings size={16} />
                     </Button>
                   </div>
                 </div>
               </Card>
               
-              <Alert className="bg-primary/5 border-primary/20">
-                <AlertDescription className="text-sm text-foreground">
+              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 mb-6">
+                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
                   Il tuo account è configurato correttamente. Puoi gestire le impostazioni del tuo profilo in qualsiasi momento.
                 </AlertDescription>
               </Alert>
@@ -483,30 +484,30 @@ const AccountPage = () => {
         </div>
       </div>
 
-      {/* Dialogs - keep existing code */}
+      {/* Dialogs with updated theme */}
       <Dialog open={showProfileDialog} onOpenChange={setShowProfileDialog}>
-        <DialogContent>
+        <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <DialogHeader>
-            <DialogTitle>Modifica profilo</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-gray-900 dark:text-gray-100">Modifica profilo</DialogTitle>
+            <DialogDescription className="text-gray-600 dark:text-gray-300">
               Modifica le informazioni del tuo account
             </DialogDescription>
           </DialogHeader>
           
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Nome</Label>
-              <Input id="name" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Il tuo nome" />
+              <Label htmlFor="name" className="text-gray-900 dark:text-gray-100">Nome</Label>
+              <Input id="name" value={newName} onChange={e => setNewName(e.target.value)} placeholder="Il tuo nome" className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="la-tua-email@esempio.com" />
+              <Label htmlFor="email" className="text-gray-900 dark:text-gray-100">Email</Label>
+              <Input id="email" type="email" value={newEmail} onChange={e => setNewEmail(e.target.value)} placeholder="la-tua-email@esempio.com" className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" />
             </div>
           </div>
           
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowProfileDialog(false)}>
+            <Button variant="outline" onClick={() => setShowProfileDialog(false)} className="border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100">
               <X size={16} className="mr-1" />
               Annulla
             </Button>
@@ -519,33 +520,33 @@ const AccountPage = () => {
       </Dialog>
 
       <Dialog open={showPasswordDialog} onOpenChange={setShowPasswordDialog}>
-        <DialogContent>
+        <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
           <DialogHeader>
-            <DialogTitle>Cambio password</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-gray-900 dark:text-gray-100">Cambio password</DialogTitle>
+            <DialogDescription className="text-gray-600 dark:text-gray-300">
               Crea una nuova password per il tuo account
             </DialogDescription>
           </DialogHeader>
           
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label htmlFor="current-password">Password attuale</Label>
-              <Input id="current-password" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} />
+              <Label htmlFor="current-password" className="text-gray-900 dark:text-gray-100">Password attuale</Label>
+              <Input id="current-password" type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="new-password">Nuova password</Label>
-              <Input id="new-password" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+              <Label htmlFor="new-password" className="text-gray-900 dark:text-gray-100">Nuova password</Label>
+              <Input id="new-password" type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" />
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="confirm-password">Conferma password</Label>
-              <Input id="confirm-password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+              <Label htmlFor="confirm-password" className="text-gray-900 dark:text-gray-100">Conferma password</Label>
+              <Input id="confirm-password" type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" />
             </div>
           </div>
           
           <DialogFooter>
-            <Button variant="outline" onClick={() => setShowPasswordDialog(false)}>
+            <Button variant="outline" onClick={() => setShowPasswordDialog(false)} className="border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100">
               <X size={16} className="mr-1" />
               Annulla
             </Button>

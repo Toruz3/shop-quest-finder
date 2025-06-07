@@ -55,7 +55,7 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
 
   return (
     <motion.div 
-      className={`fixed bottom-0 left-0 right-0 bg-card border-t border-border shadow-lg z-50 transition-all duration-300 safe-bottom footer-fixed ${isCalculating ? 'opacity-30 pointer-events-none' : ''}`}
+      className={`fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 shadow-lg z-50 transition-all duration-300 safe-bottom footer-fixed ${isCalculating ? 'opacity-30 pointer-events-none' : ''}`}
       initial={{ y: 0 }}
       animate={{ y: 0 }}
       layoutId="footer"
@@ -70,15 +70,15 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
               to={item.path} 
               className={`flex flex-col items-center justify-center gap-1 text-xs py-1 ${
                 isActive(item.path) 
-                  ? 'text-primary font-medium' 
-                  : 'text-muted-foreground hover:text-foreground'
+                  ? 'text-green-500 font-medium' 
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
               } transition-colors duration-200 relative active-scale touch-target ripple`}
             >
               <motion.div 
                 className={`p-1.5 rounded-full ${
                   isActive(item.path) 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-green-500/10 text-green-500' 
+                    : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                 } transition-colors duration-200 relative`}
                 layoutId={`icon-bg-${item.path}`}
                 transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -94,7 +94,7 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
                 <AnimatePresence>
                   {isActive(item.path) && !item.badge && (
                     <motion.span 
-                      className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"
+                      className="absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full"
                       initial={{ scale: 0, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
