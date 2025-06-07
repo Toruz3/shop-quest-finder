@@ -5,7 +5,6 @@
 
 @layer base {
   :root {
-    /* Light Mode (Default) */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -29,26 +28,26 @@
   }
 
   .dark {
-    /* Dark Mode */
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 47.4% 11.2%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 47.4% 11.2%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 74 222 128;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Soft dark theme with reduced contrast */
+    --background: 220 16% 10%;          /* #1a1b23 - Main background */
+    --foreground: 220 13% 91%;          /* #e4e6ea - Primary text */
+    --card: 220 13% 16%;                /* #252730 - Card background */
+    --card-foreground: 220 13% 91%;     /* #e4e6ea - Card text */
+    --popover: 220 13% 18%;             /* #2d303b - Elevated background */
+    --popover-foreground: 220 13% 91%;  /* #e4e6ea - Popover text */
+    --primary: 142 71% 45%;             /* #22c55e - Keep brand green */
+    --primary-foreground: 220 16% 10%;  /* Dark text on green */
+    --secondary: 220 13% 18%;           /* #2d303b - Secondary background */
+    --secondary-foreground: 220 13% 91%; /* #e4e6ea - Secondary text */
+    --muted: 220 13% 18%;               /* #2d303b - Muted background */
+    --muted-foreground: 220 9% 68%;     /* #9ca3af - Muted text */
+    --accent: 220 13% 18%;              /* #2d303b - Accent background */
+    --accent-foreground: 220 13% 91%;   /* #e4e6ea - Accent text */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 74 222 128;
+    --border: 220 13% 25%;              /* #374151 - Softer borders */
+    --input: 220 13% 18%;               /* #2d303b - Input background */
+    --ring: 142 71% 45%;                /* Green focus ring */
   }
 
   * {
@@ -70,7 +69,7 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased transition-colors duration-200;
+    @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
     position: relative;
     width: 100%;

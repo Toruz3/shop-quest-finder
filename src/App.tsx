@@ -35,15 +35,13 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <ThemeProvider defaultTheme="light" storageKey="shopquest-theme">
+        <ThemeProvider>
           <AuthProvider>
             <TooltipProvider>
-              <div className="min-h-screen bg-background text-foreground transition-colors duration-200">
-                <Toaster />
-                <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
-                <div className="app-container">
-                  <AppRoutes />
-                </div>
+              <Toaster />
+              <Sonner position="bottom-center" className="bottom-toast" toastOptions={{ duration: 3000 }} />
+              <div className="app-container">
+                <AppRoutes />
               </div>
             </TooltipProvider>
           </AuthProvider>

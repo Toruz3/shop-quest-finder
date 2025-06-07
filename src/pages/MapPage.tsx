@@ -66,7 +66,7 @@ const MapPage = () => {
 
   return (
     <motion.div 
-      className="min-h-screen w-full flex flex-col overflow-hidden bg-background transition-colors duration-200" 
+      className="min-h-screen w-full flex flex-col overflow-hidden" 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -74,12 +74,12 @@ const MapPage = () => {
     >
       {/* Background elements */}
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-muted/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
       
       {/* Content container - Fill available space minus footer height (16) */}
       <div className="flex flex-col flex-1 w-full overflow-hidden pb-16">
-        <div className="w-full px-2 py-4 flex-1 flex flex-col relative">
-          <div className="w-full flex-1 flex flex-col">
+        <div className="container mx-auto px-4 py-4 flex-1 flex flex-col relative">
+          <div className="w-full max-w-md mx-auto flex-1 flex flex-col">
             {/* Header area */}
             <MapHeader />
             
