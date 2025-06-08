@@ -136,7 +136,7 @@ const AccountPage = () => {
   
   return (
     <div className="h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Fixed Header Section - Non scrollabile */}
+      {/* Fixed Header Section */}
       <div className="flex-shrink-0 px-3 pt-4 pb-2">
         {/* Background decorations */}
         <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -163,27 +163,27 @@ const AccountPage = () => {
               </div>
             </div>
           </Card>
-          
-          {/* Tab Navigation - Fixed */}
-          <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800 mb-4">
-            <TabsTrigger value="profile" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
-              Profilo
-            </TabsTrigger>
-            <TabsTrigger value="preferences" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
-              Preferenze
-            </TabsTrigger>
-            <TabsTrigger value="activity" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
-              Attività
-            </TabsTrigger>
-          </TabsList>
         </div>
       </div>
 
-      {/* Scrollable Content Area - MAIN FIX */}
+      {/* Scrollable Content Area with Tabs */}
       <div className="flex-1 overflow-y-auto overscroll-contain" style={{ scrollBehavior: 'smooth' }}>
         <div className="px-3 pb-40">
           <div className="max-w-md mx-auto">
             <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab}>
+              {/* Tab Navigation */}
+              <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800 mb-4">
+                <TabsTrigger value="profile" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
+                  Profilo
+                </TabsTrigger>
+                <TabsTrigger value="preferences" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
+                  Preferenze
+                </TabsTrigger>
+                <TabsTrigger value="activity" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
+                  Attività
+                </TabsTrigger>
+              </TabsList>
+
               <TabsContent value="profile" className="mt-0 space-y-4">
                 {/* Profile content */}
                 <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
