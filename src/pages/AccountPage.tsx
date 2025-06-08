@@ -168,7 +168,7 @@ const AccountPage = () => {
 
       {/* Scrollable Content Area with Tabs */}
       <div className="flex-1 overflow-y-auto overscroll-contain" style={{ scrollBehavior: 'smooth' }}>
-        <div className="px-3 pb-40">
+        <div className="px-3 pb-24">
           <div className="max-w-md mx-auto">
             <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab}>
               {/* Tab Navigation */}
