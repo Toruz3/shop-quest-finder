@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Footer } from "@/components/Footer";
+
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const {
@@ -36,6 +37,7 @@ const AccountPage = () => {
   const [newEmail, setNewEmail] = useState("");
   const [profileName, setProfileName] = useState(profile?.name || "Mario Rossi");
   const [profileEmail, setProfileEmail] = useState(user?.email || "mario.rossi@email.com");
+  
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -44,6 +46,7 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
+  
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -53,6 +56,7 @@ const AccountPage = () => {
       duration: 3000
     });
   };
+  
   const handleThemeToggle = () => {
     toggleTheme();
     toast({
@@ -61,6 +65,7 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+  
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -69,11 +74,13 @@ const AccountPage = () => {
       duration: 2000
     });
   };
+  
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
+  
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -91,6 +98,7 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
+  
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -120,10 +128,12 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
+  
   if (!user) {
     navigate("/auth");
     return null;
   }
+  
   return <div className="min-h-screen relative overflow-hidden pb-40 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -266,12 +276,6 @@ const AccountPage = () => {
                   </div>
                 </div>
               </Card>
-              
-              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700 mb-8">
-                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
-                  Il tuo account è configurato correttamente. Puoi gestire le impostazioni del tuo profilo in qualsiasi momento.
-                </AlertDescription>
-              </Alert>
             </TabsContent>
             
             <TabsContent value="preferences" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
@@ -312,7 +316,6 @@ const AccountPage = () => {
                 </div>
               </Card>
               
-              {/* Shopping preferences section - keep existing code */}
               <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
@@ -363,16 +366,10 @@ const AccountPage = () => {
                   </div>
                 </div>
               </Card>
-              
-              <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700 mb-8">
-                <AlertDescription className="text-sm text-green-800 dark:text-green-200">
-                  Personalizza l'app in base alle tue preferenze. Le modifiche verranno salvate automaticamente.
-                </AlertDescription>
-              </Alert>
             </TabsContent>
             
             <TabsContent value="activity" className="mt-4 space-y-4 hide-scrollbar smooth-scroll touch-scroll overflow-y-auto max-h-[calc(100vh-250px)]">
-              {/* Activity content - keep existing code */}
+              {/* Activity content */}
               <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
                   <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
@@ -459,14 +456,6 @@ const AccountPage = () => {
                   </Button>
                 </div>
               </Card>
-              
-              <div className="mb-8">
-                <Alert className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700">
-                  <AlertDescription className="text-sm text-green-800 dark:text-green-200">
-                    Il tuo account è configurato correttamente. Puoi gestire le impostazioni del tuo profilo in qualsiasi momento.
-                  </AlertDescription>
-                </Alert>
-              </div>
             </TabsContent>
           </Tabs>
         </div>
