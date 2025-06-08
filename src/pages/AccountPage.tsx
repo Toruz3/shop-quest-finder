@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -135,48 +134,57 @@ const AccountPage = () => {
     return null;
   }
   
-  return <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 overflow-y-auto smooth-scroll">
-      <div className="relative overflow-hidden pb-24">
-        <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
+  return (
+    <div className="h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+      {/* Fixed Header Section - Non scrollabile */}
+      <div className="flex-shrink-0 px-3 pt-4 pb-2">
+        {/* Background decorations */}
+        <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
         
-        <div className="container px-3 py-4 relative z-10">
-          <div className="max-w-md mx-auto">
-            {/* Profile Card */}
-            <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 mb-4 transition-colors duration-200">
-              <div className="flex items-center space-x-4">
-                <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl font-bold">
-                  {profileName.charAt(0).toUpperCase()}
-                </div>
-                <div className="flex-1">
-                  <h2 className="text-lg font-semibold text-left text-gray-900 dark:text-gray-100">{profileName}</h2>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 text-left">{profileEmail}</p>
-                  <div className="flex mt-1">
-                    <Badge className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-700 mr-2">
-                      Utente Standard
-                    </Badge>
-                    <Badge variant="outline" className="text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800">
-                      Dal 2023
-                    </Badge>
-                  </div>
+        <div className="max-w-md mx-auto relative z-10">
+          {/* Profile Card */}
+          <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 mb-4 transition-colors duration-200">
+            <div className="flex items-center space-x-4">
+              <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl font-bold">
+                {profileName.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex-1">
+                <h2 className="text-lg font-semibold text-left text-gray-900 dark:text-gray-100">{profileName}</h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300 text-left">{profileEmail}</p>
+                <div className="flex mt-1">
+                  <Badge className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-700 mr-2">
+                    Utente Standard
+                  </Badge>
+                  <Badge variant="outline" className="text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800">
+                    Dal 2023
+                  </Badge>
                 </div>
               </div>
-            </Card>
-            
-            <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="mb-4">
-              <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800">
-                <TabsTrigger value="profile" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
-                  Profilo
-                </TabsTrigger>
-                <TabsTrigger value="preferences" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
-                  Preferenze
-                </TabsTrigger>
-                <TabsTrigger value="activity" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
-                  Attività
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="profile" className="mt-4 space-y-4 overflow-y-auto smooth-scroll touch-scroll" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+            </div>
+          </Card>
+          
+          {/* Tab Navigation - Fixed */}
+          <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800 mb-4">
+            <TabsTrigger value="profile" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
+              Profilo
+            </TabsTrigger>
+            <TabsTrigger value="preferences" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
+              Preferenze
+            </TabsTrigger>
+            <TabsTrigger value="activity" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-gray-900 dark:data-[state=active]:text-gray-100 text-gray-600 dark:text-gray-300 data-[state=active]:shadow-sm transition-all duration-200">
+              Attività
+            </TabsTrigger>
+          </TabsList>
+        </div>
+      </div>
+
+      {/* Scrollable Content Area - MAIN FIX */}
+      <div className="flex-1 overflow-y-auto overscroll-contain" style={{ scrollBehavior: 'smooth' }}>
+        <div className="px-3 pb-40">
+          <div className="max-w-md mx-auto">
+            <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab}>
+              <TabsContent value="profile" className="mt-0 space-y-4">
                 {/* Profile content */}
                 <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                   <div className="section-header">
@@ -280,7 +288,7 @@ const AccountPage = () => {
                 </Card>
               </TabsContent>
               
-              <TabsContent value="preferences" className="mt-4 space-y-4 overflow-y-auto smooth-scroll touch-scroll" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+              <TabsContent value="preferences" className="mt-0 space-y-4">
                 <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                   <div className="section-header">
                     <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
@@ -370,7 +378,7 @@ const AccountPage = () => {
                 </Card>
               </TabsContent>
               
-              <TabsContent value="activity" className="mt-4 space-y-4 overflow-y-auto smooth-scroll touch-scroll" style={{ maxHeight: 'calc(100vh - 200px)' }}>
+              <TabsContent value="activity" className="mt-0 space-y-4">
                 {/* Activity content */}
                 <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                   <div className="section-header">
@@ -539,6 +547,8 @@ const AccountPage = () => {
       </Dialog>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default AccountPage;
