@@ -16,7 +16,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Footer } from "@/components/Footer";
-
 const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("profile");
   const {
@@ -37,7 +36,6 @@ const AccountPage = () => {
   const [newEmail, setNewEmail] = useState("");
   const [profileName, setProfileName] = useState(profile?.name || "Mario Rossi");
   const [profileEmail, setProfileEmail] = useState(user?.email || "mario.rossi@email.com");
-
   useEffect(() => {
     if (profile) {
       setProfileName(profile.name);
@@ -46,7 +44,6 @@ const AccountPage = () => {
       setProfileEmail(user.email);
     }
   }, [user, profile]);
-
   const handleLogout = () => {
     logout();
     navigate("/auth");
@@ -56,7 +53,6 @@ const AccountPage = () => {
       duration: 3000
     });
   };
-
   const handleThemeToggle = () => {
     toggleTheme();
     toast({
@@ -65,7 +61,6 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-
   const toggleNotifications = () => {
     setNotificationsEnabled(!notificationsEnabled);
     toast({
@@ -74,13 +69,11 @@ const AccountPage = () => {
       duration: 2000
     });
   };
-
   const handleEditProfile = () => {
     setNewName(profileName);
     setNewEmail(profileEmail);
     setShowProfileDialog(true);
   };
-
   const handleSaveProfile = () => {
     if (!newName.trim()) {
       toast({
@@ -98,11 +91,9 @@ const AccountPage = () => {
     });
     setShowProfileDialog(false);
   };
-
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const handleChangePassword = () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
@@ -129,12 +120,10 @@ const AccountPage = () => {
     setNewPassword("");
     setConfirmPassword("");
   };
-
   if (!user) {
     navigate("/auth");
     return null;
   }
-
   return <div className="min-h-screen relative overflow-hidden pb-40 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
@@ -179,7 +168,7 @@ const AccountPage = () => {
               {/* Profile content */}
               <Card className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
                 <div className="section-header">
-                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4">
+                  <h3 className="font-medium flex items-center gap-2 text-gray-900 dark:text-gray-100 p-4 text-left">
                     <User size={16} className="text-primary" />
                     Gestione Account
                   </h3>
@@ -300,11 +289,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Tema scuro</h4>
                       <p className="text-xs text-gray-600 dark:text-gray-400 text-left">Cambia l'aspetto dell'app</p>
                     </div>
-                    <Switch
-                      checked={isDarkMode}
-                      onCheckedChange={handleThemeToggle}
-                      className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600"
-                    />
+                    <Switch checked={isDarkMode} onCheckedChange={handleThemeToggle} className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600" />
                   </div>
                   
                   <div className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
@@ -312,11 +297,7 @@ const AccountPage = () => {
                       <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Notifiche</h4>
                       <p className="text-xs text-gray-600 dark:text-gray-400 text-left">Gestisci avvisi e promemoria</p>
                     </div>
-                    <Switch
-                      checked={notificationsEnabled}
-                      onCheckedChange={toggleNotifications}
-                      className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600"
-                    />
+                    <Switch checked={notificationsEnabled} onCheckedChange={toggleNotifications} className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600" />
                   </div>
                   
                   <div className="menu-item">
@@ -568,5 +549,4 @@ const AccountPage = () => {
       <Footer />
     </div>;
 };
-
 export default AccountPage;
