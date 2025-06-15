@@ -1,191 +1,178 @@
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Minus, Plus, Trash2, BarChart3 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { Separator } from "@/components/ui/separator";
-import { Product, PriceComparison } from "@/types/shopping";
-import { useQuery } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Minus, Plus, Trash2, CheckCircle } from "lucide-react";
+import { Product } from "@/types/shopping";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
   onUpdateQuantity: (id: number, increment: boolean) => void;
   onRemoveProduct: (id: number) => void;
+  isSelected?: boolean;
+  onSelectionChange?: (id: number, selected: boolean) => void;
+  selectionMode?: boolean;
 }
 
 export const ProductCard = ({
   product,
   onUpdateQuantity,
-  onRemoveProduct
+  onRemoveProduct,
+  isSelected = false,
+  onSelectionChange,
+  selectionMode = false
 }: ProductCardProps) => {
-  const [isComparisonOpen, setIsComparisonOpen] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
 
-  // Price comparison data fetch using React Query
-  const {
-    data: priceComparison,
-    isLoading
-  } = useQuery({
-    queryKey: ['product-price-comparison', product.id],
-    queryFn: async () => {
-      // This is a simulated API call - in a real app, you would fetch from Supabase
-      // Simulating a delay to show loading state
-      await new Promise(resolve => setTimeout(resolve, 800));
+  const handleRemove = () => {
+    setIsRemoving(true);
+    setTimeout(() => {
+      onRemoveProduct(product.id);
+    }, 150);
+  };
 
-      // Sample comparison data
-      return [{
-        supermarketName: 'Esselunga',
-        price: (product.price || 0) * 0.9,
-        isBestOffer: true
-      }, {
-        supermarketName: 'Carrefour',
-        price: (product.price || 0) * 1.05,
-        isBestOffer: false
-      }, {
-        supermarketName: 'Coop',
-        price: (product.price || 0) * 0.95,
-        isBestOffer: false
-      }] as PriceComparison[];
-    },
-    enabled: isComparisonOpen // Only fetch when comparison section is opened
-  });
-  
+  const handleSelectionChange = (checked: boolean) => {
+    onSelectionChange?.(product.id, checked);
+  };
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.2 }}
+    <motion.div
+      layout
+      initial={{ opacity: 0, scale: 0.95, y: 20 }}
+      animate={{ 
+        opacity: isRemoving ? 0 : 1, 
+        scale: isRemoving ? 0.95 : 1,
+        y: isRemoving ? -20 : 0
+      }}
+      exit={{ opacity: 0, scale: 0.95, y: -20 }}
+      transition={{ 
+        duration: 0.2,
+        layout: { duration: 0.3 }
+      }}
+      className="group"
     >
-      <Card className="overflow-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-        {/* Main product content with padding */}
-        <div className="p-4 bg-white dark:bg-gray-800">
-          <div className="flex items-start gap-3">
-            {/* Image column */}
+      <Card 
+        className={`p-4 transition-all duration-200 touch-feedback ${
+          isSelected 
+            ? 'border-primary/50 bg-primary/5 shadow-md' 
+            : 'border-gray-200 dark:border-gray-700 hover:border-primary/30 hover:shadow-md'
+        }`}
+        hover
+        interactive
+      >
+        <div className="flex items-center gap-4">
+          {/* Selection Checkbox */}
+          {selectionMode && (
             <div className="flex-shrink-0">
+              <Checkbox
+                checked={isSelected}
+                onCheckedChange={handleSelectionChange}
+                className="w-5 h-5"
+              />
+            </div>
+          )}
+
+          {/* Product Image */}
+          <div className="flex-shrink-0 relative">
+            <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-600">
               {product.imageUrl ? (
-                <img 
-                  src={product.imageUrl} 
-                  alt={product.name} 
-                  className="w-16 h-16 object-cover rounded-lg shadow-sm" 
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               ) : (
-                <div className="w-16 h-16 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                  <span className="text-xl font-semibold text-gray-400 dark:text-gray-300">
-                    {product.name.charAt(0).toUpperCase()}
-                  </span>
+                <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500">
+                  <div className="text-xs font-medium">IMG</div>
                 </div>
               )}
             </div>
+            {product.originalIsPromotional && (
+              <Badge 
+                className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 py-0 h-5 scale-75"
+                variant="destructive"
+              >
+                PROMO
+              </Badge>
+            )}
+          </div>
 
-            {/* Product info column */}
-            <div className="flex-grow min-w-0">
-              <div className="flex items-center flex-wrap gap-2 mb-1">
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate">
+          {/* Product Info */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between">
+              <div className="min-w-0 flex-1">
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 truncate text-base">
                   {product.name}
                 </h3>
-              </div>
-
-              {/* Price and supermarket info */}
-              {(product.price || product.supermarket) && (
-                <p className="text-sm text-gray-500 dark:text-gray-400 text-left">
-                  {product.price ? `€${product.price.toFixed(2)}` : ''} 
-                  {product.supermarket ? ` • ${product.supermarket}` : ''}
-                </p>
-              )}
-
-              {/* Quantity controls in a row */}
-              <div className="flex items-center justify-between mt-3 mb-2">
-                <div className="flex items-center gap-1">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    className="h-8 w-8 rounded-full border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700" 
-                    onClick={() => onUpdateQuantity(product.id, false)} 
-                    aria-label="Diminuisci quantità"
-                  >
-                    <Minus className="h-3 w-3" />
-                  </Button>
-
-                  <span className="w-6 text-center text-sm font-medium text-gray-900 dark:text-gray-100">
-                    {product.quantity}
-                  </span>
-
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    className="h-8 w-8 rounded-full border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700" 
-                    onClick={() => onUpdateQuantity(product.id, true)} 
-                    aria-label="Aumenta quantità"
-                  >
-                    <Plus className="h-3 w-3" />
-                  </Button>
+                <div className="flex items-center gap-2 mt-1">
+                  {product.price && (
+                    <span className="text-sm font-medium text-primary">
+                      €{product.price.toFixed(2)}
+                    </span>
+                  )}
+                  {product.supermarket && (
+                    <Badge variant="outline" className="text-xs">
+                      {product.supermarket}
+                    </Badge>
+                  )}
                 </div>
-
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="h-8 w-8 text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700" 
-                  onClick={() => onRemoveProduct(product.id)} 
-                  aria-label="Rimuovi prodotto"
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
               </div>
             </div>
           </div>
+
+          {/* Quantity Controls */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => onUpdateQuantity(product.id, false)}
+              className="h-8 w-8 p-0 rounded-full hover:bg-red-50 hover:border-red-200 hover:text-red-600 transition-all duration-200"
+              aria-label="Diminuisci quantità"
+            >
+              <Minus className="w-4 h-4" />
+            </Button>
+            
+            <span className="text-lg font-semibold text-gray-900 dark:text-gray-100 min-w-[2rem] text-center">
+              {product.quantity}
+            </span>
+            
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => onUpdateQuantity(product.id, true)}
+              className="h-8 w-8 p-0 rounded-full hover:bg-green-50 hover:border-green-200 hover:text-green-600 transition-all duration-200"
+              aria-label="Aumenta quantità"
+            >
+              <Plus className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Remove Button */}
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={handleRemove}
+            className="h-8 w-8 p-0 rounded-full text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-200 opacity-0 group-hover:opacity-100"
+            aria-label="Rimuovi prodotto"
+          >
+            <Trash2 className="w-4 h-4" />
+          </Button>
         </div>
 
-        {/* Price comparison section - positioned as direct child of Card */}
-        <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen} className="w-full border-t border-gray-100 dark:border-gray-700">
-          <CollapsibleTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="px-4 py-2 h-8 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-50 dark:hover:bg-gray-700 w-full flex items-center justify-center"
-            >
-              <BarChart3 className="h-3.5 w-3.5 mr-1" />
-              Confronta prezzi
-            </Button>
-          </CollapsibleTrigger>
-          
-          <CollapsibleContent className="w-full">
-            <div className="bg-gray-50 dark:bg-gray-700 w-full">
-              {isLoading ? (
-                <div className="py-3 px-4 text-center text-xs text-gray-500 dark:text-gray-400">Caricamento...</div>
-              ) : priceComparison && priceComparison.length > 0 ? (
-                <div className="py-3 space-y-2">
-                  {priceComparison.map((item, idx) => (
-                    <div key={idx} className="w-full">
-                      {idx > 0 && <Separator className="my-1.5 bg-gray-200 dark:bg-gray-600" />}
-                      <div className="flex justify-between items-center w-full px-4 pt-1">
-                        <span className="text-xs text-gray-600 dark:text-gray-300 truncate max-w-[55%]">
-                          {item.supermarketName}
-                        </span>
-                        <div className="flex items-center gap-x-1.5 flex-shrink-0">
-                          <span className="text-xs font-medium text-gray-900 dark:text-gray-100">
-                            €{item.price.toFixed(2)}
-                          </span>
-                          {item.isBestOffer && (
-                            <Badge variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-[10px] border-green-200 dark:border-green-800 py-0 px-1 whitespace-nowrap">
-                              Miglior prezzo
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="py-3 px-4 text-center text-xs text-gray-500 dark:text-gray-400">
-                  Nessun dato disponibile per il confronto
-                </div>
-              )}
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
+        {/* Selection Indicator */}
+        {isSelected && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="absolute top-2 right-2 text-primary"
+          >
+            <CheckCircle className="w-5 h-5" />
+          </motion.div>
+        )}
       </Card>
     </motion.div>
   );
