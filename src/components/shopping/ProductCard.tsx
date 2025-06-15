@@ -69,19 +69,36 @@ export const ProductCard = ({
             </div>
           </div>
           
-          {/* Container per informazioni e controlli */}
-          <div className="flex-1 min-w-0 flex flex-col justify-between h-20">
-            {/* Informazioni Prodotto */}
-            <div className="flex-1">
-              <ProductInfo product={product} />
-            </div>
-
-            {/* Controlli Quantità - posizionati in basso a destra */}
-            <div className="flex justify-end">
-              <ProductQuantityControls 
-                quantity={product.quantity}
-                onQuantityChange={handleQuantityChange}
-              />
+          {/* Contenuto principale */}
+          <div className="flex-1 min-w-0">
+            {/* Nome del prodotto */}
+            <h3 className="font-semibold text-base text-gray-900 mb-2 leading-tight text-left">
+              {product.name}
+            </h3>
+            
+            {/* Riga con supermercato/prezzo e counter */}
+            <div className="flex items-center justify-between">
+              {/* Supermercato e prezzo */}
+              <div className="flex flex-col gap-1">
+                {product.supermarket && (
+                  <span className="text-sm text-gray-600 font-medium">
+                    {product.supermarket}
+                  </span>
+                )}
+                {product.price && (
+                  <span className="font-bold text-base text-gray-900">
+                    €{product.price.toFixed(2)}
+                  </span>
+                )}
+              </div>
+              
+              {/* Counter a destra */}
+              <div className="flex-shrink-0">
+                <ProductQuantityControls 
+                  quantity={product.quantity}
+                  onQuantityChange={handleQuantityChange}
+                />
+              </div>
             </div>
           </div>
           
