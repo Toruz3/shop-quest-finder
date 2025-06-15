@@ -3,10 +3,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Plus, X, Search, Trash2, Package } from "lucide-react";
+import { Plus, X, Search, Package } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FavoriteList } from "@/types/favorites";
+import { productDatabase } from "@/data/productDatabase";
 
 interface ListProductsDialogProps {
   isOpen: boolean;
@@ -29,6 +30,13 @@ export const ListProductsDialog = ({
   const filteredItems = list.items.filter(item => 
     item.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const getProductImage = (productName: string) => {
+    const product = productDatabase.find(p => 
+      p.name.toLowerCase() === productName.toLowerCase()
+    );
+    return product?.imageUrl || 'https://placehold.co/40x40?text=P';
+  };
 
   const handleAddProduct = () => {
     if (newProduct.trim() && !list.items.includes(newProduct.trim())) {
@@ -60,7 +68,7 @@ export const ListProductsDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md max-h-[80vh] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl">
+      <DialogContent className="mx-4 my-auto max-w-sm max-h-[calc(100vh-120px)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl">
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <Package className="text-primary" size={18} />
@@ -115,7 +123,7 @@ export const ListProductsDialog = ({
           {/* Products list */}
           <div className="flex-1 overflow-y-auto">
             {filteredItems.length > 0 ? (
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <AnimatePresence mode="popLayout">
                   {filteredItems.map((item, index) => (
                     <motion.div
@@ -128,9 +136,14 @@ export const ListProductsDialog = ({
                         duration: 0.15, 
                         delay: index * 0.02
                       }}
-                      className="group flex items-center justify-between p-2.5 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/20 hover:bg-primary/5 transition-all duration-150"
+                      className="group flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/20 hover:bg-primary/5 transition-all duration-150"
                     >
-                      <span className="text-gray-900 dark:text-gray-100 text-sm font-medium">
+                      <img 
+                        src={getProductImage(item)} 
+                        alt={item}
+                        className="w-8 h-8 rounded-md object-cover bg-gray-100 dark:bg-gray-700"
+                      />
+                      <span className="flex-1 text-gray-900 dark:text-gray-100 text-sm font-medium truncate">
                         {item}
                       </span>
                       <Button
