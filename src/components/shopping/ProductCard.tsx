@@ -30,11 +30,8 @@ export const ProductCard = ({
   } = useQuery({
     queryKey: ['product-price-comparison', product.id],
     queryFn: async () => {
-      // This is a simulated API call - in a real app, you would fetch from Supabase
-      // Simulating a delay to show loading state
       await new Promise(resolve => setTimeout(resolve, 800));
 
-      // Sample comparison data
       return [{
         supermarketName: 'Esselunga',
         price: (product.price || 0) * 0.9,
@@ -49,7 +46,7 @@ export const ProductCard = ({
         isBestOffer: false
       }] as PriceComparison[];
     },
-    enabled: isComparisonOpen // Only fetch when comparison section is opened
+    enabled: isComparisonOpen
   });
   
   return (
@@ -59,20 +56,20 @@ export const ProductCard = ({
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="overflow-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-        {/* Main product content with padding */}
-        <div className="p-4 bg-white dark:bg-gray-800">
-          <div className="flex items-start gap-3">
-            {/* Image column */}
+      <Card className="overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm">
+        {/* Main product content */}
+        <div className="p-4">
+          <div className="flex items-center gap-4">
+            {/* Product image */}
             <div className="flex-shrink-0">
               {product.imageUrl ? (
                 <img 
                   src={product.imageUrl} 
                   alt={product.name} 
-                  className="w-16 h-16 object-cover rounded-lg shadow-sm" 
+                  className="w-16 h-16 object-cover rounded-xl shadow-sm" 
                 />
               ) : (
-                <div className="w-16 h-16 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                   <span className="text-xl font-semibold text-gray-400 dark:text-gray-300">
                     {product.name.charAt(0).toUpperCase()}
                   </span>
@@ -80,111 +77,119 @@ export const ProductCard = ({
               )}
             </div>
 
-            {/* Product info column */}
-            <div className="flex-grow min-w-0">
-              <div className="flex items-center flex-wrap gap-2 mb-1">
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100 truncate">
-                  {product.name}
-                </h3>
+            {/* Product info */}
+            <div className="flex-1 min-w-0">
+              <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 truncate mb-1">
+                {product.name}
+              </h3>
+              
+              {/* Price and supermarket in one line */}
+              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-3">
+                {product.price && (
+                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                    €{product.price.toFixed(2)}
+                  </span>
+                )}
+                {product.supermarket && (
+                  <>
+                    <span>•</span>
+                    <span>{product.supermarket}</span>
+                  </>
+                )}
               </div>
 
-              {/* Price and supermarket info */}
-              {(product.price || product.supermarket) && (
-                <p className="text-sm text-gray-500 dark:text-gray-400 text-left">
-                  {product.price ? `€${product.price.toFixed(2)}` : ''} 
-                  {product.supermarket ? ` • ${product.supermarket}` : ''}
-                </p>
-              )}
-
-              {/* Quantity controls in a row */}
-              <div className="flex items-center justify-between mt-3 mb-2">
-                <div className="flex items-center gap-1">
+              {/* Quantity controls */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
                   <Button 
                     variant="outline" 
                     size="icon" 
-                    className="h-8 w-8 rounded-full border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700" 
+                    className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700" 
                     onClick={() => onUpdateQuantity(product.id, false)} 
                     aria-label="Diminuisci quantità"
                   >
-                    <Minus className="h-3 w-3" />
+                    <Minus className="h-4 w-4" />
                   </Button>
 
-                  <span className="w-6 text-center text-sm font-medium text-gray-900 dark:text-gray-100">
+                  <span className="text-xl font-semibold text-gray-900 dark:text-gray-100 min-w-[2rem] text-center">
                     {product.quantity}
                   </span>
 
                   <Button 
                     variant="outline" 
                     size="icon" 
-                    className="h-8 w-8 rounded-full border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700" 
+                    className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700" 
                     onClick={() => onUpdateQuantity(product.id, true)} 
                     aria-label="Aumenta quantità"
                   >
-                    <Plus className="h-3 w-3" />
+                    <Plus className="h-4 w-4" />
                   </Button>
                 </div>
 
                 <Button 
                   variant="ghost" 
                   size="icon" 
-                  className="h-8 w-8 text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-gray-50 dark:hover:bg-gray-700" 
+                  className="h-10 w-10 text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20" 
                   onClick={() => onRemoveProduct(product.id)} 
                   aria-label="Rimuovi prodotto"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-5 w-5" />
                 </Button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Price comparison section - positioned as direct child of Card */}
-        <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen} className="w-full border-t border-gray-100 dark:border-gray-700">
-          <CollapsibleTrigger asChild>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              className="px-4 py-2 h-8 text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-gray-50 dark:hover:bg-gray-700 w-full flex items-center justify-center"
-            >
-              <BarChart3 className="h-3.5 w-3.5 mr-1" />
-              Confronta prezzi
-            </Button>
-          </CollapsibleTrigger>
-          
-          <CollapsibleContent className="w-full">
-            <div className="bg-gray-50 dark:bg-gray-700 w-full">
-              {isLoading ? (
-                <div className="py-3 px-4 text-center text-xs text-gray-500 dark:text-gray-400">Caricamento...</div>
-              ) : priceComparison && priceComparison.length > 0 ? (
-                <div className="py-3 space-y-2">
-                  {priceComparison.map((item, idx) => (
-                    <div key={idx} className="w-full">
-                      {idx > 0 && <Separator className="my-1.5 bg-gray-200 dark:bg-gray-600" />}
-                      <div className="flex justify-between items-center w-full px-4 pt-1">
-                        <span className="text-xs text-gray-600 dark:text-gray-300 truncate max-w-[55%]">
-                          {item.supermarketName}
-                        </span>
-                        <div className="flex items-center gap-x-1.5 flex-shrink-0">
-                          <span className="text-xs font-medium text-gray-900 dark:text-gray-100">
-                            €{item.price.toFixed(2)}
+        {/* Price comparison section */}
+        <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
+          <div className="border-t border-gray-100 dark:border-gray-700">
+            <CollapsibleTrigger asChild>
+              <Button 
+                variant="ghost" 
+                className="w-full h-12 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center justify-center gap-2 rounded-none"
+              >
+                <BarChart3 className="h-4 w-4" />
+                Confronta prezzi
+              </Button>
+            </CollapsibleTrigger>
+            
+            <CollapsibleContent>
+              <div className="bg-gray-50 dark:bg-gray-700/50 p-4">
+                {isLoading ? (
+                  <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+                    Caricamento...
+                  </div>
+                ) : priceComparison && priceComparison.length > 0 ? (
+                  <div className="space-y-3">
+                    {priceComparison.map((item, idx) => (
+                      <div key={idx}>
+                        {idx > 0 && <Separator className="my-2 bg-gray-200 dark:bg-gray-600" />}
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600 dark:text-gray-300">
+                            {item.supermarketName}
                           </span>
-                          {item.isBestOffer && (
-                            <Badge variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-[10px] border-green-200 dark:border-green-800 py-0 px-1 whitespace-nowrap">
-                              Miglior prezzo
-                            </Badge>
-                          )}
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              €{item.price.toFixed(2)}
+                            </span>
+                            {item.isBestOffer && (
+                              <Badge variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs border-green-200 dark:border-green-800">
+                                Miglior prezzo
+                              </Badge>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="py-3 px-4 text-center text-xs text-gray-500 dark:text-gray-400">
-                  Nessun dato disponibile per il confronto
-                </div>
-              )}
-            </div>
-          </CollapsibleContent>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+                    Nessun dato disponibile per il confronto
+                  </div>
+                )}
+              </div>
+            </CollapsibleContent>
+          </div>
         </Collapsible>
       </Card>
     </motion.div>
