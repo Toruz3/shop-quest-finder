@@ -79,7 +79,7 @@ export const ListProductsDialog = ({
           {/* Add new product section */}
           <div className="flex gap-2">
             <Input value={newProduct} onChange={e => setNewProduct(e.target.value)} onKeyPress={handleKeyPress} placeholder="Aggiungi prodotto..." className="h-9 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-primary/20" autoFocus />
-            <Button onClick={handleAddProduct} disabled={!newProduct.trim() || list.items.includes(newProduct.trim())} size="icon" className="h-6 w-6 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-40 ">
+            <Button onClick={handleAddProduct} disabled={!newProduct.trim() || list.items.includes(newProduct.trim())} className="h-9 w-9 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-40" size="icon">
               <Plus size={14} />
             </Button>
           </div>
