@@ -1,3 +1,4 @@
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -72,7 +73,7 @@ export const ListProductsDialog = ({
         style={{
           position: 'fixed',
           left: '50%',
-          top: '50%',
+          top: 'calc(50vh - 2rem)',
           transform: 'translate(-50%, -50%)',
           margin: '0',
           zIndex: 50
