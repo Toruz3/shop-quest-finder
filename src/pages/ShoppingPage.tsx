@@ -20,6 +20,19 @@ const ShoppingPage = () => {
     handleAddSampleProducts,
     handleFindStores,
     handleNewList,
+    // Enhanced functionality
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+    selectedProducts,
+    selectionMode,
+    setSelectionMode,
+    handleSelectionChange,
+    handleSelectAll,
+    handleDeselectAll,
+    handleBulkDelete,
+    handleBulkQuantityChange,
   } = useShoppingState();
   
   const handleFabClick = () => {
@@ -59,6 +72,18 @@ const ShoppingPage = () => {
               onUpdateQuantity={handleUpdateQuantity}
               onRemoveProduct={handleRemoveProduct}
               onAddSampleProducts={handleAddSampleProducts}
+              selectedProducts={selectedProducts}
+              selectionMode={selectionMode}
+              setSelectionMode={setSelectionMode}
+              onSelectionChange={handleSelectionChange}
+              handleSelectAll={handleSelectAll}
+              handleDeselectAll={handleDeselectAll}
+              handleBulkDelete={handleBulkDelete}
+              handleBulkQuantityChange={handleBulkQuantityChange}
+              canUndo={canUndo}
+              canRedo={canRedo}
+              onUndo={undo}
+              onRedo={redo}
             />
           </div>
           
