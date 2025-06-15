@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { BarChart3 } from "lucide-react";
@@ -53,62 +54,65 @@ export const ProductCard = ({
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
-        {/* Main product content - with larger image */}
-        <div className="p-3">
-          <div className="flex items-center gap-3">
-            {/* Product image - larger */}
+      <Card className="overflow-hidden bg-gradient-to-r from-white to-gray-50/30 border border-gray-200/60 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 hover:border-blue-200/40">
+        {/* Main product content */}
+        <div className="p-4">
+          <div className="flex items-center gap-4">
+            {/* Product image - enhanced with better styling */}
             {product.imageUrl ? (
-              <img 
-                src={product.imageUrl} 
-                alt={product.name} 
-                className="w-16 h-16 object-cover rounded-lg flex-shrink-0" 
-              />
+              <div className="relative">
+                <img 
+                  src={product.imageUrl} 
+                  alt={product.name} 
+                  className="w-20 h-20 object-cover rounded-xl flex-shrink-0 shadow-sm ring-1 ring-gray-200/50" 
+                />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/5 to-transparent"></div>
+              </div>
             ) : (
-              <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-                <span className="text-lg font-medium text-gray-400">
+              <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center flex-shrink-0 shadow-sm ring-1 ring-gray-200/50">
+                <span className="text-xl font-semibold text-gray-400">
                   {product.name.charAt(0).toUpperCase()}
                 </span>
               </div>
             )}
 
-            {/* Product info */}
+            {/* Product info - enhanced typography */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-gray-900 truncate text-sm">
+              <h3 className="font-semibold text-gray-900 truncate text-base leading-tight">
                 {product.name}
               </h3>
               
-              {/* Price and supermarket */}
-              <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
+              {/* Price and supermarket - improved styling */}
+              <div className="flex items-center gap-2 text-sm text-gray-600 mt-1.5">
                 {product.price && (
-                  <span className="font-medium text-gray-700">
+                  <span className="font-bold text-gray-900 text-lg">
                     €{product.price.toFixed(2)}
                   </span>
                 )}
                 {product.supermarket && (
                   <>
-                    <span>•</span>
-                    <span>{product.supermarket}</span>
+                    <span className="text-gray-300">•</span>
+                    <span className="text-blue-600 font-medium">{product.supermarket}</span>
                   </>
                 )}
               </div>
             </div>
 
-            {/* Quantity controls - compact text counter */}
-            <div className="flex items-center gap-1 flex-shrink-0 bg-gray-50 rounded-full px-2 py-1">
+            {/* Quantity controls - enhanced design */}
+            <div className="flex items-center gap-2 flex-shrink-0 bg-gradient-to-r from-gray-50 to-gray-100/80 rounded-full px-3 py-2 shadow-sm ring-1 ring-gray-200/40">
               <button 
-                className="text-gray-600 hover:text-gray-800 text-xs font-bold w-3 h-3 flex items-center justify-center" 
+                className="text-gray-500 hover:text-red-500 text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full hover:bg-red-50 transition-colors duration-150" 
                 onClick={() => onUpdateQuantity(product.id, false)} 
               >
                 −
               </button>
 
-              <span className="text-xs font-medium text-gray-800 min-w-[8px] text-center">
+              <span className="text-sm font-bold text-gray-900 min-w-[12px] text-center px-1">
                 {product.quantity}
               </span>
 
               <button 
-                className="text-gray-600 hover:text-gray-800 text-xs font-bold w-3 h-3 flex items-center justify-center" 
+                className="text-gray-500 hover:text-green-500 text-sm font-bold w-6 h-6 flex items-center justify-center rounded-full hover:bg-green-50 transition-colors duration-150" 
                 onClick={() => onUpdateQuantity(product.id, true)} 
               >
                 +
@@ -117,40 +121,43 @@ export const ProductCard = ({
           </div>
         </div>
 
-        {/* Price comparison section - smaller */}
+        {/* Price comparison section - enhanced */}
         <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
-          <div className="border-t border-gray-100">
+          <div className="border-t border-gray-100/80">
             <CollapsibleTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="w-full h-8 text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center justify-center gap-2 rounded-none text-xs"
+                className="w-full h-10 text-blue-600 hover:text-blue-700 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-100/50 flex items-center justify-center gap-2 rounded-none text-sm font-medium transition-all duration-200"
               >
-                <BarChart3 className="h-3 w-3" />
+                <BarChart3 className="h-4 w-4" />
                 Confronta prezzi
               </Button>
             </CollapsibleTrigger>
             
             <CollapsibleContent>
-              <div className="bg-gray-50 p-2">
+              <div className="bg-gradient-to-r from-gray-50 to-gray-100/50 p-3 border-t border-gray-100/60">
                 {isLoading ? (
-                  <div className="text-center text-xs text-gray-500">
-                    Caricamento...
+                  <div className="text-center text-sm text-gray-500 py-2">
+                    <div className="inline-flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                      Caricamento...
+                    </div>
                   </div>
                 ) : priceComparison && priceComparison.length > 0 ? (
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     {priceComparison.map((item, idx) => (
                       <div key={idx}>
-                        {idx > 0 && <Separator className="my-1.5 bg-gray-200" />}
-                        <div className="flex justify-between items-center">
-                          <span className="text-xs text-gray-600">
+                        {idx > 0 && <Separator className="my-2 bg-gray-200/80" />}
+                        <div className="flex justify-between items-center py-1">
+                          <span className="text-sm text-gray-700 font-medium">
                             {item.supermarketName}
                           </span>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-medium text-gray-900">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-bold text-gray-900">
                               €{item.price.toFixed(2)}
                             </span>
                             {item.isBestOffer && (
-                              <Badge variant="outline" className="bg-green-50 text-green-600 text-[10px] border-green-200 px-1.5 py-0.5">
+                              <Badge variant="outline" className="bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 text-xs border-green-300/60 px-2 py-1 font-medium shadow-sm">
                                 Miglior prezzo
                               </Badge>
                             )}
@@ -160,7 +167,7 @@ export const ProductCard = ({
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center text-xs text-gray-500">
+                  <div className="text-center text-sm text-gray-500 py-2">
                     Nessun dato disponibile per il confronto
                   </div>
                 )}
