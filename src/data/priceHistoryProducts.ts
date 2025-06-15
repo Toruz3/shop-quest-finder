@@ -188,4 +188,16 @@ export const products: Product[] = [{
   price: 2.80,
   trend: "stable" as const,
   discount: null
+}, {
+  id: 31,
+  name: "Papaya",
+  price: 3.50,
+  trend: "stable" as const,
+  discount: null
+}, {
+  id: 32,
+  name: "Paprika",
+  price: 2.80,
+  trend: "down" as const,
+  discount: "5%"
 }];
