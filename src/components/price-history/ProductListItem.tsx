@@ -22,16 +22,22 @@ export const ProductListItem = ({ product, isSelected, onProductClick }: Product
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('ProductListItem clicked:', product.id);
+    console.log('ProductListItem clicked:', product.id, product.name, product);
     onProductClick(product.id);
   };
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('Button clicked for product:', product.id);
+    console.log('Button clicked for product:', product.id, product.name, product);
     onProductClick(product.id);
   };
+
+  // Validate product data
+  if (!product || typeof product.id !== 'number' || !product.name) {
+    console.warn('Invalid product data:', product);
+    return null;
+  }
 
   return (
     <Card 
@@ -42,7 +48,7 @@ export const ProductListItem = ({ product, isSelected, onProductClick }: Product
         <div>
           <h3 className="font-medium text-gray-800 dark:text-gray-100 text-left">{product.name}</h3>
           <div className="flex items-center gap-2 mt-1">
-            <span className="font-medium text-sm text-gray-900 dark:text-gray-100">€{product.price.toFixed(2)}</span>
+            <span className="font-medium text-sm text-gray-900 dark:text-gray-100">€{(product.price || 0).toFixed(2)}</span>
             {product.discount && <Badge className="text-xs bg-accent text-white">-{product.discount}</Badge>}
             <Badge variant="outline" className={`text-xs ${product.trend === "down" ? "text-green-600 bg-green-50 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-800" : product.trend === "up" ? "text-red-600 bg-red-50 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-800" : "text-blue-600 bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800"}`}>
               {product.trend === "down" && <TrendingDown size={10} className="mr-1" />}

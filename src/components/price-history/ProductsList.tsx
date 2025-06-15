@@ -17,10 +17,23 @@ interface ProductsListProps {
 }
 
 export const ProductsList = ({ products, selectedProduct, selectedTab, onProductClick }: ProductsListProps) => {
-  const filteredProducts = products.filter(product => 
-    (selectedTab === "offers" ? product.discount !== null : true) && 
-    (selectedTab === "trends" ? product.trend !== "stable" : true)
-  );
+  const filteredProducts = products.filter(product => {
+    // Validate product before filtering
+    if (!product || typeof product.id !== 'number') {
+      console.warn('Skipping invalid product:', product);
+      return false;
+    }
+    
+    return (selectedTab === "offers" ? product.discount !== null : true) && 
+           (selectedTab === "trends" ? product.trend !== "stable" : true);
+  });
+
+  console.log('ProductsList rendering with:', {
+    totalProducts: products.length,
+    filteredProducts: filteredProducts.length,
+    selectedProduct,
+    selectedTab
+  });
 
   return (
     <div className="space-y-2">
