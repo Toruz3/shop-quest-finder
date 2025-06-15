@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus, BarChart3 } from "lucide-react";
@@ -95,15 +94,15 @@ export const ProductCard = ({
               </div>
             </div>
 
-            {/* Quantity controls - smaller */}
+            {/* Quantity controls - even smaller */}
             <div className="flex items-center gap-1.5 flex-shrink-0">
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="h-6 w-6 rounded-full" 
+                className="h-5 w-5 rounded-full" 
                 onClick={() => onUpdateQuantity(product.id, false)} 
               >
-                <Minus className="h-2.5 w-2.5" />
+                <Minus className="h-2 w-2" />
               </Button>
 
               <span className="text-sm font-medium min-w-[1.5rem] text-center">
@@ -113,10 +112,10 @@ export const ProductCard = ({
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="h-6 w-6 rounded-full" 
+                className="h-5 w-5 rounded-full" 
                 onClick={() => onUpdateQuantity(product.id, true)} 
               >
-                <Plus className="h-2.5 w-2.5" />
+                <Plus className="h-2 w-2" />
               </Button>
             </div>
           </div>
