@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft, ShoppingCart } from "lucide-react";
@@ -163,28 +164,28 @@ const StoresPage = () => {
 
   return (
     <motion.div 
-      className="min-h-screen bg-gray-50/30 overflow-x-hidden"
+      className="min-h-screen bg-background dark:bg-background overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
       {/* Mobile Header */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+      <div className="sticky top-0 z-50 bg-background/80 dark:bg-background/80 backdrop-blur-md border-b border-border dark:border-border">
         <div className="flex items-center justify-between p-4">
           <Button 
             variant="ghost" 
             size="sm" 
-            className="p-2 hover:bg-gray-100 rounded-xl"
+            className="p-2 hover:bg-muted dark:hover:bg-muted rounded-xl"
             onClick={goBackToHome}
           >
-            <ChevronLeft className="h-5 w-5 text-gray-600" />
+            <ChevronLeft className="h-5 w-5 text-muted-foreground dark:text-muted-foreground" />
           </Button>
           <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-green-100 rounded-full">
-              <ShoppingCart className="h-4 w-4 text-green-600" />
+            <div className="p-1.5 bg-green-100 dark:bg-green-900/30 rounded-full">
+              <ShoppingCart className="h-4 w-4 text-green-600 dark:text-green-400" />
             </div>
-            <h1 className="font-semibold text-lg text-gray-800 tracking-tight">Shop Quest</h1>
+            <h1 className="font-semibold text-lg text-foreground dark:text-foreground tracking-tight">Shop Quest</h1>
           </div>
           <div className="w-9" />
         </div>
@@ -203,7 +204,7 @@ const StoresPage = () => {
         
         {/* Other Options */}
         <div className="px-4 mt-8 pb-8">
-          <h2 className="font-semibold mb-4 text-gray-800">Tutte le opzioni:</h2>
+          <h2 className="font-semibold mb-4 text-foreground dark:text-foreground">Tutte le opzioni:</h2>
           <div className="space-y-4">
             {otherStores.map((store, index) => (
               <motion.div

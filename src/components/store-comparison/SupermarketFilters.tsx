@@ -12,9 +12,9 @@ interface SupermarketFiltersProps {
 export const SupermarketFilters = ({ sortBy, onSortChange }: SupermarketFiltersProps) => {
   return (
     <div className="px-4 mt-6">
-      <h2 className="font-semibold mb-3 flex items-center gap-2 text-gray-800">
-        <div className="p-1.5 bg-blue-100 rounded-full">
-          <Filter className="h-3.5 w-3.5 text-blue-600" />
+      <h2 className="font-semibold mb-3 flex items-center gap-2 text-foreground dark:text-foreground">
+        <div className="p-1.5 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+          <Filter className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
         </div>
         Ordina supermercati
       </h2>
@@ -24,8 +24,8 @@ export const SupermarketFilters = ({ sortBy, onSortChange }: SupermarketFiltersP
           size="sm" 
           className={`whitespace-nowrap rounded-full h-10 px-4 ${
             sortBy === 'price' 
-              ? 'bg-green-600 hover:bg-green-700 text-white' 
-              : 'border-gray-200 hover:bg-gray-50'
+              ? 'bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white' 
+              : 'border-border dark:border-border hover:bg-muted dark:hover:bg-muted text-foreground dark:text-foreground'
           }`}
           onClick={() => onSortChange('price')}
         >
@@ -37,8 +37,8 @@ export const SupermarketFilters = ({ sortBy, onSortChange }: SupermarketFiltersP
           size="sm" 
           className={`whitespace-nowrap rounded-full h-10 px-4 ${
             sortBy === 'distance' 
-              ? 'bg-green-600 hover:bg-green-700 text-white' 
-              : 'border-gray-200 hover:bg-gray-50'
+              ? 'bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white' 
+              : 'border-border dark:border-border hover:bg-muted dark:hover:bg-muted text-foreground dark:text-foreground'
           }`}
           onClick={() => onSortChange('distance')}
         >

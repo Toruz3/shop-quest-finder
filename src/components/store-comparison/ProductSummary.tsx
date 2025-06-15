@@ -18,27 +18,27 @@ export const ProductSummary = ({ products, onEditProducts }: ProductSummaryProps
     <div className="mx-4 mt-4">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
-          <Button variant="outline" className="w-full justify-between p-4 h-auto rounded-2xl border-gray-200 hover:bg-gray-50">
+          <Button variant="outline" className="w-full justify-between p-4 h-auto rounded-2xl border-border dark:border-border hover:bg-muted dark:hover:bg-muted bg-card dark:bg-card">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 rounded-full">
-                <Package className="h-4 w-4 text-green-600" />
+              <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-full">
+                <Package className="h-4 w-4 text-green-600 dark:text-green-400" />
               </div>
               <div className="text-left">
-                <span className="font-semibold text-gray-800">Riepilogo prodotti</span>
-                <p className="text-sm text-gray-500">{products.length} prodotti selezionati</p>
+                <span className="font-semibold text-foreground dark:text-foreground">Riepilogo prodotti</span>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground">{products.length} prodotti selezionati</p>
               </div>
             </div>
-            <ChevronDown className={`h-4 w-4 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`h-4 w-4 text-muted-foreground dark:text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <Card className="mt-3 border-gray-100 rounded-2xl overflow-hidden">
-            <div className="p-4 space-y-3 bg-gray-50/50">
+          <Card className="mt-3 border-border dark:border-border rounded-2xl overflow-hidden bg-card dark:bg-card">
+            <div className="p-4 space-y-3 bg-muted/30 dark:bg-muted/30">
               {products.map((product) => (
                 <div key={product.id} className="flex items-center justify-between py-2">
                   <div className="flex items-center gap-3">
                     {product.imageUrl && (
-                      <div className="w-10 h-10 rounded-xl overflow-hidden bg-white shadow-sm">
+                      <div className="w-10 h-10 rounded-xl overflow-hidden bg-background dark:bg-background shadow-sm">
                         <img 
                           src={product.imageUrl} 
                           alt={product.name} 
@@ -46,9 +46,9 @@ export const ProductSummary = ({ products, onEditProducts }: ProductSummaryProps
                         />
                       </div>
                     )}
-                    <span className="font-medium text-gray-800">{product.name}</span>
+                    <span className="font-medium text-foreground dark:text-foreground">{product.name}</span>
                   </div>
-                  <span className="text-sm text-gray-600 bg-white px-3 py-1 rounded-full shadow-sm">
+                  <span className="text-sm text-muted-foreground dark:text-muted-foreground bg-background dark:bg-background px-3 py-1 rounded-full shadow-sm">
                     x{product.quantity}
                   </span>
                 </div>
@@ -56,7 +56,7 @@ export const ProductSummary = ({ products, onEditProducts }: ProductSummaryProps
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="w-full text-green-600 hover:text-green-700 hover:bg-green-50 mt-4 rounded-xl"
+                className="w-full text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 hover:bg-green-50 dark:hover:bg-green-950/30 mt-4 rounded-xl"
                 onClick={onEditProducts}
               >
                 <Edit3 className="h-4 w-4 mr-2" />
