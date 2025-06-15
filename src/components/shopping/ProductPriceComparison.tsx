@@ -4,11 +4,20 @@ import { BarChart3 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Separator } from '@/components/ui/separator';
-import { Product, PriceComparison } from '@/types/shopping';
+import { Product } from '@/types/shopping';
 import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 interface ProductPriceComparisonProps {
   product: Product;
+}
+
+interface StorePriceData {
+  supermarketName: string;
+  price: number;
+  isBestOffer: boolean;
+  isOnSale?: boolean;
+  salePrice?: number;
 }
 
 export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
@@ -20,22 +29,53 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
     data: priceComparison,
     isLoading
   } = useQuery({
-    queryKey: ['product-price-comparison', product.id],
+    queryKey: ['product-price-comparison', product.name],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 800));
-      return [{
-        supermarketName: 'Esselunga',
-        price: (product.price || 0) * 0.9,
-        isBestOffer: true
-      }, {
-        supermarketName: 'Carrefour',
-        price: (product.price || 0) * 1.05,
-        isBestOffer: false
-      }, {
-        supermarketName: 'Coop',
-        price: (product.price || 0) * 0.95,
-        isBestOffer: false
-      }] as PriceComparison[];
+      // Search for the product by name in the database
+      const { data: dbProduct } = await supabase
+        .from('products')
+        .select('id')
+        .ilike('name', product.name)
+        .single();
+
+      if (!dbProduct) {
+        return [];
+      }
+
+      // Get prices for this product from all stores
+      const { data: prices } = await supabase
+        .from('product_prices')
+        .select(`
+          price,
+          sale_price,
+          is_on_sale,
+          stores!inner(name)
+        `)
+        .eq('product_id', dbProduct.id);
+
+      if (!prices || prices.length === 0) {
+        return [];
+      }
+
+      // Transform the data and find the best offer
+      const priceData: StorePriceData[] = prices.map(price => ({
+        supermarketName: price.stores.name,
+        price: price.is_on_sale && price.sale_price ? Number(price.sale_price) : Number(price.price),
+        isBestOffer: false,
+        isOnSale: price.is_on_sale || false,
+        salePrice: price.sale_price ? Number(price.sale_price) : undefined
+      }));
+
+      // Find the lowest price and mark it as best offer
+      if (priceData.length > 0) {
+        const lowestPrice = Math.min(...priceData.map(p => p.price));
+        const bestOfferIndex = priceData.findIndex(p => p.price === lowestPrice);
+        if (bestOfferIndex !== -1) {
+          priceData[bestOfferIndex].isBestOffer = true;
+        }
+      }
+
+      return priceData.sort((a, b) => a.price - b.price);
     },
     enabled: isComparisonOpen
   });
@@ -72,6 +112,11 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
                         {item.isBestOffer && (
                           <Badge variant="outline" className="bg-gradient-to-r from-green-100 to-green-200 text-green-700 text-xs border-green-300 px-1.5 py-0.5 font-semibold shadow-sm">
                             Migliore
+                          </Badge>
+                        )}
+                        {item.isOnSale && (
+                          <Badge variant="outline" className="bg-gradient-to-r from-red-100 to-red-200 text-red-700 text-xs border-red-300 px-1.5 py-0.5 font-semibold shadow-sm">
+                            Offerta
                           </Badge>
                         )}
                       </div>
