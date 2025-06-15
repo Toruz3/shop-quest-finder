@@ -98,7 +98,7 @@ export const useShoppingState = () => {
         quantity: 1, 
         imageUrl: 'https://placehold.co/100x100?text=Pane',
         price: 1.50,
-        supermarket: 'Supermercato locale',
+        supermarket: 'Esselunga',
         originalIsPromotional: false 
       },
       { 
@@ -125,7 +125,7 @@ export const useShoppingState = () => {
         quantity: 1, 
         imageUrl: 'https://placehold.co/100x100?text=Pomodori',
         price: 2.30,
-        supermarket: 'Esselunga',
+        supermarket: 'Lidl',
         originalIsPromotional: true 
       },
       { 
