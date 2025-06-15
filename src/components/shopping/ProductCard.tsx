@@ -46,7 +46,7 @@ export const ProductCard = ({
     >
       {/* Card principale del prodotto */}
       <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-green-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
-        <div className="flex items-center gap-4">
+        <div className="flex items-start gap-4">
           
           {/* Immagine Prodotto - senza sfondo grigio */}
           <div className="flex-shrink-0">
@@ -69,17 +69,20 @@ export const ProductCard = ({
             </div>
           </div>
           
-          {/* Informazioni Prodotto */}
-          <div className="flex-1 min-w-0">
-            <ProductInfo product={product} />
-          </div>
+          {/* Container per informazioni e controlli */}
+          <div className="flex-1 min-w-0 flex flex-col justify-between h-20">
+            {/* Informazioni Prodotto */}
+            <div className="flex-1">
+              <ProductInfo product={product} />
+            </div>
 
-          {/* Controlli Quantità - spostati ancora più a destra */}
-          <div className="flex-shrink-0 ml-auto pl-6">
-            <ProductQuantityControls 
-              quantity={product.quantity}
-              onQuantityChange={handleQuantityChange}
-            />
+            {/* Controlli Quantità - posizionati in basso a destra */}
+            <div className="flex justify-end">
+              <ProductQuantityControls 
+                quantity={product.quantity}
+                onQuantityChange={handleQuantityChange}
+              />
+            </div>
           </div>
           
         </div>
