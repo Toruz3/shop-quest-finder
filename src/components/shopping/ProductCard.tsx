@@ -65,14 +65,6 @@ export const ProductCard = ({
       });
     }
   };
-
-  const handleFindStore = () => {
-    toast({
-      title: "Ricerca supermercato",
-      description: "Funzionalità in arrivo nelle prossime versioni!",
-      duration: 3000,
-    });
-  };
   
   return (
     <motion.div 
@@ -202,14 +194,6 @@ export const ProductCard = ({
           </CollapsibleContent>
         </div>
       </Collapsible>
-      
-      {/* Button trova supermercato */}
-      <button 
-        onClick={handleFindStore}
-        className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors duration-200 shadow-sm hover:shadow-md"
-      >
-        Trova supermercato
-      </button>
     </motion.div>
   );
 };
