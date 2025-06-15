@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Minus, Plus, Trash2, BarChart3 } from "lucide-react";
+import { Minus, Plus, BarChart3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -23,7 +22,6 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
 
-  // Price comparison data fetch using React Query
   const {
     data: priceComparison,
     isLoading
@@ -31,7 +29,6 @@ export const ProductCard = ({
     queryKey: ['product-price-comparison', product.id],
     queryFn: async () => {
       await new Promise(resolve => setTimeout(resolve, 800));
-
       return [{
         supermarketName: 'Esselunga',
         price: (product.price || 0) * 0.9,
@@ -56,37 +53,35 @@ export const ProductCard = ({
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm">
-        {/* Main product content */}
-        <div className="p-4">
-          <div className="flex items-center gap-4">
-            {/* Product image */}
-            <div className="flex-shrink-0">
-              {product.imageUrl ? (
-                <img 
-                  src={product.imageUrl} 
-                  alt={product.name} 
-                  className="w-16 h-16 object-cover rounded-xl shadow-sm" 
-                />
-              ) : (
-                <div className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
-                  <span className="text-xl font-semibold text-gray-400 dark:text-gray-300">
-                    {product.name.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-              )}
-            </div>
+      <Card className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
+        {/* Main product content - simplified layout */}
+        <div className="p-3">
+          <div className="flex items-center gap-3">
+            {/* Product image - smaller */}
+            {product.imageUrl ? (
+              <img 
+                src={product.imageUrl} 
+                alt={product.name} 
+                className="w-12 h-12 object-cover rounded-lg flex-shrink-0" 
+              />
+            ) : (
+              <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-medium text-gray-400">
+                  {product.name.charAt(0).toUpperCase()}
+                </span>
+              </div>
+            )}
 
-            {/* Product info */}
+            {/* Product info - simplified */}
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 truncate mb-1">
+              <h3 className="font-medium text-gray-900 truncate text-sm">
                 {product.name}
               </h3>
               
-              {/* Price and supermarket in one line */}
-              <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-3">
+              {/* Price and supermarket - compact */}
+              <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
                 {product.price && (
-                  <span className="font-medium text-gray-900 dark:text-gray-100">
+                  <span className="font-medium text-gray-700">
                     €{product.price.toFixed(2)}
                   </span>
                 )}
@@ -97,56 +92,42 @@ export const ProductCard = ({
                   </>
                 )}
               </div>
+            </div>
 
-              {/* Quantity controls */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700" 
-                    onClick={() => onUpdateQuantity(product.id, false)} 
-                    aria-label="Diminuisci quantità"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </Button>
+            {/* Quantity controls - compact */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="h-8 w-8 rounded-full" 
+                onClick={() => onUpdateQuantity(product.id, false)} 
+              >
+                <Minus className="h-3 w-3" />
+              </Button>
 
-                  <span className="text-xl font-semibold text-gray-900 dark:text-gray-100 min-w-[2rem] text-center">
-                    {product.quantity}
-                  </span>
+              <span className="text-sm font-medium min-w-[1.5rem] text-center">
+                {product.quantity}
+              </span>
 
-                  <Button 
-                    variant="outline" 
-                    size="icon" 
-                    className="h-10 w-10 rounded-full border-2 border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500 hover:bg-gray-50 dark:hover:bg-gray-700" 
-                    onClick={() => onUpdateQuantity(product.id, true)} 
-                    aria-label="Aumenta quantità"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  className="h-10 w-10 text-gray-400 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20" 
-                  onClick={() => onRemoveProduct(product.id)} 
-                  aria-label="Rimuovi prodotto"
-                >
-                  <Trash2 className="h-5 w-5" />
-                </Button>
-              </div>
+              <Button 
+                variant="outline" 
+                size="icon" 
+                className="h-8 w-8 rounded-full" 
+                onClick={() => onUpdateQuantity(product.id, true)} 
+              >
+                <Plus className="h-3 w-3" />
+              </Button>
             </div>
           </div>
         </div>
 
-        {/* Price comparison section */}
+        {/* Price comparison section - unchanged */}
         <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
-          <div className="border-t border-gray-100 dark:border-gray-700">
+          <div className="border-t border-gray-100">
             <CollapsibleTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="w-full h-12 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center justify-center gap-2 rounded-none"
+                className="w-full h-10 text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center justify-center gap-2 rounded-none text-sm"
               >
                 <BarChart3 className="h-4 w-4" />
                 Confronta prezzi
@@ -154,26 +135,26 @@ export const ProductCard = ({
             </CollapsibleTrigger>
             
             <CollapsibleContent>
-              <div className="bg-gray-50 dark:bg-gray-700/50 p-4">
+              <div className="bg-gray-50 p-3">
                 {isLoading ? (
-                  <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-center text-sm text-gray-500">
                     Caricamento...
                   </div>
                 ) : priceComparison && priceComparison.length > 0 ? (
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {priceComparison.map((item, idx) => (
                       <div key={idx}>
-                        {idx > 0 && <Separator className="my-2 bg-gray-200 dark:bg-gray-600" />}
+                        {idx > 0 && <Separator className="my-2 bg-gray-200" />}
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600 dark:text-gray-300">
+                          <span className="text-sm text-gray-600">
                             {item.supermarketName}
                           </span>
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                            <span className="text-sm font-medium text-gray-900">
                               €{item.price.toFixed(2)}
                             </span>
                             {item.isBestOffer && (
-                              <Badge variant="outline" className="bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-xs border-green-200 dark:border-green-800">
+                              <Badge variant="outline" className="bg-green-50 text-green-600 text-xs border-green-200">
                                 Miglior prezzo
                               </Badge>
                             )}
@@ -183,7 +164,7 @@ export const ProductCard = ({
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-center text-sm text-gray-500">
                     Nessun dato disponibile per il confronto
                   </div>
                 )}
