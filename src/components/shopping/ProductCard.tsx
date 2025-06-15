@@ -72,13 +72,13 @@ export const ProductCard = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className="bg-white dark:bg-gray-50 rounded-2xl p-4 shadow-sm max-w-[280px] w-full mx-auto"
+      className="bg-white dark:bg-gray-50 rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.02] transition-all duration-200 w-full"
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
         
-        {/* Immagine compatta */}
-        <div className="flex justify-center">
-          <div className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-gray-200 p-2 flex items-center justify-center overflow-hidden">
+        {/* SEZIONE SINISTRA - Immagine Prodotto */}
+        <div className="flex-shrink-0">
+          <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-gray-100 dark:bg-gray-200 p-2 flex items-center justify-center overflow-hidden">
             {product.imageUrl ? (
               <img 
                 src={product.imageUrl} 
@@ -97,97 +97,98 @@ export const ProductCard = ({
           </div>
         </div>
         
-        {/* Info prodotto compatte */}
-        <div className="text-center space-y-1">
-          <h3 className="text-base font-medium text-gray-900 dark:text-gray-800 leading-tight line-clamp-2">
+        {/* SEZIONE CENTRALE - Informazioni Prodotto */}
+        <div className="flex-1 flex flex-col justify-center min-h-20 text-center md:text-left">
+          <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-800 mb-1 leading-tight">
             {product.name}
           </h3>
           {product.supermarket && (
-            <p className="text-xs text-gray-500 dark:text-gray-600">
+            <p className="text-sm text-gray-500 dark:text-gray-600 mb-2">
               {product.supermarket}
             </p>
           )}
           {product.price && (
-            <p className="text-xl font-semibold text-gray-900 dark:text-gray-800">
+            <p className="font-bold text-xl text-gray-900 dark:text-gray-800">
               €{product.price.toFixed(2)}
             </p>
           )}
         </div>
-        
-        {/* Counter compatto */}
-        <div className="flex justify-center">
-          <div className="flex items-center gap-3 bg-gray-100 dark:bg-gray-200 rounded-xl px-3 py-1.5">
+
+        {/* SEZIONE DESTRA - Controlli Quantità e Azioni */}
+        <div className="flex-shrink-0 flex flex-col items-center md:items-end gap-3">
+          
+          {/* Controllo Quantità */}
+          <div className="flex items-center bg-gray-100 dark:bg-gray-200 rounded-full px-3 py-2 gap-3">
             <button 
               onClick={() => handleQuantityChange(false)}
-              className="w-6 h-6 flex items-center justify-center text-gray-600 dark:text-gray-700 hover:text-gray-900 transition-colors"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-700 hover:bg-gray-200 hover:text-gray-900 active:scale-95 transition-all"
               aria-label="Diminuisci quantità"
             >
-              <Minus size={14} strokeWidth={2} />
+              <Minus size={16} strokeWidth={2} />
             </button>
-            <span className="text-base font-medium text-gray-900 dark:text-gray-800 min-w-[1.5rem] text-center">
+            <span className="font-medium text-lg text-gray-900 dark:text-gray-800 w-8 text-center">
               {product.quantity}
             </span>
             <button 
               onClick={() => handleQuantityChange(true)}
-              className="w-6 h-6 flex items-center justify-center text-gray-600 dark:text-gray-700 hover:text-gray-900 transition-colors"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-700 hover:bg-gray-200 hover:text-gray-900 active:scale-95 transition-all"
               aria-label="Aumenta quantità"
             >
-              <Plus size={14} strokeWidth={2} />
+              <Plus size={16} strokeWidth={2} />
             </button>
           </div>
-        </div>
-        
-        {/* Confronta prezzi compatto */}
-        <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
-          <div className="flex justify-center">
+
+          {/* Confronta prezzi */}
+          <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
             <CollapsibleTrigger asChild>
-              <button className="flex items-center gap-1.5 text-blue-600 dark:text-blue-700 text-xs font-medium hover:text-blue-700 transition-colors">
-                <BarChart3 size={14} strokeWidth={2} />
+              <button className="flex items-center gap-1 text-blue-500 hover:text-blue-600 hover:underline text-sm font-normal transition-colors">
+                <BarChart3 size={16} strokeWidth={2} />
                 Confronta prezzi
               </button>
             </CollapsibleTrigger>
-          </div>
-          
-          <CollapsibleContent>
-            <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-100 rounded-xl">
-              {isLoading ? (
-                <div className="text-center text-xs text-gray-500 dark:text-gray-600 py-2">
-                  <div className="inline-flex items-center gap-2">
-                    <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                    Caricamento...
+            
+            <CollapsibleContent>
+              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-100 rounded-xl w-full md:w-64">
+                {isLoading ? (
+                  <div className="text-center text-xs text-gray-500 dark:text-gray-600 py-2">
+                    <div className="inline-flex items-center gap-2">
+                      <div className="w-3 h-3 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                      Caricamento...
+                    </div>
                   </div>
-                </div>
-              ) : priceComparison && priceComparison.length > 0 ? (
-                <div className="space-y-2">
-                  {priceComparison.map((item, idx) => (
-                    <div key={idx}>
-                      {idx > 0 && <Separator className="my-2 bg-gray-200 dark:bg-gray-300" />}
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-700 dark:text-gray-600 font-medium">
-                          {item.supermarketName}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-semibold text-gray-900 dark:text-gray-800">
-                            €{item.price.toFixed(2)}
+                ) : priceComparison && priceComparison.length > 0 ? (
+                  <div className="space-y-2">
+                    {priceComparison.map((item, idx) => (
+                      <div key={idx}>
+                        {idx > 0 && <Separator className="my-2 bg-gray-200 dark:bg-gray-300" />}
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-gray-700 dark:text-gray-600 font-medium">
+                            {item.supermarketName}
                           </span>
-                          {item.isBestOffer && (
-                            <Badge variant="outline" className="bg-green-50 dark:bg-green-100 text-green-700 dark:text-green-800 text-xs border-green-200 dark:border-green-300 px-1 py-0 font-medium">
-                              Migliore
-                            </Badge>
-                          )}
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-semibold text-gray-900 dark:text-gray-800">
+                              €{item.price.toFixed(2)}
+                            </span>
+                            {item.isBestOffer && (
+                              <Badge variant="outline" className="bg-green-50 dark:bg-green-100 text-green-700 dark:text-green-800 text-xs border-green-200 dark:border-green-300 px-1 py-0 font-medium">
+                                Migliore
+                              </Badge>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center text-xs text-gray-500 dark:text-gray-600 py-2">
-                  Nessun dato disponibile
-                </div>
-              )}
-            </div>
-          </CollapsibleContent>
-        </Collapsible>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center text-xs text-gray-500 dark:text-gray-600 py-2">
+                    Nessun dato disponibile
+                  </div>
+                )}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+          
+        </div>
         
       </div>
     </motion.div>
