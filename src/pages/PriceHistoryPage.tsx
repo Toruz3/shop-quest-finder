@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { LineChart } from "lucide-react";
@@ -135,6 +134,66 @@ const products: Product[] = [{
   id: 20,
   name: "Acqua",
   price: 0.50,
+  trend: "stable" as const,
+  discount: null
+}, {
+  id: 21,
+  name: "Acciughe",
+  price: 3.80,
+  trend: "down" as const,
+  discount: "15%"
+}, {
+  id: 22,
+  name: "Tonno",
+  price: 2.90,
+  trend: "stable" as const,
+  discount: null
+}, {
+  id: 23,
+  name: "Sardine",
+  price: 2.50,
+  trend: "down" as const,
+  discount: "10%"
+}, {
+  id: 24,
+  name: "Prosciutto",
+  price: 8.90,
+  trend: "up" as const,
+  discount: null
+}, {
+  id: 25,
+  name: "Salame",
+  price: 6.70,
+  trend: "stable" as const,
+  discount: null
+}, {
+  id: 26,
+  name: "Mortadella",
+  price: 4.20,
+  trend: "down" as const,
+  discount: "8%"
+}, {
+  id: 27,
+  name: "Bresaola",
+  price: 12.50,
+  trend: "up" as const,
+  discount: null
+}, {
+  id: 28,
+  name: "Parmigiano",
+  price: 18.90,
+  trend: "stable" as const,
+  discount: null
+}, {
+  id: 29,
+  name: "Gorgonzola",
+  price: 7.30,
+  trend: "down" as const,
+  discount: "12%"
+}, {
+  id: 30,
+  name: "Ricotta",
+  price: 2.80,
   trend: "stable" as const,
   discount: null
 }];
