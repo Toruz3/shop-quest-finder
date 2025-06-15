@@ -45,12 +45,12 @@ export const ProductCard = ({
       className="w-full"
     >
       {/* Card principale del prodotto */}
-      <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-gray-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
+      <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-green-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
         <div className="flex items-center gap-4">
           
           {/* Immagine Prodotto - più grande */}
           <div className="flex-shrink-0">
-            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-100 p-2 flex items-center justify-center overflow-hidden shadow-sm">
+            <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-200 p-2 flex items-center justify-center overflow-hidden shadow-sm">
               {product.imageUrl ? (
                 <img 
                   src={product.imageUrl} 
