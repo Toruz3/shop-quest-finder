@@ -19,10 +19,24 @@ interface ProductListItemProps {
 }
 
 export const ProductListItem = ({ product, isSelected, onProductClick }: ProductListItemProps) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('ProductListItem clicked:', product.id);
+    onProductClick(product.id);
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Button clicked for product:', product.id);
+    onProductClick(product.id);
+  };
+
   return (
     <Card 
       className={`p-3 bg-white dark:bg-gray-800 border ${isSelected ? "border-primary-300 bg-primary-50 dark:bg-primary-900/20" : "border-gray-200 dark:border-gray-700 hover:border-primary-200"} transition-all shadow-sm hover:shadow-md cursor-pointer`} 
-      onClick={() => onProductClick(product.id)}
+      onClick={handleClick}
     >
       <div className="flex justify-between items-center">
         <div>
@@ -37,7 +51,12 @@ export const ProductListItem = ({ product, isSelected, onProductClick }: Product
             </Badge>
           </div>
         </div>
-        <Button size="sm" variant={isSelected ? "default" : "outline"} className="h-8 text-xs">
+        <Button 
+          size="sm" 
+          variant={isSelected ? "default" : "outline"} 
+          className="h-8 text-xs"
+          onClick={handleButtonClick}
+        >
           {isSelected ? "Selezionato" : "Seleziona"}
         </Button>
       </div>

@@ -160,13 +160,19 @@ const PriceHistoryPage = () => {
     if (product) {
       setSelectedProduct(product.id);
       setSearchTerm("");
+      console.log('Selected product from suggestion:', product.id, product.name);
     }
   };
 
   const handleProductClick = (productId: number) => {
+    console.log('handleProductClick called with:', productId);
+    console.log('Current selectedProduct:', selectedProduct);
     setSelectedProduct(productId);
-    console.log('Selected product:', productId);
+    console.log('Selected product updated to:', productId);
   };
+  
+  console.log('Rendering PriceHistoryPage - selectedProduct:', selectedProduct);
+  console.log('selectedProductData:', selectedProductData);
   
   return (
     <div className="min-h-screen relative overflow-hidden pb-20 bg-white dark:bg-gray-900">
