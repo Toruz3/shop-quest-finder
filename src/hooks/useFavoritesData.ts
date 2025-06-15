@@ -106,6 +106,28 @@ export const useFavoritesData = () => {
     });
   };
 
+  const handleAddProduct = () => {
+    const sampleProducts = [
+      { name: "Olio Extravergine", price: 4.99, store: "Conad" },
+      { name: "Riso Basmati", price: 2.80, store: "Esselunga" },
+      { name: "Tonno in Scatola", price: 1.99, store: "Lidl" },
+      { name: "Biscotti Digestive", price: 2.20, store: "Carrefour" },
+      { name: "Succo d'Arancia", price: 1.75, store: "Coop" }
+    ];
+    
+    const randomProduct = sampleProducts[Math.floor(Math.random() * sampleProducts.length)];
+    const newProduct: FavoriteProduct = {
+      id: Date.now(),
+      ...randomProduct
+    };
+    
+    setFavoriteProducts(prev => [...prev, newProduct]);
+    showToast("product-added-to-favorites", {
+      title: "Prodotto aggiunto ai preferiti",
+      description: `${newProduct.name} è stato aggiunto ai tuoi preferiti`
+    });
+  };
+
   const handleUseList = (list: FavoriteList) => {
     showToast("list-used", {
       title: "Lista utilizzata",
@@ -177,6 +199,7 @@ export const useFavoritesData = () => {
     handleSaveList,
     handleUpdateList,
     handleDeleteProduct,
+    handleAddProduct,
     handleUseList,
     handleAddToCart,
     handleDuplicate,

@@ -1,3 +1,4 @@
+
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -8,12 +9,14 @@ interface FavoriteProductsProps {
   filteredProducts: FavoriteProduct[];
   onDeleteProduct: (id: number) => void;
   onAddToCart: (product: FavoriteProduct) => void;
+  onAddProduct: () => void;
 }
 
 export const FavoriteProducts = ({
   filteredProducts,
   onDeleteProduct,
-  onAddToCart
+  onAddToCart,
+  onAddProduct
 }: FavoriteProductsProps) => {
   return (
     <>
@@ -21,7 +24,12 @@ export const FavoriteProducts = ({
         <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
           {filteredProducts.length} prodotti preferiti
         </h2>
-        <Button variant="outline" size="sm" className="h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
+          onClick={onAddProduct}
+        >
           <Plus size={14} className="mr-1" />
           Aggiungi prodotto
         </Button>

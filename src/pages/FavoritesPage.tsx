@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -22,6 +21,7 @@ const FavoritesPage = () => {
     handleSaveList,
     handleUpdateList,
     handleDeleteProduct,
+    handleAddProduct,
     handleUseList,
     handleAddToCart,
     handleDuplicate,
@@ -114,6 +114,7 @@ const FavoritesPage = () => {
                   filteredProducts={filteredProducts}
                   onDeleteProduct={handleDeleteProduct}
                   onAddToCart={handleAddToCart}
+                  onAddProduct={handleAddProduct}
                 />
               </TabsContent>
             </Tabs>
