@@ -70,11 +70,11 @@ export const ListProductsDialog = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="max-w-sm w-[calc(100vw-2rem)] max-h-[60vh] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
+        className="max-w-sm w-[calc(100vw-2rem)] max-h-[70vh] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
         style={{
           position: 'fixed',
           left: '50%',
-          top: 'calc(50vh - 5rem)',
+          top: '50%',
           transform: 'translate(-50%, -50%)',
           margin: '0',
           zIndex: 50
