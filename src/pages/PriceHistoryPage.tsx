@@ -1,4 +1,5 @@
 
+
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -187,7 +188,11 @@ const PriceHistoryPage = () => {
   // Add product search functionality
   const { suggestions, isLoading } = useProductSearch(searchTerm);
   
-  const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  // Update filtering logic to use "starts with" approach
+  const filteredProducts = products.filter(product => 
+    product.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+  );
+  
   const selectedProductData = products.find(p => p.id === selectedProduct);
   
   const handleSelectSuggestion = (productName: string) => {
@@ -196,6 +201,11 @@ const PriceHistoryPage = () => {
       setSelectedProduct(product.id);
       setSearchTerm("");
     }
+  };
+
+  const handleProductClick = (productId: number) => {
+    setSelectedProduct(productId);
+    console.log('Selected product:', productId);
   };
   
   return (
@@ -258,58 +268,64 @@ const PriceHistoryPage = () => {
             </Select>
           </div>
           
-          {/* Price chart */}
-          <Card className="p-4 mb-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="font-medium text-gray-800 dark:text-gray-100">
-                {selectedProductData?.name || "Latte"} - Andamento prezzi
-              </h2>
-              <Badge variant="outline" className={`${selectedProductData?.trend === "down" ? "text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-400" : selectedProductData?.trend === "up" ? "text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400" : "text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400"}`}>
-                {selectedProductData?.trend === "down" && <TrendingDown size={14} className="mr-1" />}
-                {selectedProductData?.trend === "up" && <TrendingUp size={14} className="mr-1" />}
-                {selectedProductData?.trend === "down" ? "-10% ultimo mese" : selectedProductData?.trend === "up" ? "+5% ultimo mese" : "Stabile"}
-              </Badge>
-            </div>
-            
-            <div className="h-56 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={priceData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} stroke="#374151" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#9ca3af' }} axisLine={{ stroke: '#374151' }} tickLine={false} />
-                  <YAxis tick={{ fontSize: 10, fill: '#9ca3af' }} axisLine={false} tickLine={false} domain={['dataMin - 0.1', 'dataMax + 0.1']} tickFormatter={value => `€${value.toFixed(2)}`} />
-                  <Tooltip 
-                    formatter={value => [`€${Number(value).toFixed(2)}`, ""]} 
-                    labelFormatter={label => `Settimana: ${label}`}
-                    contentStyle={{ 
-                      backgroundColor: '#1f2937', 
-                      border: '1px solid #374151', 
-                      borderRadius: '8px',
-                      color: '#f9fafb'
-                    }}
-                  />
-                  <Line type="monotone" dataKey="Esselunga" stroke="#2ecc71" strokeWidth={2} activeDot={{ r: 6 }} />
-                  <Line type="monotone" dataKey="Conad" stroke="#8a6cff" strokeWidth={2} activeDot={{ r: 6 }} />
-                  <Line type="monotone" dataKey="Carrefour" stroke="#3498db" strokeWidth={2} activeDot={{ r: 6 }} />
-                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '10px', paddingTop: '8px', color: '#9ca3af' }} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-            
-            <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
-              <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
-                <Calendar size={12} />
-                Ultimo aggiornamento: oggi
+          {/* Price chart - Only show when a product is selected */}
+          {selectedProduct && (
+            <Card className="p-4 mb-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="font-medium text-gray-800 dark:text-gray-100">
+                  {selectedProductData?.name || "Prodotto"} - Andamento prezzi
+                </h2>
+                <Badge variant="outline" className={`${selectedProductData?.trend === "down" ? "text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-400" : selectedProductData?.trend === "up" ? "text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400" : "text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400"}`}>
+                  {selectedProductData?.trend === "down" && <TrendingDown size={14} className="mr-1" />}
+                  {selectedProductData?.trend === "up" && <TrendingUp size={14} className="mr-1" />}
+                  {selectedProductData?.trend === "down" ? "-10% ultimo mese" : selectedProductData?.trend === "up" ? "+5% ultimo mese" : "Stabile"}
+                </Badge>
               </div>
-              <Button size="sm" variant="outline" className="h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-                Confronta più prodotti
-              </Button>
-            </div>
-          </Card>
+              
+              <div className="h-56 w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={priceData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.3} stroke="#374151" />
+                    <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#9ca3af' }} axisLine={{ stroke: '#374151' }} tickLine={false} />
+                    <YAxis tick={{ fontSize: 10, fill: '#9ca3af' }} axisLine={false} tickLine={false} domain={['dataMin - 0.1', 'dataMax + 0.1']} tickFormatter={value => `€${value.toFixed(2)}`} />
+                    <Tooltip 
+                      formatter={value => [`€${Number(value).toFixed(2)}`, ""]} 
+                      labelFormatter={label => `Settimana: ${label}`}
+                      contentStyle={{ 
+                        backgroundColor: '#1f2937', 
+                        border: '1px solid #374151', 
+                        borderRadius: '8px',
+                        color: '#f9fafb'
+                      }}
+                    />
+                    <Line type="monotone" dataKey="Esselunga" stroke="#2ecc71" strokeWidth={2} activeDot={{ r: 6 }} />
+                    <Line type="monotone" dataKey="Conad" stroke="#8a6cff" strokeWidth={2} activeDot={{ r: 6 }} />
+                    <Line type="monotone" dataKey="Carrefour" stroke="#3498db" strokeWidth={2} activeDot={{ r: 6 }} />
+                    <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '10px', paddingTop: '8px', color: '#9ca3af' }} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              
+              <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                  <Calendar size={12} />
+                  Ultimo aggiornamento: oggi
+                </div>
+                <Button size="sm" variant="outline" className="h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+                  Confronta più prodotti
+                </Button>
+              </div>
+            </Card>
+          )}
           
           {/* Products list */}
           <div className="space-y-2">
             {filteredProducts.filter(product => (selectedTab === "offers" ? product.discount !== null : true) && (selectedTab === "trends" ? product.trend !== "stable" : true)).map(product => (
-              <Card key={product.id} className={`p-3 bg-white dark:bg-gray-800 border ${selectedProduct === product.id ? "border-primary-300 bg-primary-50 dark:bg-primary-900/20" : "border-gray-200 dark:border-gray-700 hover:border-primary-200"} transition-all shadow-sm hover:shadow-md`} onClick={() => setSelectedProduct(product.id)}>
+              <Card 
+                key={product.id} 
+                className={`p-3 bg-white dark:bg-gray-800 border ${selectedProduct === product.id ? "border-primary-300 bg-primary-50 dark:bg-primary-900/20" : "border-gray-200 dark:border-gray-700 hover:border-primary-200"} transition-all shadow-sm hover:shadow-md cursor-pointer`} 
+                onClick={() => handleProductClick(product.id)}
+              >
                 <div className="flex justify-between items-center">
                   <div>
                     <h3 className="font-medium text-gray-800 dark:text-gray-100 text-left">{product.name}</h3>
@@ -324,7 +340,7 @@ const PriceHistoryPage = () => {
                     </div>
                   </div>
                   <Button size="sm" variant={selectedProduct === product.id ? "default" : "outline"} className="h-8 text-xs">
-                    Dettagli
+                    {selectedProduct === product.id ? "Selezionato" : "Seleziona"}
                   </Button>
                 </div>
               </Card>
@@ -339,3 +355,4 @@ const PriceHistoryPage = () => {
 };
 
 export default PriceHistoryPage;
+
