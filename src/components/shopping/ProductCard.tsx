@@ -4,19 +4,43 @@ import { useToast } from "@/hooks/use-toast";
 import { ProductInfo } from "./ProductInfo";
 import { ProductQuantityControls } from "./ProductQuantityControls";
 import { ProductPriceComparison } from "./ProductPriceComparison";
+import { useRef } from "react";
+
 interface ProductCardProps {
   product: Product;
   onUpdateQuantity: (id: number, increment: boolean) => void;
   onRemoveProduct: (id: number) => void;
 }
+
 export const ProductCard = ({
   product,
   onUpdateQuantity,
   onRemoveProduct
 }: ProductCardProps) => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  const activeToasts = useRef<Set<string>>(new Set());
+
+  const showToast = (key: string, toastConfig: any) => {
+    // Se un toast con questa chiave è già attivo, non mostrarne un altro
+    if (activeToasts.current.has(key)) {
+      return;
+    }
+    
+    // Aggiungi la chiave ai toast attivi
+    activeToasts.current.add(key);
+    
+    // Mostra il toast con durata ridotta
+    toast({
+      ...toastConfig,
+      duration: 1500, // Durata ridotta a 1.5 secondi
+    });
+    
+    // Rimuovi la chiave quando il toast si chiude
+    setTimeout(() => {
+      activeToasts.current.delete(key);
+    }, 1500);
+  };
+
   const handleQuantityChange = (increment: boolean) => {
     if (!increment && product.quantity === 1) {
       onRemoveProduct(product.id);
@@ -24,13 +48,13 @@ export const ProductCard = ({
     }
     onUpdateQuantity(product.id, increment);
     if (increment) {
-      toast({
+      showToast('product-quantity-increased', {
         title: "Prodotto aggiunto alla lista",
-        description: `${product.name} è stato aggiunto con successo`,
-        duration: 3000
+        description: `${product.name} è stato aggiunto con successo`
       });
     }
   };
+
   return <motion.div initial={{
     opacity: 0,
     y: 20

@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Product, ProductSuggestion } from "@/types/shopping";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
@@ -11,8 +11,32 @@ export const useShoppingState = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isCalculating, setIsCalculating] = useState(false);
   
+  // Ref per tenere traccia dei toast attivi per evitare duplicati
+  const activeToasts = useRef<Set<string>>(new Set());
+  
   // Use the product search hook to get suggestions
   const { suggestions, isLoading } = useProductSearch(searchTerm);
+
+  const showToast = (key: string, toastConfig: any) => {
+    // Se un toast con questa chiave è già attivo, non mostrarne un altro
+    if (activeToasts.current.has(key)) {
+      return;
+    }
+    
+    // Aggiungi la chiave ai toast attivi
+    activeToasts.current.add(key);
+    
+    // Mostra il toast con durata ridotta
+    const toastInstance = toast({
+      ...toastConfig,
+      duration: 1500, // Durata ridotta a 1.5 secondi
+    });
+    
+    // Rimuovi la chiave quando il toast si chiude
+    setTimeout(() => {
+      activeToasts.current.delete(key);
+    }, 1500);
+  };
 
   const handleUpdateQuantity = (id: number, increment: boolean) => {
     console.log('Updating quantity for product ID:', id, 'increment:', increment);
@@ -47,10 +71,9 @@ export const useShoppingState = () => {
     setProducts(products.filter((product) => product.id !== id));
     
     if (productToRemove) {
-      toast({
+      showToast('product-removed', {
         title: "Prodotto rimosso",
         description: `${productToRemove.name} è stato rimosso dalla lista`,
-        duration: 3000,
         className: "toast-bottom"
       });
     }
@@ -82,10 +105,9 @@ export const useShoppingState = () => {
         }
       ]);
       setSearchTerm("");
-      toast({
+      showToast('product-added', {
         title: "Prodotto aggiunto",
         description: `${name} è stato aggiunto alla lista`,
-        duration: 3000,
       });
     }
   };
@@ -140,10 +162,9 @@ export const useShoppingState = () => {
     ];
     
     setProducts(sampleProducts);
-    toast({
+    showToast('sample-products-added', {
       title: "Prodotti di esempio aggiunti",
       description: "Sono stati aggiunti 5 prodotti alla tua lista",
-      duration: 3000,
       className: "toast-bottom"
     });
   };
@@ -151,17 +172,15 @@ export const useShoppingState = () => {
   const handleNewList = () => {
     if (products.length > 0) {
       setProducts([]);
-      toast({
+      showToast('list-cleared', {
         title: "Lista svuotata",
         description: "La tua lista della spesa è stata azzerata",
-        duration: 3000,
         className: "toast-bottom"
       });
     } else {
-      toast({
+      showToast('list-already-empty', {
         title: "Lista già vuota",
         description: "La tua lista della spesa è già vuota",
-        duration: 3000,
         className: "toast-bottom"
       });
     }
