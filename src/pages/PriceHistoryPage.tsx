@@ -52,7 +52,7 @@ const priceData = [{
   Carrefour: 2.40
 }];
 
-// Sample products
+// Expanded sample products from the database
 const products = [{
   id: 1,
   name: "Latte",
@@ -83,7 +83,98 @@ const products = [{
   price: 1.85,
   trend: "down",
   discount: "15%"
+}, {
+  id: 6,
+  name: "Olio extravergine",
+  price: 4.50,
+  trend: "stable",
+  discount: null
+}, {
+  id: 7,
+  name: "Mozzarella",
+  price: 3.20,
+  trend: "up",
+  discount: null
+}, {
+  id: 8,
+  name: "Salmone",
+  price: 12.90,
+  trend: "down",
+  discount: "25%"
+}, {
+  id: 9,
+  name: "Banane",
+  price: 1.80,
+  trend: "stable",
+  discount: null
+}, {
+  id: 10,
+  name: "Yogurt",
+  price: 2.40,
+  trend: "down",
+  discount: "5%"
+}, {
+  id: 11,
+  name: "Pollo",
+  price: 6.50,
+  trend: "up",
+  discount: null
+}, {
+  id: 12,
+  name: "Riso",
+  price: 1.20,
+  trend: "stable",
+  discount: null
+}, {
+  id: 13,
+  name: "Broccoli",
+  price: 2.10,
+  trend: "down",
+  discount: "12%"
+}, {
+  id: 14,
+  name: "Formaggio",
+  price: 4.80,
+  trend: "up",
+  discount: null
+}, {
+  id: 15,
+  name: "Caffè",
+  price: 3.60,
+  trend: "stable",
+  discount: null
+}, {
+  id: 16,
+  name: "Arance",
+  price: 2.30,
+  trend: "down",
+  discount: "8%"
+}, {
+  id: 17,
+  name: "Spaghetti",
+  price: 1.10,
+  trend: "stable",
+  discount: null
+}, {
+  id: 18,
+  name: "Carne di manzo",
+  price: 15.80,
+  trend: "up",
+  discount: null
+}, {
+  id: 19,
+  name: "Limoni",
+  price: 2.90,
+  trend: "down",
+  discount: "18%"
+}, {
+  id: 20,
+  name: "Acqua",
+  price: 0.50,
+  trend: "stable",
+  discount: null
 }];
+
 const PriceHistoryPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTab, setSelectedTab] = useState("tracked");

@@ -96,15 +96,17 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
   
   const handleAddSampleProducts = () => {
     const sampleProducts = [
-      { id: Date.now(), name: 'Pane', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
-      { id: Date.now() + 1, name: 'Latte', quantity: 2, imageUrl: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
-      { id: Date.now() + 2, name: 'Pasta', quantity: 1, imageUrl: 'https://images.unsplash.com/photo-1556060997-e26d9299868f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80' },
+      { id: Date.now(), name: 'Pane', quantity: 1, imageUrl: 'https://placehold.co/100x100?text=Pane' },
+      { id: Date.now() + 1, name: 'Latte', quantity: 2, imageUrl: 'https://placehold.co/100x100?text=Latte' },
+      { id: Date.now() + 2, name: 'Pasta', quantity: 1, imageUrl: 'https://placehold.co/100x100?text=Pasta' },
+      { id: Date.now() + 3, name: 'Pomodori', quantity: 1, imageUrl: 'https://placehold.co/100x100?text=Pomodori' },
+      { id: Date.now() + 4, name: 'Mozzarella', quantity: 1, imageUrl: 'https://placehold.co/100x100?text=Mozzarella' },
     ];
     
     setProducts(sampleProducts);
     toast({
       title: "Prodotti di esempio aggiunti",
-      description: "Sono stati aggiunti 3 prodotti alla tua lista",
+      description: "Sono stati aggiunti 5 prodotti alla tua lista",
       duration: 3000,
       className: "toast-bottom"
     });
