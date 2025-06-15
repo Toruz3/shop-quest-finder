@@ -23,7 +23,7 @@ export const ListManagementDialog = ({
 }: ListManagementDialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-2xl">
         <DialogHeader>
           <DialogTitle className="text-gray-900 dark:text-gray-100">
             {isEditing ? "Modifica lista" : "Crea nuova lista"}
@@ -38,17 +38,17 @@ export const ListManagementDialog = ({
             value={listName} 
             onChange={e => setListName(e.target.value)} 
             placeholder="Nome lista" 
-            className="w-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100" 
+            className="w-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-xl" 
             autoFocus 
           />
         </div>
         
         <DialogFooter className="flex justify-between sm:justify-between gap-2">
-          <Button variant="outline" onClick={onClose} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+          <Button variant="outline" onClick={onClose} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-xl">
             <X size={16} className="mr-1" />
             Annulla
           </Button>
-          <Button onClick={onSave}>
+          <Button onClick={onSave} className="rounded-xl">
             <Save size={16} className="mr-1" />
             {isEditing ? "Aggiorna" : "Crea"}
           </Button>
