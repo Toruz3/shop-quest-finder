@@ -65,12 +65,9 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
                   <div key={idx}>
                     {idx > 0 && <Separator className="my-1 bg-gray-200" />}
                     <div className="flex justify-between items-center py-1.5 px-2 rounded-lg bg-white/60 hover:bg-white/80 transition-all duration-200">
-                      <span className="text-xs text-gray-700 font-semibold">
-                        {item.supermarketName}
-                      </span>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-gray-800">
-                          €{item.price.toFixed(2)}
+                        <span className="text-xs text-gray-700 font-semibold">
+                          {item.supermarketName}
                         </span>
                         {item.isBestOffer && (
                           <Badge variant="outline" className="bg-gradient-to-r from-green-100 to-green-200 text-green-700 text-xs border-green-300 px-1.5 py-0.5 font-semibold shadow-sm">
@@ -78,6 +75,9 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
                           </Badge>
                         )}
                       </div>
+                      <span className="text-sm font-bold text-gray-800">
+                        €{item.price.toFixed(2)}
+                      </span>
                     </div>
                   </div>
                 ))}
