@@ -45,17 +45,17 @@ export const ProductCard = ({
       className="w-full"
     >
       {/* Card principale del prodotto */}
-      <div className="bg-white dark:bg-gray-50 rounded-t-xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:bg-gray-50/50 dark:hover:bg-gray-100/50 transition-all duration-200 border-b-0">
-        <div className="flex items-center gap-3">
+      <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-gray-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
+        <div className="flex items-center gap-4">
           
-          {/* Immagine Prodotto */}
+          {/* Immagine Prodotto - più grande */}
           <div className="flex-shrink-0">
-            <div className="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-200 p-1.5 flex items-center justify-center overflow-hidden">
+            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 border-2 border-green-100 p-2 flex items-center justify-center overflow-hidden shadow-sm">
               {product.imageUrl ? (
                 <img 
                   src={product.imageUrl} 
                   alt={product.name}
-                  className="w-full h-full object-cover rounded-md"
+                  className="w-full h-full object-cover rounded-lg"
                   loading="lazy"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
@@ -64,7 +64,7 @@ export const ProductCard = ({
                 />
               ) : null}
               <div className={`w-full h-full flex items-center justify-center ${product.imageUrl ? 'hidden' : ''}`}>
-                <div className="w-4 h-4 bg-gray-300 dark:bg-gray-400 rounded"></div>
+                <div className="w-6 h-6 bg-gradient-to-br from-green-300 to-blue-300 rounded-md shadow-sm"></div>
               </div>
             </div>
           </div>
