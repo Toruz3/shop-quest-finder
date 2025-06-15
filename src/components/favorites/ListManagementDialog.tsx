@@ -23,7 +23,7 @@ export const ListManagementDialog = ({
 }: ListManagementDialogProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-2xl mx-4">
+      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 rounded-2xl m-4 max-w-[calc(100vw-2rem)]">
         <DialogHeader>
           <DialogTitle className="text-gray-900 dark:text-gray-100">
             {isEditing ? "Modifica lista" : "Crea nuova lista"}
