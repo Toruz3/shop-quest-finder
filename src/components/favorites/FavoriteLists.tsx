@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -7,14 +6,7 @@ import { motion } from "framer-motion";
 import { Plus, ShoppingCart, Pencil, Copy, Calendar, Share2, AlertCircle, Package } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useFavoritesToast } from "@/hooks/useFavoritesToast";
-
-interface FavoriteList {
-  id: number;
-  name: string;
-  itemCount: number;
-  lastUsed: string;
-  items: string[];
-}
+import { FavoriteList } from "@/types/favorites";
 
 interface FavoriteListsProps {
   filteredLists: FavoriteList[];

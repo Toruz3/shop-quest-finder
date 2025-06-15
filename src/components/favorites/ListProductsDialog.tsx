@@ -1,4 +1,3 @@
-
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,14 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Plus, X, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-interface FavoriteList {
-  id: number;
-  name: string;
-  itemCount: number;
-  lastUsed: string;
-  items: string[];
-}
+import { FavoriteList } from "@/types/favorites";
 
 interface ListProductsDialogProps {
   isOpen: boolean;

@@ -1,224 +1,66 @@
+
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Star, Search } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { FavoriteLists } from "@/components/favorites/FavoriteLists";
 import { FavoriteProducts } from "@/components/favorites/FavoriteProducts";
 import { ListManagementDialog } from "@/components/favorites/ListManagementDialog";
 import { ListProductsDialog } from "@/components/favorites/ListProductsDialog";
-import { useFavoritesToast } from "@/hooks/useFavoritesToast";
-
-interface FavoriteList {
-  id: number;
-  name: string;
-  itemCount: number;
-  lastUsed: string;
-  items: string[];
-}
-
-interface FavoriteProduct {
-  id: number;
-  name: string;
-  price: number;
-  store: string;
-}
+import { useFavoritesData } from "@/hooks/useFavoritesData";
+import { useFavoritesDialogs } from "@/hooks/useFavoritesDialogs";
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("lists");
-  const [showDialog, setShowDialog] = useState(false);
-  const [showProductsDialog, setShowProductsDialog] = useState(false);
-  const [editingList, setEditingList] = useState<FavoriteList | null>(null);
-  const [managingList, setManagingList] = useState<FavoriteList | null>(null);
-  const [listName, setListName] = useState("");
-  const navigate = useNavigate();
-  const { showToast } = useFavoritesToast();
 
-  const [favoriteLists, setFavoriteLists] = useState<FavoriteList[]>([{
-    id: 1,
-    name: "Spesa settimanale",
-    itemCount: 12,
-    lastUsed: "2 giorni fa",
-    items: ["Latte", "Pane", "Frutta", "Verdura", "Pasta", "Formaggio"]
-  }, {
-    id: 2,
-    name: "Cena speciale",
-    itemCount: 8,
-    lastUsed: "1 settimana fa",
-    items: ["Carne", "Vino", "Formaggio", "Pane", "Verdura"]
-  }, {
-    id: 3,
-    name: "Colazione",
-    itemCount: 5,
-    lastUsed: "3 giorni fa",
-    items: ["Caffè", "Latte", "Cereali", "Frutta", "Yogurt"]
-  }]);
+  const {
+    favoriteLists,
+    favoriteProducts,
+    handleSaveList,
+    handleUpdateList,
+    handleDeleteProduct,
+    handleUseList,
+    handleAddToCart,
+    handleDuplicate,
+    handleSchedule,
+    handleShare
+  } = useFavoritesData();
 
-  const [favoriteProducts, setFavoriteProducts] = useState<FavoriteProduct[]>([{
-    id: 1,
-    name: "Latte Parzialmente Scremato",
-    price: 1.29,
-    store: "Esselunga"
-  }, {
-    id: 2,
-    name: "Pane Casereccio",
-    price: 2.50,
-    store: "Fornaio Locale"
-  }, {
-    id: 3,
-    name: "Pasta De Cecco",
-    price: 1.45,
-    store: "Conad"
-  }, {
-    id: 4,
-    name: "Parmigiano Reggiano",
-    price: 4.99,
-    store: "Esselunga"
-  }, {
-    id: 5,
-    name: "Caffè Lavazza",
-    price: 3.75,
-    store: "Carrefour"
-  }]);
+  const {
+    showDialog,
+    showProductsDialog,
+    editingList,
+    managingList,
+    listName,
+    setListName,
+    handleAddList,
+    handleEditList,
+    handleManageProducts,
+    closeDialog,
+    closeProductsDialog,
+    updateManagingList
+  } = useFavoritesDialogs();
 
-  const filteredLists = favoriteLists.filter(list => list.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  const filteredProducts = favoriteProducts.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const filteredLists = favoriteLists.filter(list => 
+    list.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  const filteredProducts = favoriteProducts.filter(product => 
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const handleAddList = () => {
-    setEditingList(null);
-    setListName("");
-    setShowDialog(true);
-  };
-
-  const handleEditList = (list: FavoriteList) => {
-    setEditingList(list);
-    setListName(list.name);
-    setShowDialog(true);
-  };
-
-  const handleSaveList = () => {
-    if (!listName.trim()) {
-      showToast("error", {
-        title: "Nome lista richiesto",
-        description: "Inserisci un nome per la lista",
-        variant: "destructive"
-      });
-      return;
-    }
-    if (editingList) {
-      setFavoriteLists(prevLists => prevLists.map(item => item.id === editingList.id ? {
-        ...item,
-        name: listName
-      } : item));
-      showToast("list-updated", {
-        title: "Lista aggiornata",
-        description: `La lista "${listName}" è stata aggiornata`
-      });
-    } else {
-      const newList: FavoriteList = {
-        id: Date.now(),
-        name: listName,
-        itemCount: 0,
-        lastUsed: "Mai",
-        items: []
-      };
-      setFavoriteLists(prev => [...prev, newList]);
-      showToast("list-added", {
-        title: "Lista aggiunta",
-        description: `La lista "${listName}" è stata creata`
-      });
-    }
-    setShowDialog(false);
-  };
-
-  const handleManageProducts = (list: FavoriteList) => {
-    setManagingList(list);
-    setShowProductsDialog(true);
-  };
-
-  const handleUpdateList = (updatedList: FavoriteList) => {
-    setFavoriteLists(prevLists => 
-      prevLists.map(list => 
-        list.id === updatedList.id ? updatedList : list
-      )
-    );
-    setManagingList(updatedList);
-  };
-
-  const handleDeleteProduct = (id: number) => {
-    setFavoriteProducts(prevProducts => prevProducts.filter(product => product.id !== id));
-    showToast("product-removed", {
-      title: "Prodotto rimosso",
-      description: "Il prodotto è stato rimosso dai preferiti"
-    });
-  };
-
-  const handleUseList = (list: FavoriteList) => {
-    showToast("list-used", {
-      title: "Lista utilizzata",
-      description: `Hai aggiunto "${list.name}" alla tua spesa`
-    });
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
-  };
-
-  const handleAddToCart = (product: FavoriteProduct) => {
-    showToast("product-added", {
-      title: "Prodotto aggiunto",
-      description: `${product.name} aggiunto al carrello`
-    });
-  };
-
-  const handleDuplicate = (listId: number) => {
-    const originalList = favoriteLists.find(list => list.id === listId);
-    if (originalList) {
-      const duplicatedList: FavoriteList = {
-        ...originalList,
-        id: Date.now(),
-        name: `${originalList.name} (Copia)`,
-        lastUsed: "Mai"
-      };
-      setFavoriteLists(prev => [...prev, duplicatedList]);
-      showToast("list-duplicated", {
-        title: "Lista duplicata",
-        description: `"${originalList.name}" è stata duplicata`
-      });
+  const onSaveList = () => {
+    const success = handleSaveList(listName, editingList);
+    if (success) {
+      closeDialog();
     }
   };
 
-  const handleSchedule = (listId: number) => {
-    showToast("schedule", {
-      title: "Pianificazione",
-      description: "Funzione di pianificazione in arrivo!"
-    });
-  };
-
-  const handleShare = async (listId: number, listName: string) => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Lista spesa: ${listName}`,
-          text: `Dai un'occhiata alla mia lista della spesa!`,
-          url: `${window.location.origin}/shared-list/${listId}`
-        });
-      } catch (error) {
-        navigator.clipboard.writeText(`${window.location.origin}/shared-list/${listId}`);
-        showToast("link-copied", {
-          title: "Link copiato",
-          description: "Link condiviso copiato negli appunti!"
-        });
-      }
-    } else {
-      navigator.clipboard.writeText(`${window.location.origin}/shared-list/${listId}`);
-      showToast("link-copied", {
-        title: "Link copiato",
-        description: "Link condiviso copiato negli appunti!"
-      });
-    }
+  const onUpdateList = (updatedList: any) => {
+    handleUpdateList(updatedList);
+    updateManagingList(updatedList);
   };
 
   return (
@@ -280,18 +122,18 @@ const FavoritesPage = () => {
 
         <ListManagementDialog
           isOpen={showDialog}
-          onClose={() => setShowDialog(false)}
+          onClose={closeDialog}
           listName={listName}
           setListName={setListName}
-          onSave={handleSaveList}
+          onSave={onSaveList}
           isEditing={!!editingList}
         />
 
         <ListProductsDialog
           isOpen={showProductsDialog}
-          onClose={() => setShowProductsDialog(false)}
+          onClose={closeProductsDialog}
           list={managingList}
-          onUpdateList={handleUpdateList}
+          onUpdateList={onUpdateList}
         />
 
         <Footer productsCount={0} />

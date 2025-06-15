@@ -1,15 +1,8 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Plus, ShoppingCart, Trash2, AlertCircle } from "lucide-react";
-
-interface FavoriteProduct {
-  id: number;
-  name: string;
-  price: number;
-  store: string;
-}
+import { FavoriteProduct } from "@/types/favorites";
 
 interface FavoriteProductsProps {
   filteredProducts: FavoriteProduct[];
