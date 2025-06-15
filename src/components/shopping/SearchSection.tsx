@@ -32,7 +32,8 @@ export const SearchSection = ({
         onAddProduct={onAddProduct}
       />
       
-      {showSuggestions && suggestions && suggestions.length > 0 && (
+      {/* Show suggestions when there's at least 1 character and we have suggestions */}
+      {searchTerm.length >= 1 && suggestions && suggestions.length > 0 && (
         <ProductSuggestions
           suggestions={suggestions}
           onSelectSuggestion={onSelectSuggestion}
