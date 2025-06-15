@@ -79,9 +79,9 @@ export const FavoriteLists = ({
                           size="sm"
                           variant="ghost"
                           onClick={() => handleManageProducts(list)}
-                          className="h-6 w-6 p-0 text-primary-600 hover:text-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 ml-auto"
+                          className="h-8 w-8 p-0 text-primary-600 hover:text-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20 ml-auto rounded-lg"
                         >
-                          <Plus size={12} />
+                          <Plus size={14} />
                         </Button>
                       </div>
                       <p className="text-xs text-gray-500 dark:text-gray-400 text-left">
@@ -89,9 +89,9 @@ export const FavoriteLists = ({
                       </p>
                     </div>
                     <Button 
-                      size="icon" 
+                      size="sm" 
                       variant="ghost" 
-                      className="h-8 w-8 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" 
+                      className="h-8 w-8 p-0 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" 
                       onClick={() => onEditList(list)}
                     >
                       <Pencil size={14} />
@@ -111,14 +111,14 @@ export const FavoriteLists = ({
                     )}
                   </div>
                   
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button
                             variant="ghost"
-                            size="icon"
-                            className="h-10 w-10 rounded-xl bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600"
+                            size="sm"
+                            className="h-10 w-10 p-0 rounded-xl bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600"
                             onClick={() => handleDuplicate(list.id)}
                           >
                             <Copy size={16} className="text-gray-600 dark:text-gray-400" />
@@ -133,8 +133,8 @@ export const FavoriteLists = ({
                         <TooltipTrigger asChild>
                           <Button
                             variant="ghost"
-                            size="icon"
-                            className="h-10 w-10 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 transition-colors border border-blue-200 dark:border-blue-800"
+                            size="sm"
+                            className="h-10 w-10 p-0 rounded-xl bg-blue-50 hover:bg-blue-100 dark:bg-blue-900/20 dark:hover:bg-blue-900/30 transition-colors border border-blue-200 dark:border-blue-800"
                             onClick={() => handleSchedule(list.id)}
                           >
                             <Calendar size={16} className="text-blue-600 dark:text-blue-400" />
@@ -149,8 +149,8 @@ export const FavoriteLists = ({
                         <TooltipTrigger asChild>
                           <Button
                             variant="ghost"
-                            size="icon"
-                            className="h-10 w-10 rounded-xl bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 transition-colors border border-green-200 dark:border-green-800"
+                            size="sm"
+                            className="h-10 w-10 p-0 rounded-xl bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/30 transition-colors border border-green-200 dark:border-green-800"
                             onClick={() => handleShare(list.id, list.name)}
                           >
                             <Share2 size={16} className="text-green-600 dark:text-green-400" />
@@ -165,7 +165,7 @@ export const FavoriteLists = ({
                     <Button 
                       variant="default" 
                       size="sm" 
-                      className="h-10 px-6 text-sm font-medium bg-green-500 hover:bg-green-600 text-white rounded-xl shadow-sm" 
+                      className="h-10 px-4 text-sm font-medium bg-green-500 hover:bg-green-600 text-white rounded-xl shadow-sm flex-shrink-0" 
                       onClick={() => handleUseList(list)}
                     >
                       <ShoppingCart size={16} className="mr-2" />
