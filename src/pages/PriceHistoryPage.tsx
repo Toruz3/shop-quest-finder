@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { Card } from "@/components/ui/card";
@@ -8,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { useProductSearch } from "@/hooks/useProductSearch";
+import { ProductSuggestions } from "@/components/shopping/ProductSuggestions";
 
 // Sample price history data
 const priceData = [{
@@ -180,8 +183,20 @@ const PriceHistoryPage = () => {
   const [selectedTab, setSelectedTab] = useState("tracked");
   const [selectedPeriod, setSelectedPeriod] = useState("30days");
   const [selectedProduct, setSelectedProduct] = useState<number | null>(1);
+  
+  // Add product search functionality
+  const { suggestions, isLoading } = useProductSearch(searchTerm);
+  
   const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
   const selectedProductData = products.find(p => p.id === selectedProduct);
+  
+  const handleSelectSuggestion = (productName: string) => {
+    const product = products.find(p => p.name.toLowerCase() === productName.toLowerCase());
+    if (product) {
+      setSelectedProduct(product.id);
+      setSearchTerm("");
+    }
+  };
   
   return (
     <div className="min-h-screen relative overflow-hidden pb-20 bg-white dark:bg-gray-900">
@@ -204,6 +219,14 @@ const PriceHistoryPage = () => {
               className="pr-10 py-5 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-300 focus:ring focus:ring-primary-200 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full" 
             />
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+            
+            {/* Product suggestions */}
+            {searchTerm.length >= 1 && suggestions && suggestions.length > 0 && (
+              <ProductSuggestions
+                suggestions={suggestions}
+                onSelectSuggestion={handleSelectSuggestion}
+              />
+            )}
           </div>
           
           <Tabs defaultValue="tracked" className="mb-4" onValueChange={setSelectedTab}>
@@ -220,23 +243,10 @@ const PriceHistoryPage = () => {
             </TabsList>
           </Tabs>
           
-          {/* Product selector and period filter */}
+          {/* Period filter only - removed product selector */}
           <div className="flex gap-2 mb-4">
-            <Select onValueChange={value => setSelectedProduct(Number(value))} defaultValue="1">
-              <SelectTrigger className="flex-1 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-                <SelectValue placeholder="Seleziona prodotto" />
-              </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-                {products.map(product => (
-                  <SelectItem key={product.id} value={product.id.toString()} className="text-gray-900 dark:text-gray-100">
-                    {product.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            
             <Select onValueChange={setSelectedPeriod} defaultValue="30days">
-              <SelectTrigger className="w-32 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+              <SelectTrigger className="w-full bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                 <SelectValue placeholder="Periodo" />
               </SelectTrigger>
               <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
