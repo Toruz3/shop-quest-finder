@@ -1,3 +1,4 @@
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -68,15 +69,14 @@ export const ListProductsDialog = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent 
-        className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-8rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
+        className="max-w-sm w-[calc(100vw-2rem)] max-h-[60vh] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
         style={{
-          margin: '1rem !important',
-          marginTop: '2rem !important',
-          marginBottom: '12rem !important',
-          right: '1rem !important',
-          bottom: 'auto !important',
-          top: '50% !important',
-          transform: 'translateY(-50%) !important'
+          position: 'fixed !important',
+          left: '50% !important',
+          top: 'calc(50vh - 5rem) !important',
+          transform: 'translate(-50%, -50%) !important',
+          margin: '0 !important',
+          zIndex: '50 !important'
         }}
       >
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
