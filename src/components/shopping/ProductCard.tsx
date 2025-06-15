@@ -48,9 +48,9 @@ export const ProductCard = ({
       <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-green-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
         <div className="flex items-center gap-4">
           
-          {/* Immagine Prodotto - più grande */}
+          {/* Immagine Prodotto - senza contorno grigio */}
           <div className="flex-shrink-0">
-            <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 p-2 flex items-center justify-center overflow-hidden shadow-sm">
+            <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 p-2 flex items-center justify-center overflow-hidden">
               {product.imageUrl ? (
                 <img 
                   src={product.imageUrl} 
@@ -64,7 +64,7 @@ export const ProductCard = ({
                 />
               ) : null}
               <div className={`w-full h-full flex items-center justify-center ${product.imageUrl ? 'hidden' : ''}`}>
-                <div className="w-6 h-6 bg-gradient-to-br from-green-300 to-blue-300 rounded-md shadow-sm"></div>
+                <div className="w-6 h-6 bg-gradient-to-br from-green-300 to-blue-300 rounded-md"></div>
               </div>
             </div>
           </div>
@@ -74,8 +74,8 @@ export const ProductCard = ({
             <ProductInfo product={product} />
           </div>
 
-          {/* Controlli Quantità - spostati più a destra e ridotti */}
-          <div className="flex-shrink-0 ml-auto">
+          {/* Controlli Quantità - spostati ancora più a destra */}
+          <div className="flex-shrink-0 ml-auto pl-4">
             <ProductQuantityControls 
               quantity={product.quantity}
               onQuantityChange={handleQuantityChange}

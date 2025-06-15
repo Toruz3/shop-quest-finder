@@ -16,12 +16,12 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
       </h3>
       <div className="flex items-center gap-3 flex-wrap">
         {product.supermarket && (
-          <span className="text-xs text-gray-700 bg-gray-100 px-2 py-1 rounded-full font-medium shadow-sm">
+          <span className="text-xs text-gray-700 bg-gray-100 px-2 py-1 rounded-full font-medium">
             {product.supermarket}
           </span>
         )}
         {product.price && (
-          <span className="font-bold text-sm text-gray-700 bg-gray-100 px-2 py-1 rounded-full shadow-sm">
+          <span className="font-bold text-sm text-gray-700 bg-gray-100 px-2 py-1 rounded-full">
             €{product.price.toFixed(2)}
           </span>
         )}
