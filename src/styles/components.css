@@ -1,27 +1,114 @@
 
 @layer components {
-  .card-hover { @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1; }
-  .btn-primary { @apply bg-primary text-primary-foreground font-medium shadow-md hover:shadow-lg hover:bg-primary/90 hover:shadow-primary/20 transition-all duration-300; min-height: 48px; border-radius: 8px; padding: 0 16px;}
-  .btn-secondary { @apply bg-secondary text-secondary-foreground font-medium border border-border hover:bg-secondary/80 transition-all duration-300; min-height: 48px; border-radius: 8px; padding: 0 16px;}
-  .card { @apply bg-card rounded-xl border border-border shadow-card; border-radius: 12px;}
-  .mobile-card { @apply p-4 rounded-xl shadow-sm hover:shadow-md transition-all;}
-  .mobile-button { @apply h-12 rounded-lg active:scale-95 transition-transform; min-height: 48px;}
-  .mobile-input { @apply h-14 text-base px-4 rounded-lg;}
-  .search-bar { @apply h-14 px-4 rounded-lg shadow-search flex items-center bg-card border border-border;}
-  .fab-button { @apply fixed rounded-full shadow-lg active:scale-95 transition-transform z-30 bottom-24 right-5;}
-  .bottom-sheet { @apply fixed bottom-0 left-0 right-0 bg-background rounded-t-xl shadow-xl z-40 transform transition-transform duration-300;}
+  .card-hover { 
+    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1 cursor-pointer;
+  }
+  
+  .btn-primary { 
+    @apply bg-primary text-primary-foreground font-medium shadow-md hover:shadow-lg hover:bg-primary/90 hover:shadow-primary/20 transition-all duration-300 btn-enhanced; 
+    min-height: 48px; 
+    border-radius: 12px; 
+    padding: 0 20px;
+  }
+  
+  .btn-secondary { 
+    @apply bg-secondary text-secondary-foreground font-medium border border-border hover:bg-secondary/80 transition-all duration-300 btn-enhanced; 
+    min-height: 48px; 
+    border-radius: 12px; 
+    padding: 0 20px;
+  }
+  
+  .card { 
+    @apply bg-card rounded-xl border border-border shadow-card state-transition; 
+    border-radius: 16px;
+  }
+  
+  .mobile-card { 
+    @apply p-5 rounded-xl shadow-sm hover:shadow-md transition-all touch-feedback;
+  }
+  
+  .mobile-button { 
+    @apply h-12 rounded-xl active:scale-95 transition-transform touch-feedback; 
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .mobile-input { 
+    @apply h-14 text-base px-4 rounded-xl border-2 focus:border-primary/50 transition-all;
+  }
+  
+  .search-bar { 
+    @apply h-14 px-4 rounded-xl shadow-search flex items-center bg-card border-2 border-border hover:border-primary/30 focus-within:border-primary/50 transition-all;
+  }
+  
+  .fab-button { 
+    @apply fixed rounded-full shadow-lg active:scale-95 transition-transform z-30 bottom-24 right-5 btn-enhanced;
+  }
+  
+  .bottom-sheet { 
+    @apply fixed bottom-0 left-0 right-0 bg-background rounded-t-xl shadow-xl z-40 transform transition-transform duration-300;
+  }
+  
   .bottom-sheet-open { @apply translate-y-0;}
   .bottom-sheet-closed { @apply translate-y-full;}
   .toast-bottom { @apply bottom-20 top-auto !important;}
 
-  /* Category chip styles with dark theme support */
-  .category-chip { @apply flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-200; height: 40px;}
-  .category-chip-active { @apply bg-primary/15 text-primary font-medium;}
-  .category-chip-inactive { @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;}
+  /* Enhanced category chips with better touch targets */
+  .category-chip { 
+    @apply flex items-center gap-2 px-4 py-3 rounded-full text-sm whitespace-nowrap transition-all duration-200 touch-feedback; 
+    height: 44px;
+    min-width: 44px;
+  }
+  .category-chip-active { 
+    @apply bg-primary/15 text-primary font-medium border-2 border-primary/30;
+  }
+  .category-chip-inactive { 
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 border-2 border-transparent hover:border-border;
+  }
 
-  /* Soft dark theme enhancements */
+  /* Improved soft dark theme */
   .soft-transition { @apply transition-colors duration-200 ease-in-out; }
-  .hover-soft { @apply hover:bg-muted/50 soft-transition; }
-  .menu-item { @apply p-3 flex items-center justify-between hover:bg-muted/30 soft-transition; }
-  .section-header { @apply p-3 bg-muted/20 border-b border-border; }
+  .hover-soft { @apply hover:bg-muted/50 soft-transition touch-feedback; }
+  .menu-item { 
+    @apply p-4 flex items-center justify-between hover:bg-muted/30 soft-transition touch-feedback rounded-lg; 
+    min-height: 56px;
+  }
+  .section-header { @apply p-4 bg-muted/20 border-b border-border rounded-t-lg; }
+
+  /* Enhanced product cards */
+  .product-card {
+    @apply bg-white dark:bg-gray-800 rounded-xl border-2 border-gray-100 dark:border-gray-700 p-4 transition-all duration-200 hover:border-primary/30 hover:shadow-md swipe-indicator touch-feedback;
+  }
+
+  /* Loading states */
+  .loading-skeleton {
+    @apply bg-gray-200 dark:bg-gray-700 animate-pulse rounded;
+  }
+
+  .loading-shimmer {
+    @apply shimmer bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700;
+  }
+
+  /* Enhanced form elements */
+  .form-input {
+    @apply w-full px-4 py-3 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+    min-height: 48px;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2;
+  }
+
+  /* Success/Error states */
+  .state-success {
+    @apply border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300;
+  }
+
+  .state-error {
+    @apply border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300;
+  }
+
+  .state-warning {
+    @apply border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300;
+  }
 }
