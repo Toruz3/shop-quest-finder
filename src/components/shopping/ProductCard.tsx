@@ -45,7 +45,7 @@ export const ProductCard = ({
       className="w-full"
     >
       {/* Card principale del prodotto */}
-      <div className="bg-white dark:bg-gray-50 rounded-t-xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.01] transition-all duration-200 border-b-0">
+      <div className="bg-white dark:bg-gray-50 rounded-t-xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:bg-gray-50/50 dark:hover:bg-gray-100/50 transition-all duration-200 border-b-0">
         <div className="flex items-center gap-3">
           
           {/* Immagine Prodotto */}

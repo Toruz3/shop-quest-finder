@@ -42,7 +42,7 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({ 
     <div className="w-full">
       <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
         <CollapsibleTrigger asChild>
-          <button className="w-full flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50 text-sm font-medium transition-all duration-200 px-4 py-2 rounded-b-xl border border-gray-100 border-t-0 hover:border-blue-300 bg-white dark:bg-gray-50">
+          <button className="w-full flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700 hover:bg-blue-50/70 text-sm font-medium transition-all duration-200 px-4 py-2 rounded-b-xl border border-gray-100 border-t-0 bg-white dark:bg-gray-50">
             <BarChart3 size={16} strokeWidth={2} />
             <span>Confronta Prezzi</span>
           </button>
