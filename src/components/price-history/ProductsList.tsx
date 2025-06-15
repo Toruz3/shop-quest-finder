@@ -1,13 +1,6 @@
 
 import { ProductListItem } from "./ProductListItem";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  trend: "down" | "up" | "stable";
-  discount: string | null;
-}
+import { Product } from "@/data/priceHistoryProducts";
 
 interface ProductsListProps {
   products: Product[];

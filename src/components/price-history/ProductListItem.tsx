@@ -3,14 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TrendingDown, TrendingUp } from "lucide-react";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  trend: "down" | "up" | "stable";
-  discount: string | null;
-}
+import { Product } from "@/data/priceHistoryProducts";
 
 interface ProductListItemProps {
   product: Product;

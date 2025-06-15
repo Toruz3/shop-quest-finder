@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Calendar, TrendingDown, TrendingUp } from "lucide-react";
+import { Product } from "@/data/priceHistoryProducts";
 
 // Sample price history data
 const priceData = [{
@@ -47,14 +48,6 @@ const priceData = [{
   Conad: 2.45,
   Carrefour: 2.40
 }];
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  trend: "down" | "up" | "stable";
-  discount: string | null;
-}
 
 interface PriceChartProps {
   selectedProduct: Product | null;
