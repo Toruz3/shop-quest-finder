@@ -14,14 +14,14 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({
       <h3 className="font-semibold text-base text-gray-900 mb-2 line-clamp-1 leading-tight text-left">
         {product.name}
       </h3>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-1">
         {product.supermarket && (
           <span className="text-sm text-gray-600 font-medium">
             {product.supermarket}
           </span>
         )}
         {product.price && (
-          <span className="font-bold text-base text-gray-900 ml-2">
+          <span className="font-bold text-base text-gray-900">
             €{product.price.toFixed(2)}
           </span>
         )}
