@@ -74,11 +74,11 @@ export const ProductCard = ({
       transition={{ duration: 0.3 }}
       className="bg-white dark:bg-gray-50 rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.02] transition-all duration-200 w-full"
     >
-      <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4">
+      <div className="flex flex-row items-center gap-4">
         
         {/* SEZIONE SINISTRA - Immagine Prodotto */}
         <div className="flex-shrink-0">
-          <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-gray-100 dark:bg-gray-200 p-2 flex items-center justify-center overflow-hidden">
+          <div className="w-20 h-20 rounded-xl bg-gray-100 dark:bg-gray-200 p-2 flex items-center justify-center overflow-hidden">
             {product.imageUrl ? (
               <img 
                 src={product.imageUrl} 
@@ -98,7 +98,7 @@ export const ProductCard = ({
         </div>
         
         {/* SEZIONE CENTRALE - Informazioni Prodotto */}
-        <div className="flex-1 flex flex-col justify-center min-h-20 text-center md:text-left">
+        <div className="flex-1 flex flex-col justify-center min-h-20">
           <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-800 mb-1 leading-tight">
             {product.name}
           </h3>
@@ -115,7 +115,7 @@ export const ProductCard = ({
         </div>
 
         {/* SEZIONE DESTRA - Controlli Quantità e Azioni */}
-        <div className="flex-shrink-0 flex flex-col items-center md:items-end gap-3">
+        <div className="flex-shrink-0 flex flex-col items-end gap-3">
           
           {/* Controllo Quantità */}
           <div className="flex items-center bg-gray-100 dark:bg-gray-200 rounded-full px-3 py-2 gap-3">
@@ -148,7 +148,7 @@ export const ProductCard = ({
             </CollapsibleTrigger>
             
             <CollapsibleContent>
-              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-100 rounded-xl w-full md:w-64">
+              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-100 rounded-xl w-64">
                 {isLoading ? (
                   <div className="text-center text-xs text-gray-500 dark:text-gray-600 py-2">
                     <div className="inline-flex items-center gap-2">
