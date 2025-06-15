@@ -68,7 +68,7 @@ export const ListProductsDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="m-4 mb-20 max-w-sm max-h-[calc(100vh-160px)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl">
+      <DialogContent className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mx-4 mb-24 mt-4 max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-8rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl">
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <Package className="text-primary" size={18} />
@@ -123,7 +123,7 @@ export const ListProductsDialog = ({
           {/* Products list */}
           <div className="flex-1 overflow-y-auto">
             {filteredItems.length > 0 ? (
-              <div className="space-y-1">
+              <div className="space-y-1.5">
                 <AnimatePresence mode="popLayout">
                   {filteredItems.map((item, index) => (
                     <motion.div
@@ -136,12 +136,12 @@ export const ListProductsDialog = ({
                         duration: 0.15, 
                         delay: index * 0.02
                       }}
-                      className="group flex items-center gap-2 p-2 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/20 hover:bg-primary/5 transition-all duration-150"
+                      className="group flex items-center gap-3 p-2.5 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/20 hover:bg-primary/5 transition-all duration-150"
                     >
                       <img 
                         src={getProductImage(item)} 
                         alt={item}
-                        className="w-8 h-8 rounded-md object-cover bg-gray-100 dark:bg-gray-700"
+                        className="w-8 h-8 rounded-md object-cover bg-gray-100 dark:bg-gray-700 flex-shrink-0"
                       />
                       <span className="flex-1 text-gray-900 dark:text-gray-100 text-sm font-medium truncate">
                         {item}
@@ -150,7 +150,7 @@ export const ListProductsDialog = ({
                         size="icon"
                         variant="ghost"
                         onClick={() => handleRemoveProduct(item)}
-                        className="h-6 w-6 opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-150"
+                        className="h-6 w-6 opacity-0 group-hover:opacity-100 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all duration-150 flex-shrink-0"
                       >
                         <X size={12} />
                       </Button>
