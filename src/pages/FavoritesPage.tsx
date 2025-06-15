@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { FavoriteLists } from "@/components/favorites/FavoriteLists";
 import { FavoriteProducts } from "@/components/favorites/FavoriteProducts";
 import { ListManagementDialog } from "@/components/favorites/ListManagementDialog";
+import { ListProductsDialog } from "@/components/favorites/ListProductsDialog";
 import { useFavoritesToast } from "@/hooks/useFavoritesToast";
 
 interface FavoriteList {
@@ -30,7 +30,9 @@ const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("lists");
   const [showDialog, setShowDialog] = useState(false);
+  const [showProductsDialog, setShowProductsDialog] = useState(false);
   const [editingList, setEditingList] = useState<FavoriteList | null>(null);
+  const [managingList, setManagingList] = useState<FavoriteList | null>(null);
   const [listName, setListName] = useState("");
   const navigate = useNavigate();
   const { showToast } = useFavoritesToast();
@@ -130,6 +132,20 @@ const FavoritesPage = () => {
       });
     }
     setShowDialog(false);
+  };
+
+  const handleManageProducts = (list: FavoriteList) => {
+    setManagingList(list);
+    setShowProductsDialog(true);
+  };
+
+  const handleUpdateList = (updatedList: FavoriteList) => {
+    setFavoriteLists(prevLists => 
+      prevLists.map(list => 
+        list.id === updatedList.id ? updatedList : list
+      )
+    );
+    setManagingList(updatedList);
   };
 
   const handleDeleteProduct = (id: number) => {
@@ -247,6 +263,7 @@ const FavoritesPage = () => {
                   onDuplicate={handleDuplicate}
                   onSchedule={handleSchedule}
                   onShare={handleShare}
+                  onManageProducts={handleManageProducts}
                 />
               </TabsContent>
               
@@ -268,6 +285,13 @@ const FavoritesPage = () => {
           setListName={setListName}
           onSave={handleSaveList}
           isEditing={!!editingList}
+        />
+
+        <ListProductsDialog
+          isOpen={showProductsDialog}
+          onClose={() => setShowProductsDialog(false)}
+          list={managingList}
+          onUpdateList={handleUpdateList}
         />
 
         <Footer productsCount={0} />

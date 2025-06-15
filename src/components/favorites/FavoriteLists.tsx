@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
-import { Plus, ShoppingCart, Pencil, Copy, Calendar, Share2, AlertCircle } from "lucide-react";
+import { Plus, ShoppingCart, Pencil, Copy, Calendar, Share2, AlertCircle, Package } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useFavoritesToast } from "@/hooks/useFavoritesToast";
 
@@ -24,6 +24,7 @@ interface FavoriteListsProps {
   onDuplicate: (listId: number) => void;
   onSchedule: (listId: number) => void;
   onShare: (listId: number, listName: string) => void;
+  onManageProducts: (list: FavoriteList) => void;
 }
 
 export const FavoriteLists = ({
@@ -33,7 +34,8 @@ export const FavoriteLists = ({
   onUseList,
   onDuplicate,
   onSchedule,
-  onShare
+  onShare,
+  onManageProducts
 }: FavoriteListsProps) => {
   const { showToast } = useFavoritesToast();
 
@@ -51,6 +53,10 @@ export const FavoriteLists = ({
 
   const handleShare = async (listId: number, listName: string) => {
     onShare(listId, listName);
+  };
+
+  const handleManageProducts = (list: FavoriteList) => {
+    onManageProducts(list);
   };
 
   return (
@@ -72,8 +78,18 @@ export const FavoriteLists = ({
               <Card className="overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-primary-200 transition-all duration-300 shadow-sm hover:shadow-md">
                 <div className="p-3">
                   <div className="flex justify-between items-start">
-                    <div>
-                      <h3 className="font-medium text-gray-800 dark:text-gray-100 text-left">{list.name}</h3>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-medium text-gray-800 dark:text-gray-100 text-left">{list.name}</h3>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={() => handleManageProducts(list)}
+                          className="h-6 w-6 p-0 text-primary-600 hover:text-primary-700 hover:bg-primary-50 dark:hover:bg-primary-900/20"
+                        >
+                          <Package size={12} />
+                        </Button>
+                      </div>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-left">
                         {list.itemCount} prodotti • Usata {list.lastUsed}
                       </p>
