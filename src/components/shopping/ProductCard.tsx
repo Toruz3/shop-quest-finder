@@ -42,18 +42,18 @@ export const ProductCard = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className="bg-white dark:bg-gray-50 rounded-2xl p-4 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.01] transition-all duration-200 w-full"
+      className="bg-white dark:bg-gray-50 rounded-xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.01] transition-all duration-200 w-full"
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-center gap-3">
         
-        {/* Immagine Prodotto */}
+        {/* Immagine Prodotto - più piccola */}
         <div className="flex-shrink-0">
-          <div className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-gray-200 p-2 flex items-center justify-center overflow-hidden">
+          <div className="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-200 p-1.5 flex items-center justify-center overflow-hidden">
             {product.imageUrl ? (
               <img 
                 src={product.imageUrl} 
                 alt={product.name}
-                className="w-full h-full object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-md"
                 loading="lazy"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none';
@@ -62,34 +62,28 @@ export const ProductCard = ({
               />
             ) : null}
             <div className={`w-full h-full flex items-center justify-center ${product.imageUrl ? 'hidden' : ''}`}>
-              <div className="w-6 h-6 bg-gray-300 dark:bg-gray-400 rounded"></div>
+              <div className="w-4 h-4 bg-gray-300 dark:bg-gray-400 rounded"></div>
             </div>
           </div>
         </div>
         
-        {/* Contenuto principale */}
+        {/* Informazioni Prodotto - layout compatto */}
         <div className="flex-1 min-w-0">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            
-            {/* Informazioni Prodotto */}
-            <div className="flex-1 min-w-0">
-              <ProductInfo product={product} />
-            </div>
+          <ProductInfo product={product} />
+        </div>
 
-            {/* Controlli e azioni */}
-            <div className="flex items-center gap-3 flex-shrink-0">
-              
-              {/* Controlli Quantità */}
-              <ProductQuantityControls 
-                quantity={product.quantity}
-                onQuantityChange={handleQuantityChange}
-              />
+        {/* Controlli in orizzontale - più compatti */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          
+          {/* Controlli Quantità */}
+          <ProductQuantityControls 
+            quantity={product.quantity}
+            onQuantityChange={handleQuantityChange}
+          />
 
-              {/* Confronta prezzi */}
-              <ProductPriceComparison product={product} />
-              
-            </div>
-          </div>
+          {/* Confronta prezzi */}
+          <ProductPriceComparison product={product} />
+          
         </div>
       </div>
     </motion.div>
