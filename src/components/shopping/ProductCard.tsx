@@ -42,10 +42,10 @@ export const ProductCard = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
-      className="w-full space-y-2"
+      className="w-full"
     >
       {/* Card principale del prodotto */}
-      <div className="bg-white dark:bg-gray-50 rounded-xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.01] transition-all duration-200">
+      <div className="bg-white dark:bg-gray-50 rounded-t-xl p-3 shadow-sm border border-gray-100 hover:shadow-md hover:scale-[1.01] transition-all duration-200 border-b-0">
         <div className="flex items-center gap-3">
           
           {/* Immagine Prodotto */}
@@ -85,7 +85,7 @@ export const ProductCard = ({
         </div>
       </div>
 
-      {/* Sezione Confronta Prezzi - ora sotto la card e a tutta larghezza */}
+      {/* Sezione Confronta Prezzi - attaccata alla card principale */}
       <div className="w-full">
         <ProductPriceComparison product={product} />
       </div>
