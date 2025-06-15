@@ -45,13 +45,15 @@ const PriceHistoryPage = () => {
           
           <ProductsFilter
             selectedTab={selectedTab}
-            selectedPeriod={selectedPeriod}
             onTabChange={setSelectedTab}
-            onPeriodChange={setSelectedPeriod}
           />
           
           {/* Price chart - Only show when a product is selected */}
-          <PriceChart selectedProduct={selectedProductData} />
+          <PriceChart 
+            selectedProduct={selectedProductData} 
+            selectedPeriod={selectedPeriod}
+            onPeriodChange={setSelectedPeriod}
+          />
           
           {/* Products list */}
           <ProductsList

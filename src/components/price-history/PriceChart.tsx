@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Calendar, TrendingDown, TrendingUp } from "lucide-react";
 import { Product } from "@/data/priceHistoryProducts";
@@ -51,9 +51,11 @@ const priceData = [{
 
 interface PriceChartProps {
   selectedProduct: Product | null;
+  selectedPeriod: string;
+  onPeriodChange: (value: string) => void;
 }
 
-export const PriceChart = ({ selectedProduct }: PriceChartProps) => {
+export const PriceChart = ({ selectedProduct, selectedPeriod, onPeriodChange }: PriceChartProps) => {
   if (!selectedProduct) return null;
 
   return (
@@ -98,9 +100,17 @@ export const PriceChart = ({ selectedProduct }: PriceChartProps) => {
           <Calendar size={12} />
           Ultimo aggiornamento: oggi
         </div>
-        <Button size="sm" variant="outline" className="h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-          Confronta più prodotti
-        </Button>
+        <Select onValueChange={onPeriodChange} value={selectedPeriod}>
+          <SelectTrigger className="w-32 h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+            <SelectValue placeholder="Periodo" />
+          </SelectTrigger>
+          <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+            <SelectItem value="7days" className="text-gray-900 dark:text-gray-100">7 giorni</SelectItem>
+            <SelectItem value="30days" className="text-gray-900 dark:text-gray-100">30 giorni</SelectItem>
+            <SelectItem value="90days" className="text-gray-900 dark:text-gray-100">3 mesi</SelectItem>
+            <SelectItem value="365days" className="text-gray-900 dark:text-gray-100">1 anno</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </Card>
   );
