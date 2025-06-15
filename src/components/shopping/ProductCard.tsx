@@ -1,8 +1,6 @@
-
-
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Minus, Plus, BarChart3 } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -96,29 +94,25 @@ export const ProductCard = ({
               </div>
             </div>
 
-            {/* Quantity controls - extremely small */}
-            <div className="flex items-center gap-0.5 flex-shrink-0">
-              <Button 
-                variant="outline" 
-                size="icon" 
-                className="h-3 w-3 rounded-full border p-0" 
+            {/* Quantity controls - compact text counter */}
+            <div className="flex items-center gap-1 flex-shrink-0 bg-gray-50 rounded-full px-2 py-1">
+              <button 
+                className="text-gray-600 hover:text-gray-800 text-xs font-bold w-3 h-3 flex items-center justify-center" 
                 onClick={() => onUpdateQuantity(product.id, false)} 
               >
-                <Minus className="h-1 w-1" />
-              </Button>
+                −
+              </button>
 
-              <span className="text-xs font-medium min-w-[1rem] text-center px-1">
+              <span className="text-xs font-medium text-gray-800 min-w-[8px] text-center">
                 {product.quantity}
               </span>
 
-              <Button 
-                variant="outline" 
-                size="icon" 
-                className="h-3 w-3 rounded-full border p-0" 
+              <button 
+                className="text-gray-600 hover:text-gray-800 text-xs font-bold w-3 h-3 flex items-center justify-center" 
                 onClick={() => onUpdateQuantity(product.id, true)} 
               >
-                <Plus className="h-1 w-1" />
-              </Button>
+                +
+              </button>
             </div>
           </div>
         </div>
@@ -178,4 +172,3 @@ export const ProductCard = ({
     </motion.div>
   );
 };
-
