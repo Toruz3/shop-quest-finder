@@ -2,12 +2,42 @@
 import { ShoppingCart, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 interface EmptyStateProps {
   onAddSampleProducts: () => void;
 }
 
 export const EmptyState = ({ onAddSampleProducts }: EmptyStateProps) => {
+  const [activeToasts, setActiveToasts] = useState<Set<string>>(new Set());
+
+  const showToast = (toastKey: string, toastConfig: any) => {
+    if (activeToasts.has(toastKey)) return;
+    
+    setActiveToasts(prev => new Set(prev).add(toastKey));
+    
+    const { dismiss } = toast(toastConfig);
+    
+    setTimeout(() => {
+      setActiveToasts(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(toastKey);
+        return newSet;
+      });
+    }, 1500);
+    
+    return dismiss;
+  };
+
+  const handleAddSampleProducts = () => {
+    onAddSampleProducts();
+    showToast("sample-products-added", {
+      title: "Prodotti aggiunti",
+      description: "Prodotti di esempio aggiunti alla lista"
+    });
+  };
+
   return (
     <div className="flex flex-col items-center text-center space-y-6 py-8">
       <motion.div 
@@ -34,7 +64,7 @@ export const EmptyState = ({ onAddSampleProducts }: EmptyStateProps) => {
       
       <Button 
         variant="outline"
-        onClick={onAddSampleProducts}
+        onClick={handleAddSampleProducts}
         className="bg-card border-primary/20 text-primary hover:bg-primary/5 group"
       >
         <Plus className="w-4 h-4 mr-2 group-hover:scale-110 transition-all" />

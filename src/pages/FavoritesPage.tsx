@@ -18,6 +18,7 @@ const FavoritesPage = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [editingList, setEditingList] = useState<any>(null);
   const [listName, setListName] = useState("");
+  const [activeToasts, setActiveToasts] = useState<Set<string>>(new Set());
   const navigate = useNavigate();
 
   const [favoriteLists, setFavoriteLists] = useState([{
@@ -69,6 +70,24 @@ const FavoritesPage = () => {
   const filteredLists = favoriteLists.filter(list => list.name.toLowerCase().includes(searchTerm.toLowerCase()));
   const filteredProducts = favoriteProducts.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
+  const showToast = (toastKey: string, toastConfig: any) => {
+    if (activeToasts.has(toastKey)) return;
+    
+    setActiveToasts(prev => new Set(prev).add(toastKey));
+    
+    const { dismiss } = toast(toastConfig);
+    
+    setTimeout(() => {
+      setActiveToasts(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(toastKey);
+        return newSet;
+      });
+    }, 1500);
+    
+    return dismiss;
+  };
+
   const handleAddList = () => {
     setEditingList(null);
     setListName("");
@@ -83,7 +102,7 @@ const FavoritesPage = () => {
 
   const handleSaveList = () => {
     if (!listName.trim()) {
-      toast({
+      showToast("error", {
         title: "Nome lista richiesto",
         description: "Inserisci un nome per la lista",
         variant: "destructive"
@@ -95,7 +114,7 @@ const FavoritesPage = () => {
         ...item,
         name: listName
       } : item));
-      toast({
+      showToast("list-updated", {
         title: "Lista aggiornata",
         description: `La lista "${listName}" è stata aggiornata`
       });
@@ -108,7 +127,7 @@ const FavoritesPage = () => {
         items: []
       };
       setFavoriteLists(prev => [...prev, newList]);
-      toast({
+      showToast("list-added", {
         title: "Lista aggiunta",
         description: `La lista "${listName}" è stata creata`
       });
@@ -118,14 +137,14 @@ const FavoritesPage = () => {
 
   const handleDeleteProduct = (id: number) => {
     setFavoriteProducts(prevProducts => prevProducts.filter(product => product.id !== id));
-    toast({
+    showToast("product-removed", {
       title: "Prodotto rimosso",
       description: "Il prodotto è stato rimosso dai preferiti"
     });
   };
 
   const handleUseList = (list: any) => {
-    toast({
+    showToast("list-used", {
       title: "Lista utilizzata",
       description: `Hai aggiunto "${list.name}" alla tua spesa`
     });
@@ -135,7 +154,7 @@ const FavoritesPage = () => {
   };
 
   const handleAddToCart = (product: any) => {
-    toast({
+    showToast("product-added", {
       title: "Prodotto aggiunto",
       description: `${product.name} aggiunto al carrello`
     });
@@ -151,7 +170,7 @@ const FavoritesPage = () => {
         lastUsed: "Mai"
       };
       setFavoriteLists(prev => [...prev, duplicatedList]);
-      toast({
+      showToast("list-duplicated", {
         title: "Lista duplicata",
         description: `"${originalList.name}" è stata duplicata`
       });
@@ -159,7 +178,7 @@ const FavoritesPage = () => {
   };
 
   const handleSchedule = (listId: number) => {
-    toast({
+    showToast("schedule", {
       title: "Pianificazione",
       description: "Funzione di pianificazione in arrivo!"
     });
@@ -175,14 +194,14 @@ const FavoritesPage = () => {
         });
       } catch (error) {
         navigator.clipboard.writeText(`${window.location.origin}/shared-list/${listId}`);
-        toast({
+        showToast("link-copied", {
           title: "Link copiato",
           description: "Link condiviso copiato negli appunti!"
         });
       }
     } else {
       navigator.clipboard.writeText(`${window.location.origin}/shared-list/${listId}`);
-      toast({
+      showToast("link-copied", {
         title: "Link copiato",
         description: "Link condiviso copiato negli appunti!"
       });
