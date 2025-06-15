@@ -48,9 +48,9 @@ export const ProductCard = ({
       <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-green-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
         <div className="flex items-center gap-4">
           
-          {/* Immagine Prodotto - senza contorno grigio */}
+          {/* Immagine Prodotto - senza sfondo grigio */}
           <div className="flex-shrink-0">
-            <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-green-50 to-blue-50 p-2 flex items-center justify-center overflow-hidden">
+            <div className="w-20 h-20 rounded-xl p-2 flex items-center justify-center overflow-hidden">
               {product.imageUrl ? (
                 <img 
                   src={product.imageUrl} 
@@ -75,7 +75,7 @@ export const ProductCard = ({
           </div>
 
           {/* Controlli Quantità - spostati ancora più a destra */}
-          <div className="flex-shrink-0 ml-auto pl-4">
+          <div className="flex-shrink-0 ml-auto pl-6">
             <ProductQuantityControls 
               quantity={product.quantity}
               onQuantityChange={handleQuantityChange}
