@@ -298,20 +298,24 @@ const AccountPage = () => {
                   </div>
                   
                   <div className="divide-y divide-gray-200 dark:divide-gray-700">
-                    <div className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                      <div className="flex flex-col">
+                    <div className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                      <div className="flex flex-col flex-1 mr-3">
                         <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Tema scuro</h4>
                         <p className="text-xs text-gray-600 dark:text-gray-400 text-left">Cambia l'aspetto dell'app</p>
                       </div>
-                      <Switch checked={isDarkMode} onCheckedChange={handleThemeToggle} className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600" />
+                      <div className="flex-shrink-0">
+                        <Switch checked={isDarkMode} onCheckedChange={handleThemeToggle} className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600" />
+                      </div>
                     </div>
                     
-                    <div className="flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                      <div className="flex flex-col">
+                    <div className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                      <div className="flex flex-col flex-1 mr-3">
                         <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 text-left">Notifiche</h4>
                         <p className="text-xs text-gray-600 dark:text-gray-400 text-left">Gestisci avvisi e promemoria</p>
                       </div>
-                      <Switch checked={notificationsEnabled} onCheckedChange={toggleNotifications} className="h-5 w-9 data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600" />
+                      <div className="flex-shrink-0">
+                        <Switch checked={notificationsEnabled} onCheckedChange={toggleNotifications} className="data-[state=checked]:bg-primary data-[state=unchecked]:bg-gray-300 dark:data-[state=unchecked]:bg-gray-600" />
+                      </div>
                     </div>
                     
                     <div className="menu-item">
