@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Plus, ShoppingCart, Trash2, AlertCircle } from "lucide-react";
 import { FavoriteProduct } from "@/types/favorites";
+import { ProductSelectionDialog } from "./ProductSelectionDialog";
+import { useState } from "react";
 
 interface FavoriteProductsProps {
   filteredProducts: FavoriteProduct[];
   onDeleteProduct: (id: number) => void;
   onAddToCart: (product: FavoriteProduct) => void;
-  onAddProduct: () => void;
+  onAddProduct: (productData: { name: string; category: string }) => void;
 }
 
 export const FavoriteProducts = ({
@@ -18,6 +20,12 @@ export const FavoriteProducts = ({
   onAddToCart,
   onAddProduct
 }: FavoriteProductsProps) => {
+  const [showProductDialog, setShowProductDialog] = useState(false);
+
+  const handleSelectProduct = (productData: { name: string; category: string }) => {
+    onAddProduct(productData);
+  };
+
   return (
     <>
       <div className="flex justify-between items-center mb-3">
@@ -28,7 +36,7 @@ export const FavoriteProducts = ({
           variant="outline" 
           size="sm" 
           className="h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100"
-          onClick={onAddProduct}
+          onClick={() => setShowProductDialog(true)}
         >
           <Plus size={14} className="mr-1" />
           Aggiungi prodotto
@@ -74,6 +82,12 @@ export const FavoriteProducts = ({
           </div>
         </Card>
       )}
+
+      <ProductSelectionDialog
+        isOpen={showProductDialog}
+        onClose={() => setShowProductDialog(false)}
+        onSelectProduct={handleSelectProduct}
+      />
     </>
   );
 };
