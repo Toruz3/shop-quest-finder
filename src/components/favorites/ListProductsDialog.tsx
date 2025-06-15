@@ -1,4 +1,5 @@
 
+
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -71,12 +72,12 @@ export const ListProductsDialog = ({
       <DialogContent 
         className="max-w-sm w-[calc(100vw-2rem)] max-h-[60vh] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
         style={{
-          position: 'fixed !important',
-          left: '50% !important',
-          top: 'calc(50vh - 5rem) !important',
-          transform: 'translate(-50%, -50%) !important',
-          margin: '0 !important',
-          zIndex: '50 !important'
+          position: 'fixed',
+          left: '50%',
+          top: 'calc(50vh - 5rem)',
+          transform: 'translate(-50%, -50%)',
+          margin: '0',
+          zIndex: 50
         }}
       >
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
@@ -192,3 +193,4 @@ export const ListProductsDialog = ({
     </Dialog>
   );
 };
+
