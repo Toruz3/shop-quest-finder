@@ -8,6 +8,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FavoriteList } from "@/types/favorites";
 import { productDatabase } from "@/data/productDatabase";
+import { useProductSearch } from "@/hooks/useProductSearch";
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
 
 interface ListProductsDialogProps {
   isOpen: boolean;
@@ -24,6 +26,10 @@ export const ListProductsDialog = ({
 }: ListProductsDialogProps) => {
   const [newProduct, setNewProduct] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // Use product search hook for suggestions
+  const { suggestions, isLoading } = useProductSearch(newProduct);
 
   if (!list) return null;
 
@@ -34,16 +40,18 @@ export const ListProductsDialog = ({
     return product?.imageUrl || 'https://placehold.co/40x40?text=P';
   };
 
-  const handleAddProduct = () => {
-    if (newProduct.trim() && !list.items.includes(newProduct.trim())) {
+  const handleAddProduct = (productName?: string) => {
+    const nameToAdd = productName || newProduct.trim();
+    if (nameToAdd && !list.items.includes(nameToAdd)) {
       const updatedList = {
         ...list,
-        items: [...list.items, newProduct.trim()],
+        items: [...list.items, nameToAdd],
         itemCount: list.items.length + 1,
         lastUsed: "Ora"
       };
       onUpdateList(updatedList);
       setNewProduct("");
+      setShowSuggestions(false);
     }
   };
 
@@ -60,6 +68,15 @@ export const ListProductsDialog = ({
     if (e.key === 'Enter') {
       handleAddProduct();
     }
+  };
+
+  const handleInputChange = (value: string) => {
+    setNewProduct(value);
+    setShowSuggestions(value.length > 0);
+  };
+
+  const handleSuggestionSelect = (suggestion: any) => {
+    handleAddProduct(suggestion.name);
   };
 
   return (
@@ -87,24 +104,69 @@ export const ListProductsDialog = ({
         </DialogHeader>
         
         <div className="flex-1 overflow-hidden flex flex-col p-4 pt-3 space-y-3">
-          {/* Add new product section */}
-          <div className="flex gap-2 items-center">
-            <Input 
-              value={newProduct} 
-              onChange={e => setNewProduct(e.target.value)} 
-              onKeyPress={handleKeyPress} 
-              placeholder="Aggiungi prodotto..." 
-              className="flex-1 h-10 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-primary/20" 
-              autoFocus 
-            />
-            <Button 
-              onClick={handleAddProduct} 
-              disabled={!newProduct.trim() || list.items.includes(newProduct.trim())} 
-              className="h-10 w-10 p-0 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-40 hover:scale-105 active:scale-95 transition-all duration-200 ease-out shadow-sm hover:shadow-md flex items-center justify-center" 
-              size="sm"
-            >
-              <Plus size={16} />
-            </Button>
+          {/* Add new product section with suggestions */}
+          <div className="relative">
+            <div className="flex gap-2 items-center">
+              <div className="flex-1 relative">
+                <Input 
+                  value={newProduct} 
+                  onChange={e => handleInputChange(e.target.value)} 
+                  onKeyPress={handleKeyPress}
+                  onFocus={() => setShowSuggestions(newProduct.length > 0)}
+                  placeholder="Aggiungi prodotto..." 
+                  className="h-10 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-primary/20" 
+                  autoFocus 
+                />
+                
+                {/* Product suggestions dropdown */}
+                {showSuggestions && newProduct.length > 0 && (
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+                    {isLoading ? (
+                      <div className="p-3 text-sm text-gray-500 text-center">
+                        Caricamento...
+                      </div>
+                    ) : suggestions.length > 0 ? (
+                      <div className="py-1">
+                        {suggestions.slice(0, 5).map((suggestion) => (
+                          <button
+                            key={suggestion.id}
+                            onClick={() => handleSuggestionSelect(suggestion)}
+                            className="w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 text-sm"
+                          >
+                            <img 
+                              src={suggestion.imageUrl || 'https://placehold.co/24x24?text=P'} 
+                              alt={suggestion.name}
+                              className="w-6 h-6 rounded object-cover bg-gray-100 dark:bg-gray-700 flex-shrink-0"
+                            />
+                            <div className="flex-1">
+                              <div className="font-medium text-gray-900 dark:text-gray-100">
+                                {suggestion.name}
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                                {suggestion.category}
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="p-3 text-sm text-gray-500 text-center">
+                        Nessun prodotto trovato
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+              
+              <Button 
+                onClick={() => handleAddProduct()} 
+                disabled={!newProduct.trim() || list.items.includes(newProduct.trim())} 
+                className="h-10 w-10 p-0 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-40 hover:scale-105 active:scale-95 transition-all duration-200 ease-out shadow-sm hover:shadow-md flex items-center justify-center" 
+                size="sm"
+              >
+                <Plus size={16} />
+              </Button>
+            </div>
           </div>
           
           {/* Search and count */}
@@ -176,6 +238,14 @@ export const ListProductsDialog = ({
             )}
           </div>
         </div>
+
+        {/* Click outside handler to close suggestions */}
+        {showSuggestions && (
+          <div 
+            className="fixed inset-0 z-40" 
+            onClick={() => setShowSuggestions(false)}
+          />
+        )}
       </DialogContent>
     </Dialog>
   );
