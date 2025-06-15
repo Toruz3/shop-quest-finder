@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { FabMenu } from "@/components/ui/fab-menu";
@@ -20,6 +21,8 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState<ProductSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
+  const [selectionMode, setSelectionMode] = useState(false);
 
   useEffect(() => {
     if (searchTerm.length >= 1) {
@@ -161,6 +164,60 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
       });
     }
   };
+
+  // Selection functions for the new props
+  const handleSelectionChange = (id: number, selected: boolean) => {
+    setSelectedProducts(prev => 
+      selected 
+        ? [...prev, id]
+        : prev.filter(selectedId => selectedId !== id)
+    );
+  };
+
+  const handleSelectAll = () => {
+    setSelectedProducts(products.map(p => p.id));
+    setSelectionMode(true);
+  };
+
+  const handleDeselectAll = () => {
+    setSelectedProducts([]);
+    setSelectionMode(false);
+  };
+
+  const handleBulkDelete = () => {
+    const newProducts = products.filter(p => !selectedProducts.includes(p.id));
+    setProducts(newProducts);
+    setSelectedProducts([]);
+    setSelectionMode(false);
+    
+    toast({
+      title: "Prodotti rimossi",
+      description: "I prodotti selezionati sono stati rimossi",
+      duration: 3000,
+      className: "toast-bottom"
+    });
+  };
+
+  const handleBulkQuantityChange = (increment: boolean) => {
+    setProducts(prevProducts => 
+      prevProducts.map(product => {
+        if (selectedProducts.includes(product.id)) {
+          const newQuantity = increment 
+            ? product.quantity + 1 
+            : Math.max(1, product.quantity - 1);
+          return { ...product, quantity: newQuantity };
+        }
+        return product;
+      })
+    );
+    
+    toast({
+      title: increment ? "Quantità aumentata" : "Quantità diminuita",
+      description: `${selectedProducts.length} prodotti modificati`,
+      duration: 2000,
+      className: "toast-bottom"
+    });
+  };
   
   const fabActions = [
     {
@@ -245,6 +302,18 @@ export const ShoppingList = ({ onFindStores, isCalculating }: ShoppingListProps)
         onUpdateQuantity={updateQuantity}
         onRemoveProduct={removeProduct}
         onAddSampleProducts={handleAddSampleProducts}
+        selectedProducts={selectedProducts}
+        selectionMode={selectionMode}
+        setSelectionMode={setSelectionMode}
+        onSelectionChange={handleSelectionChange}
+        handleSelectAll={handleSelectAll}
+        handleDeselectAll={handleDeselectAll}
+        handleBulkDelete={handleBulkDelete}
+        handleBulkQuantityChange={handleBulkQuantityChange}
+        canUndo={false}
+        canRedo={false}
+        onUndo={() => {}}
+        onRedo={() => {}}
       />
 
       <ShoppingActionButton 

@@ -63,31 +63,32 @@ export const useShoppingState = () => {
   const handleUpdateQuantity = useCallback((id: number, increment: boolean) => {
     console.log('Updating quantity for product ID:', id, 'increment:', increment);
     
-    setProducts(prevProducts => {
-      return prevProducts.map((product) => {
-        if (product.id === id) {
-          if (!increment && product.quantity === 1) {
-            console.log('Product will be removed as quantity would become 0');
-            return null;
-          }
-          
-          const newQuantity = increment ? product.quantity + 1 : product.quantity - 1;
-          console.log('New quantity will be:', newQuantity);
-          
-          return {
-            ...product,
-            quantity: newQuantity,
-          };
+    const newProducts = products.map((product) => {
+      if (product.id === id) {
+        if (!increment && product.quantity === 1) {
+          console.log('Product will be removed as quantity would become 0');
+          return null;
         }
-        return product;
-      }).filter(Boolean) as Product[];
-    });
-  }, [setProducts]);
+        
+        const newQuantity = increment ? product.quantity + 1 : product.quantity - 1;
+        console.log('New quantity will be:', newQuantity);
+        
+        return {
+          ...product,
+          quantity: newQuantity,
+        };
+      }
+      return product;
+    }).filter(Boolean) as Product[];
+    
+    setProducts(newProducts);
+  }, [products, setProducts]);
 
   const handleRemoveProduct = useCallback((id: number) => {
     console.log('Removing product with ID:', id);
     const productToRemove = products.find(p => p.id === id);
-    setProducts(products.filter((product) => product.id !== id));
+    const newProducts = products.filter((product) => product.id !== id);
+    setProducts(newProducts);
     
     // Remove from selection if selected
     setSelectedProducts(prev => prev.filter(selectedId => selectedId !== id));
@@ -235,17 +236,17 @@ export const useShoppingState = () => {
   }, [products, selectedProducts, setProducts]);
 
   const handleBulkQuantityChange = useCallback((increment: boolean) => {
-    setProducts(prevProducts => {
-      return prevProducts.map(product => {
-        if (selectedProducts.includes(product.id)) {
-          const newQuantity = increment 
-            ? product.quantity + 1 
-            : Math.max(1, product.quantity - 1);
-          return { ...product, quantity: newQuantity };
-        }
-        return product;
-      });
+    const newProducts = products.map(product => {
+      if (selectedProducts.includes(product.id)) {
+        const newQuantity = increment 
+          ? product.quantity + 1 
+          : Math.max(1, product.quantity - 1);
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
     });
+    
+    setProducts(newProducts);
     
     toast({
       title: increment ? "Quantità aumentata" : "Quantità diminuita",
@@ -253,7 +254,7 @@ export const useShoppingState = () => {
       duration: 2000,
       className: "toast-bottom"
     });
-  }, [selectedProducts, setProducts]);
+  }, [products, selectedProducts, setProducts]);
 
   // Auto-disable selection mode when no products are selected
   useEffect(() => {
