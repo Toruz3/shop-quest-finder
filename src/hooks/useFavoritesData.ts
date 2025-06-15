@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FavoriteList, FavoriteProduct } from "@/types/favorites";
@@ -17,9 +16,9 @@ export const useFavoritesData = () => {
   }, {
     id: 2,
     name: "Cena speciale",
-    itemCount: 8,
+    itemCount: 7,
     lastUsed: "1 settimana fa",
-    items: ["Carne", "Vino", "Formaggio", "Pane", "Verdura"]
+    items: ["Carne", "Vino", "Formaggio", "Pane"]
   }, {
     id: 3,
     name: "Colazione",
