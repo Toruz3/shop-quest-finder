@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Minus, Plus, BarChart3 } from "lucide-react";
@@ -54,31 +55,31 @@ export const ProductCard = ({
       transition={{ duration: 0.2 }}
     >
       <Card className="overflow-hidden bg-white border border-gray-200 rounded-lg shadow-sm">
-        {/* Main product content - simplified layout */}
+        {/* Main product content - with larger image */}
         <div className="p-3">
           <div className="flex items-center gap-3">
-            {/* Product image - smaller */}
+            {/* Product image - larger */}
             {product.imageUrl ? (
               <img 
                 src={product.imageUrl} 
                 alt={product.name} 
-                className="w-12 h-12 object-cover rounded-lg flex-shrink-0" 
+                className="w-16 h-16 object-cover rounded-lg flex-shrink-0" 
               />
             ) : (
-              <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-                <span className="text-sm font-medium text-gray-400">
+              <div className="w-16 h-16 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                <span className="text-lg font-medium text-gray-400">
                   {product.name.charAt(0).toUpperCase()}
                 </span>
               </div>
             )}
 
-            {/* Product info - simplified */}
+            {/* Product info */}
             <div className="flex-1 min-w-0">
               <h3 className="font-medium text-gray-900 truncate text-sm">
                 {product.name}
               </h3>
               
-              {/* Price and supermarket - compact */}
+              {/* Price and supermarket */}
               <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
                 {product.price && (
                   <span className="font-medium text-gray-700">
@@ -94,15 +95,15 @@ export const ProductCard = ({
               </div>
             </div>
 
-            {/* Quantity controls - compact */}
-            <div className="flex items-center gap-2 flex-shrink-0">
+            {/* Quantity controls - smaller */}
+            <div className="flex items-center gap-1.5 flex-shrink-0">
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="h-8 w-8 rounded-full" 
+                className="h-6 w-6 rounded-full" 
                 onClick={() => onUpdateQuantity(product.id, false)} 
               >
-                <Minus className="h-3 w-3" />
+                <Minus className="h-2.5 w-2.5" />
               </Button>
 
               <span className="text-sm font-medium min-w-[1.5rem] text-center">
@@ -112,49 +113,49 @@ export const ProductCard = ({
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="h-8 w-8 rounded-full" 
+                className="h-6 w-6 rounded-full" 
                 onClick={() => onUpdateQuantity(product.id, true)} 
               >
-                <Plus className="h-3 w-3" />
+                <Plus className="h-2.5 w-2.5" />
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Price comparison section - unchanged */}
+        {/* Price comparison section - smaller */}
         <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
           <div className="border-t border-gray-100">
             <CollapsibleTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="w-full h-10 text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center justify-center gap-2 rounded-none text-sm"
+                className="w-full h-8 text-blue-600 hover:text-blue-700 hover:bg-blue-50 flex items-center justify-center gap-2 rounded-none text-xs"
               >
-                <BarChart3 className="h-4 w-4" />
+                <BarChart3 className="h-3 w-3" />
                 Confronta prezzi
               </Button>
             </CollapsibleTrigger>
             
             <CollapsibleContent>
-              <div className="bg-gray-50 p-3">
+              <div className="bg-gray-50 p-2">
                 {isLoading ? (
-                  <div className="text-center text-sm text-gray-500">
+                  <div className="text-center text-xs text-gray-500">
                     Caricamento...
                   </div>
                 ) : priceComparison && priceComparison.length > 0 ? (
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     {priceComparison.map((item, idx) => (
                       <div key={idx}>
-                        {idx > 0 && <Separator className="my-2 bg-gray-200" />}
+                        {idx > 0 && <Separator className="my-1.5 bg-gray-200" />}
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-gray-600">
+                          <span className="text-xs text-gray-600">
                             {item.supermarketName}
                           </span>
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium text-gray-900">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-medium text-gray-900">
                               €{item.price.toFixed(2)}
                             </span>
                             {item.isBestOffer && (
-                              <Badge variant="outline" className="bg-green-50 text-green-600 text-xs border-green-200">
+                              <Badge variant="outline" className="bg-green-50 text-green-600 text-[10px] border-green-200 px-1.5 py-0.5">
                                 Miglior prezzo
                               </Badge>
                             )}
@@ -164,7 +165,7 @@ export const ProductCard = ({
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center text-sm text-gray-500">
+                  <div className="text-center text-xs text-gray-500">
                     Nessun dato disponibile per il confronto
                   </div>
                 )}
