@@ -68,7 +68,15 @@ export const ListProductsDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="mx-4 my-4 mb-24 max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-8rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl">
+      <DialogContent 
+        className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-8rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
+        style={{
+          margin: '1rem !important',
+          marginBottom: '6rem !important',
+          right: '1rem !important',
+          bottom: '6rem !important'
+        }}
+      >
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-2">
             <Package className="text-primary" size={18} />
