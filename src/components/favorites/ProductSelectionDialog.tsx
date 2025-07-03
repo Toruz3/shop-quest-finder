@@ -34,7 +34,7 @@ export const ProductSelectionDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl fixed left-[50%] top-[calc(50%-3rem)] translate-x-[-50%] translate-y-[-50%]">
+      <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl fixed left-[50%] top-[calc(50%-2rem)] translate-x-[-50%] translate-y-[-50%]">
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
           <DialogTitle className="text-gray-900 dark:text-gray-100 text-base font-semibold flex items-center gap-2">
             <Plus className="text-primary" size={18} />
