@@ -123,7 +123,7 @@ const AccountPage = () => {
   }
   
   return (
-    <div className="h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
+    <div className="h-screen flex flex-col bg-background transition-colors duration-300">
       {/* Fixed Header Section */}
       <div className="flex-shrink-0 px-3 pt-4 pb-2">
         {/* Background decorations */}

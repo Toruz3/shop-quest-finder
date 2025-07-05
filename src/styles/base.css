@@ -28,10 +28,10 @@
   }
 
   .dark {
-    /* Unified gray-900 based dark theme for consistent appearance */
-    --background: 212 19% 9%;           /* #111827 - gray-900 */
+    /* Unified gray-800 based dark theme to eliminate double border effect */
+    --background: 215 25% 13%;          /* #1f2937 - gray-800 */
     --foreground: 210 40% 98%;          /* #f9fafb - gray-50 */
-    --card: 215 25% 13%;                /* #1f2937 - gray-800 */
+    --card: 215 25% 13%;                /* #1f2937 - gray-800 same as background */
     --card-foreground: 210 40% 98%;     /* #f9fafb - gray-50 */
     --popover: 215 25% 13%;             /* #1f2937 - gray-800 */
     --popover-foreground: 210 40% 98%;  /* #f9fafb - gray-50 */
