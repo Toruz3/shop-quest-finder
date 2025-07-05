@@ -123,21 +123,16 @@ const AccountPage = () => {
   }
   
   return (
-    <div className="h-screen flex flex-col bg-background transition-colors duration-300">
-      {/* Fixed Header Section */}
-      <div className="flex-shrink-0 px-3 pt-4 pb-2">
-        {/* Background decorations */}
-        <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
-        
-        <div className="max-w-md mx-auto relative z-10">
+    <div className="h-screen flex flex-col">
+      {/* Single Card Container */}
+      <div className="flex-1 bg-card m-3 rounded-xl overflow-hidden">
+        {/* Header Section */}
+        <div className="p-4 pb-2">
           <ProfileCard profileName={profileName} profileEmail={profileEmail} />
         </div>
-      </div>
 
-      {/* Scrollable Content Area with Tabs */}
-      <div className="flex-1 overflow-y-auto overscroll-contain" style={{ scrollBehavior: 'smooth' }}>
-        <div className="px-3 pb-24">
+        {/* Scrollable Content Area with Tabs */}
+        <div className="flex-1 overflow-y-auto overscroll-contain px-4 pb-6" style={{ scrollBehavior: 'smooth' }}>
           <div className="max-w-md mx-auto">
             <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab}>
               {/* Tab Navigation */}
