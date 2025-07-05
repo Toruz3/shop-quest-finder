@@ -66,7 +66,7 @@ const MapPage = () => {
 
   return (
     <motion.div 
-      className="min-h-screen w-full flex flex-col overflow-hidden bg-white dark:bg-gray-900" 
+      className="min-h-screen w-full flex flex-col overflow-hidden" 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
