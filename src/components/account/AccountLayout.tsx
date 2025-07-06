@@ -19,7 +19,7 @@ export const AccountLayout = ({ profileName, profileEmail, children }: AccountLa
         </div>
 
         {/* Scrollable Content Area with Tabs */}
-        <div className="flex-1 overflow-y-auto overscroll-contain px-2 pb-4" style={{ scrollBehavior: 'smooth' }}>
+        <div className="overflow-y-auto overscroll-contain px-2 pb-4 flex-1" style={{ scrollBehavior: 'smooth', height: 'calc(100vh - 180px)' }}>
           {children}
         </div>
       </div>
