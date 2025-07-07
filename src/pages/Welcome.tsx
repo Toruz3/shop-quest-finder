@@ -8,7 +8,7 @@ const Welcome = () => {
 
   return (
     <motion.div 
-      className="min-h-screen w-full flex flex-col justify-center items-center bg-white overflow-hidden relative"
+      className="min-h-screen w-full flex flex-col justify-center items-center bg-background overflow-hidden relative"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -37,10 +37,10 @@ const Welcome = () => {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <h1 className="text-4xl font-bold text-primary">
+          <h1 className="text-4xl font-bold text-foreground">
             Shop Quest
           </h1>
-          <p className="text-lg text-neutral-600 max-w-md">
+          <p className="text-lg text-muted-foreground max-w-md">
             La tua spesa intelligente. Confronta i prezzi, crea la lista e risparmia tempo e denaro.
           </p>
         </motion.div>
@@ -53,7 +53,7 @@ const Welcome = () => {
           transition={{ delay: 0.4, duration: 0.6 }}
         >
           <Button
-            className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 text-white shadow-lg transition-all duration-200 hover:scale-[1.02]"
+            className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-all duration-200 hover:scale-[1.02]"
             onClick={() => navigate("/auth")}
           >
             <LogIn className="mr-2 h-5 w-5" />
@@ -62,7 +62,7 @@ const Welcome = () => {
           
           <Button
             variant="outline"
-            className="w-full h-12 text-base font-semibold border-2 border-primary text-primary hover:bg-primary/5 transition-all duration-200 hover:scale-[1.02]"
+            className="w-full h-12 text-base font-semibold border-2 border-primary text-primary hover:bg-primary/5 hover:text-primary transition-all duration-200 hover:scale-[1.02]"
             onClick={() => navigate("/auth", { state: { tab: "register" } })}
           >
             <UserPlus className="mr-2 h-5 w-5" />
