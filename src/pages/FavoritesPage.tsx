@@ -66,11 +66,11 @@ const FavoritesPage = () => {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen relative overflow-hidden pb-20">
+      <div className="min-h-screen relative overflow-hidden pb-16">
         <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
         
-        <div className="container px-3 py-4 relative z-10">
+        <div className="container px-4 py-4 relative z-10">
           <div className="max-w-md mx-auto">
             <h1 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
               <Star className="text-primary" size={20} />
