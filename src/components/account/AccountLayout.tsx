@@ -10,7 +10,7 @@ interface AccountLayoutProps {
 
 export const AccountLayout = ({ profileName, profileEmail, children }: AccountLayoutProps) => {
   return (
-    <div className="min-h-screen flex flex-col pb-12">
+    <div className="min-h-screen flex flex-col pb-16">
       {/* Single Card Container */}
       <div className="bg-card m-0.5 rounded-xl">
         {/* Header Section */}
