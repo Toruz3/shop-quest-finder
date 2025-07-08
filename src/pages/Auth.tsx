@@ -172,7 +172,13 @@ const Auth = () => {
           
           {isLogin && <div className="flex items-center justify-between mt-2">
               <div className="flex items-center space-x-1">
-                <Checkbox id="rememberMe" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked === true)} className="!h-3 !w-3 [&>*]:!h-2.5 [&>*]:!w-2.5" />
+                <input 
+                  type="checkbox" 
+                  id="rememberMe" 
+                  checked={rememberMe} 
+                  onChange={(e) => setRememberMe(e.target.checked)} 
+                  className="h-3 w-3 rounded border-gray-300 text-primary focus:ring-primary focus:ring-1"
+                />
                 <Label htmlFor="rememberMe" className="text-xs cursor-pointer">
                   Remember me
                 </Label>
