@@ -84,18 +84,18 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
     <div className="w-full">
       <Collapsible open={isComparisonOpen} onOpenChange={setIsComparisonOpen}>
         <CollapsibleTrigger asChild>
-          <button className="w-full flex items-center justify-center gap-2 text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-sm font-semibold transition-all duration-300 px-4 py-2 rounded-b-xl border-2 border-blue-100 border-t-0 shadow-sm hover:shadow-md">
+          <button className="w-full flex items-center justify-center gap-2 text-primary-foreground bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-sm font-semibold transition-all duration-300 px-4 py-2 rounded-b-xl border-2 border-blue-100 border-t-0 shadow-sm hover:shadow-md">
             <BarChart3 size={16} strokeWidth={2.5} />
             <span>Confronta Prezzi</span>
           </button>
         </CollapsibleTrigger>
         
         <CollapsibleContent>
-          <div className="p-2 bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-b-xl shadow-sm border-2 border-gray-100 border-t-0 w-full">
+          <div className="p-2 bg-gradient-to-br from-muted/50 to-accent/10 rounded-b-xl shadow-sm border-2 border-border border-t-0 w-full">
             {isLoading ? (
-              <div className="text-center text-xs text-blue-600 py-2">
+              <div className="text-center text-xs text-primary py-2">
                 <div className="inline-flex items-center gap-2">
-                  <div className="w-3 h-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
                   <span className="font-medium">Caricamento prezzi...</span>
                 </div>
               </div>
@@ -103,10 +103,10 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
               <div className="space-y-1">
                 {priceComparison.map((item, idx) => (
                   <div key={idx}>
-                    {idx > 0 && <Separator className="my-1 bg-gray-200" />}
-                    <div className="flex justify-between items-center py-1.5 px-2 rounded-lg bg-white/60 hover:bg-white/80 transition-all duration-200">
+                    {idx > 0 && <Separator className="my-1 bg-border" />}
+                    <div className="flex justify-between items-center py-1.5 px-2 rounded-lg bg-card/60 hover:bg-card/80 transition-all duration-200">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-700 font-semibold">
+                        <span className="text-xs text-foreground font-semibold">
                           {item.supermarketName}
                         </span>
                         {item.isBestOffer && (
@@ -120,7 +120,7 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
                           </Badge>
                         )}
                       </div>
-                      <span className="text-sm font-bold text-gray-800">
+                      <span className="text-sm font-bold text-foreground">
                         €{item.price.toFixed(2)}
                       </span>
                     </div>
@@ -128,7 +128,7 @@ export const ProductPriceComparison: React.FC<ProductPriceComparisonProps> = ({
                 ))}
               </div>
             ) : (
-              <div className="text-center text-xs text-gray-600 py-2">
+              <div className="text-center text-xs text-muted-foreground py-2">
                 <span className="font-medium">
                   Nessun dato disponibile per il confronto prezzi
                 </span>

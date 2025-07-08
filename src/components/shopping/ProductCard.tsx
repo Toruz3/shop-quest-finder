@@ -68,7 +68,7 @@ export const ProductCard = ({
     duration: 0.3
   }} className="w-full">
       {/* Card principale del prodotto */}
-      <div className="bg-white rounded-t-xl p-4 shadow-sm border-2 border-green-100 hover:shadow-lg hover:bg-gray-50/30 transition-all duration-300 border-b-0">
+      <div className="bg-card rounded-t-xl p-4 shadow-sm border-2 border-green-100 hover:shadow-lg hover:bg-accent/5 transition-all duration-300 border-b-0">
         <div className="flex items-start gap-4">
           
           {/* Immagine Prodotto - senza sfondo grigio */}
@@ -87,7 +87,7 @@ export const ProductCard = ({
           {/* Contenuto principale */}
           <div className="flex-1 min-w-0">
             {/* Nome del prodotto */}
-            <h3 className="font-semibold text-base text-gray-900 mb-2 leading-tight text-left">
+            <h3 className="font-semibold text-base text-foreground mb-2 leading-tight text-left">
               {product.name}
             </h3>
             
@@ -95,10 +95,10 @@ export const ProductCard = ({
             <div className="flex items-center justify-between">
               {/* Supermercato e prezzo */}
               <div className="flex flex-col gap-1">
-                {product.supermarket && <span className="text-sm text-gray-600 font-medium text-left">
+                {product.supermarket && <span className="text-sm text-muted-foreground font-medium text-left">
                     {product.supermarket}
                   </span>}
-                {product.price && <span className="font-bold text-base text-gray-900 text-left">
+                {product.price && <span className="font-bold text-base text-foreground text-left">
                     €{product.price.toFixed(2)}
                   </span>}
               </div>
