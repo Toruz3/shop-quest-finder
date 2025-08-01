@@ -68,7 +68,7 @@ export const Footer = ({ isCalculating = false, productsCount = 0 }: FooterProps
             <Link 
               key={item.path}
               to={item.path} 
-              className={`flex flex-col items-center justify-center gap-1 text-xs py-1 ${
+              className={`flex flex-col items-center justify-center gap-0.5 text-xs py-1 ${
                 isActive(item.path) 
                   ? 'text-green-500 font-medium' 
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
