@@ -50,57 +50,57 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="mt-3 p-4 bg-card dark:bg-card border border-border dark:border-border rounded-xl space-y-4">
-            <div className="flex items-center space-x-3">
+          <div className="mt-3 p-3 bg-card dark:bg-card border border-border dark:border-border rounded-xl space-y-3">
+            <div className="flex items-center space-x-2">
               <Checkbox
                 id="openNow"
                 checked={filters.openNow}
                 onCheckedChange={(checked) => handleFilterChange('openNow', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-green-600 dark:text-green-400" />
+                <Clock className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
                 <label htmlFor="openNow" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Aperto ora
                 </label>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
               <Checkbox
                 id="hasParking"
                 checked={filters.hasParking}
                 onCheckedChange={(checked) => handleFilterChange('hasParking', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Car className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                <Car className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
                 <label htmlFor="hasParking" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Con parcheggio
                 </label>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
               <Checkbox
                 id="hasDelivery"
                 checked={filters.hasDelivery}
                 onCheckedChange={(checked) => handleFilterChange('hasDelivery', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Truck className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+                <Truck className="h-3.5 w-3.5 text-orange-600 dark:text-orange-400" />
                 <label htmlFor="hasDelivery" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Consegna disponibile
                 </label>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2">
               <Checkbox
                 id="hasServices"
                 checked={filters.hasServices}
                 onCheckedChange={(checked) => handleFilterChange('hasServices', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Zap className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                <Zap className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />
                 <label htmlFor="hasServices" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Servizi extra (farmacia, bar)
                 </label>
