@@ -37,7 +37,7 @@ export const ProductSelectionDialog = ({
       <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl fixed left-[50%] top-[calc(50%-2rem)] translate-x-[-50%] translate-y-[-50%]">
         <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
           <DialogTitle className="text-gray-900 dark:text-gray-100 text-base font-semibold flex items-center gap-2">
-            <Plus className="text-primary" size={18} />
+            <Plus className="text-green-500" size={18} />
             Aggiungi prodotto ai preferiti
           </DialogTitle>
         </DialogHeader>
@@ -49,7 +49,7 @@ export const ProductSelectionDialog = ({
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Cerca prodotti..."
-              className="h-10 pl-8 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg"
+              className="h-10 pl-8 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg focus:border-green-500 focus:ring-green-200"
               autoFocus
             />
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
@@ -71,7 +71,7 @@ export const ProductSelectionDialog = ({
                       <CommandItem
                         key={product.id}
                         onSelect={() => handleSelectProduct(product)}
-                        className="cursor-pointer p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg mb-1"
+                        className="cursor-pointer p-3 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg mb-1 transition-colors"
                       >
                         <div className="flex items-center gap-3 w-full">
                           <img
