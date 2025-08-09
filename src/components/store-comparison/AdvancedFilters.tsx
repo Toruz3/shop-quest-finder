@@ -59,7 +59,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
               />
               <div className="flex items-center gap-2">
                 <Clock className="h-3 w-3 text-green-600 dark:text-green-400" />
-                <label htmlFor="openNow" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
+                <label htmlFor="openNow" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Aperto ora
                 </label>
               </div>
@@ -73,7 +73,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
               />
               <div className="flex items-center gap-2">
                 <Car className="h-3 w-3 text-blue-600 dark:text-blue-400" />
-                <label htmlFor="hasParking" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
+                <label htmlFor="hasParking" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Con parcheggio
                 </label>
               </div>
@@ -87,7 +87,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
               />
               <div className="flex items-center gap-2">
                 <Truck className="h-3 w-3 text-orange-600 dark:text-orange-400" />
-                <label htmlFor="hasDelivery" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
+                <label htmlFor="hasDelivery" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Consegna disponibile
                 </label>
               </div>
@@ -101,7 +101,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
               />
               <div className="flex items-center gap-2">
                 <Zap className="h-3 w-3 text-purple-600 dark:text-purple-400" />
-                <label htmlFor="hasServices" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
+                <label htmlFor="hasServices" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
                   Servizi extra (farmacia, bar)
                 </label>
               </div>
@@ -111,7 +111,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
               <Button 
                 variant="ghost" 
                 size="sm"
-                className="w-full text-xs text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground"
+                className="w-full text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground"
                 onClick={() => onFiltersChange({
                   openNow: false,
                   hasParking: false,
