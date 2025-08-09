@@ -50,7 +50,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
           </Button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <div className="mt-3 p-3 bg-card dark:bg-card border border-border dark:border-border rounded-xl space-y-3">
+          <div className="mt-3 p-2 bg-card dark:bg-card border border-border dark:border-border rounded-lg space-y-2">
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="openNow"
@@ -58,8 +58,8 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
                 onCheckedChange={(checked) => handleFilterChange('openNow', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Clock className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
-                <label htmlFor="openNow" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
+                <Clock className="h-3 w-3 text-green-600 dark:text-green-400" />
+                <label htmlFor="openNow" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
                   Aperto ora
                 </label>
               </div>
@@ -72,8 +72,8 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
                 onCheckedChange={(checked) => handleFilterChange('hasParking', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Car className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-                <label htmlFor="hasParking" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
+                <Car className="h-3 w-3 text-blue-600 dark:text-blue-400" />
+                <label htmlFor="hasParking" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
                   Con parcheggio
                 </label>
               </div>
@@ -86,8 +86,8 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
                 onCheckedChange={(checked) => handleFilterChange('hasDelivery', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Truck className="h-3.5 w-3.5 text-orange-600 dark:text-orange-400" />
-                <label htmlFor="hasDelivery" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
+                <Truck className="h-3 w-3 text-orange-600 dark:text-orange-400" />
+                <label htmlFor="hasDelivery" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
                   Consegna disponibile
                 </label>
               </div>
@@ -100,8 +100,8 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
                 onCheckedChange={(checked) => handleFilterChange('hasServices', !!checked)}
               />
               <div className="flex items-center gap-2">
-                <Zap className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />
-                <label htmlFor="hasServices" className="text-sm font-medium text-foreground dark:text-foreground cursor-pointer">
+                <Zap className="h-3 w-3 text-purple-600 dark:text-purple-400" />
+                <label htmlFor="hasServices" className="text-xs font-medium text-foreground dark:text-foreground cursor-pointer">
                   Servizi extra (farmacia, bar)
                 </label>
               </div>
@@ -111,7 +111,7 @@ export const AdvancedFilters = ({ filters, onFiltersChange }: AdvancedFiltersPro
               <Button 
                 variant="ghost" 
                 size="sm"
-                className="w-full text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground"
+                className="w-full text-xs text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground"
                 onClick={() => onFiltersChange({
                   openNow: false,
                   hasParking: false,
