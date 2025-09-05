@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/hooks/use-theme";
+import { supabase } from "@/integrations/supabase/client";
 
 interface UseAccountHandlersProps {
   isDarkMode: boolean;
@@ -46,7 +47,7 @@ export const useAccountHandlers = ({
   setNewPassword,
   setConfirmPassword
 }: UseAccountHandlersProps) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
   const { toggleTheme } = useTheme();
   
@@ -84,7 +85,7 @@ export const useAccountHandlers = ({
     setShowProfileDialog(true);
   };
   
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
     if (!newName.trim()) {
       toast({
         variant: "destructive",
@@ -93,16 +94,44 @@ export const useAccountHandlers = ({
       });
       return;
     }
-    setProfileName(newName);
-    setProfileEmail(newEmail);
-    toast({
-      title: "Profilo aggiornato",
-      description: "Le modifiche al profilo sono state salvate"
-    });
-    setShowProfileDialog(false);
+
+    if (!user) {
+      toast({
+        variant: "destructive",
+        title: "Errore di autenticazione",
+        description: "Devi essere autenticato per aggiornare il profilo"
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ name: newName.trim() })
+        .eq("id", user.id);
+
+      if (error) {
+        throw error;
+      }
+
+      setProfileName(newName);
+      setProfileEmail(newEmail);
+      toast({
+        title: "Profilo aggiornato",
+        description: "Le modifiche al profilo sono state salvate"
+      });
+      setShowProfileDialog(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast({
+        variant: "destructive",
+        title: "Errore nell'aggiornamento",
+        description: "Impossibile aggiornare il profilo. Riprova più tardi."
+      });
+    }
   };
-  
-  const handleChangePassword = () => {
+
+  const handleChangePassword = async () => {
     if (!currentPassword || !newPassword || !confirmPassword) {
       toast({
         variant: "destructive",
@@ -111,6 +140,7 @@ export const useAccountHandlers = ({
       });
       return;
     }
+    
     if (newPassword !== confirmPassword) {
       toast({
         variant: "destructive",
@@ -119,14 +149,41 @@ export const useAccountHandlers = ({
       });
       return;
     }
-    toast({
-      title: "Password aggiornata",
-      description: "La tua password è stata modificata con successo"
-    });
-    setShowPasswordDialog(false);
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
+
+    if (newPassword.length < 6) {
+      toast({
+        variant: "destructive",
+        title: "Password troppo corta",
+        description: "La password deve essere di almeno 6 caratteri"
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase.auth.updateUser({ 
+        password: newPassword 
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      toast({
+        title: "Password aggiornata",
+        description: "La tua password è stata modificata con successo"
+      });
+      setShowPasswordDialog(false);
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (error: any) {
+      console.error("Error updating password:", error);
+      toast({
+        variant: "destructive",
+        title: "Errore nell'aggiornamento",
+        description: error.message || "Impossibile aggiornare la password. Riprova più tardi."
+      });
+    }
   };
 
   return {
