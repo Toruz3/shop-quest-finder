@@ -93,7 +93,7 @@ const FavoritesPage = () => {
                   Liste Preferite
                 </TabsTrigger>
                 <TabsTrigger value="products" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
-                  Prodotti preferiti
+                  Prodotti Preferiti
                 </TabsTrigger>
               </TabsList>
               
