@@ -87,28 +87,12 @@ const FavoritesPage = () => {
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
             </div>
             
-            <Tabs defaultValue="lists" value={activeTab} onValueChange={setActiveTab} className="mb-4">
-              <TabsList className="w-full grid grid-cols-2 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800">
-                <TabsTrigger value="lists" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
-                  Liste Preferite
-                </TabsTrigger>
+            <Tabs defaultValue="products" value={activeTab} onValueChange={setActiveTab} className="mb-4">
+              <TabsList className="w-full grid grid-cols-1 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800">
                 <TabsTrigger value="products" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
                   Prodotti Preferiti
                 </TabsTrigger>
               </TabsList>
-              
-              <TabsContent value="lists" className="mt-4">
-                <FavoriteLists
-                  filteredLists={filteredLists}
-                  onAddList={handleAddList}
-                  onEditList={handleEditList}
-                  onUseList={handleUseList}
-                  onDuplicate={handleDuplicate}
-                  onSchedule={handleSchedule}
-                  onShare={handleShare}
-                  onManageProducts={handleManageProducts}
-                />
-              </TabsContent>
               
               <TabsContent value="products" className="mt-4">
                 <FavoriteProducts
