@@ -61,11 +61,7 @@ const authenticatedRoutes = [
 ];
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { user, isLoading } = useAuth();
-  const location = useLocation();
-  
-  if (isLoading) return null; // loading
-  if (!user) return <Navigate to="/auth" state={{ from: location }} replace />;
+  // Auth temporarily disabled for development
   return <>{children}</>;
 }
 
