@@ -14,7 +14,7 @@ import { useFavoritesDialogs } from "@/hooks/useFavoritesDialogs";
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("lists");
+  const [activeTab, setActiveTab] = useState("products");
 
   const {
     favoriteLists,
