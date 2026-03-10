@@ -123,27 +123,6 @@ export const ShoppingFab = ({
                 <FilePlus2 className="h-5 w-5" />
               </Button>
             </motion.div>
-            
-            {/* Salva Lista - bottom position (closest to FAB) */}
-            <motion.div 
-              className="flex items-center justify-end space-x-3 rtl:space-x-reverse pointer-events-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ delay: 0.3, type: 'spring', stiffness: 300, damping: 25 }}
-            >
-              <span className="bg-card text-card-foreground py-1.5 px-3 rounded-md shadow-sm text-sm font-medium">
-                Salva Lista
-              </span>
-              <Button 
-                size="icon" 
-                className="bg-blue-500 hover:bg-blue-600 text-white rounded-full h-10 w-10 flex-shrink-0" 
-                onClick={handleSaveList}
-                aria-label="Salva lista"
-              >
-                <Save className="h-5 w-5" />
-              </Button>
-            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
