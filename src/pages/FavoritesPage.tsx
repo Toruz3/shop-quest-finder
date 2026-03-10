@@ -90,7 +90,7 @@ const FavoritesPage = () => {
             <Tabs defaultValue="lists" value={activeTab} onValueChange={setActiveTab} className="mb-4">
               <TabsList className="w-full grid grid-cols-2 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800">
                 <TabsTrigger value="lists" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
-                  Liste salvate
+                  Liste Preferite
                 </TabsTrigger>
                 <TabsTrigger value="products" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
                   Prodotti preferiti
