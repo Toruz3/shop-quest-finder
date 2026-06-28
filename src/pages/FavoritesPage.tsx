@@ -1,11 +1,9 @@
 
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { Star, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { FavoriteLists } from "@/components/favorites/FavoriteLists";
 import { FavoriteProducts } from "@/components/favorites/FavoriteProducts";
 import { ListManagementDialog } from "@/components/favorites/ListManagementDialog";
 import { ListProductsDialog } from "@/components/favorites/ListProductsDialog";
@@ -14,7 +12,6 @@ import { useFavoritesDialogs } from "@/hooks/useFavoritesDialogs";
 
 const FavoritesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeTab, setActiveTab] = useState("products");
 
   const {
     favoriteLists,
