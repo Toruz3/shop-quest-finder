@@ -35,7 +35,7 @@ export const ProductSelectionDialog = ({
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-card border-border rounded-xl shadow-xl fixed left-[50%] top-[calc(50%-2rem)] translate-x-[-50%] translate-y-[-50%]">
-        <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <DialogHeader className="flex-shrink-0 pb-3 border-b border-border">
           <DialogTitle className="text-foreground text-base font-semibold flex items-center gap-2">
             <Plus className="text-green-500" size={18} />
             Aggiungi prodotto ai preferiti
@@ -49,7 +49,7 @@ export const ProductSelectionDialog = ({
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               placeholder="Cerca prodotti..."
-              className="h-10 pl-8 text-sm bg-muted/40 border-gray-200 dark:border-gray-600 rounded-lg focus:border-green-500 focus:ring-green-200"
+              className="h-10 pl-8 text-sm bg-muted/40 border-border rounded-lg focus:border-primary focus:ring-primary/20"
               autoFocus
             />
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={14} />

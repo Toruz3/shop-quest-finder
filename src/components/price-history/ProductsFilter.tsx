@@ -13,13 +13,13 @@ export const ProductsFilter = ({
   return (
     <Tabs defaultValue="tracked" className="mb-4" onValueChange={onTabChange}>
       <TabsList className="w-full grid grid-cols-3 h-12 rounded-lg p-1 bg-muted">
-        <TabsTrigger value="tracked" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
+        <TabsTrigger value="tracked" className="rounded-md data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
           Monitorati
         </TabsTrigger>
-        <TabsTrigger value="offers" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
+        <TabsTrigger value="offers" className="rounded-md data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
           In offerta
         </TabsTrigger>
-        <TabsTrigger value="trends" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
+        <TabsTrigger value="trends" className="rounded-md data-[state=active]:bg-card data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
           Tendenze
         </TabsTrigger>
       </TabsList>

@@ -14,7 +14,7 @@ export const ProductImage: React.FC<ProductImageProps> = ({
   className = "w-20 h-20" 
 }) => {
   return (
-    <div className={`${className} rounded-xl bg-gray-50 dark:bg-gray-800 p-2 flex items-center justify-center overflow-hidden`}>
+    <div className={`${className} rounded-xl bg-muted/40 p-2 flex items-center justify-center overflow-hidden`}>
       {src ? (
         <img 
           src={src} 
@@ -27,10 +27,10 @@ export const ProductImage: React.FC<ProductImageProps> = ({
           }}
         />
       ) : (
-        <Package className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+        <Package className="w-8 h-8 text-muted-foreground" />
       )}
       <div className="hidden w-full h-full flex items-center justify-center">
-        <Package className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+        <Package className="w-8 h-8 text-muted-foreground" />
       </div>
     </div>
   );

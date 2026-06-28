@@ -46,7 +46,7 @@ export const PasswordDialog = ({
               type="password" 
               value={currentPassword} 
               onChange={e => setCurrentPassword(e.target.value)} 
-              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
           
@@ -57,7 +57,7 @@ export const PasswordDialog = ({
               type="password" 
               value={newPassword} 
               onChange={e => setNewPassword(e.target.value)} 
-              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
           
@@ -68,13 +68,13 @@ export const PasswordDialog = ({
               type="password" 
               value={confirmPassword} 
               onChange={e => setConfirmPassword(e.target.value)} 
-              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
         </div>
         
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-gray-200 dark:border-gray-600 text-foreground">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-border text-foreground">
             <X size={16} className="mr-1" />
             Annulla
           </Button>

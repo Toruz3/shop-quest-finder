@@ -36,7 +36,7 @@ export const StoreItem = ({ store }: StoreItemProps) => {
             {store.address} • {store.distance}
           </p>
           <div className="flex items-center gap-2 mt-2">
-            <Badge variant="outline" className="text-xs py-0 border-gray-200 dark:border-gray-600 text-muted-foreground">
+            <Badge variant="outline" className="text-xs py-0 border-border text-muted-foreground">
               {store.priceLevel}
             </Badge>
             <span className="text-xs text-muted-foreground">

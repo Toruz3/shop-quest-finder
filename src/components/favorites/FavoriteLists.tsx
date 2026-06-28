@@ -87,7 +87,7 @@ export const FavoriteLists = ({
                   </div>
                   
                   <div className="flex flex-wrap gap-1.5 mb-4">
-                    {list.items.slice(0, 5).map((item, idx) => <Badge key={idx} variant="outline" className="bg-muted/40 text-foreground border-gray-200 dark:border-gray-600 text-xs px-2 py-1 rounded-full">
+                    {list.items.slice(0, 5).map((item, idx) => <Badge key={idx} variant="outline" className="bg-muted/40 text-foreground border-border text-xs px-2 py-1 rounded-full">
                         {item}
                       </Badge>)}
                     {list.items.length > 5}
@@ -97,7 +97,7 @@ export const FavoriteLists = ({
                     <div className="flex items-center gap-2">
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="ghost" size="sm" className="h-10 w-10 p-0 rounded-xl bg-gray-50 hover:bg-muted dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-600" onClick={() => handleDuplicate(list.id)}>
+                          <Button variant="ghost" size="sm" className="h-10 w-10 p-0 rounded-xl bg-muted/40 hover:bg-muted dark:hover:bg-gray-700 transition-colors border border-border" onClick={() => handleDuplicate(list.id)}>
                             <Copy size={16} className="text-muted-foreground" />
                           </Button>
                         </TooltipTrigger>

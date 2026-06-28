@@ -28,7 +28,7 @@ const toastVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-border bg-white dark:bg-gray-800 text-foreground border-gray-200 dark:border-gray-700",
+        default: "border-border bg-card text-foreground border-gray-200 dark:border-gray-700",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",
         success: "border-primary-600 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-400",
@@ -64,7 +64,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "inline-flex h-10 shrink-0 items-center justify-center rounded-lg border bg-transparent px-4 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700",
+      "inline-flex h-10 shrink-0 items-center justify-center rounded-lg border bg-transparent px-4 text-sm font-medium ring-offset-background transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 group-[.destructive]:border-muted/40 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive border-border hover:bg-gray-50 dark:hover:bg-gray-700",
       className
     )}
     {...props}
@@ -96,7 +96,7 @@ const ToastTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ToastPrimitives.Title
     ref={ref}
-    className={cn("text-base font-semibold text-left text-gray-900 dark:text-gray-100", className)}
+    className={cn("text-base font-semibold text-left text-foreground", className)}
     {...props}
   />
 ))

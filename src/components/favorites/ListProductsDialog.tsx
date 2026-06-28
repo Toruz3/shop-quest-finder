@@ -84,7 +84,7 @@ export const ListProductsDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-border rounded-xl shadow-xl"
+      <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-card border-border rounded-xl shadow-xl"
         style={{
           position: 'fixed',
           left: '50%',
@@ -94,7 +94,7 @@ export const ListProductsDialog = ({
           zIndex: 50
         }}
       >
-        <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <DialogHeader className="flex-shrink-0 pb-3 border-b border-border">
           <div className="flex items-center gap-2">
             <Package className="text-primary" size={18} />
             <div>
@@ -119,13 +119,13 @@ export const ListProductsDialog = ({
                   onKeyPress={handleKeyPress}
                   onFocus={() => setShowSuggestions(newProduct.length > 0)}
                   placeholder="Aggiungi prodotto..."
-                  className="h-10 text-sm bg-muted/40 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-primary/20"
+                  className="h-10 text-sm bg-muted/40 border-border rounded-lg focus:ring-1 focus:ring-primary/20"
                   autoFocus
                 />
                 
                 {/* Product suggestions dropdown */}
                 {showSuggestions && newProduct.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
                     {isLoading ? (
                       <div className="p-3 text-sm text-gray-500 text-center">
                         Caricamento...
@@ -172,7 +172,7 @@ export const ListProductsDialog = ({
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder={`Cerca tra ${list.items.length} prodotti...`}
-                className="h-10 pl-8 text-sm bg-muted/40 border-gray-200 dark:border-gray-600 rounded-lg"
+                className="h-10 pl-8 text-sm bg-muted/40 border-border rounded-lg"
               />
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={12} />
             </div>
@@ -216,7 +216,7 @@ export const ListProductsDialog = ({
               </div>
             ) : list.items.length === 0 ? (
               <div className="text-center py-8">
-                <Package size={32} className="text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+                <Package size={32} className="text-muted-foreground/60 mx-auto mb-2" />
                 <p className="text-sm text-muted-foreground">
                   Nessun prodotto nella lista
                 </p>
@@ -226,7 +226,7 @@ export const ListProductsDialog = ({
               </div>
             ) : (
               <div className="text-center py-8">
-                <Search size={32} className="text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+                <Search size={32} className="text-muted-foreground/60 mx-auto mb-2" />
                 <p className="text-sm text-muted-foreground">
                   Nessun risultato per "{searchTerm}"
                 </p>

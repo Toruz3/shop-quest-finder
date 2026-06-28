@@ -194,7 +194,7 @@ export const StoreComparison = () => {
                   <Navigation className="w-3.5 h-3.5" />
                   <span>Indicazioni</span>
                 </Button>
-                <Button variant="outline" className="text-xs font-medium text-gray-600 hover:text-gray-800 group-hover:pr-5 border-gray-200 hover:border-gray-300 hover:bg-gray-50 rounded-lg transition-all duration-300 px-2 py-1 h-auto">
+                <Button variant="outline" className="text-xs font-medium text-gray-600 hover:text-gray-800 group-hover:pr-5 border-gray-200 hover:border-gray-300 hover:bg-muted/40 rounded-lg transition-all duration-300 px-2 py-1 h-auto">
                   <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
                   <span>Acquista</span>
                   <ArrowRight className="w-3.5 h-3.5 ml-1 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />

@@ -28,18 +28,18 @@ export const QuantityCounter: React.FC<QuantityCounterProps> = ({
   };
 
   return (
-    <div className="flex items-center gap-3 bg-gray-50 dark:bg-gray-800 rounded-xl p-2">
+    <div className="flex items-center gap-3 bg-muted/40 rounded-xl p-2">
       <button 
         onClick={handleDecrement}
         disabled={quantity <= min}
-        className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-muted transition-colors active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label="Diminuisci quantità"
       >
-        <Minus className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+        <Minus className="w-4 h-4 text-muted-foreground" />
       </button>
 
       <span 
-        className="text-lg font-bold text-gray-900 dark:text-gray-100 min-w-[32px] text-center"
+        className="text-lg font-bold text-foreground min-w-[32px] text-center"
         aria-live="polite"
       >
         {quantity}
@@ -48,10 +48,10 @@ export const QuantityCounter: React.FC<QuantityCounterProps> = ({
       <button 
         onClick={handleIncrement}
         disabled={quantity >= max}
-        className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-8 h-8 rounded-full flex items-center justify-center hover:bg-muted transition-colors active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label="Aumenta quantità"
       >
-        <Plus className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+        <Plus className="w-4 h-4 text-muted-foreground" />
       </button>
     </div>
   );

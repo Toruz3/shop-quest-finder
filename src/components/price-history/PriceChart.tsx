@@ -95,7 +95,7 @@ export const PriceChart = ({ selectedProduct, selectedPeriod, onPeriodChange }: 
         </ResponsiveContainer>
       </div>
       
-      <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+      <div className="mt-3 pt-3 border-t border-border flex justify-between items-center">
         <div className="text-xs text-muted-foreground flex items-center gap-1">
           <Calendar size={12} />
           Ultimo aggiornamento: oggi

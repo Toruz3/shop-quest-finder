@@ -42,7 +42,7 @@ export const ProfileDialog = ({
               value={newName} 
               onChange={e => setNewName(e.target.value)} 
               placeholder="Il tuo nome" 
-              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
           
@@ -54,13 +54,13 @@ export const ProfileDialog = ({
               value={newEmail} 
               onChange={e => setNewEmail(e.target.value)} 
               placeholder="la-tua-email@esempio.com" 
-              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
         </div>
         
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-gray-200 dark:border-gray-600 text-foreground">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-border text-foreground">
             <X size={16} className="mr-1" />
             Annulla
           </Button>
