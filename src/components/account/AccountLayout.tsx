@@ -11,15 +11,9 @@ interface AccountLayoutProps {
 export const AccountLayout = ({ profileName, profileEmail, children }: AccountLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col pb-16">
-      {/* Single Card Container */}
-      <div className="bg-card m-0.5 rounded-xl">
-        {/* Header Section */}
-        <div className="p-4 pb-2">
+      <div className="container px-4 py-4">
+        <div className="max-w-md mx-auto">
           <ProfileCard profileName={profileName} profileEmail={profileEmail} />
-        </div>
-
-        {/* Content Area with Tabs */}
-        <div className="px-2 pb-6">
           {children}
         </div>
       </div>

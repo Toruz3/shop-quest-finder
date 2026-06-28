@@ -72,10 +72,7 @@ const MapPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Background elements */}
-      <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-      
+      {/* Background elements */}      
       {/* Content container - Fill available space minus footer height (16) */}
       <div className="flex flex-col flex-1 w-full overflow-hidden pb-16">
         <div className="container mx-auto px-4 py-4 flex-1 flex flex-col relative">

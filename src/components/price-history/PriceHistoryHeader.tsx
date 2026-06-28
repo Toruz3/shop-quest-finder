@@ -1,11 +1,10 @@
-
-import { LineChart } from "lucide-react";
-
 export const PriceHistoryHeader = () => {
   return (
-    <h1 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
-      <LineChart className="text-primary" />
-      <span>Storico Prezzi</span>
-    </h1>
+    <header className="mb-5">
+      <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Andamento</p>
+      <h1 className="font-serif text-3xl leading-tight text-foreground">
+        Storico <em className="italic text-primary">prezzi</em>
+      </h1>
+    </header>
   );
 };

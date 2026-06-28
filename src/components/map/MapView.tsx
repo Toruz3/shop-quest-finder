@@ -21,11 +21,11 @@ export const MapView = ({ isMapLoaded }: MapViewProps) => {
             className="w-full h-full object-cover" 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
-          <Button size="sm" className="absolute bottom-2 right-2 bg-white text-primary hover:bg-white/90">
+          <Button size="sm" className="absolute bottom-2 right-2 bg-card text-primary hover:bg-card/90">
             <Locate size={16} className="mr-1" />
             Posizione attuale
           </Button>
-          <Button size="icon" className="absolute top-2 right-2 h-8 w-8 bg-white text-neutral-700 hover:bg-white/90">
+          <Button size="icon" className="absolute top-2 right-2 h-8 w-8 bg-card text-neutral-700 hover:bg-card/90">
             <PlusCircle size={16} />
           </Button>
         </div>

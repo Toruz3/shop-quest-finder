@@ -59,12 +59,12 @@ export const PriceChart = ({ selectedProduct, selectedPeriod, onPeriodChange }: 
   if (!selectedProduct) return null;
 
   return (
-    <Card className="p-4 mb-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
+    <Card className="p-4 mb-4 bg-card border border-border shadow-sm">
       <div className="flex items-center justify-between mb-3">
-        <h2 className="font-medium text-gray-800 dark:text-gray-100">
+        <h2 className="font-medium text-foreground">
           {selectedProduct.name} - Andamento prezzi
         </h2>
-        <Badge variant="outline" className={`${selectedProduct.trend === "down" ? "text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-400" : selectedProduct.trend === "up" ? "text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400" : "text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400"}`}>
+        <Badge variant="outline" className={`${selectedProduct.trend === "down" ? "text-green-600 bg-primary/5 dark:text-green-400" : selectedProduct.trend === "up" ? "text-red-600 bg-red-50 dark:bg-red-900/20 dark:text-red-400" : "text-blue-600 bg-blue-50 dark:bg-blue-900/20 dark:text-blue-400"}`}>
           {selectedProduct.trend === "down" && <TrendingDown size={14} className="mr-1" />}
           {selectedProduct.trend === "up" && <TrendingUp size={14} className="mr-1" />}
           {selectedProduct.trend === "down" ? "-10% ultimo mese" : selectedProduct.trend === "up" ? "+5% ultimo mese" : "Stabile"}
@@ -95,20 +95,20 @@ export const PriceChart = ({ selectedProduct, selectedPeriod, onPeriodChange }: 
         </ResponsiveContainer>
       </div>
       
-      <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
-        <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+      <div className="mt-3 pt-3 border-t border-border flex justify-between items-center">
+        <div className="text-xs text-muted-foreground flex items-center gap-1">
           <Calendar size={12} />
           Ultimo aggiornamento: oggi
         </div>
         <Select onValueChange={onPeriodChange} value={selectedPeriod}>
-          <SelectTrigger className="w-32 h-8 text-xs bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
+          <SelectTrigger className="w-32 h-8 text-xs bg-card border-border text-foreground">
             <SelectValue placeholder="Periodo" />
           </SelectTrigger>
-          <SelectContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-            <SelectItem value="7days" className="text-gray-900 dark:text-gray-100">7 giorni</SelectItem>
-            <SelectItem value="30days" className="text-gray-900 dark:text-gray-100">30 giorni</SelectItem>
-            <SelectItem value="90days" className="text-gray-900 dark:text-gray-100">3 mesi</SelectItem>
-            <SelectItem value="365days" className="text-gray-900 dark:text-gray-100">1 anno</SelectItem>
+          <SelectContent className="bg-card border-border">
+            <SelectItem value="7days" className="text-foreground">7 giorni</SelectItem>
+            <SelectItem value="30days" className="text-foreground">30 giorni</SelectItem>
+            <SelectItem value="90days" className="text-foreground">3 mesi</SelectItem>
+            <SelectItem value="365days" className="text-foreground">1 anno</SelectItem>
           </SelectContent>
         </Select>
       </div>

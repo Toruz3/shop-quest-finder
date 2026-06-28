@@ -1,11 +1,10 @@
-
-import { MapPin } from "lucide-react";
-
 export const MapHeader = () => {
   return (
-    <h1 className="text-xl font-bold mb-4 flex items-center gap-2 justify-center text-center text-gray-800 dark:text-gray-100">
-      <MapPin className="text-primary w-6 h-6" />
-      <span>Supermercati vicini</span>
-    </h1>
+    <header className="mb-5">
+      <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Trova</p>
+      <h1 className="font-serif text-3xl leading-tight text-foreground">
+        Supermercati <em className="italic text-primary">vicini</em>
+      </h1>
+    </header>
   );
 };

@@ -30,51 +30,51 @@ export const PasswordDialog = ({
 }: PasswordDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+      <DialogContent className="bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="text-gray-900 dark:text-gray-100">Cambio password</DialogTitle>
-          <DialogDescription className="text-gray-600 dark:text-gray-400">
+          <DialogTitle className="text-foreground">Cambio password</DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Crea una nuova password per il tuo account
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label htmlFor="current-password" className="text-gray-900 dark:text-gray-100">Password attuale</Label>
+            <Label htmlFor="current-password" className="text-foreground">Password attuale</Label>
             <Input 
               id="current-password" 
               type="password" 
               value={currentPassword} 
               onChange={e => setCurrentPassword(e.target.value)} 
-              className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="new-password" className="text-gray-900 dark:text-gray-100">Nuova password</Label>
+            <Label htmlFor="new-password" className="text-foreground">Nuova password</Label>
             <Input 
               id="new-password" 
               type="password" 
               value={newPassword} 
               onChange={e => setNewPassword(e.target.value)} 
-              className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="confirm-password" className="text-gray-900 dark:text-gray-100">Conferma password</Label>
+            <Label htmlFor="confirm-password" className="text-foreground">Conferma password</Label>
             <Input 
               id="confirm-password" 
               type="password" 
               value={confirmPassword} 
               onChange={e => setConfirmPassword(e.target.value)} 
-              className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" 
+              className="bg-card border-border text-foreground" 
             />
           </div>
         </div>
         
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-border text-foreground">
             <X size={16} className="mr-1" />
             Annulla
           </Button>

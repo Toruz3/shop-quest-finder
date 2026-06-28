@@ -84,7 +84,7 @@ export const ListProductsDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-700 rounded-xl shadow-xl"
+      <DialogContent className="max-w-sm w-[calc(100vw-2rem)] max-h-[calc(100vh-12rem)] overflow-hidden flex flex-col bg-card border-border rounded-xl shadow-xl"
         style={{
           position: 'fixed',
           left: '50%',
@@ -94,14 +94,14 @@ export const ListProductsDialog = ({
           zIndex: 50
         }}
       >
-        <DialogHeader className="flex-shrink-0 pb-3 border-b border-gray-100 dark:border-gray-700">
+        <DialogHeader className="flex-shrink-0 pb-3 border-b border-border">
           <div className="flex items-center gap-2">
             <Package className="text-primary" size={18} />
             <div>
-              <DialogTitle className="text-gray-900 dark:text-gray-100 text-base font-semibold">
+              <DialogTitle className="text-foreground text-base font-semibold">
                 {list.name}
               </DialogTitle>
-              <DialogDescription className="text-gray-500 dark:text-gray-400 text-xs">
+              <DialogDescription className="text-muted-foreground text-xs">
                 Gestisci i prodotti della lista
               </DialogDescription>
             </div>
@@ -119,13 +119,13 @@ export const ListProductsDialog = ({
                   onKeyPress={handleKeyPress}
                   onFocus={() => setShowSuggestions(newProduct.length > 0)}
                   placeholder="Aggiungi prodotto..."
-                  className="h-10 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-primary/20"
+                  className="h-10 text-sm bg-muted/40 border-border rounded-lg focus:ring-1 focus:ring-primary/20"
                   autoFocus
                 />
                 
                 {/* Product suggestions dropdown */}
                 {showSuggestions && newProduct.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+                  <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
                     {isLoading ? (
                       <div className="p-3 text-sm text-gray-500 text-center">
                         Caricamento...
@@ -136,18 +136,18 @@ export const ListProductsDialog = ({
                           <button
                             key={suggestion.id}
                             onClick={() => handleSuggestionSelect(suggestion)}
-                            className="w-full px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 text-sm transition-colors"
+                            className="w-full px-3 py-2 text-left hover:bg-muted flex items-center gap-2 text-sm transition-colors"
                           >
                             <img
                               src={suggestion.imageUrl || 'https://placehold.co/24x24?text=P'}
                               alt={suggestion.name}
-                              className="w-6 h-6 rounded object-cover bg-gray-100 dark:bg-gray-700 flex-shrink-0"
+                              className="w-6 h-6 rounded object-cover bg-muted flex-shrink-0"
                             />
                             <div className="flex-1">
-                              <div className="font-medium text-gray-900 dark:text-gray-100">
+                              <div className="font-medium text-foreground">
                                 {suggestion.name}
                               </div>
-                              <div className="text-xs text-gray-500 dark:text-gray-400">
+                              <div className="text-xs text-muted-foreground">
                                 {suggestion.category}
                               </div>
                             </div>
@@ -172,7 +172,7 @@ export const ListProductsDialog = ({
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder={`Cerca tra ${list.items.length} prodotti...`}
-                className="h-10 pl-8 text-sm bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-600 rounded-lg"
+                className="h-10 pl-8 text-sm bg-muted/40 border-border rounded-lg"
               />
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" size={12} />
             </div>
@@ -191,14 +191,14 @@ export const ListProductsDialog = ({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, x: -50 }}
                       transition={{ duration: 0.15, delay: index * 0.02 }}
-                      className="group flex items-center gap-3 p-2.5 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary/20 hover:bg-primary/5 transition-all duration-150"
+                      className="group flex items-center gap-3 p-2.5 bg-muted/40/50 rounded-lg border border-border hover:border-primary/20 hover:bg-primary/5 transition-all duration-150"
                     >
                       <img
                         src={getProductImage(item)}
                         alt={item}
-                        className="w-8 h-8 rounded-md object-cover bg-gray-100 dark:bg-gray-700 flex-shrink-0"
+                        className="w-8 h-8 rounded-md object-cover bg-muted flex-shrink-0"
                       />
-                      <span className="flex-1 text-gray-900 dark:text-gray-100 text-sm font-medium truncate">
+                      <span className="flex-1 text-foreground text-sm font-medium truncate">
                         {item}
                       </span>
                       <Button
@@ -216,18 +216,18 @@ export const ListProductsDialog = ({
               </div>
             ) : list.items.length === 0 ? (
               <div className="text-center py-8">
-                <Package size={32} className="text-gray-300 dark:text-gray-600 mx-auto mb-2" />
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <Package size={32} className="text-muted-foreground/60 mx-auto mb-2" />
+                <p className="text-sm text-muted-foreground">
                   Nessun prodotto nella lista
                 </p>
-                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                <p className="text-xs text-muted-foreground mt-1">
                   Aggiungi il primo prodotto
                 </p>
               </div>
             ) : (
               <div className="text-center py-8">
-                <Search size={32} className="text-gray-300 dark:text-gray-600 mx-auto mb-2" />
-                <p className="text-sm text-gray-500 dark:text-gray-400">
+                <Search size={32} className="text-muted-foreground/60 mx-auto mb-2" />
+                <p className="text-sm text-muted-foreground">
                   Nessun risultato per "{searchTerm}"
                 </p>
               </div>

@@ -13,7 +13,7 @@ export const PriceDisplay: React.FC<PriceDisplayProps> = ({
   className = "" 
 }) => {
   return (
-    <div className={`text-2xl font-bold text-gray-900 dark:text-gray-100 ${className}`}>
+    <div className={`text-2xl font-bold text-foreground ${className}`}>
       {currency}{price.toFixed(2)}
     </div>
   );
