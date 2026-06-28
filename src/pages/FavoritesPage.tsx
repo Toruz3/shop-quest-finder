@@ -42,10 +42,7 @@ const FavoritesPage = () => {
     updateManagingList
   } = useFavoritesDialogs();
 
-  const filteredLists = favoriteLists.filter(list => 
-    list.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  const filteredProducts = favoriteProducts.filter(product => 
+  const filteredProducts = favoriteProducts.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
