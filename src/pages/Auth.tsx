@@ -85,10 +85,7 @@ const Auth = () => {
     }
   };
   if (showResetForm) {
-    return <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-        
+    return <div className="min-h-screen flex items-center justify-center px-4">        
         <div className="w-full max-w-sm glass-effect p-6 rounded-xl shadow-lg">
           <div className="text-center mb-4">
             <div className="flex items-center justify-center gap-2 mb-3">
@@ -122,10 +119,7 @@ const Auth = () => {
         </div>
       </div>;
   }
-  return <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="absolute top-40 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-      
+  return <div className="min-h-screen flex items-center justify-center px-4">      
       <div className="w-full max-w-sm glass-effect p-6 rounded-xl shadow-lg">
         <div className="text-center mb-4">
           <div className="flex items-center justify-center gap-2 mb-3">

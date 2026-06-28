@@ -12,20 +12,20 @@ export const ProfileCard = ({ profileName, profileEmail }: ProfileCardProps) => 
     <Card 
       hover 
       interactive
-      className="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5 mb-4 fade-in-scale"
+      className="border border-border bg-card p-5 mb-4 fade-in-scale"
     >
       <div className="flex items-center space-x-4">
-        <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl font-bold bounce-in">
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary text-xl font-bold bounce-in">
           {profileName.charAt(0).toUpperCase()}
         </div>
         <div className="flex-1">
-          <h2 className="text-lg font-semibold text-left text-gray-900 dark:text-gray-100">{profileName}</h2>
-          <p className="text-sm text-gray-600 dark:text-gray-300 text-left">{profileEmail}</p>
+          <h2 className="text-lg font-semibold text-left text-foreground">{profileName}</h2>
+          <p className="text-sm text-muted-foreground text-left">{profileEmail}</p>
           <div className="flex mt-2 gap-2">
-            <Badge className="bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-700 slide-up">
+            <Badge className="bg-primary/10 text-primary border-primary/20 slide-up">
               Utente Standard
             </Badge>
-            <Badge variant="outline" className="text-gray-600 dark:text-gray-300 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 slide-up">
+            <Badge variant="outline" className="text-muted-foreground border-border bg-muted/40 slide-up">
               Dal 2023
             </Badge>
           </div>

@@ -66,13 +66,10 @@ const FavoritesPage = () => {
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen relative overflow-hidden pb-16">
-        <div className="absolute top-20 right-[5%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-40 left-[5%] w-72 h-72 bg-accent/5 rounded-full blur-3xl"></div>
-        
+      <div className="min-h-screen relative overflow-hidden pb-16">        
         <div className="container px-4 py-4 relative z-10">
           <div className="max-w-md mx-auto">
-            <h1 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900 dark:text-gray-100">
+            <h1 className="text-xl font-bold mb-4 flex items-center gap-2 text-foreground">
               <Star className="text-primary" size={20} />
               <span>I miei preferiti</span>
             </h1>
@@ -82,13 +79,13 @@ const FavoritesPage = () => {
                 placeholder={activeTab === "lists" ? "Cerca lista" : "Cerca prodotto"} 
                 value={searchTerm} 
                 onChange={e => setSearchTerm(e.target.value)} 
-                className="pr-10 py-5 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-300 focus:ring focus:ring-primary-200 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full" 
+                className="pr-10 py-5 bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring focus:ring-primary/20 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full" 
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" />
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             </div>
             
             <Tabs defaultValue="products" value={activeTab} onValueChange={setActiveTab} className="mb-4">
-              <TabsList className="w-full grid grid-cols-1 h-12 rounded-lg p-1 bg-gray-100 dark:bg-gray-800">
+              <TabsList className="w-full grid grid-cols-1 h-12 rounded-lg p-1 bg-muted">
                 <TabsTrigger value="products" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
                   Prodotti Preferiti
                 </TabsTrigger>

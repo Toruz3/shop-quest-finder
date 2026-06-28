@@ -26,41 +26,41 @@ export const ProfileDialog = ({
 }: ProfileDialogProps) => {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+      <DialogContent className="bg-card border-border">
         <DialogHeader>
-          <DialogTitle className="text-gray-900 dark:text-gray-100">Modifica profilo</DialogTitle>
-          <DialogDescription className="text-gray-600 dark:text-gray-400">
+          <DialogTitle className="text-foreground">Modifica profilo</DialogTitle>
+          <DialogDescription className="text-muted-foreground">
             Modifica le informazioni del tuo account
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4 py-4">
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-gray-900 dark:text-gray-100">Nome</Label>
+            <Label htmlFor="name" className="text-foreground">Nome</Label>
             <Input 
               id="name" 
               value={newName} 
               onChange={e => setNewName(e.target.value)} 
               placeholder="Il tuo nome" 
-              className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" 
+              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
             />
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-gray-900 dark:text-gray-100">Email</Label>
+            <Label htmlFor="email" className="text-foreground">Email</Label>
             <Input 
               id="email" 
               type="email" 
               value={newEmail} 
               onChange={e => setNewEmail(e.target.value)} 
               placeholder="la-tua-email@esempio.com" 
-              className="bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100" 
+              className="bg-card border-gray-200 dark:border-gray-600 text-foreground" 
             />
           </div>
         </div>
         
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="border-gray-200 dark:border-gray-600 text-foreground">
             <X size={16} className="mr-1" />
             Annulla
           </Button>
