@@ -1,37 +1,33 @@
-
-import React from 'react';
-import { Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from "lucide-react";
 
 interface ProductQuantityControlsProps {
   quantity: number;
   onQuantityChange: (increment: boolean) => void;
 }
 
-export const ProductQuantityControls: React.FC<ProductQuantityControlsProps> = ({
+export const ProductQuantityControls = ({
   quantity,
-  onQuantityChange
-}) => {
+  onQuantityChange,
+}: ProductQuantityControlsProps) => {
   return (
-    <div className="flex-shrink-0">
-      <div className="flex items-center bg-gray-100 dark:bg-gray-200 rounded-md px-1 py-0.5 gap-0.5">
-        <button 
-          onClick={() => onQuantityChange(false)}
-          className="w-4 h-4 rounded-sm flex items-center justify-center text-gray-600 dark:text-gray-700 hover:bg-gray-200 hover:text-gray-900 active:scale-95 transition-all duration-200"
-          aria-label="Diminuisci quantità"
-        >
-          <Minus size={8} strokeWidth={2.5} />
-        </button>
-        <span className="font-semibold text-xs text-gray-900 dark:text-gray-800 min-w-[12px] text-center">
-          {quantity}
-        </span>
-        <button 
-          onClick={() => onQuantityChange(true)}
-          className="w-4 h-4 rounded-sm flex items-center justify-center text-gray-600 dark:text-gray-700 hover:bg-gray-200 hover:text-gray-900 active:scale-95 transition-all duration-200"
-          aria-label="Aumenta quantità"
-        >
-          <Plus size={8} strokeWidth={2.5} />
-        </button>
-      </div>
+    <div className="inline-flex items-center border border-border rounded-md bg-background">
+      <button
+        onClick={() => onQuantityChange(false)}
+        className="w-8 h-8 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-muted transition-colors rounded-l-md"
+        aria-label="Diminuisci quantità"
+      >
+        <Minus size={14} strokeWidth={1.75} />
+      </button>
+      <span className="font-serif text-base min-w-[24px] text-center num-tabular text-foreground">
+        {quantity}
+      </span>
+      <button
+        onClick={() => onQuantityChange(true)}
+        className="w-8 h-8 flex items-center justify-center text-foreground/70 hover:text-foreground hover:bg-muted transition-colors rounded-r-md"
+        aria-label="Aumenta quantità"
+      >
+        <Plus size={14} strokeWidth={1.75} />
+      </button>
     </div>
   );
 };

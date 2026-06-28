@@ -4,16 +4,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-// Make sure React is properly initialized before rendering
+import "@fontsource/instrument-serif/400.css";
+import "@fontsource/instrument-serif/400-italic.css";
+import "@fontsource/work-sans/400.css";
+import "@fontsource/work-sans/500.css";
+import "@fontsource/work-sans/600.css";
+
 const rootElement = document.getElementById("root");
 if (!rootElement) {
   throw new Error("Root element not found");
 }
 
-// Create root with explicit typing
 const root = ReactDOM.createRoot(rootElement);
-
-// Render the app
 root.render(
   <React.StrictMode>
     <App />

@@ -1,4 +1,3 @@
-
 import { ShoppingHeader } from "@/components/shopping/ShoppingHeader";
 import { SearchSection } from "@/components/shopping/SearchSection";
 import { ShoppingListArea } from "@/components/shopping/ShoppingListArea";
@@ -13,7 +12,6 @@ const ShoppingPage = () => {
     setSearchTerm,
     isCalculating,
     suggestions,
-    isLoadingSuggestions,
     handleAddProduct,
     handleUpdateQuantity,
     handleRemoveProduct,
@@ -21,24 +19,19 @@ const ShoppingPage = () => {
     handleFindStores,
     handleNewList,
   } = useShoppingState();
-  
+
   const handleFabClick = () => {
     const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
-    if (searchInput) {
-      console.log("Focusing search input");
-      searchInput.focus();
-    } else {
-      console.log("Could not find search input");
-    }
+    searchInput?.focus();
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1 px-4 py-4 overflow-y-auto pb-16 relative">
+    <div className="flex flex-col min-h-screen bg-background">
+      <main className="flex-1 px-5 pt-6 pb-24 overflow-y-auto relative">
         <div className="flex flex-col max-w-md mx-auto w-full">
           <ShoppingHeader />
-          
-          <div className="mt-4 mb-6">
+
+          <div className="mt-6 mb-4">
             <SearchSection
               searchTerm={searchTerm}
               onSearchChange={setSearchTerm}
@@ -61,20 +54,14 @@ const ShoppingPage = () => {
               onAddSampleProducts={handleAddSampleProducts}
             />
           </div>
-          
+
           {products.length > 0 && (
-            <FindStoresButton 
-              isCalculating={isCalculating}
-              onClick={handleFindStores}
-            />
+            <FindStoresButton isCalculating={isCalculating} onClick={handleFindStores} />
           )}
         </div>
       </main>
 
-      <ShoppingFab 
-        onClick={handleFabClick} 
-        onNewList={handleNewList}
-      />
+      <ShoppingFab onClick={handleFabClick} onNewList={handleNewList} />
     </div>
   );
 };

@@ -5,49 +5,50 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 134 65% 45%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 134 65% 45%;
+    /* Minimal Paper — light */
+    --background: 42 24% 94%;          /* #f5f3ee paper */
+    --foreground: 0 0% 14%;            /* #232323 ink */
+    --card: 42 30% 98%;                /* #fbfaf6 */
+    --card-foreground: 0 0% 14%;
+    --popover: 42 30% 98%;
+    --popover-foreground: 0 0% 14%;
+    --primary: 162 80% 26%;            /* #0d7a5f editorial green */
+    --primary-foreground: 42 30% 98%;
+    --secondary: 40 20% 90%;
+    --secondary-foreground: 0 0% 14%;
+    --muted: 40 18% 89%;               /* #e8e4dd */
+    --muted-foreground: 30 8% 38%;     /* warm gray ink */
+    --accent: 40 20% 90%;
+    --accent-foreground: 0 0% 14%;
+    --destructive: 4 70% 45%;
+    --destructive-foreground: 42 30% 98%;
+    --border: 36 15% 82%;              /* #d8d3c9 */
+    --input: 36 15% 82%;
+    --ring: 162 80% 26%;
     --radius: 0.5rem;
   }
 
   .dark {
-    /* Unified gray-800 based dark theme to eliminate double border effect */
-    --background: 215 25% 13%;          /* #1f2937 - gray-800 */
-    --foreground: 210 40% 98%;          /* #f9fafb - gray-50 */
-    --card: 215 25% 13%;                /* #1f2937 - gray-800 same as background */
-    --card-foreground: 210 40% 98%;     /* #f9fafb - gray-50 */
-    --popover: 215 25% 13%;             /* #1f2937 - gray-800 */
-    --popover-foreground: 210 40% 98%;  /* #f9fafb - gray-50 */
-    --primary: 142 71% 45%;             /* #22c55e - Keep brand green */
-    --primary-foreground: 212 19% 9%;   /* Dark text on green */
-    --secondary: 217 19% 27%;           /* #374151 - gray-700 */
-    --secondary-foreground: 210 40% 98%; /* #f9fafb - gray-50 */
-    --muted: 217 19% 27%;               /* #374151 - gray-700 */
-    --muted-foreground: 215 20% 65%;    /* #9ca3af - gray-400 */
-    --accent: 217 19% 27%;              /* #374151 - gray-700 */
-    --accent-foreground: 210 40% 98%;   /* #f9fafb - gray-50 */
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 19% 27%;              /* #374151 - gray-700 */
-    --input: 217 19% 27%;               /* #374151 - gray-700 */
-    --ring: 142 71% 45%;                /* Green focus ring */
+    /* Minimal Paper — dark (ink) */
+    --background: 30 5% 10%;           /* near-black warm */
+    --foreground: 42 22% 92%;
+    --card: 30 6% 13%;
+    --card-foreground: 42 22% 92%;
+    --popover: 30 6% 13%;
+    --popover-foreground: 42 22% 92%;
+    --primary: 162 60% 50%;            /* lighter green for contrast */
+    --primary-foreground: 30 10% 10%;
+    --secondary: 30 5% 18%;
+    --secondary-foreground: 42 22% 92%;
+    --muted: 30 5% 18%;
+    --muted-foreground: 36 10% 65%;
+    --accent: 30 5% 18%;
+    --accent-foreground: 42 22% 92%;
+    --destructive: 4 60% 50%;
+    --destructive-foreground: 42 22% 92%;
+    --border: 30 5% 22%;
+    --input: 30 5% 22%;
+    --ring: 162 60% 50%;
   }
 
   * {
@@ -55,11 +56,8 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-  
-  *::-webkit-scrollbar {
-    display: none;
-  }
-  
+  *::-webkit-scrollbar { display: none; }
+
   html {
     @apply overflow-x-hidden touch-manipulation;
     height: 100%;
@@ -67,44 +65,47 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-foreground antialiased font-sans;
+    font-feature-settings: "ss01", "ss02", "calt", "rlig";
     position: relative;
     width: 100%;
     overflow-x: hidden;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     -webkit-tap-highlight-color: transparent;
-    -webkit-overflow-scrolling: touch;
   }
-  
-  p, h1, h2, h3, h4, h5, h5, h6 {
-    @apply text-balance;
-    letter-spacing: -0.01em;
-    line-height: 1.5;
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-foreground;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    font-weight: 400;
   }
-  
-  h1 { @apply text-xl font-bold; }
-  h2 { @apply text-lg font-semibold; }
-  h3 { @apply text-base font-medium; }
-  
+
+  h1 { @apply text-3xl; }
+  h2 { @apply text-2xl; }
+  h3 { @apply text-xl; }
+
   button, a, input, select, textarea {
     @apply touch-manipulation;
   }
-  
+
   @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   }
 }
 
-/* Menu item styles for consistent spacing and hover states */
 @layer components {
-  .menu-item {
-    @apply flex items-center justify-between p-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200;
+  .paper-card {
+    @apply bg-card border border-border rounded-lg;
   }
-  
-  .section-header {
-    @apply border-b border-gray-200 dark:border-gray-700;
+  .paper-divider {
+    @apply border-t border-border;
+  }
+  .text-display {
+    @apply font-serif tracking-tight;
+  }
+  .num-tabular {
+    font-variant-numeric: tabular-nums;
   }
 }
