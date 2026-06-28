@@ -69,37 +69,29 @@ const FavoritesPage = () => {
       <div className="min-h-screen relative overflow-hidden pb-16">        
         <div className="container px-4 py-4 relative z-10">
           <div className="max-w-md mx-auto">
-            <h1 className="text-xl font-bold mb-4 flex items-center gap-2 text-foreground">
-              <Star className="text-primary" size={20} />
-              <span>I miei preferiti</span>
-            </h1>
-            
-            <div className="relative mb-4">
-              <Input 
-                placeholder={activeTab === "lists" ? "Cerca lista" : "Cerca prodotto"} 
-                value={searchTerm} 
-                onChange={e => setSearchTerm(e.target.value)} 
-                className="pr-10 py-5 bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring focus:ring-primary/20 transition-all duration-300 rounded-xl shadow-sm hover:shadow-md focus:shadow-md w-full" 
+            <header className="mb-5">
+              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">La tua collezione</p>
+              <h1 className="font-serif text-3xl leading-tight text-foreground">
+                I tuoi <em className="italic text-primary">preferiti</em>
+              </h1>
+            </header>
+
+            <div className="relative mb-5">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+              <Input
+                placeholder="Cerca prodotto"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="pl-9 h-11 bg-card border-border text-foreground placeholder:text-muted-foreground rounded-md"
               />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             </div>
-            
-            <Tabs defaultValue="products" value={activeTab} onValueChange={setActiveTab} className="mb-4">
-              <TabsList className="w-full grid grid-cols-1 h-12 rounded-lg p-1 bg-muted">
-                <TabsTrigger value="products" className="rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-gray-700 data-[state=active]:text-primary data-[state=active]:shadow-sm transition-all">
-                  Prodotti Preferiti
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="products" className="mt-4">
-                <FavoriteProducts
-                  filteredProducts={filteredProducts}
-                  onDeleteProduct={handleDeleteProduct}
-                  onAddToCart={handleAddToCart}
-                  onAddProduct={handleAddProduct}
-                />
-              </TabsContent>
-            </Tabs>
+
+            <FavoriteProducts
+              filteredProducts={filteredProducts}
+              onDeleteProduct={handleDeleteProduct}
+              onAddToCart={handleAddToCart}
+              onAddProduct={handleAddProduct}
+            />
           </div>
         </div>
 
